@@ -1,0 +1,966 @@
+<html><head>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds2.feedburner.com/Cprogrammingcom/">
+<link rel="stylesheet" href="shared-libraries-linux-gcc_files/style.css" type="text/css">
+<!--[if IE]>
+    <link rel="stylesheet" href="http://static.cprogramming.com/main_images/style-ie.css?np4" type="text/css">
+<![endif]-->
+
+<link href="shared-libraries-linux-gcc_files/shCore.css" rel="stylesheet" type="text/css">
+<link href="shared-libraries-linux-gcc_files/shThemeDefault.css" rel="stylesheet" type="text/css">
+
+
+<meta name="keywords" content="gcc shared library, linux shared library, g++ shared library, so file, so shared library">
+<meta name="Description" content="How to create and use shared libraries with GCC/G++ on Linux">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Shared libraries with GCC on Linux - Cprogramming.com</title>
+
+<!-- ADDED DFP -->
+<script async="" src="shared-libraries-linux-gcc_files/cbgapi.loaded_0"></script><script id="fbjssdk" src="shared-libraries-linux-gcc_files/all.js"></script><script gapi_processed="true" id="gplus1js" src="shared-libraries-linux-gcc_files/plusone.js"></script><script id="tweetjs" src="shared-libraries-linux-gcc_files/widgets.js"></script><script src="shared-libraries-linux-gcc_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript" src="shared-libraries-linux-gcc_files/google_service.js">
+</script>
+<script type="text/javascript">
+GS_googleAddAdSenseService("ca-pub-2560316224908115");
+GS_googleEnableAllServices();
+</script><script src="shared-libraries-linux-gcc_files/google_ads.js"></script>
+<script type="text/javascript">
+GA_googleAddSlot("ca-pub-2560316224908115", "RunOfSite_LargeRectangle_ATF_336x280");
+GA_googleAddSlot("ca-pub-2560316224908115", "RunOfSite_ATF_leaderboard_728x90");
+
+</script>
+<script type="text/javascript">
+GA_googleFetchAds();
+</script>
+<!-- END ADDED DFP -->
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7820175-1']);
+  _gaq.push(['_setDomainName', '.cprogramming.com']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<script src="shared-libraries-linux-gcc_files/osd.js" type="text/javascript"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}
+.fb_invisible{display:none}
+.fb_reset{background:none;border-spacing:0;border:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}
+.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}
+.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}
+.fb_dialog_content{background:#fff;color:#333}
+.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yA/x/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/y6/x/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\9;right:7px\9}
+.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}
+.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}
+.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yA/x/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/y6/x/s816eWC-2sl.gif)}
+.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yA/x/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/y6/x/s816eWC-2sl.gif)}
+.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}
+.fb_dialog_top_left,
+.fb_dialog_top_right,
+.fb_dialog_bottom_left,
+.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}
+/* @noflip */
+.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yR/x/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}
+/* @noflip */
+.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yR/x/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}
+/* @noflip */
+.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yR/x/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}
+/* @noflip */
+.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yR/x/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right,
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right{width:10px;height:100%}
+.fb_dialog_vert_left{margin-left:-10px}
+.fb_dialog_vert_right{right:0;margin-right:-10px}
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{width:100%;height:10px}
+.fb_dialog_horiz_top{margin-top:-10px}
+.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}
+.fb_dialog_iframe{line-height:0}
+.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}
+.fb_dialog_content .dialog_title > span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yD/x/Cou7n-nqK52.gif)
+no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}
+body.fb_hidden{-webkit-transform:none;height:100%;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100%
+}
+.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yc/x/3rhSv5V8j3o.gif)
+white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}
+.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}
+#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}
+#fb-root #fb_dialog_ipad_overlay.hidden{display:none}
+.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}
+.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}
+.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%
+}
+.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100%, from(#4966A6),
+color-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,
+rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}
+.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}
+.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yJ/x/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}
+.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}
+#fb_dialog_loader_close{float:left}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{position:relative;display:-moz-inline-block;display:inline-block}
+.fb_iframe_widget iframe{position:absolute}
+.fb_iframe_widget_lift{z-index:1}
+.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify;vertical-align:text-bottom}
+.fb_hide_iframes iframe{position:relative;left:-10000px}
+.fb_iframe_widget_loader{position:relative;display:inline-block}
+.fb_iframe_widget_fluid{display:inline}
+.fb_iframe_widget_fluid span{width:100%}
+.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}
+.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yJ/x/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_button_simple,
+.fb_button_simple_rtl{background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yH/x/eIpbnVKI9lR.png);background-repeat:no-repeat;cursor:pointer;outline:none;text-decoration:none}
+.fb_button_simple_rtl{background-position:right 0}
+.fb_button_simple .fb_button_text{margin:0 0 0 20px;padding-bottom:1px}
+.fb_button_simple_rtl .fb_button_text{margin:0 10px 0 0}
+a.fb_button_simple:hover .fb_button_text,
+a.fb_button_simple_rtl:hover .fb_button_text,
+.fb_button_simple:hover .fb_button_text,
+.fb_button_simple_rtl:hover .fb_button_text{text-decoration:underline}
+.fb_button,
+.fb_button_rtl{background:#29447e url(http://static.ak.fbcdn.net/rsrc.php/v2/yl/x/FGFbc80dUKj.png);background-repeat:no-repeat;cursor:pointer;display:inline-block;padding:0 0 0 1px;text-decoration:none;outline:none}
+.fb_button .fb_button_text,
+.fb_button_rtl .fb_button_text{background:#5f78ab url(http://static.ak.fbcdn.net/rsrc.php/v2/yl/x/FGFbc80dUKj.png);border-top:solid 1px #879ac0;border-bottom:solid 1px #1a356e;color:#fff;display:block;font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-weight:bold;padding:2px 6px 3px 6px;margin:1px 1px 0 21px;text-shadow:none}
+a.fb_button,
+a.fb_button_rtl,
+.fb_button,
+.fb_button_rtl{text-decoration:none}
+a.fb_button:active .fb_button_text,
+a.fb_button_rtl:active .fb_button_text,
+.fb_button:active .fb_button_text,
+.fb_button_rtl:active .fb_button_text{border-bottom:solid 1px #29447e;border-top:solid 1px #45619d;background:#4f6aa3;text-shadow:none}
+.fb_button_xlarge,
+.fb_button_xlarge_rtl{background-position:left -60px;font-size:24px;line-height:30px}
+.fb_button_xlarge .fb_button_text{padding:3px 8px 3px 12px;margin-left:38px}
+a.fb_button_xlarge:active{background-position:left -99px}
+.fb_button_xlarge_rtl{background-position:right -268px}
+.fb_button_xlarge_rtl .fb_button_text{padding:3px 8px 3px 12px;margin-right:39px}
+a.fb_button_xlarge_rtl:active{background-position:right -307px}
+.fb_button_large,
+.fb_button_large_rtl{background-position:left -138px;font-size:13px;line-height:16px}
+.fb_button_large .fb_button_text{margin-left:24px;padding:2px 6px 4px 6px}
+a.fb_button_large:active{background-position:left -163px}
+.fb_button_large_rtl{background-position:right -346px}
+.fb_button_large_rtl .fb_button_text{margin-right:25px}
+a.fb_button_large_rtl:active{background-position:right -371px}
+.fb_button_medium,
+.fb_button_medium_rtl{background-position:left -188px;font-size:11px;line-height:14px}
+a.fb_button_medium:active{background-position:left -210px}
+.fb_button_medium_rtl{background-position:right -396px}
+.fb_button_text_rtl,
+.fb_button_medium_rtl .fb_button_text{padding:2px 6px 3px 6px;margin-right:22px}
+a.fb_button_medium_rtl:active{background-position:right -418px}
+.fb_button_small,
+.fb_button_small_rtl{background-position:left -232px;font-size:10px;line-height:10px}
+.fb_button_small .fb_button_text{padding:2px 6px 3px;margin-left:17px}
+a.fb_button_small:active,
+.fb_button_small:active{background-position:left -250px}
+.fb_button_small_rtl{background-position:right -440px}
+.fb_button_small_rtl .fb_button_text{padding:2px 6px;margin-right:18px}
+a.fb_button_small_rtl:active{background-position:right -458px}
+.fb_share_count_wrapper{position:relative;float:left}
+.fb_share_count{background:#b0b9ec none repeat scroll 0 0;color:#333;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;text-align:center}
+.fb_share_count_inner{background:#e8ebf2;display:block}
+.fb_share_count_right{margin-left:-1px;display:inline-block}
+.fb_share_count_right .fb_share_count_inner{border-top:solid 1px #e8ebf2;border-bottom:solid 1px #b0b9ec;margin:1px 1px 0 1px;font-size:10px;line-height:10px;padding:2px 6px 3px;font-weight:bold}
+.fb_share_count_top{display:block;letter-spacing:-1px;line-height:34px;margin-bottom:7px;font-size:22px;border:solid 1px #b0b9ec}
+.fb_share_count_nub_top{border:none;display:block;position:absolute;left:7px;top:35px;margin:0;padding:0;width:6px;height:7px;background-repeat:no-repeat;background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yP/x/bSOHtKbCGYI.png)}
+.fb_share_count_nub_right{border:none;display:inline-block;padding:0;width:5px;height:10px;background-repeat:no-repeat;background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/x/i_oIVTKMYsL.png);vertical-align:top;background-position:right 5px;z-index:10;left:2px;margin:0 2px 0 0;position:relative}
+.fb_share_no_count{display:none}
+.fb_share_size_Small .fb_share_count_right .fb_share_count_inner{font-size:10px}
+.fb_share_size_Medium .fb_share_count_right .fb_share_count_inner{font-size:11px;padding:2px 6px 3px;letter-spacing:-1px;line-height:14px}
+.fb_share_size_Large .fb_share_count_right .fb_share_count_inner{font-size:13px;line-height:16px;padding:2px 6px 4px;font-weight:normal;letter-spacing:-1px}
+.fb_share_count_hidden .fb_share_count_nub_top,
+.fb_share_count_hidden .fb_share_count_top,
+.fb_share_count_hidden .fb_share_count_nub_right,
+.fb_share_count_hidden .fb_share_count_right{visibility:hidden}
+.fb_connect_bar_container div,
+.fb_connect_bar_container span,
+.fb_connect_bar_container a,
+.fb_connect_bar_container img,
+.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}
+.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}
+.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}
+.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}
+.fb_connect_bar a:hover{color:#fff}
+.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}
+.fb_connect_bar div a,
+.fb_connect_bar span,
+.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}
+.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fb_edge_widget_with_comment{position:relative;*z-index:1000}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50% 50%;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender
+.FB_Loader{margin-top:0}
+.fbpluginrecommendationsbarleft,
+.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}
+/* @noflip */
+.fbpluginrecommendationsbarleft{left:10px}
+/* @noflip */
+.fbpluginrecommendationsbarright{right:10px}</style></head>
+
+<body data-twttr-rendered="true">
+<div>
+
+<a href="http://www.cprogramming.com/"><img class="logo noprint" src="shared-libraries-linux-gcc_files/title.png" height="83" width="324" border="0"></a> 
+
+<table class="line noprint"><tbody><tr><td></td></tr></tbody></table>
+<div class="noprint" style="padding-top:25px;padding-right:25px;" align="right">
+<!-- SiteSearch Google -->
+<form action="http://www.google.com/cse" id="cse-search-box">
+  <div>
+    <input name="cx" value="partner-pub-2560316224908115:wqvdce-aw4a" type="hidden">
+    <input name="ie" value="ISO-8859-1" type="hidden">
+    <input style="background: url(&quot;http://www.google.com/cse/intl/en/images/google_custom_search_watermark.gif&quot;) no-repeat scroll left center rgb(255, 255, 255);" name="q" size="31" type="text">
+    <input name="sa" value="Search" type="submit">
+  </div>
+<input value="www.cprogramming.com/tutorial/shared-libraries-linux-gcc.html" name="siteurl" type="hidden"><input value="www.google.ro/url?sa=t&amp;rct=j&amp;q=how%20to%20create%20a%20.so%20library%20in%20linux&amp;source=web&amp;cd=2&amp;cad=rja&amp;sqi=2&amp;ved=0CDIQFjAB&amp;url=http%3A%2F%2Fwww.cprogramming.com%2Ftutorial%2Fshared-libraries-linux-gcc.html&amp;ei=UYYuUdrGCsGRtAbt3ID4Bw&amp;usg=AFQjCNGT6iui5xTqZwsJLlNI8JorL4MYtg" name="ref" type="hidden"><input name="ss" type="hidden"></form>
+<script type="text/javascript" src="shared-libraries-linux-gcc_files/brand"></script>
+<!-- SiteSearch Google -->
+</div>
+<div>
+  <table class="main">
+    <tbody><tr>
+
+  	<td class="noprint" colspan="5" bgcolor="#EBEBEB">
+  		<img src="shared-libraries-linux-gcc_files/spacer-vert.png" height="6" width="0">
+  	   <center>
+    	<div class="leaderboard">
+
+<!-- ADDED DFP -->
+<!-- ca-pub-2560316224908115/Homepage_ATF_leaderboard_728x90 -->
+<script type="text/javascript">
+GA_googleFillSlot("RunOfSite_ATF_leaderboard_728x90");
+</script><script src="shared-libraries-linux-gcc_files/ads"></script><div id="google_ads_div_RunOfSite_ATF_leaderboard_728x90_ad_wrapper">
+<div id="google_ads_div_RunOfSite_ATF_leaderboard_728x90_ad_container" style="display:inline-block;"><script type="text/javascript"><!--
+	e9 = new Object();
+    e9.size = "728x90,468x60";
+//--></script>
+<script type="text/javascript" src="shared-libraries-linux-gcc_files/tags.js"></script><script type="text/javascript" src="shared-libraries-linux-gcc_files/displayAd.js"></script><div align="center"><script type="text/javascript" src="shared-libraries-linux-gcc_files/j.js"></script><div id="tfac_72890884831938" style="z-index: 2147483638; position: relative; width: 728px;"><script src="shared-libraries-linux-gcc_files/tf_adChoice10.js" type="text/javascript"></script><div style="text-align: left; height: 15px; left: 709px; overflow: hidden; position: absolute; top: 0px; width: 19px; z-index: 2147483638;"><img style="margin:0;position:absolute;left:0px; display:block;" src="shared-libraries-linux-gcc_files/ad_choices_i_UR.png" onmouseover="tf_e9AdChoice.expand(this,728,709);" height="15px" width="19px" border="0"><a href="http://a.tribalfusion.com/j.u?rnd=884831938&amp;redirect=http://www.youronlinechoices.com/ro/" target="_blank"><img style="margin:0;position:absolute;display:none;" src="shared-libraries-linux-gcc_files/ad_choices_UR.png" onmouseout="tf_e9AdChoice.collapsed(this,728,709);" height="15px" width="77px" border="0"></a></div></div>
+<script language="javascript" defer="defer">
+  (function() {
+    var 	tf_adchoice_width;
+    var 	tf_adchoice_height;
+
+    if (typeof(e9AdChoice) === "undefined")
+     {
+       tf_adchoice_width = 728;
+       tf_adchoice_height = 90;
+     }
+    else
+     {
+       tf_adchoice_width = e9AdChoice.width;
+       tf_adchoice_height = e9AdChoice.height; 
+       e9AdChoice = undefined;
+     }
+
+    var adChoiceObj = {
+        adWidth			: tf_adchoice_width,
+        adHeight		: tf_adchoice_height,
+        adChoiceIconPos 	: "UR".toLowerCase(),
+        adChoiceIconDir 	: "http://cdnx.tribalfusion.com/media/common//adChoice/icon/",
+        adChoiceOptOutPage 	: "http://a.tribalfusion.com/j.u?rnd=884831938&redirect=http://www.youronlinechoices.com/ro/",
+        adChoiceDivId		: "tfac_72890884831938",
+        adChoiceIconVisibility	: "true",
+        rnd                     : "884831938"
+    };
+
+    var script = document.createElement('script');
+    script.type = "text/javascript";
+    script.src = "http://cdnx.tribalfusion.com/media/common/adChoice/tf_adChoice10.js";
+
+    if (script.readyState) //IE 
+     { 
+       script.onreadystatechange = function() {
+         if (    script.readyState == "loaded" 
+	      || script.readyState == "complete")
+	  {
+            script.onreadystatechange = null;
+   	    window.setTimeout(function() {tf_e9AdChoice.showAdChoiceIcon(adChoiceObj)},2000);
+          }
+       };
+     } 
+    else 
+     { 
+       script.onload = function() {
+   	  window.setTimeout(function() {tf_e9AdChoice.showAdChoiceIcon(adChoiceObj)},2000);
+       };
+     }
+
+    document.getElementById(adChoiceObj.adChoiceDivId).appendChild(script);
+  })();
+</script>
+<script language="javascript">
+var map_value=["N1657.8427.TRIBALFUSIONADNETWORK/B7188763.124","N1657.8427.TRIBALFUSIONADNETWORK/B7188763.51"];
+var value = map_value[(new Date().getTime() + parseInt(Math.random() * 100000,10)) % map_value.length];
+document.write("<IFRAME SRC='http://ad.doubleclick.net/adi/" + value + ";sz=728x90;pc=[TPAS_ID];click=http://a.tribalfusion.com/h.click/aBmUoeTtnWnrFqQrByYaFp5a3c4TM2oTbBYFJfUdfRmPfJnVYsoHMH5TZbk2Way5PfGmFQZb0VnR1cJU1srvnEnV5bF4WrnBUAv3QTb1ScYNQdbr1tBnV6Yp2GB5YFQIV6at2PQeQ6fJ4WFqXW3AnW2n36Q05cU8UsMjWsjlRAnnWWvQTrjX56Q2srmsnUTHnnulo9ffqaa2oCBHm9isN6voRsf3OUrTwoABpsrtXeiHJk/;ord=884831938?' WIDTH='728' HEIGHT='90' HSPACE='0' VSPACE='0' FRAMEBORDER='0' BORDERCOLOR='#000000' SCROLLING='no' MARGINHEIGHT='0' MARGINWIDTH='0' ></IFRAME>")
+</script><iframe src="shared-libraries-linux-gcc_files/a.html" hspace="0" vspace="0" bordercolor="#000000" marginheight="0" marginwidth="0" frameborder="0" height="90" scrolling="no" width="728"></iframe><iframe src="shared-libraries-linux-gcc_files/wrapper1.html" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0" allowtransparency="true" frameborder="0" height="1" scrolling="no" width="1"></iframe></div>
+
+
+
+</div>
+</div>
+
+<!-- END ADDED DFP -->
+
+</div>
+		</center>
+		<img src="shared-libraries-linux-gcc_files/spacer-vert.png" height="4" width="1">
+  	</td>
+        
+  </tr>
+
+  <tr>
+
+     <td class="noprint" valign="top" width="130" bgcolor="#EBEBEB"> 
+     <div class="menu" valign="top" style="font-size:14px;width:200px">
+     <p class="navcategory" align="left">
+          <img class="bullet" src="shared-libraries-linux-gcc_files/bullet.gif" height="14" width="11">    Starting out
+     </p>
+
+     <p class="navlist" style="font-size:14px;" align="left">
+             <a href="http://www.cprogramming.com/c++book/?inl=sb">Get the Ebook</a><br>
+             <a href="http://www.cprogramming.com/begin.html">Get Started with C or C++</a><br>
+             <a href="http://www.cprogramming.com/compilers.html">Getting a Compiler</a><br>
+             <a href="http://www.cprogramming.com/books.html">Book Recommendations</a><br>
+     </p>
+
+     <p class="navcategory" align="left">
+          <br>
+          <img class="bullet" src="shared-libraries-linux-gcc_files/bullet.gif" height="14" width="11"> Tutorials
+     </p>
+
+     <p class="navlist" style="font-size:14px;" align="left">
+            <a href="http://www.cprogramming.com/tutorial/c-tutorial.html">C Tutorial</a><br>
+            <a href="http://www.cprogramming.com/tutorial/c++-tutorial.html">C++ Tutorial</a><br>
+            <a href="http://www.cprogramming.com/java-programming.html">Java Tutorial</a><br>
+            <a href="http://www.cprogramming.com/game-programming.html">Game Programming</a><br>
+            <a href="http://www.cprogramming.com/graphics-programming.html">Graphics Programming</a><br>
+            <a href="http://www.cprogramming.com/algorithms-and-data-structures.html">Algorithms &amp; Data Structures</a><br>
+            <a href="http://www.cprogramming.com/debuggers.html">Debugging</a><br>
+            <a href="http://www.cprogramming.com/tutorial.html">All Tutorials</a><br>
+     </p>
+
+     <p class="navcategory" align="left">
+          <br>
+          <img class="bullet" src="shared-libraries-linux-gcc_files/bullet.gif" height="14" width="11"> Practice
+     </p>
+
+     <p class="navlist" style="font-size:14px;" align="left">
+            <a href="http://www.cprogramming.com/challenge.html">Practice Problems</a><br>
+            <a href="http://www.cprogramming.com/quiz/">Quizzes</a><br>
+     </p>
+     <p class="navcategory" align="left">
+          <br>
+          <img class="bullet" src="shared-libraries-linux-gcc_files/bullet.gif" height="14" width="11"> Resources
+     </p>
+
+     <p class="navlist" style="font-size:14px;" align="left">
+            <a href="http://www.cprogramming.com/cgi-bin/source/source.cgi">Source Code</a><br>
+            <a href="http://www.cprogramming.com/snippets/">Source Code Snippets</a><br>
+            <a href="http://www.cprogramming.com/tips/">C and C++ Tips</a><br>
+            <a href="http://www.cprogramming.com/jobs/">Finding a Job</a>
+     </p>
+
+     <p class="navcategory" align="left">
+          <br>
+          <img class="bullet" src="shared-libraries-linux-gcc_files/bullet.gif" height="14" width="11"> References
+     </p>
+
+     <p class="navlist" style="font-size:14px;" align="left">
+            <a href="http://www.cprogramming.com/function.html">Function Reference</a><br>
+            <a href="http://www.cprogramming.com/reference/">Syntax Reference</a><br>
+            <a href="http://www.cprogramming.com/cgi-bin/cdir/Cdirectory.cgi">Programming Links</a><br>
+            <a href="http://faq.cprogramming.com/cgi-bin/smartfaq.cgi">Programming FAQ</a><br>
+     </p>
+
+     <p class="navcategory" align="left">
+          <br>
+          <img class="bullet" src="shared-libraries-linux-gcc_files/bullet.gif" height="14" width="11"> Getting Help
+     </p>
+
+     <p class="navlist" style="font-size:14px;" align="left">
+             <a href="http://www.cprogramming.com/board.html">Message Board</a><br>
+             <a href="http://www.cprogramming.com/expert.html">Ask an Expert</a><br>
+             <a href="http://www.cprogramming.com/email.html">Email</a><br>
+             <a href="http://www.cprogramming.com/about.html">About Us</a>
+     </p>
+     </div>
+
+<center>
+      <br><br>
+     <script type="text/javascript"><!--
+     google_ad_client = "pub-2560316224908115";
+     google_ad_width = 120;
+     google_ad_height = 90;
+     google_ad_format = "120x90_0ads_al";
+     google_ad_channel ="0800879710";
+     google_color_border = "EBEBEB";
+     google_color_bg = "EBEBEB";
+     google_color_link = "C30000";
+     google_color_url = "C30000";
+     google_color_text = "000000";
+     //--></script>
+     <script type="text/javascript" src="shared-libraries-linux-gcc_files/show_ads.js">
+       </script><ins style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:120px"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:120px"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="90" scrolling="no" width="120"></iframe></ins></ins>
+</center>
+
+
+
+    </td>
+	<td class="content" valign="top">
+
+    			<div class="content2">
+
+<h1>Shared libraries with GCC on Linux</h1>
+
+<div style="margin-right: 1em; float:left; padding: .4em; border-right: 1px solid #bbb"> By anduril462</div>
+
+<p>Libraries are an indispensable tool for any programmer. They are 
+pre-existing code that is compiled and ready for you to use. They often 
+provide generic functionality, like <a href="http://www.cprogramming.com/tutorial/lesson15.html">linked lists</a> or <a href="http://www.cprogramming.com/tutorial/lesson18.html">binary trees</a> that can hold any data, or specific functionality like an interface to a <a href="http://www.cprogramming.com/tutorial/c++_database_access_using_ado.html">database server</a> such as <a href="http://www.mysql.com/">MySQL</a>.</p>
+
+<p>Most larger software projects will contain several components, some 
+of which you may find use for later on in some other project, or that 
+you just want to separate out for organizational purposes. When you have
+ a reusable or logically distinct set of functions, it is helpful to 
+build a library from it so that you don&#8217;t have to copy the source code 
+into your current project and recompile it all the time&#8211;and so you can 
+keep different modules of your program disjoint and change one without 
+affecting others. Once it&#8217;s been written and tested, you can safely 
+reuse it over and over again, saving the time and hassle of building it 
+into your project every time.</p>
+
+<p>Building static libraries is fairly simple, and since we rarely get 
+questions on them, I won&#8217;t cover them. I&#8217;ll stick with shared libraries,
+ which seem to be more confusing for most people.</p>
+
+<p>Before we get started, it might help to get a quick rundown of everything that happens from source code to running program:</p>
+
+<ol>
+<li>C Preprocessor: This stage processes all the <a href="http://www.cprogramming.com/tutorial/cpreprocessor.html">preprocessor directives</a>. Basically, any line that starts with a #, such as #define and #include.</li>
+
+<li>Compilation Proper: Once the source file has been preprocessed, the result is then compiled. Since many people refer to the <a href="http://www.cprogramming.com/compilingandlinking.html">entire build process</a> as compilation, this stage is often referred to as &#8220;compilation proper.&#8221; This stage turns a .c file into an .o (object) file.</li>
+
+<li>Linking: Here is where all of the object files and any libraries are
+ linked together to make your final program. Note that for static 
+libraries, the actual library is placed in your final program, while for
+ shared libraries, only a reference to the library is placed inside. Now
+ you have a complete program that is ready to run. You launch it from 
+the shell, and the program is handed off to the loader.</li>
+
+<li>Loading: This stage happens when your program starts up. Your 
+program is scanned for references to shared libraries. Any references 
+found are resolved and the libraries are mapped into your program.</li>
+</ol>
+
+<p>Steps 3 and 4 are where the magic (and confusion) happens with shared libraries.</p>
+
+<p>Now, on to our (very simple) example.</p>
+
+<h2 id="fooh">foo.h:</h2>
+<div><div id="highlighter_348242" class="syntaxhighlighter  cpp"><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp preprocessor">#ifndef foo_h__</code></div><div class="line number2 index1 alt1"><code class="cpp preprocessor">#define foo_h__</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="cpp keyword bold">extern</code> <code class="cpp keyword bold">void</code> <code class="cpp plain">foo(</code><code class="cpp keyword bold">void</code><code class="cpp plain">);</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="cpp preprocessor">#endif&nbsp; // foo_h__</code></div></div></td></tr></tbody></table></div></div>
+<h2 id="fooc">foo.c:</h2>
+<div><div id="highlighter_419733" class="syntaxhighlighter  cpp"><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp preprocessor">#include &lt;stdio.h&gt;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="cpp keyword bold">void</code> <code class="cpp plain">foo(</code><code class="cpp keyword bold">void</code><code class="cpp plain">)</code></div><div class="line number5 index4 alt2"><code class="cpp plain">{</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp functions bold">puts</code><code class="cpp plain">(</code><code class="cpp string">"Hello, I'm a shared library"</code><code class="cpp plain">);</code></div><div class="line number7 index6 alt2"><code class="cpp plain">}</code></div></div></td></tr></tbody></table></div></div>
+<h2 id="mainc">main.c:</h2>
+<div><div id="highlighter_193303" class="syntaxhighlighter  cpp"><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp preprocessor">#include &lt;stdio.h&gt;</code></div><div class="line number2 index1 alt1"><code class="cpp preprocessor">#include "foo.h"</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="cpp color1 bold">int</code> <code class="cpp plain">main(</code><code class="cpp keyword bold">void</code><code class="cpp plain">)</code></div><div class="line number5 index4 alt2"><code class="cpp plain">{</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp functions bold">puts</code><code class="cpp plain">(</code><code class="cpp string">"This is a shared library test..."</code><code class="cpp plain">);</code></div><div class="line number7 index6 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">foo();</code></div><div class="line number8 index7 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp keyword bold">return</code> <code class="cpp plain">0;</code></div><div class="line number9 index8 alt2"><code class="cpp plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>foo.h defines the interface to our library, a single function, foo().
+ foo.c contains the implementation of that function, and main.c is a 
+driver program that uses our library.</p>
+
+<p>For the purposes of this example, everything will happen in /home/username/foo</p>
+
+<h2 id="step_1_compiling_with_position_independent_code">Step 1: Compiling with Position Independent Code</h2>
+
+<p>We need to compile our library source code into position-independent code (PIC):<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+<pre class="example">$ gcc -c -Wall -Werror -fpic foo.c
+</pre>
+<h2 id="step_2_creating_a_shared_library_from_an_object_file">Step 2: Creating a shared library from an object file</h2>
+
+<p>Now we need to actually turn this object file into a shared library. We&#8217;ll call it libfoo.so:</p>
+<pre class="example">gcc -shared -o libfoo.so foo.o
+</pre>
+<h2 id="step_3_linking_with_a_shared_library">Step 3: Linking with a shared library</h2>
+
+<p>As you can see, that was actually pretty easy. We have a shared 
+library. Let&#8217;s compile our main.c and link it with libfoo. We&#8217;ll call 
+our final program &#8220;test.&#8221; Note that the -lfoo option is not looking for 
+foo.o, but libfoo.so. GCC assumes that all libraries start with &#8216;lib&#8217; 
+and end with .so or .a (.so is for shared object or shared libraries, 
+and .a is for archive, or statically linked libraries).</p>
+<pre class="example">$ gcc -Wall -o test main.c -lfoo
+/usr/bin/ld: cannot find -lfoo
+collect2: ld returned 1 exit status
+</pre>
+<h3 id="telling_gcc_where_to_find_the_shared_library">Telling GCC where to find the shared library</h3>
+
+<p>Uh-oh! The linker doesn&#8217;t know where to find libfoo. GCC has a list 
+of places it looks by default, but our directory is not in that list.<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>
+ We need to tell GCC where to find libfoo.so. We will do that with the 
+-L option. In this example, we will use the current directory, 
+/home/username/foo:</p>
+<pre class="example">$ gcc -L/home/username/foo -Wall -o test main.c -lfoo
+</pre>
+<h2 id="step_4_making_the_library_available_at_runtime">Step 4: Making the library available at runtime</h2>
+
+<p>Good, no errors. Now let&#8217;s run our program:</p>
+<pre class="example">$ ./test
+./test: error while loading shared libraries: libfoo.so: cannot open shared object file: No such file or directory
+</pre>
+<p>Oh no! The loader can&#8217;t find the shared library.<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>
+ We didn&#8217;t install it in a standard location, so we need to give the 
+loader a little help. We have a couple of options: we can use the 
+environment variable LD_LIBRARY_PATH for this, or rpath. Let&#8217;s take a 
+look first at LD_LIBRARY_PATH:</p>
+
+<h3 id="using_ld_library_path">Using LD_LIBRARY_PATH</h3>
+<pre class="example">$ echo $LD_LIBRARY_PATH
+</pre>
+<p>There&#8217;s nothing in there. Let&#8217;s fix that by prepending our working directory to the existing LD_LIBRARY_PATH:</p>
+<pre class="example">$ LD_LIBRARY_PATH=/home/username/foo:$LD_LIBRARY_PATH
+$ ./test
+./test: error while loading shared libraries: libfoo.so: cannot open shared object file: No such file or directory
+</pre>
+<p>What happened? Our directory is in LD_LIBRARY_PATH, but we didn&#8217;t 
+export it. In Linux, if you don&#8217;t export the changes to an environment 
+variable, they won&#8217;t be inherited by the child processes. The loader and
+ our test program didn&#8217;t inherit the changes we made. Thankfully, the 
+fix is easy:</p>
+<pre class="example">$ export LD_LIBRARY_PATH=/home/username/foo:$LD_LIBRARY_PATH
+$ ./test
+This is a shared library test...
+Hello, I'm a shared library
+</pre>
+<p>Good, it worked! LD_LIBRARY_PATH is great for quick tests and for 
+systems on which you don&#8217;t have admin privileges. As a downside, 
+however, exporting the LD_LIBRARY_PATH variable means it may cause 
+problems with other programs you run that also rely on LD_LIBRARY_PATH 
+if you don&#8217;t reset it to its previous state when you&#8217;re done.</p>
+
+<h3 id="using_rpath">Using rpath</h3>
+
+<p>Now let&#8217;s try rpath (first we&#8217;ll clear LD_LIBRARY_PATH to ensure it&#8217;s
+ rpath that&#8217;s finding our library). Rpath, or the run path, is a way of 
+embedding the location of shared libraries in the executable itself, 
+instead of relying on default locations or environment variables. We do 
+this during the linking stage. Notice the lengthy 
+&#8220;-Wl,-rpath=/home/username/foo&#8221; option. The -Wl portion sends 
+comma-separated options to the linker, so we tell it to send the -rpath 
+option to the linker with our working directory.</p>
+<pre class="example">$ unset LD_LIBRARY_PATH
+$ gcc -L/home/username/foo -Wl,-rpath=/home/username/foo -Wall -o test main.c -lfoo
+$ ./test
+This is a shared library test...
+Hello, I'm a shared library
+</pre>
+<p>Excellent, it worked. The rpath method is great because each program 
+gets to list its shared library locations independently, so there are no
+ issues with different programs looking in the wrong paths like there 
+were for LD_LIBRARY_PATH.</p>
+
+<h4 id="rpath_vs_ld_library_path">rpath vs. LD_LIBRARY_PATH</h4>
+
+<p>There are a few downsides to rpath, however. First, it requires that 
+shared libraries be installed in a fixed location so that all users of 
+your program will have access to those libraries in those locations. 
+That means less flexibility in system configuration. Second, if that 
+library refers to a NFS mount or other network drive, you may experience
+ undesirable delays&#8211;or worse&#8211;on program startup.</p>
+
+<h3 id="using_ldconfig_to_modify_ldso">Using ldconfig to modify ld.so</h3>
+
+<p>What if we want to install our library so everybody on the system can
+ use it? For that, you will need admin privileges. You will need this 
+for two reasons: first, to put the library in a standard location, 
+probably /usr/lib or /usr/local/lib, which normal users don&#8217;t have write
+ access to. Second, you will need to modify the ld.so config file and 
+cache. As root, do the following:</p>
+<pre class="example">$ cp /home/username/foo/libfoo.so /usr/lib
+$ chmod 0755 /usr/lib/libfoo.so
+</pre>
+<p>Now the file is in a standard location, with correct permissions, 
+readable by everybody. We need to tell the loader it&#8217;s available for 
+use, so let&#8217;s update the cache:</p>
+<pre class="example">$ ldconfig
+</pre>
+<p>That should create a link to our shared library and update the cache so it&#8217;s available for immediate use. Let&#8217;s double check:</p>
+<pre class="example">$ ldconfig -p | grep foo
+libfoo.so (libc6) =&gt; /usr/lib/libfoo.so
+</pre>
+<p>Now our library is installed. Before we test it, we have to clean up a few things:</p>
+
+<p>Clear our LD_LIBRARY_PATH once more, just in case:</p>
+<pre class="example">$ unset LD_LIBRARY_PATH
+</pre>
+<p>Re-link our executable. Notice we don&#8217;t need the -L option since our 
+library is stored in a default location and we aren&#8217;t using the rpath 
+option:</p>
+<pre class="example">$ gcc -Wall -o test main.c -lfoo
+</pre>
+<p>Let&#8217;s make sure we&#8217;re using the /usr/lib instance of our library using ldd:</p>
+<pre class="example">$ ldd test | grep foo
+libfoo.so =&gt; /usr/lib/libfoo.so (0x00a42000)
+</pre>
+<p>Good, now let&#8217;s run it:</p>
+<pre class="example">$ ./test
+This is a shared library test...
+Hello, I'm a shared library
+</pre>
+<p>That about wraps it up. We&#8217;ve covered how to build a shared library, 
+how to link with it, and how to resolve the most common loader issues 
+with shared libraries&#8211;as well as the positives and negatives of 
+different approaches.</p>
+<div class="footnotes"><hr><ol><li id="fn:1">
+<p>What is position independent code? PIC is code that works no matter 
+where in memory it is placed. Because several different programs can all
+ use one instance of your shared library, the library cannot store 
+things at fixed addresses, since the location of that library in memory 
+will vary from program to program.</p>
+<a href="#fnref:1" rev="footnote">&#8617;</a></li><li id="fn:2">
+<p>GCC first searches for libraries in /usr/local/lib, then in /usr/lib.
+ Following that, it searches for libraries in the directories specified 
+by the -L parameter, in the order specified on the command line.</p>
+<a href="#fnref:2" rev="footnote">&#8617;</a></li><li id="fn:3">
+<p>The default GNU loader, ld.so, looks for libraries in the following order:</p>
+
+<ol>
+<li>It looks in the DT_RPATH section of the executable, unless there is a DT_RUNPATH section.</li>
+
+<li>It looks in LD_LIBRARY_PATH. This is skipped if the executable is setuid/setgid for security reasons.</li>
+
+<li>It looks in the DT_RUNPATH section of the executable unless the setuid/setgid bits are set (for security reasons).</li>
+
+<li>It looks in the cache file /etc/ld/so/cache (disabled with the &#8216;-z nodeflib&#8217; linker option).</li>
+
+<li>It looks in the default directories /lib then /usr/lib (disabled with the &#8216;-z nodeflib&#8217; linker option).</li>
+</ol>
+<a href="#fnref:3" rev="footnote">&#8617;</a></li></ol></div>
+<div id="footer" class="noprint">
+
+<div id="social" style="margin-top:5px;height:23px;">
+<table>
+<tbody><tr>
+<td> 
+<div class=" fb_reset" id="fb-root"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="shared-libraries-linux-gcc_files/xd_arbiter.html" style="border: medium none;" tab-index="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" allowtransparency="true" name="fb_xdm_frame_http" frameborder="0" scrolling="no"></iframe><iframe src="shared-libraries-linux-gcc_files/xd_arbiter_002.html" style="border: medium none;" tab-index="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" allowtransparency="true" name="fb_xdm_frame_https" frameborder="0" scrolling="no"></iframe></div></div></div>
+<div fb-xfbml-state="rendered" data-href="http://www.cprogramming.com/tutorial/shared-libraries-linux-gcc.html" id="fb-recommend" class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-send="false" data-width="120" data-height="21" data-layout="button_count" data-action="recommend"><span style="height: 21px; width: 115px;"><iframe src="shared-libraries-linux-gcc_files/like.html" class="fb_ltr" title="Like this content on Facebook." style="border: medium none; overflow: hidden; height: 21px; width: 115px;" name="f2dbacc052c5164" id="f14a921d701cf04" scrolling="no"></iframe></span></div>
+</td>
+<td>
+<iframe data-twttr-rendered="true" title="Twitter Tweet Button" style="width: 106px; height: 20px;" class="twitter-share-button twitter-count-horizontal" src="shared-libraries-linux-gcc_files/tweet_button.html" allowtransparency="true" frameborder="0" scrolling="no"></iframe>
+</td>
+<td>
+<div id="___plusone_0" style="height: 20px; width: 90px; display: inline-block; text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;"><iframe title="+1" data-gapiattached="true" allowtransparency="true" src="shared-libraries-linux-gcc_files/fastbutton.html" name="I0_1362003560132" id="I0_1362003560132" vspace="0" tabindex="0" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" marginwidth="0" marginheight="0" hspace="0" frameborder="0" scrolling="no" width="100%"></iframe></div>
+</td>
+</tr>
+</tbody></table>
+</div>
+
+<div style="font-size:14px;padding:10px;margin-top:5px;margin-bottom:5px;">
+<div style="width:400px;margin-top:5px">
+<div style="float:left"><a href="http://www.cprogramming.com/c++book/?inl=ft-nhp"><img src="shared-libraries-linux-gcc_files/small_3d.jpg" border="0"></a></div>Want to become a C++ programmer? The Cprogramming.com ebook, Jumping into C++, will walk you through it, step-by-step. <a href="http://www.cprogramming.com/c++book/?inl=ft-nhp">Get Jumping into C++ today!</a>
+</div>
+<div style="clear: both"></div>
+
+<b>Popular pages</b>
+<ul>
+ <li><a href="http://www.cprogramming.com/begin.html">Exactly how to get started with C++ (or C) today</a> 
+</li><li><a href="http://www.cprogramming.com/tutorial/c-tutorial.html">C Tutorial</a>
+</li><li><a href="http://www.cprogramming.com/tutorial/c++-tutorial.html">C++ Tutorial</a>
+</li><li><a href="http://www.cprogramming.com/how_to_learn_to_program.html">5 ways you can learn to program faster</a> 
+</li><li><a href="http://www.cprogramming.com/beginner_programming_mistakes.html">The 5 Most Common Problems New Programmers Face</a>
+</li><li><a href="http://www.cprogramming.com/code_blocks/">How to set up a compiler</a>
+</li><li><a href="http://www.cprogramming.com/tutorial/common.html">8 Common programming Mistakes</a> 
+</li><li><a href="http://www.cprogramming.com/c++11/what-is-c++0x.html">What is C++11?</a>
+</li><li><a href="http://www.cprogramming.com/tutorial/game_programming/same_game_part1.html">How to make a game in 48 hours</a>
+</li></ul>
+
+<b>Recent additions</b> <a href="http://feeds2.feedburner.com/Cprogrammingcom" rel="alternate" type="application/rss+xml"><img src="shared-libraries-linux-gcc_files/feed-icon16x16.png" alt="subscribe to a feed" style="border:0" height="16" width="16"></a>
+<ul>
+
+<li> <a href="http://www.cprogramming.com/c++11/c++11-nullptr-strongly-typed-enum-class.html">Enum classes and nullptr in C++11</a> - November 27, 2011</li>
+<li><a href="http://www.cprogramming.com/tutorial/computersciencetheory/hash-table.html">Learn about The Hash Table</a> - November 20, 2011</li>
+<li><a href="http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html">Rvalue References and Move Semantics in C++11</a> - November 13, 2011</li>
+<li><a href="http://www.cprogramming.com/java/c-and-c++-for-java-programmers.html">C and C++ for Java Programmers</a> - November 5, 2011</li>
+<li><a href="http://www.cprogramming.com/tutorial/c++-iostreams.html">A Gentle Introduction to C++ IO Streams</a> - October 10, 2011</li>
+</ul>
+
+</div>
+<style type="text/css">
+@import url(http://www.google.com/cse/api/branding.css);
+</style>
+<div class="cse-branding-bottom" style="background-color:#FFFFFF;color:#000000;width:50%; margin:auto">
+  <div class="cse-branding-form">
+    <form action="http://www.google.com/cse" id="cse-search-box">
+      <div>
+        <input name="cx" value="partner-pub-2560316224908115:0581759109" type="hidden">
+        <input name="ie" value="UTF-8" type="hidden">
+        <input name="q" size="55" type="text">
+        <input name="sa" value="Search" type="submit">
+      </div>
+    </form>
+  </div>
+  <div class="cse-branding-logo">
+    <img src="shared-libraries-linux-gcc_files/poweredby_FFFFFF.gif" alt="Google">
+  </div>
+  <div class="cse-branding-text">
+    Custom Search
+  </div>
+</div>
+
+<center>
+<div style="margin-top:20px; margin-bottom: 20px">
+<script type="text/javascript">
+<!--
+google_ad_client = "pub-2560316224908115";
+/* link_ads_bottom */
+google_ad_slot = "2258412831";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script> 
+<script type="text/javascript" src="shared-libraries-linux-gcc_files/show_ads.js"> </script><ins style="display:inline-table;border:none;height:15px;margin:0;padding:0;position:relative;visibility:visible;width:728px"><ins id="aswift_1_anchor" style="display:block;border:none;height:15px;margin:0;padding:0;position:relative;visibility:visible;width:728px"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="15" scrolling="no" width="728"></iframe></ins></ins> 
+</div>
+ 
+<script type="text/javascript" src="shared-libraries-linux-gcc_files/618210012.js"></script><style type="text/css">#af-form-618210012 .af-body .af-textWrap{width:98%;display:block;float:none;}#af-form-618210012 .af-body a{color:#AA0101;text-decoration:underline;font-style:normal;font-weight:normal;}#af-form-618210012 .af-body input.text, #af-form-618210012 .af-body textarea{background-color:#FFFFFF;border-color:#000000;border-width:1px;border-style:solid;color:#000000;text-decoration:none;font-style:normal;font-weight:normal;font-size:12px;font-family:Verdana, sans-serif;}#af-form-618210012 .af-body input.text:focus, #af-form-618210012 .af-body textarea:focus{background-color:#FFFFFF;border-color:#AA0101;border-width:1px;border-style:solid;}#af-form-618210012 .af-body label.previewLabel{display:block;float:none;text-align:left;width:auto;color:#000000;text-decoration:none;font-style:normal;font-weight:normal;font-size:12px;font-family:Verdana, sans-serif;}#af-form-618210012 .af-body{padding-bottom:15px;background-repeat:no-repeat;background-position:inherit;background-image:none;color:#000000;font-size:12px;font-family:Verdana, sans-serif;}#af-form-618210012 .af-footer{padding-right:15px;padding-left:15px;background-color:#transparent;border-width:1px;border-bottom-style:none;border-left-style:none;border-right-style:none;border-top-style:none;color:#000000;font-size:12px;font-family:Verdana, sans-serif;}#af-form-618210012 .af-header{padding-bottom:95px;padding-top:20px;padding-right:115px;padding-left:10px;background-color:transparent;background-repeat:no-repeat;background-position:top right;background-image:url("http://forms.aweber.com/images/forms/sign-up-below/big-red/header.png");border-width:1px;border-bottom-style:none;border-left-style:none;border-right-style:none;border-top-style:none;color:#AA0101;font-size:16px;font-family:Verdana, sans-serif;}#af-form-618210012 .af-quirksMode .bodyText{padding-top:2px;padding-bottom:2px;}#af-form-618210012 .af-quirksMode{padding-right:15px;padding-left:15px;}#af-form-618210012 .af-standards .af-element{padding-right:15px;padding-left:15px;}#af-form-618210012 .bodyText p{margin:1em 0;}#af-form-618210012 .buttonContainer input.submit{background-color:#0479c2;background-image:url("http://forms.aweber.com/images/forms/sign-up-below/big-red/button.png");color:#FFFFFF;text-decoration:none;font-style:normal;font-weight:normal;font-size:14px;font-family:Verdana, sans-serif;}#af-form-618210012 .buttonContainer input.submit{width:auto;}#af-form-618210012 .buttonContainer{text-align:center;}#af-form-618210012 body,#af-form-618210012 dl,#af-form-618210012 dt,#af-form-618210012 dd,#af-form-618210012 h1,#af-form-618210012 h2,#af-form-618210012 h3,#af-form-618210012 h4,#af-form-618210012 h5,#af-form-618210012 h6,#af-form-618210012 pre,#af-form-618210012 code,#af-form-618210012 fieldset,#af-form-618210012 legend,#af-form-618210012 blockquote,#af-form-618210012 th,#af-form-618210012 td{float:none;color:inherit;position:static;margin:0;padding:0;}#af-form-618210012 button,#af-form-618210012 input,#af-form-618210012 submit,#af-form-618210012 textarea,#af-form-618210012 select,#af-form-618210012 label,#af-form-618210012 optgroup,#af-form-618210012 option{float:none;position:static;margin:0;}#af-form-618210012 div{margin:0;}#af-form-618210012 fieldset{border:0;}#af-form-618210012 form,#af-form-618210012 textarea,.af-form-wrapper,.af-form-close-button,#af-form-618210012 img{float:none;color:inherit;position:static;background-color:none;border:none;margin:0;padding:0;}#af-form-618210012 input,#af-form-618210012 button,#af-form-618210012 textarea,#af-form-618210012 select{font-size:100%;}#af-form-618210012 p{color:inherit;}#af-form-618210012 select,#af-form-618210012 label,#af-form-618210012 optgroup,#af-form-618210012 option{padding:0;}#af-form-618210012 table{border-collapse:collapse;border-spacing:0;}#af-form-618210012 ul,#af-form-618210012 ol{list-style-image:none;list-style-position:outside;list-style-type:disc;padding-left:40px;}#af-form-618210012,#af-form-618210012 .quirksMode{width:429px;}#af-form-618210012.af-quirksMode{overflow-x:hidden;}#af-form-618210012{background-color:transparent;border-color:#CFCFCF;border-width:1px;border-style:none;}#af-form-618210012{display:block;}#af-form-618210012{overflow:hidden;}.af-body .af-textWrap{text-align:left;}.af-body input.image{border:none!important;}.af-body input.submit,.af-body input.image,.af-form .af-element input.button{float:none!important;}.af-body input.text{width:100%;float:none;padding:2px!important;}.af-body.af-standards input.submit{padding:4px 12px;}.af-clear{clear:both;}.af-element label{text-align:left;display:block;float:left;}.af-element{padding:5px 0;}.af-form-wrapper{text-indent:0;}.af-form{text-align:left;margin:auto;}.af-header,.af-footer{margin-bottom:0;margin-top:0;padding:10px;}.af-quirksMode .af-element{padding-left:0!important;padding-right:0!important;}.lbl-right .af-element label{text-align:right;}body {}</style><form method="post" class="af-form-wrapper" action="http://www.aweber.com/scripts/addlead.pl"><div style="display: none;"><input name="meta_web_form_id" value="618210012" type="hidden"><input name="meta_split_id" value="" type="hidden"><input name="listname" value="cprogramming" type="hidden"><input name="redirect" value="http://www.cprogramming.com/ml_thankyou.html" id="redirect_511ae85073b72bd998ab0ca30b3542e3" type="hidden"><input name="meta_adtracking" value="inline" type="hidden"><input name="meta_message" value="1" type="hidden"><input name="meta_required" value="email" type="hidden"><input name="meta_tooltip" value="" type="hidden"></div><div id="af-form-618210012" class="af-form"><div id="af-header-618210012" class="af-header"><div class="bodyText"><center><div><div>Join our mailing list to keep up with the latest news and updates about Cprogramming.com!</div>&nbsp;</div></center></div></div><div id="af-body-618210012" class="af-body af-standards"><div class="af-element"><label class="previewLabel" for="awf_field-28821296">Name</label><div class="af-textWrap"><input id="awf_field-28821296" name="name" class="text" tabindex="500" type="text"></div><div class="af-clear"></div></div><div class="af-element"><label class="previewLabel" for="awf_field-28821297">Email</label><div class="af-textWrap"><input class="text" id="awf_field-28821297" name="email" tabindex="501" type="text"></div><div class="af-clear"></div></div><div class="af-element"><div class="bodyText"><center></center></div><div class="af-clear"></div></div><div class="af-element buttonContainer"><input name="submit" id="af-submit-image-618210012" class="image" style="background: none;" alt="Submit Form" src="shared-libraries-linux-gcc_files/button.png" tabindex="502" type="image"><div class="af-clear"></div></div><div class="af-element" style="text-align: center"><img src="shared-libraries-linux-gcc_files/a.png" alt="Subscriber Counter"></div></div><div id="af-footer-618210012" class="af-footer"><div class="bodyText"><p>&nbsp;</p></div></div></div></form><script type="text/javascript">    <!--    (function() {        var IE = /*@cc_on!@*/false;        if (!IE) { return; }        if (document.compatMode && document.compatMode == 'BackCompat') {            if (document.getElementById("af-form-618210012")) {                document.getElementById("af-form-618210012").className = 'af-form af-quirksMode';            }            if (document.getElementById("af-body-618210012")) {                document.getElementById("af-body-618210012").className = "af-body inline af-quirksMode";            }            if (document.getElementById("af-header-618210012")) {                document.getElementById("af-header-618210012").className = "af-header af-quirksMode";            }            if (document.getElementById("af-footer-618210012")) {                document.getElementById("af-footer-618210012").className = "af-footer af-quirksMode";            }        }    })();    --></script>
+
+<div class="footer-links" style="padding:10px">
+<a href="http://www.cprogramming.com/advertising.html">Advertising</a> | <a href="http://www.cprogramming.com/privacy.html">Privacy policy</a> |
+<a href="http://www.cprogramming.com/use.html">Copyright © 1997-2011 Cprogramming.com. All rights reserved.</a> | <a href="mailto:webmaster@cprogramming.com">webmaster@cprogramming.com</a>
+</div>
+</center></div>
+</div>
+</td>
+    	
+
+
+<td class="content noprint" rowspan="1" valign="top" bgcolor="#EBEBEB">
+<div class="content2"><br><div class="verticalad">
+
+
+
+
+
+
+
+<script type="text/javascript"><!--
+        e9 = new Object();
+    e9.size = "160x600,120x600";
+//--></script>
+<script type="text/javascript" src="shared-libraries-linux-gcc_files/tags.js"></script><div align="center"><script type="text/javascript" src="shared-libraries-linux-gcc_files/j_002.js"></script><div id="tfac_160600884904344" style="z-index: 2147483638; position: relative; width: 160px;"><script src="shared-libraries-linux-gcc_files/tf_adChoice10.js" type="text/javascript"></script><div style="text-align: left; height: 15px; left: 141px; overflow: hidden; position: absolute; top: 0px; width: 19px; z-index: 2147483638;"><img style="margin:0;position:absolute;left:0px; display:block;" src="shared-libraries-linux-gcc_files/ad_choices_i_UR.png" onmouseover="tf_e9AdChoice.expand(this,160,141);" height="15px" width="19px" border="0"><a href="http://a.tribalfusion.com/j.u?rnd=884904344&amp;redirect=http://www.youronlinechoices.com/ro/" target="_blank"><img style="margin:0;position:absolute;display:none;" src="shared-libraries-linux-gcc_files/ad_choices_UR.png" onmouseout="tf_e9AdChoice.collapsed(this,160,141);" height="15px" width="77px" border="0"></a></div></div>
+<script language="javascript" defer="defer">
+  (function() {
+    var 	tf_adchoice_width;
+    var 	tf_adchoice_height;
+
+    if (typeof(e9AdChoice) === "undefined")
+     {
+       tf_adchoice_width = 160;
+       tf_adchoice_height = 600;
+     }
+    else
+     {
+       tf_adchoice_width = e9AdChoice.width;
+       tf_adchoice_height = e9AdChoice.height; 
+       e9AdChoice = undefined;
+     }
+
+    var adChoiceObj = {
+        adWidth			: tf_adchoice_width,
+        adHeight		: tf_adchoice_height,
+        adChoiceIconPos 	: "UR".toLowerCase(),
+        adChoiceIconDir 	: "http://cdnx.tribalfusion.com/media/common//adChoice/icon/",
+        adChoiceOptOutPage 	: "http://a.tribalfusion.com/j.u?rnd=884904344&redirect=http://www.youronlinechoices.com/ro/",
+        adChoiceDivId		: "tfac_160600884904344",
+        adChoiceIconVisibility	: "true",
+        rnd                     : "884904344"
+    };
+
+    var script = document.createElement('script');
+    script.type = "text/javascript";
+    script.src = "http://cdnx.tribalfusion.com/media/common/adChoice/tf_adChoice10.js";
+
+    if (script.readyState) //IE 
+     { 
+       script.onreadystatechange = function() {
+         if (    script.readyState == "loaded" 
+	      || script.readyState == "complete")
+	  {
+            script.onreadystatechange = null;
+   	    window.setTimeout(function() {tf_e9AdChoice.showAdChoiceIcon(adChoiceObj)},2000);
+          }
+       };
+     } 
+    else 
+     { 
+       script.onload = function() {
+   	  window.setTimeout(function() {tf_e9AdChoice.showAdChoiceIcon(adChoiceObj)},2000);
+       };
+     }
+
+    document.getElementById(adChoiceObj.adChoiceDivId).appendChild(script);
+  })();
+</script>
+<center>
+<a href="http://a.tribalfusion.com/h.click/aKmUoe1EMy4TBi4TfQmqMHYFJdWWfVoAnInsMwodMD3TZbj2HIp5mbZapr3ZdXcMSYcFX0sjunqf45bJSTUjBWA31REj4ScnMQdJwYt7uVAfv3sB3YFYLUAin2PUcPP7I4HvO0dBKmHAo4A3R3sngTGJkUcjkRAnmUHn3Ubj33rexUEQrWTYdSQZa7oWZaZbtqbQo8XGs93qwTy4P8TTOB70yCyGpWekvQT6ToMosdQP37DY1m/http://newsonlineweekly.com/aa/?sub1=t" target="_blank">
+<img src="shared-libraries-linux-gcc_files/160X600.gif" height="600" width="160" border="0"></a>
+</center></div>
+
+
+
+
+</div><br>
+
+<style type="text/css">
+.sidebar-box { width: 150px; margin-bottom:5px; }
+</style>
+    <div id="side-images">
+        <div style="padding:5px;margin-top:5px">
+            <div style="margin-bottom: 5px">
+                <b>Popular pages</b>
+            </div>
+            <div>
+                
+                <!--http://www.flickr.com/photos/baslow/5620208/sizes/o/in/photostream/ -->
+                <div class="sidebar-box">
+                    <a href="http://www.cprogramming.com/tutorial/c-tutorial.html">
+                    <img src="shared-libraries-linux-gcc_files/5620208_bff9c514e6_s.jpg" alt="C tutorial" height="75" width="75" border="0">
+                    <br>
+                    C Tutorial
+                    </a>
+                </div>
+                
+
+                
+                <!--http://www.flickr.com/photos/29233640@N07/2855530649/sizes/sq/in/photostream/-->
+                <div class="sidebar-box">
+                    <a href="http://www.cprogramming.com/begin.html">
+                    <img src="shared-libraries-linux-gcc_files/2855530649_905f7862fd_s.jpg" alt="Get started" height="75" width="75" border="0">
+                    <br>
+                    Exactly how to get started with C++ (or C) today</a>
+                </div>
+                
+
+                
+                <!--http://www.flickr.com/photos/mikecogh/6505012533/sizes/sq/in/photostream/-->
+                <div class="sidebar-box">
+                    <a href="http://www.cprogramming.com/how_to_learn_to_program.html">
+                    <img src="shared-libraries-linux-gcc_files/6505012533_55c83fdfa0_s.jpg" alt="Learn to program" height="75" width="75" border="0">
+                    <br>
+                    5 ways you can learn to program faster</a>
+                </div>
+                
+
+                
+                <div class="sidebar-box">
+                    <a href="http://www.cprogramming.com/tutorial/c++-tutorial.html">
+                    <img src="shared-libraries-linux-gcc_files/c-img.png" alt="C++ tutorial" height="75" width="75" border="0">
+                    <br>
+                    C++ Tutorial</a>
+                </div>
+                
+
+                
+                <!--http://www.flickr.com/photos/giopuo/3441263816/sizes/sq/in/photostream/-->
+                <div class="sidebar-box">
+                    <a href="http://www.cprogramming.com/beginner_programming_mistakes.html">
+                    <img src="shared-libraries-linux-gcc_files/3441263816_95f132a884_s.jpg" alt="Problems new programmers face" height="75" width="75" border="0">
+                    <br>
+                    The 5 Most Common Problems New Programmers Face</a>
+                </div>
+                
+
+                
+                <div class="sidebar-box">
+                   <a href="http://www.cprogramming.com/tutorial/game_programming/same_game_part1.html">
+                    <img src="shared-libraries-linux-gcc_files/same_game_small.png" alt="Learn to make a game" height="42" width="42" border="0">
+                    <br>
+                   How to make a game in 48 hours</a>
+                </div>
+                
+
+                
+                <div class="sidebar-box">
+                   <a href="http://www.cprogramming.com/tutorial/common.html">
+                    <img src="shared-libraries-linux-gcc_files/2291127824_087a497bea_s.jpg" alt="Common problems" height="75" width="75" border="0">
+                    <br>
+                   8 Common Programming Mistakes</a>
+                </div>
+                
+
+                
+                <div class="sidebar-box">
+                   <a href="http://www.cprogramming.com/c++11/what-is-c++0x.html">
+                    <img src="shared-libraries-linux-gcc_files/c11.png" alt="C++11" height="75" width="75" border="0">
+                    <br>
+                   What is C++11?</a>
+                </div>
+                
+            </div>
+        </div>
+        <div style="display:block">
+            <a href="http://www.cprogramming.com/image_credits.html">Image credits</a>
+        </div>
+    </div>
+</div>
+</td>  	
+
+</tr>
+</tbody></table>
+</div>
+
+
+<script>
+(function(w, d, s) {
+  var cur_url = window.location;
+  var loc = cur_url;
+  if ( /htm(l?)/.test( cur_url.pathname ) ) {
+    loc = cur_url.protocol + "//" + cur_url.host + cur_url.pathname.replace( /\+/g, "%2b" );
+  }
+  d.getElementById( "fb-recommend" ).setAttribute( "data-href", loc );
+  function go(){
+    var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.src = url; js.id = id;
+          fjs.parentNode.insertBefore(js, fjs);
+        };
+    load('//connect.facebook.net/en_US/all.js#xfbml=1&channelUrl=http%3A%2F%2Fwww.cprogramming.com%2Ffb%2Fchannel.html', 'fbjssdk');
+    load('https://apis.google.com/js/plusone.js', 'gplus1js');
+    load('//platform.twitter.com/widgets.js', 'tweetjs');
+  }
+  if (w.addEventListener) { w.addEventListener("load", go, false); }
+  else if (w.attachEvent) { w.attachEvent("onload",go); }
+}(window, document, 'script'));
+</script>
+
+
+
+
+
+<script type="text/javascript" src="shared-libraries-linux-gcc_files/shCore.js"></script>
+<script type="text/javascript" src="shared-libraries-linux-gcc_files/shBrushCpp.js"></script>
+<script type="text/javascript">
+         SyntaxHighlighter.all();
+</script>
+
+
+
+</div></body></html>

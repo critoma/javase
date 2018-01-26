@@ -1,0 +1,145 @@
+Linux UBUNTU 12/14:
+
+//use ghex for introspecting the files in hex
+
+//set env variables:
+
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_25
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export CLASSPATH=.:$JAVA_HOME/jre/lib
+export JSE=/home/stud/javase/lectures
+
+cd $JSE/c09/src
+
+A. Sockets - UDP 
+
+cd $JSE/c09/src
+
+A.0. UDP Simple Client & Server - uni-cast non-multi-threading (with Wireshark over Mobile HotSpot and the Oracle VM Box set to do bridge over Wi-Fi)
+
+cd udpsimple01
+javac eu/ase/net/udp/UDPServer.java
+javac eu/ase/net/udp/UDPClient.java
+
+sudo -E $JAVA_HOME/bin/java eu/ase/net/udp/UDPServer
+>ps -a
+>kill PID-UDP_Server
+sudo -E $JAVA_HOME/bin/java eu/ase/net/udp/UDPServer &
+>netstat -na -p udp
+java eu/ase/net/udp/UDPClient 127.0.0.1
+java eu/ase/net/udp/UDPClient 86.55.177.71
+
+cd ..
+
+A.1. UDP Simple Client & Server - multi-cast non-multi-threading
+
+cd udpmulticast01
+javac eu/ase/udpmulticast/MulticastUDPServer.java
+javac eu/ase/udpmulticast/MulticastUDPClient.java
+
+java eu/ase/udpmulticast/MulticastUDPServer 4445
+java eu/ase/udpmulticast/MulticastUDPClient 4446
+
+cd ..
+
+A.2. UDP - Multithreading UDP Client & Server
+
+cd udpmultithread02
+
+javac UDPQuoteServer.java
+javac UDPQuoteServerThread.java
+javac UDPQuoteClient.java
+
+java UDPQuoteServer 127.0.0.1 4806
+java UDPQuoteClient 127.0.0.1 4806
+
+cd ..
+
+A.3. Real Multithreading UDP Client & Server
+
+cd udpmultithreadreal03
+
+javac UDPQuoteServer.java
+javac UDPQuoteServerThread.java
+javac UDPQuoteClient.java
+
+java UDPQuoteServer 127.0.0.1 4806
+java UDPQuoteClient 127.0.0.1 4806
+
+cd ..
+
+>netstat -na -p udp | grep 4806
+
+
+
+--------------------------------------------------------------------------------------------
+
+B. Sockets - TCP
+
+cd $JSE/c09/src
+
+B.1. TCP Simple Client & Server - TCP State Machine Overview
+
+cd tcpsimple04
+
+>ifconfig
+
+javac eu/ase/net/tcp/TCPServer.java
+javac eu/ase/net/tcp/TCPClient.java
+
+sudo $JAVA_HOME/bin/java eu/ase/net/tcp/TCPServer
+>ps -a
+>sudo kill PID_Server_TCP
+sudo $JAVA_HOME/bin/java eu/ase/net/tcp/TCPServer &
+
+java eu/ase/net/tcp/TCPClient 127.0.0.1 4801
+java eu/ase/net/tcp/TCPClient 86.55.177.71 4801
+
+>jdb eu/ase/net/tcp/TCPServer
+stop at eu.ase.net.tcp.TCPServer:9
+run
+next
+stop at eu.ase.net.tcp.TCPServer:33
+cont
+next
+
+
+cd ..
+
+>netstat -na -p tcp 3 |  grep 4801
+
+>sudo wireshark
+
+Windows 7 / Win 2012 Server / Ubuntu 12:
+netstat -na -p tcp | findstr /R "4801"
+
+
+B.2. Simple Multi-threading TCP Client & Server
+
+cd tcpmultithreadsimple05
+
+javac eu/ase/net/tcp/TCPMultiThreadServer.java
+javac eu/ase/net/tcp/TCPClient.java
+
+java eu/ase/net/tcp/TCPMultiThreadServer
+java eu/ase/net/tcp/TCPClient 127.0.0.1 4801
+
+cd ..
+
+netstat -na -p tcp 3
+
+B.3. Web Server - Laboratory / Seminar
+
+cd serverWeb06
+
+javac eu/ase/httpserver/HTTPMultiServer.java
+
+cd ..
+
+#Trafic analysis
+>sudo wireshark
+
+Request: http://ip_masina:8085/mytest.html
+
+
+Request: http://ip_masina:8085/bba.html

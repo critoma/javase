@@ -1,0 +1,36 @@
+(function(){
+	var rp=parseFloat("100"),r=Math.random()*10000,s_id="DL_316683_18_200026711560",d=document;
+
+	function w(){
+		if (!d.body){setTimeout(w,100);return;}
+		try{ var s=d.getElementById(s_id);
+			if (!s){
+				s=d.createElement('script');
+				s.src="http://amch.questionmarket.com/adsc/d316683/18/200026711560/decide.php?lt="+Math.floor((new Date()).getTime()/1000);
+				s.type='text/javascript';
+				s.id=s_id;
+				d.body.insertBefore(s,d.body.firstChild); }
+	        }catch(e){ }
+                if (0) {
+                  var dle = new Image();
+                  dle.src = "http://a.dlqm.net/asdet/adsc_detail.php?site=18&code=200026711560&ord="+ Math.floor((new Date()).getTime()/1000);
+                }
+	}
+
+	function t(){
+		if (1==4)w();
+		else setTimeout(w,Math.ceil(Math.random() * 4) * 500); 
+	}
+
+        if (!isNaN(rp)&&(r>=rp*100)) return;
+
+	if (false) {
+		w();        
+	} else if (d.readyState=="complete"){ 
+		t();
+	} else if (window.addEventListener){ // DOM
+		window.addEventListener("load", t, false);
+	} else if (window.attachEvent){ // IE 5+
+		window.attachEvent("onload", t);
+	}
+})();

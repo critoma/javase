@@ -1,0 +1,36 @@
+package eu.ase.polimorfism;
+
+public class Vehicul implements IMiscare {
+    private int greutate;
+    
+    public Vehicul() {
+        this.greutate = 0;
+    }
+    
+    public Vehicul(int gr) {
+        this.greutate = gr;
+    }
+    
+    public int getGreutate() {
+        return this.greutate;
+    }
+    
+    public void setGreutate(int greutate) {
+        this.greutate = greutate;
+    }
+    
+    @Override
+    public void pornesteMotor() {
+        System.out.println("Vehicul - porneste motor");
+    }
+    
+    @Override
+    public void opresteMotor() {
+        System.out.println("Vehicul - opreste motor");
+    }
+    
+    public String afis() {
+        String rez = new String("Vehicul - greutate="+this.greutate);
+        return rez;
+    }
+}

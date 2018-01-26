@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:bookStore xmlns:ns2="eu.ase.jaxb">
+    <bookList>
+        <book>
+            <author>Neil</author>
+            <title>The game</title>
+            <publisher>H1</publisher>
+            <isbn>1234</isbn>
+        </book>
+        <book>
+            <author>Gigel</author>
+            <title>The maze</title>
+            <publisher>H2</publisher>
+            <isbn>3333</isbn>
+        </book>
+    </bookList>
+    <location>Frankfurt am Main Airport</location>
+    <name>Fraport BookStore</name>
+</ns2:bookStore>

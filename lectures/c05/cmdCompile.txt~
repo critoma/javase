@@ -1,0 +1,45 @@
+Linux UBUNTU 12:
+
+//use ghex for introspecting the files in hex
+
+//set env variables:
+
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_25
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export CLASSPATH=.:$JAVA_HOME/jre/lib
+export JSE=/home/stud/javase/lectures
+
+cd $JSE/c05/src
+
+A. Exceptions
+
+cd $JSE/c05/src/S06_Exceptions
+
+A.1. No exception handled
+javac ProgMainE1.java
+
+A.2. Catch Exceptions
+javac ProgMainE2.java
+java ProgMainE2
+
+A.3. Pass the exceptions
+javac ProgMainE3.java
+java ProgMainE3
+
+--------------------------------------------------------------------------------------------
+
+B. Source Code Design Patterns
+
+cd $JSE/c05/src/S07_FactoryMethodsClasses
+
+B.1 Factory Methods
+javac FactMethods.java
+java ProgMain1
+java ProgMain2
+
+B.2 Singleton classes
+javac Singleton.java
+java ProgMain3
+
+
+--------------------------------------------------------------------------------------------

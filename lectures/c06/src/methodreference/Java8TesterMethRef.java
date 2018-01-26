@@ -1,0 +1,18 @@
+package methodreference;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Java8TesterMethRef {
+   public static void main(String args[]){
+     List<String> names = new ArrayList<String>();	
+     names.add("Diana");
+     names.add("Mariah");
+     names.add("Dan");
+     names.add("Steve");
+     names.add("Mike");
+     names.forEach(System.out::println);
+   }
+}
+
+

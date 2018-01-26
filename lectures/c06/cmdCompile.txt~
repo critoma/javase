@@ -1,0 +1,179 @@
+Linux UBUNTU 14:
+# export JAVA_HOME=/opt/software/java/jdks/jdk1.6.0_35
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_25
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export CLASSPATH=.:$JAVA_HOME/jre/lib
+export JSE=/home/stud/javase/lectures
+
+cd $JSE/c06/src
+// ##############################################################################
+
+A. JavaScript Nashorn for callbacks-closure sample
+
+1. Hello World JS from Java2JS & JS2Java
+
+cd $JSE/c06/src
+
+//sample.js
+print('Hello World!'); 
+
+jjs ./nashornjs/sample.js
+
+javac nashornjs/Java8JSTester.java
+java nashornjs/Java8JSTester
+
+javac nashornjs/HelloWorldJSFile.java
+java nashornjs/HelloWorldJSFile
+
+jjs nashornjs/sampleBigDecimal.js
+
+2. Closure/Call-backs
+
+jjs ./nashornjs/p001a_function.js
+
+jjs ./nashornjs/p001c_functionCallBacks.js
+
+javac nashornjs/Callbacks.java
+
+java nashornjs.Caller
+
+
+javac nashornjs/Callbacks2.java
+
+java nashornjs.Caller
+
+// ##############################################################################
+
+B. Java Nested classes samples
+
+cd $JSE/c06/src
+
+1. Non-static nested class (inner class) - Member inner class
+
+javac nestedclasses/MemberInnerClass1.java
+java nestedclasses/TestMemberOuter1
+
+
+2. Non-static nested class (inner class) - Annomynous inner class (with standard class, abstract class and interface)
+
+javac nestedclasses/AnonymousInnerClassAbstract2.java
+java nestedclasses/TestAnnonymousInner
+
+javac nestedclasses/AnonymousInnerClassInterface3.java
+java nestedclasses/TestAnnonymousInner1
+
+
+3. Non-static nested class (inner class) - Local inner class
+
+javac nestedclasses/LocalInner4.java
+java nestedclasses/LocalInner4
+
+javac nestedclasses/LocalInner5.java
+java nestedclasses/LocalInner5
+
+
+4. Static nested class - Static nested class
+
+javac nestedclasses/StaticNestedOuterTest6.java
+java nestedclasses/StaticNestedOuterTest6
+
+javac nestedclasses/StaticNestedOuterTest7.java
+java nestedclasses/StaticNestedOuterTest7
+
+
+5. Static nested class - Nested Interface
+
+javac nestedclasses/NestedInterface8.java
+java nestedclasses/TestNestedInterface8
+
+javac nestedclasses/NestedInterface9.java
+java nestedclasses/TestNestedInterface9
+
+
+// ##############################################################################
+
+C. Java 8 Features:
+
+1. Method references
+
+javac methodreference/Java8TesterMethRef.java
+java methodreference/Java8TesterMethRef
+
+javac methodreference/InternalVsExternalIteration.java
+java methodreference/InternalVsExternalIteration
+
+2. Default Methods
+
+javac defaultmethods/Java8TesterDefMeth.java
+java defaultmethods/Java8TesterDefMeth
+
+3. Lambda & Functional Interfaces
+
+javac lambda/Java8TesterLambda.java
+java lambda/Java8TesterLambda
+
+javac lambda/Example1_Lambda.java
+java lambda/Example1_Lambda
+
+javac lambda/Java8LambdaBiConsumerJCL.java
+java lambda/Java8LambdaBiConsumerJCL
+
+javac functionalinterface/Java8TesterFI.java
+java functionalinterface/Java8TesterFI
+
+javac functionalinterface/AreLambdasClosuresFI.java
+java functionalinterface/AreLambdasClosuresFI
+
+javac functionalinterface/Example3_FI.java
+java functionalinterface/Example3_FI
+
+javac functionalinterface/Java8TesterLambdaFullComparatorFI.java
+java functionalinterface/Java8TesterLambdaFullComparatorFI
+
+
+4. Streams for processing
+
+javac streams/Java8TesterProcessingStreams.java
+java streams/Java8TesterProcessingStreams
+
+javac streams/Java8StreamsExample2.java
+java streams/Example2_Java7
+java streams/Example2_Java8ProcessingStream
+
+
+5. Optional
+
+javac optional/Java8TestOptional.java
+java optional/Java8TestOptional
+
+
+6. New Date/Time API
+
+javac datetime/Java8TestLocalDateTime.java
+java datetime/Java8TestLocalDateTime
+
+javac datetime/Java8TestZonedDateTime.java
+java datetime/Java8TestZonedDateTime
+
+javac datetime/Java8TestChronoUnitsEnum.java
+java datetime/Java8TestChronoUnitsEnum
+
+javac datetime/Java8TestPeriodDuration.java
+java datetime/Java8TestPeriodDuration
+
+javac datetime/Java8TestTemporalAdjustment.java
+java datetime/Java8TestTemporalAdjustment
+
+javac datetime/Java8TestBackwardCompatibility.java
+java datetime/Java8TestBackwardCompatibility
+
+7. Base64
+
+javac base64/Java8TestBase64.java
+java base64/Java8TestBase64
+
+// ##############################################################################
+
+
+
+

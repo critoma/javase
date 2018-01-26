@@ -1,0 +1,115 @@
+body {
+ font-family: helvetica, arial, sans-serif;
+ background-color: #cccccc;
+ color: #000000;
+}
+/* Main Table */
+table.main {
+ border           : 1px solid #000000;
+ width            : 100%;
+ background-color : #000000;
+}
+table.main tr.main {
+ background-color: #cccccc;
+}
+table.main td.content {
+ background-color: #cccccc;
+ border           : 1px solid #000000;
+ vertical-align: top;
+}
+table.main td.leftcol {
+ background-color: #c0c0c0;
+ border           : 1px solid #000000;
+ width: 160px;
+ vertical-align: top;
+}
+table.main td.rightcol {
+ background-color: #c0c0c0;
+ border           : 1px solid #000000;
+ width: 160px;
+ vertical-align: top;
+}
+/* Label Bar */
+table.labelbar {
+ width           : 100%;
+ background-color: #ffcc33;
+ font            : 18px Helvetica, Verdana, Arial, sans-serif;
+ font-weight     : bold;
+ color           : #000000;
+}
+table.labelbar tr{
+ padding         : 2px 2px 2px 2px;
+ background-color: #ffcc33;
+ font            : 18px Helvetica, Verdana, Arial, sans-serif;
+ font-weight     : bold;
+ color           : #000000;
+}
+table.labelbar td{
+ padding         : 2px 2px 2px 2px;
+ background-color: #ffcc33;
+ font            : 18px Helvetica, Verdana, Arial, sans-serif;
+ font-weight     : bold;
+ color           : #000000;
+}
+table.labelbar2 {
+ width           : 100%;
+ background-color: #c0c0c0;
+ font            : 18px Verdana, Arial, Helvetica, sans-serif;
+ font-weight     : bold;
+ color           : #000000;
+}
+table.labelbar2 tr{
+ padding         : 2px 2px 2px 2px;
+ background-color: #c0c0c0;
+ font            : 18px Verdana, Arial, Helvetica, sans-serif;
+ font-weight     : bold;
+ color           : #000000;
+}
+table.labelbar2 td{
+ padding         : 2px 2px 2px 2px;
+ background-color: #c0c0c0;
+ font            : 18px Verdana, Arial, Helvetica, sans-serif;
+ font-weight     : bold;
+ color           : #000000;
+}
+/* Code Table */
+table.code {
+ border           : 1px solid #000000;
+ width            : 100%;
+ background-color : #000000;
+}
+table.code tr.code {
+ background-color: #c0c0c0;
+}
+
+/* Table headers are bold, regular data is not */
+th {
+ font-family: helvetica, arial, sans-serif;
+ font-weight: bold;
+ color: #000000;
+}
+td {
+ font-family: helvetica, arial, sans-serif;
+ color: #000000;
+}
+a:link {font-family: Helvetica, Arial, sans-serif; color: #0000FF; text-decoration: none; }
+a:visited {font-family: Helvetica, Arial, sans-serif; color: #0000CC; text-decoration: none; }
+a:active {font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0000FF; text-decoration: none; }
+a:hover {font-family: Helvetica, Arial, sans-serif; color: #0000AA; text-decoration: underline; }
+a.menubar:link     {  font-family: arial, helvetica, sans-serif; font-size: 12px; color: #f7bc33 }
+a.menubar:visited {  font-family: arial, helvetica, sans-serif; color: #f7bc33; font-size: 12px; }
+a.menubar:hover {  font-family: arial, helvetica, sans-serif; font-size: 12px; color: #f8bd34; text-decoration: underline; }
+.text {
+ font-family: helvetica, arial, sans-serif;
+ color: #000000;
+}
+.textbold {
+ font-family: helvetica, arial, sans-serif;
+ font-weight: bold;
+ color: #000000;
+}
+a.footer:link { font-family: arial, helvetica, sans-serif; color: #f7bc33; text-decoration: underline; }
+a.footer:visited { font-family: arial, helvetica, sans-serif; color: #f7bc33; text-decoration: underline; }
+a.footer:hover { font-family: arial, helvetica, sans-serif; color: #f8bd34; text-decoration: none; }
+#globalNavigation { background:#000000; }
+#footer { background:transparent; }

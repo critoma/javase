@@ -1,0 +1,4 @@
+{var dz=document;
+dz.writeln("<IFRAME FRAMEBORDER=0 MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING=NO WIDTH=728 HEIGHT=90 SRC=\"http://ad.yieldmanager.com/st?ad_type=iframe&ad_size=728x90&section=3951727&x=http://media.fastclick.net/w/click.here?cid=351710;mid=881922;m=1;sid=51962;c=0;tp=5;forced_click=\"></IFRAME>");
+dz.writeln("<script type=\"text/javascript\">(function(){document.write('<span id=\"te-clearads-js-1031148506_5_881922\"><sc'+'ript type=\"text/javascript\" src=\"'+((\"https:\"==document.location.protocol)?\"https\":\"http\")+'://choices.truste.com/ca?pid=valueclick01&aid=valueclickeu02&cid=4&c=1031148506_5_881922&w=728&h=90&plc=tr&admarker=dynamic\"></scr'+'ipt></span>');}());<\/script>");
+dz.writeln("");}

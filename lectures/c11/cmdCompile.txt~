@@ -1,0 +1,69 @@
+Linux UBUNTU 12/14:
+
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_25
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar
+export JSE=/home/stud/javase/lectures
+
+# http://www.vogella.com/tutorials/JAXB/article.html
+# http://www.vogella.com/tutorials/JavaXML/article.html
+
+cd $JSE/c11/src
+
+###########################################################
+
+A. StaX
+
+cd StaX
+
+javac eu/ase/stax_xml/*.java
+
+java eu/ase/stax_xml/TestRead config.xml
+
+cd ..
+
+###########################################################
+
+B. XPath
+
+cd XPath
+
+javac eu/ase/xpath/*.java
+
+java eu/ase/xpath/QueryXML
+
+cd ..
+
+###########################################################
+
+C. XSLT
+
+
+
+###########################################################
+
+D. JAXB 2 (Java XML)
+
+cd JAXB
+
+javac eu/ase/jaxb/Book.java
+javac eu/ase/jaxb/BookStore.java
+javac eu/ase/jaxb/BookProgMain.java
+
+java eu/ase/jaxb/BookProgMain
+
+cd ..
+
+###########################################################
+
+E. JSON (Java-JSON Library org.json - for more complex operations try Jackson)
+
+cd JSON
+
+javac -classpath .:./lib/java-json.jar eu/ase/json/BuildJson1.java
+javac -classpath .:./lib/java-json.jar eu/ase/json/ParseJson1.java
+
+java -classpath .:./lib/java-json.jar eu/ase/json/BuildJson1
+java -classpath .:./lib/java-json.jar eu/ase/json/ParseJson1 ./myJsonObj.json
+
+cd ..

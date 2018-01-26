@@ -1,0 +1,1688 @@
+<html><head><title>An Introduction to Java Annotations</title>
+
+
+<meta name="description" content="Make your development easier through the use of JDK5's annotation feature. The objective is to spend less time on unhandy code-writing and focus more on business logic rules.">
+<meta name="keywords" content="">
+<meta name="authors" content=" M. M. Islam Chisty">
+<meta name="date" content="20051014">
+<meta name="channel" content="ewsoftware">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="Annotations_02_files/text.css" type="text/css" rel="stylesheet">
+<script language="JavaScript">
+<!--
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_findObj(n, d) { //v3.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+
+<script language="JavaScript1.2">
+<!--
+function checkForm() {
+	if (document.whatwhere.where.value == "your email") {
+		alert("Please enter your email");
+		return false;
+	} else {
+		return true;
+	}
+}
+//-->
+</script>
+
+<link rel="stylesheet" type="text/css" href="Annotations_02_files/listmenu_h.css"><link rel="stylesheet" type="text/css" href="Annotations_02_files/listmenu_h_settings.css"><link rel="stylesheet" href="Annotations_02_files/headermenu.css" type="text/css"><link rel="stylesheet" href="Annotations_02_files/epfs.css" type="text/css"><link rel="stylesheet" href="Annotations_02_files/security.css" type="text/css"><link rel="stylesheet" href="Annotations_02_files/security.css" type="text/css"><link rel="stylesheet" href="Annotations_02_files/security.css" type="text/css"><link rel="stylesheet" href="Annotations_02_files/security.css" type="text/css"><link rel="stylesheet" href="Annotations_02_files/security.css" type="text/css"><link rel="stylesheet" type="text/css" href="Annotations_02_files/footer-new-v2.css"></head><body onload="MM_preloadImages('/img/navarrow_on.gif')" bgcolor="#ffffff" vlink="#666666">
+
+<center>
+<script type="text/javascript" src="Annotations_02_files/fsmenu_commented.js"></script>
+<script type="text/javascript" src="Annotations_02_files/menuset.js"></script>
+<script type="text/javascript" src="Annotations_02_files/menusetv2.js"></script>
+<script type="text/javascript" src="Annotations_02_files/menusetv3.js"></script>
+
+
+
+
+
+
+
+<!-- START TOP TOOLBAR -->
+<div id="heightcontainer"></div>		
+<div style="width: 100%;" id="navitoolbarcontainer">
+		  <div style="margin: 0px; padding: 0px; width: 100%;">
+		  <div id="navitile" style="width: 100%;">
+			<div style="padding-left: 0px; margin-left: 0px; padding-top: 5px; padding-right: 5px; float: left; white-space: nowrap;">
+
+			<a title="View Internet.com - The Network for Technology Professionals" href="http://www.internet.com/" class="gt"><img alt="Internet.com - The Network for Technology Professionals" src="Annotations_02_files/icom_logo_global.png" border="0"></a>
+
+			</div>		
+				<ul class="menulist" id="listMenuRoot" style="height: 22px;">
+				 <li style="margin-top: 0px;">
+				  <a class="gt" href="http://www.internet.com/it/" style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;"><span class="subind">&gt;</span> <b>IT</b> </a>
+				  
+				  
+				  <ul id="listMenu-id-1">
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.bitaplanet.com/">bITa Planet</a></li>  
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.cioupdate.com/">CIO Update</a></li> 
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.databasejournal.com/">Database Journal</a></li>   
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.datamation.com/">Datamation</a></li> 
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.drmwatch.com/">DRM Watch</a></li> 
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.enterpriseitplanet.com/">Enterprise IT Planet</a></li>   
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.enterprisenetworkingplanet.com/">Enterprise Networking Planet</a></li> 
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.enterprisestorageforum.com/">Enterprise Storage Forum</a></li> 
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.esecurityplanet.com/">eSecurity Planet</a></li> 
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.hardwarecentral.com/">Hardware Central</a></li>   
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.intranetjournal.com/">Intranet Journal</a></li> 
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.isp-planet.com/">ISP Planet</a></li> 
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.itsmwatch.com/">ITSMwatch</a></li> 
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.justlinux.com/">JustLinux</a></li>   
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.linuxplanet.com/">Linux Planet</a></li>
+
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.opennetworkstoday.com/">Open Networks Today</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://serverwatch.internet.com/">ServerWatch</a></li>   
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.sysopt.com/">SysOpt</a></li> 
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.virtualdr.com/">Virtual DR</a></li> 
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.voipplanet.com/">VoIP Planet</a></li>   
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.webvideouniverse.com/">WebVideoUniverse</a> 
+				   </li><li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.wi-fiplanet.com/">Wi-Fi Planet</a></li>   
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.windrivers.com/">WinDrivers.com</a></li>   
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.internet.com/it">More  »</a></li>
+
+				  </ul>
+				 </li>
+				
+				 <li style="margin-top: 0px;">
+				  <a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.internet.com/developer/" class="gt"><span class="subind">&gt;</span> <b>Developer</b> </a>
+				   <ul id="listMenu-id-2">
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.15seconds.com/">15 Seconds</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.4guysfromrolla.com/">4GuysFromRolla.com</a></li>
+
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.asp101.com/">ASP101</a></li>		
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.codeguru.com/">CodeGuru</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.developer.com/">Developer.com</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.devx.com/">DevX</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.flashkit.com/">FlashKit.com</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.developer.com/java/">Gamelan</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.jars.com/">JARS</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.javascript.com/">JavaScript.com</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://javascriptsource.com/">JavaScriptSource</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.phpbuilder.com/">PHPBuilder.com</a></li>   
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.scriptsearch.com/">ScriptSearch</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.vbforums.com/">VB Forums</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.vbwire.com/">VB Wire</a></li>
+
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.webdeveloper.com/">WebDeveloper.com</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.webreference.com/">Webreference</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.internet.com/developer">More »</a></li>
+				  </ul>
+				 </li>
+				
+				 <li style="margin-top: 0px;">
+				  <a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.internetnews.com/" class="gt"><span class="subind">&gt;</span> <b>News</b> </a>
+				   <ul id="listMenu-id-3">
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.internetnews.com/">Internetnews.com</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.linuxtoday.com/">Linux Today</a></li>   		   
+				  </ul>
+				 </li>
+				
+				
+				 <li style="margin-top: 0px;"><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.smallbusinesscomputing.com/" class="gt"><span class="subind">&gt;</span> <b>Small Business</b> </a>
+				   <ul id="listMenu-id-4">
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.smallbusinesscomputing.com/">SmallBusinessComputing</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.webopedia.com/">Webopedia</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.winplanet.com/">WinPlanet</a></li>
+				  </ul>
+				 </li>
+				 
+				
+				 <li style="margin-top: 0px;"><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.internet.com/personaltechnology/" class="gt"><span class="subind">&gt;</span> <b>Personal Tech</b> </a>
+				   <ul id="listMenu-id-5">
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.blackberrytoday.com/">BlackBerryToday</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.jumbo.com/">Jumbo</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.megapixel.net/">Megapixel.net</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.palmblvd.com/">Palm Boulevard</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.pdastreet.com/">PDAStreet</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.pocketpcwire.com/">PocketPCWire</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.smartphonetoday.com/">Smart Phone Today</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.windowsmobiletoday.com/">WindowsMobileToday</a></li>
+				  </ul>
+				 </li>		
+				</ul>
+				
+				
+				
+				<ul style="height: 22px;" id="listMenuv2Root" class="menulistv2">
+				 <li style="margin-top: 0px;">
+				  <a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica;" href="http://www.jupiterevents.com/" class="gt"><span class="subind">&gt;</span> Events </a>
+
+				  <ul id="listMenuv2-id-1">
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.jupiterevents.com/">JupiterEvents</a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.jupiterwebcasts.com/">JupiterWebcasts</a></li>
+				  </ul>
+				 </li>
+				 <li style="margin-top: 0px;"><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.justtechjobs.com/" class="gt"> Jobs </a></li>
+				 <li style="margin-top: 0px;"><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.jupitermedia.com/partners/" class="gt"> Partners </a></li>
+
+				 <li style="margin-top: 0px;">
+				  <a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.internet.com/solutions" class="gt"><span class="subind">&gt;</span> Solutions </a>
+				  <ul id="listMenuv2-id-2">
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.internet.com/ebook"> eBooks </a></li>
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.internet.com/video"> Video </a></li>
+				  </ul>
+				 </li>
+
+				 <li style="margin-top: 0px;"><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://shop.hardwarecentral.com/" class="" gt=""> Shop </a></li>
+				 
+				</ul>
+		
+		
+				<ul class="menulistv3" id="listMenuv3Root" style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; height: 22px;">
+				 <li style="margin-top: 0px;"><a class="gt" href="http://member.internet.com/" style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;"><span class="subind">&gt;</span> Login </a>
+
+				 
+				  <ul id="listMenuv3-id-1">
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://member.internet.com/profile/postal">Manage My Profile</a></li>
+
+				  </ul>
+				 
+				 
+				 </li>
+				 <li style="margin-top: 0px;"><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://member.internet.com/register" class="gt"><span class="subind">&gt;</span>Register </a>
+				 
+				   <ul id="listMenuv3-id-2">
+				   <li><a style="color: rgb(255, 255, 255); font-size: 9px; font-family: arial,verdana,helvetica; text-decoration: none;" href="http://www.internet.com/WhyJoin">Why Join?</a></li>
+				  </ul>
+				 
+				 
+				 </li>
+		
+				 
+				</ul>
+
+		<div style="margin-top: 0px;" id="lightgrey">
+
+		<form target="_top" action="http://search.internet.com/www.jupiterweb.com" method="post">
+			<input value="1" name="IC_Summary" type="hidden">
+			<input value="0" name="IC_StartNumber" type="hidden">
+			<input value="10" name="IC_BatchSize" type="hidden">
+
+			<input value="50" name="IC_RelevanceThreshold" type="hidden">
+			<input value="all" name="IC_QueryDatabase" type="hidden">
+			<input title="Search Internet.com" onfocus="this.value='';" class="inputglobal" size="11" name="IC_QueryText" value="Search All Sites" type="text">
+
+			<input alt="go" src="Annotations_02_files/newgo.gif" name="SUBMIT" value="Find" align="absmiddle" border="0" height="18" type="image" vspace="2" width="35">
+		</form>
+		</div>
+	</div>
+	</div>
+
+	<!--
+	<div style="width:100%;">
+    	<img src="/icom_includes/toolbars/globaltoolbar/img/shad.png" style="width:100%; height:11px; padding:0px; margin-top:22px;" />
+	</div>
+	-->
+	</div>
+   
+   <script src="Annotations_02_files/pngadapt.js" type="text/javascript"></script>
+
+
+<!-- END TOP TOOLBAR -->
+<img src="Annotations_02_files/35363233616234343436633663663430_017.gif" height="2" width="2"></center>
+<p>
+
+<script language="JavaScript1.2" src="Annotations_02_files/HM_Loader.js" type="text/javascript">
+</script><script language="JavaScript1.2" src="Annotations_02_files/HM_Arrays.js" type="text/javascript"></script><script language="JavaScript1.2" src="Annotations_02_files/HM_ScriptDOM.js" type="text/javascript"></script>
+<table border="0" cellpadding="5" cellspacing="0" width="100%">
+  <tbody><tr align="center"> 
+    <td>
+<iframe src="Annotations_02_files/B2108749.htm" marginwidth="0" marginheight="0" hspace="0" vspace="0" bordercolor="#000000" frameborder="0" height="90" scrolling="no" width="728">
+&lt;SCRIPT language='JavaScript1.1'
+SRC="http://ad.doubleclick.net/adj/N3691.Jupiter_Media/B2108749;abr=!ie;sz=728x90;ord=1782643229?"&gt;
+&lt;/SCRIPT&gt;
+&lt;NOSCRIPT&gt;
+&lt;A
+HREF="http://ad.doubleclick.net/jump/N3691.Jupiter_Media/B2108749;abr=!ie4;abr=!ie5;sz=728x90;ord=1782643229?"&gt;
+&lt;IMG
+SRC="http://ad.doubleclick.net/ad/N3691.Jupiter_Media/B2108749;abr=!ie4;abr=!ie5;sz=728x90;ord=1782643229?"
+BORDER=0 WIDTH=728 HEIGHT=90 ALT="Click Here"&gt;&lt;/A&gt;
+&lt;/NOSCRIPT&gt;
+</iframe><img src="Annotations_02_files/35363233616234343436633663663430_019.gif" height="1" width="1">    </td>
+  </tr>
+</tbody></table>
+
+<!-- OBJECT:index.navbar(Top) --><!--Top Nav Start--> 
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr> 
+    <td align="left">
+
+<script src="Annotations_02_files/headermenu.js"></script>
+<div style="position: relative; top: 16px; left: 0px; text-align: left; z-index: 900;">
+<div onmouseout="showMenuit(0)" onmouseover="showMenuit(1)" id="menuit" style="border: 1px solid rgb(0, 0, 0); padding: 3px; background-color: rgb(255, 255, 204); position: absolute; left: 5px; width: 595px; visibility: hidden; opacity: 0.95; z-index: 50;"> 
+<a href="http://itmanagement.earthweb.com/" class="menulink"><b>IT MANAGEMENT</b></a>
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr>
+<td width="15%">
+<a href="http://www.cioupdate.com/" class="menulink">CIO Update</a><br>
+<a href="http://itmanagement.earthweb.com/" class="menulink">Datamation</a></td>
+<td width="15%">
+<a href="http://www.ecrmguide.com/" class="menulink">eCRMGuide</a><br>
+<a href="http://www.drmwatch.com/" class="menulink">DRM Watch</a></td>
+<td width="15%">
+<a href="http://www.esecurityplanet.com/" class="menulink">eSecurity Planet</a><br>
+<a href="http://www.itsmwatch.com/" class="menulink">ITSMWatch</a></td>
+<td width="15%">
+<a href="http://www.intranetjournal.com/" class="menulink">Intranet Journal</a><br>
+<a href="http://www.insideid.com/" class="menulink">Inside ID</a></td>
+<td valign="top" width="20%">
+<a href="http://www.gridcomputingplanet.com/" class="menulink">Grid Computing Planet</a><br>
+<a href="http://www.bitaplanet.com/" class="menulink">bITa Planet</a>
+</td>
+<td valign="top" width="20%">
+<a href="http://www.itcareerplanet.com/" class="menulink">IT Career Planet</a><br>
+<a href="http://www.projectmanagerplanet.com/" class="menulink">Project Manager Planet</a>
+</td>
+</tr></tbody></table>
+</div>
+</div>
+
+<div style="position: relative; top: 16px; left: 0px; text-align: left; z-index: 900;">
+<div onmouseout="showMenunc(0)" onmouseover="showMenunc(1)" id="menunc" style="border: 1px solid rgb(0, 0, 0); padding: 3px; background-color: rgb(255, 255, 204); position: absolute; width: 400px; left: 113px; visibility: hidden; opacity: 0.95;"> 
+<a href="http://networking.earthweb.com/" class="menulink"><b>NETWORKING</b></a>
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr>
+<td>
+<a href="http://www.enterprisenetworkingplanet.com/" class="menulink">EnterpriseNetworkingPlanet</a><br>
+<a href="http://www.instantmessagingplanet.com/" class="menulink">InstantMessagingPlanet</a></td>
+<td>
+<a href="http://www.enterprisestorageforum.com/" class="menulink">EnterpriseStorageForum</a><br>
+<a href="http://www.opennetworkstoday.com/" class="menulink">OpenNetworksToday</a></td>
+<td valign="top">
+<a href="http://www.opticallynetworked.com/" class="menulink">OpticallyNetworked</a><br>
+<a href="http://www.practicallynetworked.com/" class="menulink">PracticallyNetworked</a></td>
+</tr></tbody></table>
+</div>
+</div>
+
+<div style="position: relative; top: 16px; left: 0px; text-align: left; z-index: 900;">
+<div onmouseout="showMenuweb(0)" onmouseover="showMenuweb(1)" id="menuweb" style="border: 1px solid rgb(0, 0, 0); padding: 3px; background-color: rgb(255, 255, 204); position: absolute; width: 200px; left: 204px; visibility: hidden; opacity: 0.95;"> 
+<a href="http://webdeveloper.earthweb.com/" class="menulink"><b>WEB DEVELOPMENT</b></a>
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr>
+<td width="50%">
+<a href="http://www.htmlgoodies.com/" class="menulink">HTML Goodies</a><br></td>
+<td valign="top" width="50%">
+<a href="http://webdeveloper.earthweb.com/webjs/" class="menulink">Javascripts.com</a><br>
+</td></tr></tbody></table>
+</div>
+</div>
+
+<div style="position: relative; top: 16px; left: 0px; text-align: left; z-index: 900;">
+<div onmouseout="showMenuhw(0)" onmouseover="showMenuhw(1)" id="menuhw" style="border: 1px solid rgb(0, 0, 0); padding: 3px; background-color: rgb(255, 255, 204); position: absolute; width: 215px; left: 324px; visibility: hidden; opacity: 0.95;"> 
+<a href="http://hardware.earthweb.com/" class="menulink"><b>HARDWARE &amp; SYSTEMS</b></a>
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="50%">
+<a href="http://earthwebhardware.com/" class="menulink">EarthWeb Hardware </a><br>
+<a href="http://www.sysopt.com/" class="menulink">SysOpt</a></td>
+<td width="50%">
+<a href="http://www.virtualdr.com/" class="menulink">Virtual Dr.</a><br>
+<a href="http://www.workstationplanet.com/" class="menulink">WorkstationPlanet</a></td></tr></tbody></table>
+</div>
+</div>
+
+<div style="position: relative; top: 16px; left: 0px; text-align: left; z-index: 900;">
+<div onmouseout="showMenusw(0)" onmouseover="showMenusw(1)" id="menusw" style="border: 1px solid rgb(0, 0, 0); padding: 3px; background-color: rgb(255, 255, 204); position: absolute; width: 215px; left: 466px; visibility: hidden; opacity: 0.95;"> 
+<a href="http://softwaredev.earthweb.com/" class="menulink"><b>SOFTWARE DEVELOPMENT</b></a>
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr>
+<td>
+<a href="http://www.codeguru.com/" class="menulink">CodeGuru</a><br>
+<a href="http://www.developer.com/" class="menulink">Developer</a></td>
+<td>
+<a href="http://www.jguru.com/" class="menulink"> jGuru.com</a><br>
+<a href="http://www.jars.com/" class="menulink"> JARS</a></td>
+<td valign="top">
+<a href="http://www.gamelan.com/" class="menulink">Gamelan</a><br></td>
+</tr></tbody></table>
+</div>
+</div>
+
+<div style="position: relative; top: 16px; left: 0px; text-align: left; z-index: 900;">
+<div onmouseout="showMenuitnews(0)" onmouseover="showMenuitnews(1)" id="menuitnews" style="border: 1px solid rgb(0, 0, 0); padding: 3px; background-color: rgb(255, 255, 204); position: absolute; width: 460px; left: 225px; visibility: hidden; opacity: 0.95;"> 
+<a href="http://news.earthweb.com/" class="menulink"><b>EARTHWEBNEWS.COM</b></a>
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr>
+<td width="20%">
+<a href="http://news.earthweb.com/bus-news/" class="menulink">Business</a><br>
+<a href="http://news.earthweb.com/dev-news/" class="menulink">Developer</a></td>
+<td width="20%">
+<a href="http://news.earthweb.com/ec-news/" class="menulink">Ecommerce</a><br>
+<a href="http://news.earthweb.com/ent-news/" class="menulink">Enterprise</a></td>
+<td width="20%">
+<a href="http://news.earthweb.com/infra/" class="menulink">Networking</a><br>
+<a href="http://news.earthweb.com/security/" class="menulink">Security</a></td>
+<td width="20%">
+<a href="http://news.earthweb.com/special/" class="menulink">Special Reports</a><br>
+<a href="http://news.earthweb.com/storage/" class="menulink">Storage</a></td>
+<td width="20%">
+<a href="http://news.earthweb.com/commentary/" class="menulink">Commentary</a><br>
+<a href="http://news.earthweb.com/wireless/" class="menulink">Wireless</a></td>
+<td width="20%">
+<a href="http://news.earthweb.com/xSP/" class="menulink">xSP</a><br>
+<a href="http://news.earthweb.com/stats/" class="menulink">Stats</a></td>
+</tr></tbody></table>
+</div>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td>
+<div id="ewheader" style="width: 750px;">
+    <ul>
+      <li onmouseover="showMenuit(1)" onmouseout="showMenuit(0)"><a href="http://itmanagement.earthweb.com/">IT MANAGEMENT</a></li>
+      <li onmouseover="showMenunc(1)" onmouseout="showMenunc(0)"><a href="http://networking.earthweb.com/">NETWORKING</a></li>
+      <li onmouseover="showMenuweb(1)" onmouseout="showMenuweb(0)"><a href="http://webdeveloper.earthweb.com/">WEB DEVELOPMENT</a></li>
+      <li onmouseover="showMenuhw(1)" onmouseout="showMenuhw(0)"><a href="http://hardware.earthweb.com/">HARDWARE &amp; SYSTEMS</a></li>
+      <li onmouseover="showMenusw(1)" onmouseout="showMenusw(0)"><a href="http://softwaredev.earthweb.com/">SOFTWARE DEVELOPMENT</a></li>
+	  <li onmouseover="showMenuitnews(1)" onmouseout="showMenuitnews(0)"><a href="http://news.earthweb.com/">IT NEWS</a></li></ul>
+</div>
+</td></tr></tbody></table>
+
+</td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr>
+
+<td rowspan="2" width="295"><a href="http://www.developer.com/java"><img src="Annotations_02_files/gamelanlogotop.gif" alt="gamelan" border="0" height="82" width="295"></a></td>
+    <td align="left" background="Annotations_02_files/bluetop.gif" width="100%"> 
+
+<script language="javascript">
+<!--//
+function set_target() {
+   if (document.myform.searchsite.selectedIndex==1) {
+     document.myform.starget.value="icom";
+     document.myform.IC_QueryDatabase.value = "www.earthweb.com javascriptsearch.com itmanagement.earthweb.com webdeveloper.earthweb.com hardware.earthweb.com networking.earthweb.com www.developer.com htmlgoodies.earthweb.com sysopt.earthweb.com www.networkstorageforum.com www.practicallynetworked.com www.opticallynetworked.com www.jars.com codeguru.earthweb.com cin.earthweb.com www.intranetjournal.com";
+   } else if (document.myform.searchsite.selectedIndex==0) {
+     document.myform.starget.value="icom";
+     document.myform.IC_QueryDatabase.value = "www.developer.com";
+   }
+}
+//-->
+</script>
+
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <form method="post" name="myform" action="http://search.internet.com/www.developer.com" onsubmit="set_target()"></form>
+          <tbody><tr> 
+            <td align="left" width="81"><img src="Annotations_02_files/searchtop.gif" alt="Search" height="40" width="81"></td>
+            <td align="left">
+              <input name="starget" value="" type="hidden">
+              <input name="IC_QueryDatabase" value="" type="hidden">
+ 
+              <select name="searchsite" style="color: rgb(0, 0, 0); font-family: verdana,arial,sans-serif; font-weight: normal; font-size: 9pt; background-color: rgb(255, 255, 255);">
+                <option value="Developer" selected="selected">Developer.com</option>
+                <option value="Earthweb">Earthweb</option>
+              </select>
+              <input name="IC_QueryText" size="10" type="text">
+              <input name="submit" value="Go!" src="Annotations_02_files/go_but.gif" alt="Go" align="absmiddle" border="0" height="18" type="image" width="31">
+            </td>
+            <td align="right"><a href="http://www.earthweb.com/"><img src="Annotations_02_files/eweblogo.gif" alt="EarthWeb" border="0" height="13" hspace="5" width="128"></a></td>
+          </tr>
+        
+      </tbody></table>
+
+    </td>
+    <td rowspan="2" background="Annotations_02_files/rulefill.gif" width="1"><img src="Annotations_02_files/blank.gif" height="1" width="1"></td>
+  </tr>
+  <tr> 
+    <td align="left" background="Annotations_02_files/devsites_bkgd_w.gif" valign="top"> 
+      <table background="Annotations_02_files/devsites_bkgd.gif" border="0" cellpadding="0" cellspacing="0" width="90%">
+        <tbody><tr> 
+          <td align="left" height="26" valign="top" width="100%"> 
+            <table border="0" cellpadding="0" cellspacing="0" width="90%">
+              <tbody><tr>
+                <td class="toolbars" nowrap="nowrap"><img src="Annotations_02_files/devsites_filler.gif" height="25" width="9"></td>
+                <td nowrap="nowrap" width="100%">
+                  <a href="http://www.codeguru.com/" class="btn_item"><span class="navlinks">CodeGuru</span></a>
+                  <font color="#ffffff">|</font> <a href="http://www.developer.com/java" class="btn_item"><span class="navlinks">Gamelan</span></a> 
+                  <font color="#ffffff">|</font> <a href="http://www.jars.com/" class="btn_item"><span class="navlinks">Jars</span></a> 
+                  <font color="#ffffff">|</font> <a href="http://www.developer.com/ws" class="btn_item"><span class="navlinks">Wireless</span></a> 
+                  <font color="#ffffff">|</font> <a href="http://www.codeguru.com/forum/" class="btn_item"><span class="navlinks">Discussions</span></a></td>
+              </tr>
+            </tbody></table>
+          </td>
+          <td align="right" height="26" width="73"><img src="Annotations_02_files/righttop.gif" height="42" width="73"></td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+<!--Top Nav Stop-->   
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr> 
+    <td align="center" background="Annotations_02_files/leftnav_bkgd.gif" valign="top" width="161"> 
+
+  
+<!-- OBJECT:index.navbar(left) --><a href="http://www.developer.com/"><img src="Annotations_02_files/navigate_dev.gif" alt="Navigate developer.com" border="0" height="15" width="161"></a><br>
+
+      <table background="" bgcolor="#999999" border="0" cellpadding="0" cellspacing="0" width="159">
+        <tbody><tr align="right"> 
+          <td><a href="http://www.developer.com/design" class="btn_item">Architecture &amp; Design</a></td>
+          <td align="center" width="10">&nbsp;</td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+        <tr align="right"> 
+          <td><a href="http://www.developer.com/db" class="btn_item">Database</a></td>
+          <td align="center" width="10">&nbsp;</td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+<!--
+        <tr align="right"> 
+          <td><a href="/dhtml" class="btn_item">DHTML</a></td>
+          <td width="10" align="center">&nbsp;</td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="/img/navdivider.gif" width="159" height="2" vspace="2"></td>
+-->
+        
+        <tr align="right"> 
+          <td><a href="http://www.developer.com/java" class="btn_item" onmouseover="HM_f_PopUp('HM_Menu1',event);MM_swapImage('javanavoff','','/img/navarrow_on.gif',1)" onmouseout="HM_f_PopDown('HM_Menu1');MM_swapImgRestore()">Java</a></td>
+          <td align="center" width="20"><img src="Annotations_02_files/navarrow_off.gif" name="javanavoff" height="12" width="12"></td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+        <tr align="right"> 
+          <td><a href="http://www.developer.com/lang" class="btn_item" onmouseover="HM_f_PopUp('HM_Menu2',event);MM_swapImage('langnavoff','','/img/navarrow_on.gif',1)" onmouseout="HM_f_PopDown('HM_Menu2');MM_swapImgRestore()">Languages 
+            &amp; Tools</a></td>
+          <td align="center" width="20"><img src="Annotations_02_files/navarrow_off.gif" name="langnavoff" height="12" width="12"></td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+        <tr align="right"> 
+          <td><a href="http://www.developer.com/net" class="btn_item" onmouseover="HM_f_PopUp('HM_Menu3',event);MM_swapImage('micronavoff','','/img/navarrow_on.gif',1)" onmouseout="HM_f_PopDown('HM_Menu3');MM_swapImgRestore()">Microsoft 
+            &amp; .NET</a></td>
+          <td align="center" width="20"><img src="Annotations_02_files/navarrow_off.gif" name="micronavoff" height="12" width="12"></td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+        <tr align="right"> 
+          <td><a href="http://www.developer.com/open" class="btn_item">Open Source</a></td>
+          <td align="center" width="10">&nbsp;</td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+        <tr align="right"> 
+          <td><a href="http://www.developer.com/mgmt" class="btn_item">Project Management</a></td>
+          <td align="center" width="10">&nbsp;</td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+<tr align="right"> 
+          <td><a href="http://www.developer.com/security" class="btn_item">Security</a></td>
+          <td align="center" width="10">&nbsp;</td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+        <tr align="right"> 
+          <td><a href="http://www.developer.com/tech" class="btn_item">Techniques</a></td>
+          <td align="center" width="10">&nbsp;</td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+        <tr align="right"> 
+          <td><a href="http://www.developer.com/voice" class="btn_item">Voice</a></td>
+          <td align="center" width="10">&nbsp;</td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+        <tr align="right"> 
+          <td><a href="http://www.developer.com/services" class="btn_item">Web Services</a></td>
+          <td align="center" width="10">&nbsp;</td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+        <tr align="right"> 
+          <td><a href="http://www.developer.com/ws" class="btn_item" onmouseover="HM_f_PopUp('HM_Menu4',event);MM_swapImage('wirelessnavoff','','/img/navarrow_on.gif',1)" onmouseout="HM_f_PopDown('HM_Menu4');MM_swapImgRestore()">Wireless/Mobile</a></td>
+          <td align="center" width="20"><img src="Annotations_02_files/navarrow_off.gif" name="wirelessnavoff" height="12" width="12"></td>
+        </tr>
+        
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+        <tr align="right"> 
+          <td><a href="http://www.developer.com/xml" class="btn_item">XML</a></td>
+          <td align="center" width="10">&nbsp;</td>
+        </tr>
+
+<tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" vspace="2" width="159"></td>
+        </tr>
+        <tr align="right"> 
+          <td><a href="http://www.justtechjobs.com/Jobseekers.asp" class="btn_item">Technology Jobs</a></td>
+          <td align="center" width="10">&nbsp;</td>
+        </tr>
+        <tr align="right"> 
+          <td colspan="2"><img src="Annotations_02_files/navdivider.gif" height="2" width="159"></td>
+        </tr>
+      </tbody></table>
+      <p>     
+<table cellpadding="0" cellspacing="0">
+<!-- <tr>
+    <td bgcolor="999999"><img src="/img/navdivider.gif" width="159" height="2" vspace="2"></td>
+  </tr> -->
+  <tbody><tr bgcolor="#003399" valign="top">
+
+	<th bgcolor="#003399">&nbsp; &nbsp;<font color="#ffffff" face="verdana, helvetica" size="1"><b>Developer.com Webcasts:</b></font><br></th> 
+  </tr>
+  <tr>
+    <td bgcolor="#999999">
+<table bgcolor="#999999" border="0" cellpadding="0" cellspacing="0" width="100%">
+<!-- <tr>
+    <td colspan="2" bgcolor="999999"><img src="/img/navdivider.gif" width="159" height="2" vspace="2"></td>
+  </tr> -->
+
+<tbody><tr>
+		<td valign="top"> &nbsp;&nbsp;</td><td><a href="http://cp.jupiterweb.com/index.php/2601_default/" class="imnav">The Impact of Coding Standards and Code Reviews</a></td>
+</tr>
+
+	<tr><td colspan="2"><br></td></tr>
+
+<tr>
+		<td valign="top"> &nbsp;&nbsp;</td><td><a href="http://cp.jupiterweb.com/index.php/2596_default/" class="imnav">Project Management for the Developer</a></td>
+</tr>
+
+	<tr><td colspan="2"><br></td></tr>
+
+	
+<tr>
+		<td valign="top"> &nbsp;&nbsp;</td><td><a href="http://cp.jupiterweb.com/index.php/2741_default/" class="imnav">Defining Your Own Software Development Methodology</a></td>
+</tr>
+
+
+	<tr><td colspan="2"><br></td></tr>
+<tr>
+		<td valign="top"> &nbsp;&nbsp;</td><td><a href="http://www.jupiterwebcasts.com/developer/" class="imnav">more Webcasts...</a></td>
+</tr>
+
+
+</tbody></table>
+
+<br><br>
+</td>
+</tr>
+</tbody></table>           
+        </p><p>
+        
+<br>
+<b><center><a href="http://www.developer.com/db/article.php/3653956"><img src="Annotations_02_files/devpoy_07sm.gif" border="0" height="61" width="130"></a><br><a href="http://www.developer.com/db/article.php/3653956">See the Winners!</a></center></b>
+<br><br>      
+ 
+<iframe src="Annotations_02_files/search.htm" marginheight="0" marginwidth="0" frameborder="0" height="800" scrolling="no" width="125"></iframe>
+<img src="Annotations_02_files/35363233616234343436633663663430_022.gif" height="1" width="1">      </p><p>
+<a href="http://jobs.internet.com/"><img src="Annotations_02_files/jobs_but.gif" alt="Developer Jobs" border="0" height="24" width="130"></a> 
+      </p><p>
+        
+        <!--Start commerce-->
+      <table border="0" cellpadding="0" cellspacing="0" width="147">
+        <tbody><tr> 
+          <td colspan="3"><img src="Annotations_02_files/commerce_topper.gif" height="32" width="147"></td>
+        </tr>
+        <tr> 
+          <td bgcolor="#000000" width="1"><img src="Annotations_02_files/blank.gif" height="1" width="1"></td>
+          <td bgcolor="#ffffff" width="145">
+            <table border="0" cellpadding="4" cellspacing="0" width="145">
+              <tbody><tr>
+                <td class="commerce"><a href="http://www.internet.com/partners/">Be a Commerce Partner</a><br>
+<a href="http://www.bizrate.com/buy/browse__cat_id--499,rf--jup009.html">Mp3 Player Reviews</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_028.gif" border="0" height="1" width="1"><br><a href="http://www.bugdugle.com/" target="new">Blog</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_018.gif" height="1" width="1"><br><a href="http://www.rocketprofit.com/" target="new">Affiliate Programs</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_014.gif" height="1" width="1"><br><a href="http://www.gimmees.com/">Imprinted Promotions</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_023.gif" border="0" height="1" width="1"><br><a href="http://shop.hardwarecentral.com/main/linkin_id-3063160">Compare Prices</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_012.gif" height="1" width="1"><br><a href="http://www.elearners.com/">Online Universities</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_008.gif" border="0" height="1" width="1"><br><a href="http://www.boatangel.org/">Boat Donations</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_003.gif" border="0" height="1" width="1"><br><a href="http://lifeinsurance8.com/" target="new">Life Insurance</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_013.gif" height="1" width="1"><br><a href="http://www.iscdfw.com/">Internet Security</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_010.gif" border="0" height="1" width="1"><br><a href="http://www.canadawebhosting.com/" target="new">Managed Hosting</a>
+<img src="Annotations_02_files/35363233616234343436633663663430.gif" height="1" width="1"><br><a href="http://www.tophosts.com/">Web Hosting Directory</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_011.gif" border="0" height="1" width="1"><br><a href="http://www.usimprints.com/" target="new">Custom Products</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_020.gif" height="1" width="1"><br><a href="http://shopping.yahoo.com/b:Desktops:22483485">Desktop Computers</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_021.gif" height="1" width="1"><br><a href="http://www.developer.com/RealMedia/ads/click_lx.cgi/ew/ewsoftware/www.gamelan.com/other/article/651982996/cp14/OasDefault/Web_Hosting_Unleashed_CP_1a/WebHostingReviews.html/35363233616234343436633663663430" target="new">Web Hosting Reviews</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_004.gif" height="1" width="1"><br></td>
+              </tr>
+            </tbody></table>
+          </td>
+          <td bgcolor="#000000" width="1"><img src="Annotations_02_files/blank.gif" height="1" width="1"></td>
+        </tr>
+        <tr bgcolor="#000000"> 
+          <td colspan="3" height="1"><img src="Annotations_02_files/blank.gif" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      </p><p>&nbsp;
+        <!--End commerce-->         
+
+
+<a href="http://www.domainbank.net/"><img src="Annotations_02_files/infobizcomnetorg.gif" border="0" height="60" width="120"></a>
+<img src="Annotations_02_files/35363233616234343436633663663430_015.gif" height="1" width="1">
+
+       
+
+
+   
+
+
+    </p></td>
+    <td valign="top"> 
+
+
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody><tr> 
+          <td class="text">
+
+            <!-- BOB & feeds start-->
+            <table align="right" border="0" cellpadding="2" cellspacing="0" width="150">
+              <tbody><tr> 
+                <td><!--Bob Start -->
+<script language="JavaScript1.1" src="Annotations_02_files/B2382392.js">
+</script>
+
+
+		
+		<script src="B2108749_data/MotifExternalScript_01_01.js" language="JavaScript"></script>
+
+		<div id="DIV_21728426_11187451546406" style="position: static; visibility: visible; z-index: 999999;"><embed alt="Click Here!" id="FLASH_21728426_11187451546406" src="Annotations_02_files/PID_273027_TBC_Phs1_DTA_Pep_336x850_main.swf" quality="high" bgcolor="#" wmode="opaque" name="FLASH_21728426_11187451546406" swliveconnect="TRUE" flashvars="click=http%3A//ad.doubleclick.net/click%253Bh%3Dv8/35b2/3/0/%252a/j%253B117355179%253B1-0%253B0%253B17931750%253B10408-336/850%253B21710536/21728426/1%253B%253B%257Esscs%253D%253f&amp;rid=21728426&amp;clickN=&amp;FSV=false&amp;varName=21728426_11187451546406&amp;td=www.developer.com&amp;ct=RO&amp;st=&amp;ac=234&amp;zp=&amp;bw=4&amp;dma=1&amp;city=11468&amp;br=ff&amp;os=win" type="application/x-shockwave-flash" allowscriptaccess="always" height="850" width="336"></div><script src="B2108749_data/globalTemplate_19_09.js" language="JavaScript"></script>
+		<noscript>
+<A TARGET="_blank"
+HREF="http://ad.doubleclick.net/activity;src%3D1365243%3Bmet%3D1%3Bv%3D1%3Bpid%3D17931750%3Baid%3D117355179%3Bko%3D0%3Bcid%3D21710536%3Brid%3D21728426%3Brv%3D1%3Bcs%3De%3Beid1%3D1204%3Becn1%3D1%3Betm1%3D0%3B_dc_redir%3Durl%3fhttp://ad.doubleclick.net/click%3Bh=v8/35b2/3/0/%2a/j%3B117355179%3B1-0%3B0%3B17931750%3B10408-336/850%3B21710536/21728426/1%3B%3B%7Esscs%3D%3fhttp://www.ibm.com/software/info/takebackcontrol/r/open?orgid=2091&p_creative=PepSquadearthweb&s_tact=106AH0LW">
+<IMG
+SRC="http://m1.2mdn.net/1365243/PID_273027_TBC_Phs1_DTA_Pep_336x850.jpg"
+width="336" height="850" BORDER="0" alt="Click Here!"> </A> <IMG
+SRC="http://ad.doubleclick.net/activity;src=1365243;met=1;v=1;pid=17931750;aid=117355179;ko=0;cid=21710536;rid=21728426;rv=1;&timestamp=1552082;eid1=9;ecn1=1;etm1=0;"
+width="0px" height="0px" style="visibility:hidden" BORDER="0"/> <IMG
+SRC="" width="0px" height="0px" style="visibility:hidden" BORDER="0"/>
+<IMG SRC="" width="0px" height="0px" style="visibility:hidden"
+BORDER="0"/> </noscript>
+
+		
+<noscript>
+<A
+HREF="http://ad.doubleclick.net/jump/N815.ibmjupitermedia/B2382392.10;sz=336x850;ord=1787936822?">
+<IMG
+SRC="http://ad.doubleclick.net/ad/N815.ibmjupitermedia/B2382392.10;sz=336x850;ord=1787936822?"
+BORDER=0 WIDTH=336 HEIGHT=850 ALT="Click Here"></A>
+</noscript><img src="Annotations_02_files/35363233616234343436633663663430_006.gif" height="1" width="1">
+
+
+<br>
+
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="360">
+	<tbody><tr>
+	    <td><img src="Annotations_02_files/16268.gif" alt="" border="0" height="56" width="360"></td>
+	</tr>
+	<tr>
+		<td style="border-left: 1px solid rgb(0, 103, 80); border-right: 1px solid rgb(0, 103, 80);">
+		
+		
+		  <table border="0" cellpadding="5" cellspacing="0">
+
+		  <tbody><tr>
+				  <td bgcolor="#ffffff"> <font style="font-family: Arial,Verdana,Sans Serif; font-size: 11px;">	
+</font><div style="line-height: 20px;"></div>
+<font style="font-family: Arial,Verdana,Sans Serif; font-size: 11px;"><b>Download these IBM resources today!</b><br>
+                  
+<a href="http://www.developer.com/RealMedia/ads/click_lx.ads/ew/ewsoftware/www.gamelan.com/other/article/509830543/accessunit/OasDefault/Devx_IBMSkillBuildingPortal_3i/IBM_SB_AUb.html/35363233616234343436633663663430?ibm/Link/34625" style="color: rgb(0, 51, 255);"><b>e-Kit: IBM Rational Systems Development Solution</b></a><br>With
+systems teams under so much pressure to develop products faster, reduce
+production costs, and react to changing business needs quickly,
+communication and collaboration seem to get lost. Now, theres a way to
+improve product quality and communication. <br> 
+</font><hr color="#006750" size="1">
+<font style="font-family: Arial,Verdana,Sans Serif; font-size: 11px;">                  	 
+				  <a href="http://www.developer.com/RealMedia/ads/click_lx.ads/ew/ewsoftware/www.gamelan.com/other/article/509830543/accessunit/OasDefault/Devx_IBMSkillBuildingPortal_3i/IBM_SB_AUb.html/35363233616234343436633663663430?ibm/Link/29400" style="color: rgb(0, 51, 255);"><b>Download: IBM Rational Rose Technical Developer V7.0 </b></a><br>
+Based on the industry standard Unified Modeling Language (UML),
+Rational Rose Technical Developer provides a highly automated and
+reliable solution to the unique problems of concurrency and
+distribution. <br>
+
+</font><hr color="#006750" size="1">
+
+<font style="font-family: Arial,Verdana,Sans Serif; font-size: 11px;">				  <a href="http://www.developer.com/RealMedia/ads/click_lx.ads/ew/ewsoftware/www.gamelan.com/other/article/509830543/accessunit/OasDefault/Devx_IBMSkillBuildingPortal_3i/IBM_SB_AUb.html/35363233616234343436633663663430?ibm/Link/29754" style="color: rgb(0, 51, 255);"><b>Download: Compound Analysis for Java </b></a><br>
+A Linux-based Compound XML Document Editor using the an Eclipse
+Modeling Framework to provide a more customized editing experience for
+developers. <br>
+
+
+</font><hr color="#006750" size="1">
+
+<font style="font-family: Arial,Verdana,Sans Serif; font-size: 11px;">				
+
+				  <a href="http://www.developer.com/RealMedia/ads/click_lx.ads/ew/ewsoftware/www.gamelan.com/other/article/509830543/accessunit/OasDefault/Devx_IBMSkillBuildingPortal_3i/IBM_SB_AUb.html/35363233616234343436633663663430?ibm/Link/31780" style="color: rgb(0, 51, 255);"><b>Download: Be Agile, with DB2 on Rails</b></a><br>
+The Starter Toolkit for DB2 on Rails is a conveniently-packaged set of
+products and technologies that enables the quick creation of a
+configuration for building DB2 Web apps using Ruby on Rails technology.
+<br>
+ 
+</font><hr color="#006750" size="1">
+
+<font style="font-family: Arial,Verdana,Sans Serif; font-size: 11px;">				  <a href="http://www.developer.com/RealMedia/ads/click_lx.ads/ew/ewsoftware/www.gamelan.com/other/article/509830543/accessunit/OasDefault/Devx_IBMSkillBuildingPortal_3i/IBM_SB_AUb.html/35363233616234343436633663663430?ibm/Link/32368" style="color: rgb(0, 51, 255);"><b>Download: IBM Rational Data Architect V7.0 </b></a><br>
+IBM Rational Data Architect is an enterprise data modeling and
+integration design tool designed to help data architects design
+relational and federated databases, understand data assets and their
+relationships and streamline database projects.<br>
+
+</font><hr color="#006750" size="1">
+
+<font style="font-family: Arial,Verdana,Sans Serif; font-size: 11px;">				  <a href="http://www.developer.com/RealMedia/ads/click_lx.ads/ew/ewsoftware/www.gamelan.com/other/article/509830543/accessunit/OasDefault/Devx_IBMSkillBuildingPortal_3i/IBM_SB_AUb.html/35363233616234343436633663663430?ibm/Link/27256" style="color: rgb(0, 51, 255);"><b>Download: IBM Rational Software Modeler V7.0  </b></a><br>
+IBM Rational Software Modeler is a Unified Modeling Language (UML)
+2.0-based visual modeling and design tool for architects, systems
+analysts, and designers who are responsible for specifying and
+maintaining system or software models and designs.<br>
+
+					</font></td>
+			  </tr>
+		  </tbody></table>		
+          </td></tr>
+		<tr><td><img src="Annotations_02_files/14736.gif" alt="" border="0" height="21" width="360"></td></tr>
+		
+	
+</tbody></table><img src="Annotations_02_files/35363233616234343436633663663430_016.gif" height="1" width="1">
+                <!--Bob Stop--></td>
+              </tr>
+<tr><td>
+<a href="http://www.developer.com/RealMedia/ads/click_lx.cgi/ew/ewsoftware/www.gamelan.com/other/article/1136846819/imu-right/OasDefault/default/empty.gif/35363233616234343436633663663430" target="_top"><img src="Annotations_02_files/empty.gif" alt="" border="0" height="2" width="2"></a><img src="Annotations_02_files/35363233616234343436633663663430_025.gif" border="0" height="1" width="1"></td></tr>
+              <tr> 
+                <td>
+                  <!--Devnews Start--> 
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tbody><tr> 
+                      <td width="1"><img src="Annotations_02_files/devnews_topper_lline.gif" height="32" width="1"></td>
+                      <td background="Annotations_02_files/devnews_bkgd.gif" width="100%"><img src="Annotations_02_files/devnews_topper.gif" alt="Developer News" height="32" width="111"></td>
+                      <td align="right" background="Annotations_02_files/devnews_bkgd.gif" width="74"><img src="Annotations_02_files/devnews_topper_r.gif" alt="-" height="32" width="74"></td>
+                      <td width="1"><img src="Annotations_02_files/devnews_topper_rline.gif" height="32" width="1"></td>
+                    </tr>
+                    <tr> 
+                      <td bgcolor="#000000" width="1"><img src="Annotations_02_files/blank.gif" height="32" width="1"></td>
+                      <td colspan="2"> 
+                        <table border="0" cellpadding="3" cellspacing="0" width="100%">
+                          <tbody><tr> 
+                            <td class="devnews">
+
+&#8226;<a href="http://www.internetnews.com/dev-news/article.php/3694146">XenSource Puts Up Enterprise Challenge to VMware</a> &nbsp;&nbsp; August 14, 2007<br>
+&#8226;<a href="http://www.internetnews.com/dev-news/article.php/3694076">Mozilla's Lawyer Isn't a GPLv3 Fan</a> &nbsp;&nbsp; August 13, 2007<br>
+&#8226;<a href="http://www.internetnews.com/bus-news/article.php/3694021">R.I.P. SCO?</a> &nbsp;&nbsp; August 13, 2007<br>
+&#8226;<a href="http://www.internetnews.com/dev-news/article.php/3693656">VMware: Linux Is Ideal OS for Virtualization</a> &nbsp;&nbsp; August 10, 2007<br>
+ 
+
+                            </td>
+                          </tr>
+                        </tbody></table>
+                      </td>
+                      <td background="Annotations_02_files/rulefill.gif" width="1"><img src="Annotations_02_files/blank.gif" height="1" width="1"></td>
+                    </tr>
+                    <tr> 
+                      <td colspan="4" bgcolor="#000000" height="1"><img src="Annotations_02_files/blank.gif" height="1" width="1"></td>
+                    </tr>
+                  </tbody></table>
+                  <!--Devnews Stop-->
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <!--Tech Newsletter Start--> 
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tbody><tr> 
+                      <td width="1"><img src="Annotations_02_files/devnews_topper_lline.gif" height="32" width="1"></td>
+                      <td background="Annotations_02_files/freetech_bkdg.gif" width="100%"><img src="Annotations_02_files/freetech_topper.gif" alt="Free Tech Newsletter" height="31" width="141"></td>
+                      <td align="right" background="Annotations_02_files/freetech_bkdg.gif" width="74"><img src="Annotations_02_files/freetech_topper_r.gif" alt="-" height="32" width="74"></td>
+                      <td width="1"><img src="Annotations_02_files/devnews_topper_rline.gif" height="32" width="1"></td>
+                    </tr>
+                    <tr> 
+                      <td bgcolor="#000000" width="1"><img src="Annotations_02_files/blank.gif" height="32" width="1"></td>
+                      <td colspan="2"> 
+                        <table border="0" cellpadding="3" cellspacing="0" width="100%">
+                          <form name="newsletterform" action="http://member.internet.com/subscribe.php" method="post"></form>
+                          <tbody><tr>                            
+                            <td class="devnews">
+                              <select name="list_names[]" style="color: rgb(0, 0, 0); font-family: verdana,arial,sans-serif; font-weight: normal; font-size: 9pt; background-color: rgb(255, 255, 255);">
+<option value="earthweb-developer-1-text" selected="selected">Developer.com Update</option>
+<option value="earthweb-code-guru-update-text">Codeguru.com Update</option>
+<option value="earthweb-jars-java-update-text">Jars.com Update</option>
+<option value="earthweb-gamelan-java-text">Gamelan.com Update</option>
+<option value="15seconds-html">15Seconds HTML</option>
+<option value="15seconds-text">15Seconds Text</option>
+<option value="4guysfromrolla-html">4 Guys from Rolla</option>
+<option value="aspwire-text">ASP Wire</option>
+<option value="asp101-text">ASP 101</option>
+<option value="sqlwire-text">Database Journal</option>
+<option value="dba-support-text">DBASupport</option>
+<option value="javaboutique-jnews-text">Java Boutique JNews</option>
+<option value="it-career-source-text">IT Career Source</option>
+<option value="vbwire-text">VB Wire</option>
+<option value="webdeveloper-weekly-html">WebDeveloper.com</option>
+<option value="webreference-update-html">WebReference HTML</option>
+<option value="webreference-update-text">WebReference Text</option>
+<option value="virtualdr-text">Virtual Dr. Text</option>
+<option value="enterprise-networking-planet-text">Enterprise Networking Planet</option>
+
+
+                              </select>
+                            </td>
+                          </tr>
+                          <tr> 
+                            <td align="center">
+<input value="http://e-newsletters.internet.com/earthweb_opt-in.html" name="redirect_ok" type="hidden">
+                                <input name="imageField2" src="Annotations_02_files/signup_but.gif" align="absmiddle" border="0" height="18" type="image" width="58">
+                            </td>
+			  </tr>
+			  
+                        </tbody></table>
+                      </td>
+                      <td background="Annotations_02_files/rulefill.gif" width="1"><img src="Annotations_02_files/blank.gif" height="1" width="1"></td>
+                    </tr>
+                    <tr> 
+                      <td colspan="4" bgcolor="#000000" height="1"><img src="Annotations_02_files/blank.gif" height="1" width="1"></td>
+                    </tr>
+                  </tbody></table>
+                  <!--Tech Newsletter Stop-->
+                </td>
+              </tr>
+            </tbody></table>
+            <!-- BOB & feeds stop-->
+<p></p><p>
+<table bgcolor="#000000" border="0" cellpadding="1" cellspacing="0">
+        <tbody><tr>
+          <td>
+            <table bgcolor="#cccccc" border="0" cellpadding="1" cellspacing="0">
+              <tbody><tr> 
+                <td><font face="Verdana, Arial, Helvetica, sans-serif" size="-2"><a href="http://www.developer.com/RealMedia/ads/click_lx.cgi/ew/ewsoftware/www.gamelan.com/other/article/496507384/ciu/OasDefault/Intel_CPU_Planet_GEMS_1ob/CIU_WhitepaperITAgility.html/35363233616234343436633663663430">
+<b>Whitepaper: IT Agility through Automated, Policy-based Virtual Infrastructure.</b> Learn how you can increase agility and hardware utilization, decrease costs, and align business and IT goals.  
+</a>
+
+</font></td>
+              </tr>
+            </tbody></table>
+          </td>
+        </tr>
+      </tbody></table><img src="Annotations_02_files/35363233616234343436633663663430_024.gif" height="1" width="1"></p><p>
+<font face="Arial, Helvetica" size="+1"><b>An Introduction to Java Annotations</b></font><br>
+By   <a href="http://www.developer.com/feedback.php/http://www.developer.com/java/other/article.php/10936_3556176_2">M. M. Islam Chisty</a><br></p><p>
+
+<font face="Verdana, Arial, Helvetica" size="-1"><b>Go to page:</b> <a href="http://www.developer.com/java/other/article.php/10936_3556176_1">Prev</a> &nbsp;<a href="http://www.developer.com/java/other/article.php/10936_3556176_1">1</a> &nbsp;2 &nbsp;<a href="http://www.developer.com/java/other/article.php/10936_3556176_3">3</a> &nbsp;<a href="http://www.developer.com/java/other/article.php/10936_3556176_3">Next</a> &nbsp;</font></p><p>
+<font face="Verdana, Arial, Helvetica" size="-1">
+<!--content_start-->
+</font></p><h3><font face="Verdana, Arial, Helvetica" size="-1">Simple Annotations</font></h3>
+<p><font face="Verdana, Arial, Helvetica" size="-1">There are only three types of simple annotations provided by JDK5. They are:</font></p>
+<ul>
+<font face="Verdana, Arial, Helvetica" size="-1"><li>Override 
+</li><li>Deprecated 
+</li><li>Suppresswarnings </li></font></ul>
+<p><font face="Verdana, Arial, Helvetica" size="-1">It's important to
+note that JDK5 (in other words, Tiger) actually does not have many
+built-in annotations; rather, it allows core Java the ability to
+support the annotation feature. The charter for JSR-175 strictly
+dictated it was to define a metadata facility. It was left to the
+programmers to write custom annotation types and to other JSRs to write
+a set of standard annotation types. The following sections will
+describe each simple annotation in more depth, along with examples.</font></p>
+<h4><font face="Verdana, Arial, Helvetica" size="-1">The Override annotation</font></h4>
+<p><font face="Verdana, Arial, Helvetica" size="-1">An override
+annotation indicates that the annotated method is required to override
+a method in a super class. If a method with this annotation does not
+override its super-class's method, the compiler will generate an error.
+Example 1 demonstrates the override annotation:</font></p>
+<h4><font face="Verdana, Arial, Helvetica" size="-1">Example 1</font></h4><pre><font face="Verdana, Arial, Helvetica" size="-1">public class Test_Override {
+@Override
+public String toString() {
+   return super.toString() +
+   " Testing annotation name: 'Override'";
+}
+}
+</font></pre>
+<p><font face="Verdana, Arial, Helvetica" size="-1">What happens if a
+spelling mistake occurs with the method name? For example, if you
+change the name of the toString method to "tostring" and compile the
+code, you will get something like the following:</font></p><pre><font face="Verdana, Arial, Helvetica" size="-1">Compiling 1 source file to D:tempNew Folder (2)
+                              TestJavaApplication1buildclasses
+D:tempNew Folder (2)TestJavaApplication1srctest
+   myannotationTest_Override.java:24: method does not override
+                a method from its superclass
+@Override
+1 error
+BUILD FAILED (total time: 0 seconds)
+</font></pre>
+<h4><font face="Verdana, Arial, Helvetica" size="-1">The Deprecated annotation</font></h4>
+<p><font face="Verdana, Arial, Helvetica" size="-1">This annotation
+indicates that when a deprecated program element is used, the compiler
+should warn you about it. Example 2 shows you the deprecated annotation.</font></p>
+<h4><font face="Verdana, Arial, Helvetica" size="-1">Example 2</font></h4>
+<p><font face="Verdana, Arial, Helvetica" size="-1">First, create a class with the deprecated method as follows:</font></p><pre><font face="Verdana, Arial, Helvetica" size="-1">public class Test_Deprecated {
+   @Deprecated
+   public void doSomething() {
+      System.out.println("Testing annotation name: 'Deprecated'");
+   }
+}
+</font></pre>
+<p><font face="Verdana, Arial, Helvetica" size="-1">Next, try to invoke this method from another class:</font></p><pre><font face="Verdana, Arial, Helvetica" size="-1">public class TestAnnotations {
+   public static void main(String arg[]) throws Exception {
+      new TestAnnotations(); 
+   }
+   public TestAnnotations() {
+   Test_Deprecated t2=new Test_Deprecated();
+   t2.doSomething();
+}
+</font></pre>
+<p><font face="Verdana, Arial, Helvetica" size="-1">The doSomething()
+method in this example is declared as a deprecated method. Therefore,
+this method should not be used when this class is instantiated by other
+classes. If you compile Test_Deprecated.java, no warning messages will
+be generated by the compiler. But, if you try to compile
+TestAnnotations.java where the deprecated method is used, you will see
+something like this:</font></p><pre><font face="Verdana, Arial, Helvetica" size="-1">Compiling 1 source file to D:tempNew Folder
+(2)TestJavaApplication1buildclasses
+D:tempNew Folder
+(2)TestJavaApplication1srctestmyannotation
+    TestAnnotations.java:27:
+warning: [deprecation] doSomething() in
+test.myannotation.Test_Deprecated has been deprecated
+t2.doSomething();
+1 warning
+</font></pre>
+<h4><font face="Verdana, Arial, Helvetica" size="-1">The Suppresswarnings annotation</font></h4>
+<p><font face="Verdana, Arial, Helvetica" size="-1">This annotation
+indicates that compiler warnings should be shielded in the annotated
+element and all of its sub-elements. The set of warnings suppressed in
+an element is the superset of the warnings in all of its containing
+sub-elements. As an example, if you annotate a class to suppress one
+warning and one of its methods to suppress another warning, both
+warnings will be suppressed at the method level only. See Example 3 for
+the suppresswarnings annotation.</font></p>
+<h4><font face="Verdana, Arial, Helvetica" size="-1">Example 3</font></h4><pre><font face="Verdana, Arial, Helvetica" size="-1">public class TestAnnotations {
+   public static void main(String arg[]) throws Exception {
+      new TestAnnotations().doSomeTestNow();
+   }
+   @SuppressWarnings({"deprecation"})
+   public void doSomeTestNow() {
+      Test_Deprecated t2 = new Test_Deprecated();
+      t2.doSomething();
+   }
+}
+</font></pre>
+<p><font face="Verdana, Arial, Helvetica" size="-1">In this example,
+you are suppressing the deprecation warning for the method listing
+shown in Example 2. Because the method is suppressed, you are unlikely
+to view the "deprecation" warning any more.</font></p>
+<blockquote><font face="Verdana, Arial, Helvetica" size="-1"><b>Note:</b>
+It is a good idea to use this annotation at the most deeply nested
+element where it is effective. Therefore, if you want to suppress a
+warning in a particular method, you should annotate that method rather
+than its class.</font></blockquote>
+<h3><font face="Verdana, Arial, Helvetica" size="-1">Meta-Annotations (Annotation Types)</font></h3>
+<p><font face="Verdana, Arial, Helvetica" size="-1">Meta-annotations, which are actually known as the annotations of annotations, contain four types. These are:</font></p>
+<ul>
+<font face="Verdana, Arial, Helvetica" size="-1"><li>Target 
+</li><li>Retention 
+</li><li>Documented 
+</li><li>Inherited </li></font></ul>
+<h4><font face="Verdana, Arial, Helvetica" size="-1">The Target annotation</font></h4>
+<p><font face="Verdana, Arial, Helvetica" size="-1">The target
+annotation indicates the targeted elements of a class in which the
+annotation type will be applicable. It contains the following
+enumerated types as its value:</font></p>
+<ul>
+<font face="Verdana, Arial, Helvetica" size="-1"><li><tt>@Target(ElementType.TYPE)</tt>&#8212;can be applied to any element of a class 
+</li><li><tt>@Target(ElementType.FIELD)</tt>&#8212;can be applied to a field or property 
+</li><li><tt>@Target(ElementType.METHOD)</tt>&#8212;can be applied to a method level annotation 
+</li><li><tt>@Target(ElementType.PARAMETER)</tt>&#8212;can be applied to the parameters of a method 
+</li><li><tt>@Target(ElementType.CONSTRUCTOR)</tt>&#8212;can be applied to constructors 
+</li><li><tt>@Target(ElementType.LOCAL_VARIABLE)</tt>&#8212;can be applied to local variables 
+</li><li><tt>@Target(ElementType.ANNOTATION_TYPE)</tt>&#8212;indicates that the declared type itself is an annotation type </li></font></ul>
+<p><font face="Verdana, Arial, Helvetica" size="-1">Example 4 demonstrates the target annotation:</font></p>
+<h4><font face="Verdana, Arial, Helvetica" size="-1">Example 4</font></h4>
+<p><font face="Verdana, Arial, Helvetica" size="-1">First, define an annotation named Test_Target with @Target metadata, as follows:</font></p><pre><font face="Verdana, Arial, Helvetica" size="-1">@Target(ElementType.METHOD)
+public @interface Test_Target {
+   public String doTestTarget();
+}
+</font></pre>
+<p><font face="Verdana, Arial, Helvetica" size="-1">Next, create a class that will use the Test_Target annotation:</font></p><pre><font face="Verdana, Arial, Helvetica" size="-1">public class TestAnnotations {
+   public static void main(String arg[]) {
+      new TestAnnotations().doTestTarget();
+   }
+   @Test_Target(doTestTarget="Hello World !")
+   public void doTestTarget() {
+      System.out.printf("Testing Target annotation");
+   }
+}
+</font></pre>
+<p><font face="Verdana, Arial, Helvetica" size="-1">The
+@Target(ElementType.METHOD) indicates that this annotation type can be
+used to annotate only at the method levels. If you compile the
+preceding code, no warning messages will be shown. Now, if you declare
+a String variable and apply your newly created annotation, what will
+happen? Let me demonstrate this as follows:</font></p><pre><font face="Verdana, Arial, Helvetica" size="-1">public class TestAnnotations {
+   @Test_Target(doTestTarget="Hello World !")
+   private String str;
+   public static void main(String arg[]) {
+      new TestAnnotations().doTestTarget();
+   }
+   public void doTestTarget() {
+      System.out.printf("Testing Target annotation");
+   }
+}
+</font></pre>
+<p><font face="Verdana, Arial, Helvetica" size="-1">The only change you
+can see from above is that the annotation declaration is shifted from
+method-level to field-level, which is not correct. Because you have
+defined your annotation @Test_Target to be applicable only at
+method-level, if you try to compile this class, you are likely to get
+something like this:</font></p><pre><font face="Verdana, Arial, Helvetica" size="-1">"TestAnnotations.java": 
+D:R_AND_DTestAnnotationsrctestmyannotation
+   TestAnnotations.java:16: 
+annotation type not applicable to this kind of declaration at line
+16, column 0
+@Test_Target(doTestTarget="Hello World !")
+^
+Error in javac compilation
+</font></pre><!--content_stop-->
+<p>
+
+<font face="Verdana, Arial, Helvetica" size="-1">
+<b>Go to page:</b> <a href="http://www.developer.com/java/other/article.php/10936_3556176_1">Prev</a> &nbsp;<a href="http://www.developer.com/java/other/article.php/10936_3556176_1">1</a> &nbsp;2 &nbsp;<a href="http://www.developer.com/java/other/article.php/10936_3556176_3">3</a> &nbsp;<a href="http://www.developer.com/java/other/article.php/10936_3556176_3">Next</a> &nbsp;</font>
+</p><p>
+
+</p><p>
+
+<table border="0" cellpadding="3" width="100%">
+              <tbody><tr> 
+                <td align="left" valign="top"> <br>
+
+<!-- print box --->
+
+<table border="0" cellpadding="0" cellspacing="7">
+<tbody><tr><td>
+    <div id="tools_inews">
+
+		<b>Tools:</b>
+		<a href="http://www.developer.com/java/other/email.php/3556176"><img src="Annotations_02_files/badge_email.gif" alt="" align="absmiddle" border="0" height="17" hspace="2" vspace="2" width="71"></a>
+		<a href="http://www.developer.com/java/other/print.php/10936_3556176_2"><img src="Annotations_02_files/badge_print.gif" alt="" align="absmiddle" border="0" height="17" hspace="2" vspace="2" width="71"></a>
+
+		<a href="http://digg.com/submit?phase=2&amp;url=www.developer.com/java/other/article.php/10936_3556176_2&amp;title=An+Introduction+to+Java+Annotations&amp;bodytext=Make+your+development+easier+through+the+use+of+JDK5%27s+annotation+feature.+The+objective+is+to+spend+less+time+on+unhandy+code-writing+and+focus+more+on+business+logic+rules.&amp;topic=" onclick="window.open('http://digg.com/submit?phase=2&url=www.developer.com/java/other/article.php/10936_3556176_2&title=An+Introduction+to+Java+Annotations&bodytext=Make+your+development+easier+through+the+use+of+JDK5%27s+annotation+feature.+The+objective+is+to+spend+less+time+on+unhandy+code-writing+and+focus+more+on+business+logic+rules.&topic=','digg','toolbar=no,width=900,height=600,scrollbars=yes'); return false;"><img src="Annotations_02_files/badge_digg.gif" alt="" align="absmiddle" border="0" height="17" hspace="2" vspace="2" width="91"></a>
+
+		<a href="http://del.icio.us/post" onclick="window.open('http://del.icio.us/post?v=4&noui&jump=close&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=700,height=400'); return false;"><img src="Annotations_02_files/badge_delicious.gif" alt="" align="absmiddle" border="0" height="17" hspace="2" vspace="2" width="91"></a>    </div>
+</td></tr>
+
+<tr><td>
+    <div id="tools_inews">
+<!-- search box -->
+<script type="text/javascript">
+function addFireFox() {
+	if ((typeof window.sidebar == "object") && (typeof window.sidebar.addSearchEngine == "function")) {
+		window.sidebar.addSearchEngine('http://www.developer.com/search/ffsearch.src', 'http://www.developer.com/search/ffsearch.png', 'Developer', 'Developer');
+	}
+	else {
+		alert(' x ');
+	}
+}
+
+function addIE() {
+	window.external.AddSearchProvider('/search/iesearch.xml');
+}
+</script>
+		<b>Add www.developer.com</b> to your favorites<br>
+
+		<a href="http://add.my.yahoo.com/rss?url=http://www.developer.com/icom_includes/feeds/special/dev-5.xml"><img src="Annotations_02_files/badge_myyahoo.gif" alt="" border="0" height="17" hspace="2" vspace="2" width="91"></a>
+
+		<a href="javascript:window.external.AddFavorite('http://www.developer.com', 'www.developer.com')"><img src="Annotations_02_files/badge_windowsfav.gif" alt="" border="0" height="17" hspace="2" vspace="2" width="118"></a>
+		<div class="dotrule"></div>
+		<b>Add www.developer.com</b> to your browser search box<br>
+		<a href="javascript:addIE();"><img src="Annotations_02_files/ie_icon.gif" alt="" align="absmiddle" border="0" hspace="2" vspace="2">IE 7</a> | <a href="javascript:addFireFox();"><img src="Annotations_02_files/ff_icon.gif" alt="" align="absmiddle" border="0" hspace="2" vspace="2">Firefox 2.0</a> | <a href="javascript:addFireFox();"><img src="Annotations_02_files/ff_icon.gif" alt="" align="absmiddle" border="0" hspace="2" vspace="2">Firefox 1.5.x</a> 
+<!-- search box -->
+<div class="dotrule"></div>
+		<b>Receive news</b> via our XML/RSS <a href="http://www.developer.com/icom_includes/feeds/special/dev-5.xml">feed</a> <a href="http://www.developer.com/icom_includes/feeds/special/dev-5.xml"><img src="Annotations_02_files/xml.gif" alt="" align="absmiddle" border="0" height="14" hspace="0" width="36"><img src="Annotations_02_files/rss.png" alt="" align="absmiddle" border="0" height="14" hspace="0" width="36"></a>    </div>
+</td></tr>
+</tbody></table>
+<p>
+<!-- end print box --->
+
+                  <br>
+
+<font face="Verdana, Arial, Helvetica" size="1"><a href="http://www.developer.com/java/other/archives.php">Other Java Archives</a></font> 
+
+</p><p><img src="Annotations_02_files/jw_devsol.gif"></p>
+<p>
+<img src="Annotations_02_files/arrow.gif" align="bottom"> 
+<a href="http://www.developer.com/RealMedia/ads/click_lx.cgi/ew/ewsoftware/www.gamelan.com/other/article/246232631/fl1/OasDefault/Elementool_115292_GEMS_1e/FL_1.html/35363233616234343436633663663430" class="ss">Download: Elementool Bug Tracking--Keep Software Fixes On Course. </a>
+<img src="Annotations_02_files/35363233616234343436633663663430_026.gif" height="1" width="1"><br>
+<img src="Annotations_02_files/arrow_005.gif" align="bottom"> 
+<a href="http://www.developer.com/RealMedia/ads/click_lx.cgi/ew/ewsoftware/www.gamelan.com/other/article/353920117/fl2/OasDefault/MS_Visual_Studio_Gems_1f/FeaturedLink_Bringyouruser.html/35363233616234343436633663663430" class="ss">Bring  your user interfaces to life with richer, more intuitive information displays. Read more.
+</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_005.gif" height="1" width="1"><br>
+<img src="Annotations_02_files/arrow_004.gif" align="bottom"> 
+<a href="http://www.developer.com/RealMedia/ads/click_lx.cgi/ew/ewsoftware/www.gamelan.com/other/article/1622181376/fl3/OasDefault/DevX_Intel_GoParallel_1m/FL_Intel_Go.html/35363233616234343436633663663430" class="ss">Intel Go Parallel Portal: Translating Multicore Power into Application Performance   </a>
+<img src="Annotations_02_files/35363233616234343436633663663430_009.gif" height="1" width="1"><br>
+<img src="Annotations_02_files/arrow_003.gif" align="bottom"> 
+<a href="http://www.developer.com/RealMedia/ads/click_lx.cgi/ew/ewsoftware/www.gamelan.com/other/article/2109727575/fl4/OasDefault/Avaya_Q307_Portal_GEMS_1i/Featured_L_Avaya.html/35363233616234343436633663663430" class="ss">Developing Intelligent Communications? Visit the Avaya Developer Connection Center on DevX.   
+</a>
+<img src="Annotations_02_files/35363233616234343436633663663430_007.gif" height="1" width="1"><br>
+<img src="Annotations_02_files/arrow_002.gif" align="bottom"> 
+<a href="http://www.developer.com/RealMedia/ads/click_lx.cgi/ew/ewsoftware/www.gamelan.com/other/article/1065740885/fl5/OasDefault/Ipswitch_VS_115315_GEMS_1g/Featured_L_Ipswitch.html/35363233616234343436633663663430" class="ss">Ipswitch: Solutions for Managing Your Network and Your Data </a>
+<img src="Annotations_02_files/35363233616234343436633663663430_002.gif" height="1" width="1"></p>
+                </td>
+              </tr>
+            </tbody></table>
+
+          </p></td>
+        </tr>
+      </tbody></table>
+    </td>
+    <td background="Annotations_02_files/rulefill.gif" width="1"><img src="Annotations_02_files/blank.gif" height="1" width="1"></td>
+  </tr>
+  <tr bgcolor="#000000"> 
+    <td colspan="3" align="center" height="1" valign="top"><img src="Annotations_02_files/blank.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table> 
+    
+    <img src="Annotations_02_files/blank.gif" height="1" width="1">
+  
+   
+    <img src="Annotations_02_files/blank.gif" height="1" width="1">
+  
+
+
+<table border="0" cellpadding="5" cellspacing="0" width="100%">
+  <tbody><tr align="center"> 
+    <td>
+<iframe src="Annotations_02_files/search_002.htm" marginheight="0" marginwidth="0" frameborder="0" height="100" scrolling="no" width="750"></iframe>
+<img src="Annotations_02_files/35363233616234343436633663663430_027.gif" height="1" width="1">    </td>
+  </tr>
+</tbody></table>
+
+<!-- OBJECT:index.footer --><font face="arial, helvetica" size="-1">
+</font>
+
+
+<script src="Annotations_02_files/decorators.js" type="text/javascript"></script>
+<script src="Annotations_02_files/prototype.js" type="text/javascript"></script>
+
+<script src="Annotations_02_files/pngadapt.js" type="text/javascript"></script>
+<script src="Annotations_02_files/scriptaculous.js" type="text/javascript"></script><script type="text/javascript" src="Annotations_02_files/effects.js"></script>
+
+
+		<!-- start foot links -->
+</p><div class="setimageload"></div>
+<div style="margin-left: auto; margin-right: auto; padding-top: 10px; padding-left: 5px; padding-right: 5px; width: 760px;">				
+	
+	<div style="margin-bottom: 15px;">			
+					
+		<!-- start icom links section -->			  
+								
+		<div id="div1" class="smsection" collapsible="true"><div class="floatingIcon"><a href="javascript://" title="Expand/Contract this item" onclick="toggleDiv(this.parentNode.parentNode);"><img src="Annotations_02_files/expand.gif" alt="Expand/Contract this item" title="Expand/Contract this item"></a></div><p style="cursor: pointer;" class="" onmouseover="changeFade(this, 1);" onmouseout="changeFade(this, 0);"><a onclick="toggleDiv(this.parentNode.parentNode);" title="Expand/Contract this item" href="javascript://" class="footinsetlink">Internet.com Sitemap</a></p><div class="collapseWrap" style="display: none; margin-top: -10px; clear: left;">
+			
+			<ul style="list-style-type: none; list-style-image: none; list-style-position: outside;">
+
+				<li style="list-style-type: none; list-style-image: none; list-style-position: outside;">	
+					<table cellpadding="1" cellspacing="1" width="725">
+						<tbody><tr>
+							<td class="smheader" align="right">IT Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://alllinuxdevices.com/">All Linux Devices</a> | 
+								<a class="sitemaplink" href="http://www.antionline.com/index.php/">AntiOnline</a> |
+								<a class="sitemaplink" href="http://apachetoday.com/">Apache Today</a> |
+								<a class="sitemaplink" href="http://www.aspnews.com/">ASPNews</a> | 
+								<a class="sitemaplink" href="http://www.cpu-planet.com/">CPU Planet</a> |
+ 								<a class="sitemaplink" href="http://www.databasejournal.com/">DatabaseJournal</a> |
+								<a class="sitemaplink" href="http://www.dbasupport.com/">DBASupport.com</a> |
+ 								<a class="sitemaplink" href="http://www.enterpriseitplanet.com/">Enterprise IT Planet</a> |
+								<a class="sitemaplink" href="http://www.hardwarecentral.com/">HardwareCentral</a> |       
+								<a class="sitemaplink" href="http://isp.webopedia.com/">ISP Glossary</a> |
+								<a class="sitemaplink" href="http://www.internetnews.com/xSP/">ISP News</a> |
+								<a class="sitemaplink" href="http://www.isp-planet.com/">ISP Planet</a> |
+								<a class="sitemaplink" href="http://www.justlinux.com/">Just Linux</a> |
+								<a class="sitemaplink" href="http://www.linuxplanet.com/">Linux Planet</a> |
+								<a class="sitemaplink" href="http://www.serverwatch.com/stypes/compare/">ServerCompare</a> |
+								<a class="sitemaplink" href="http://serverwatch.internet.com/">ServerWatch</a> |
+								<a class="sitemaplink" href="http://solarisguide.com/">Solaris Guide</a> |
+								<a class="sitemaplink" href="http://www.sqlcourse.com/">SQLCourse.com</a> |
+								<a class="sitemaplink" href="http://sqlcourse2.com/">SQLCourse2.com</a> | 
+								<a class="sitemaplink" href="http://www.sysopt.com/">SysOpt</a> |
+								<a class="sitemaplink" href="http://asp.thelist.com/">The List: ASPs</a> |
+								<a class="sitemaplink" href="http://broadband.thelist.com/">The List: Broadband</a> |
+								<a class="sitemaplink" href="http://thelist.internet.com/">The List: ISPs</a> |
+								<a class="sitemaplink" href="http://webhosts.thelist.com/">The List: WebHosts</a> |
+								<a class="sitemaplink" href="http://webdesign.thelist.com/">The List: WebDesigners</a> |
+								<a class="sitemaplink" href="http://www.thinplanet.com/">Thin Planet</a> |
+								<a class="sitemaplink" href="http://www.ultrawidebandplanet.com/">Ultrawideband Planet</a> |
+   								<a class="sitemaplink" href="http://www.voipplanet.com/">VoIPPlanet</a> |       
+								<a class="sitemaplink" href="http://www.webvideouniverse.com/">WebVideoUniverse</a> |           
+								<a class="sitemaplink" href="http://www.wi-fihotspotlist.com/">Wi-FIHotSpotList</a> |
+								<a class="sitemaplink" href="http://www.wi-fiplanet.com/">Wi-FiPlanet</a> |
+								<a class="sitemaplink" href="http://www.windrivers.com/">WinDrivers</a> |
+								<a class="sitemaplink" href="http://www.internetnews.com/asp-news/">xSP News</a>        
+ 							</td>
+
+						</tr>
+						<tr>
+							<td class="smheader" align="right">Developer Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://www.4guysfromrolla.com/">4GuysFromRolla.com</a> | 
+								<a class="sitemaplink" href="http://www.15seconds.com/">15 Seconds</a> | 
+								<a class="sitemaplink" href="http://www.asp101.com/">ASP101</a> | 
+								<a class="sitemaplink" href="http://www.aspwire.com/">ASP Wire</a> | 
+								<a class="sitemaplink" href="http://www.flashkit.com/">FlashKit.com</a> | 
+								<a class="sitemaplink" href="http://www.hiermenuscentral.com/">HierMenusCentral.com</a> | 
+								<a class="sitemaplink" href="http://www.javascript.com/">JavaScript.com</a> | 
+								<a class="sitemaplink" href="http://javascriptsource.com/">JavaScriptSource</a> |
+								<a class="sitemaplink" href="http://www.phpbuilder.com/">PHPBuilder.com</a> |
+								<a class="sitemaplink" href="http://www.scriptsearch.com/">ScriptSearch</a> | 
+								<a class="sitemaplink" href="http://www.streamingmediaworld.com/">StreamingMediaWorld</a> | 
+								<a class="sitemaplink" href="http://www.thecounter.com/">The Counter</a> | 
+								<a class="sitemaplink" href="http://www.theguestbook.com/">The Guestbook</a> | 
+								<a class="sitemaplink" href="http://www.vbforums.com/">VB Forums</a> | 
+								<a class="sitemaplink" href="http://www.vbwire.com/">VB Wire</a> | 
+								<a class="sitemaplink" href="http://www.webdevelopersjournal.com/">Web Developer's Journal</a> | 
+								<a class="sitemaplink" href="http://www.wdvl.com/">Web Developer's Virtual Library</a> | 
+								<a class="sitemaplink" href="http://www.webdeveloper.com/">WebDeveloper.com</a> | 
+								<a class="sitemaplink" href="http://www.webreference.com/">Webreference</a> | 
+								<a class="sitemaplink" href="http://www.xmlfiles.com/">XMLfiles.com</a>
+
+							</td>
+						</tr>
+						<tr>
+							<td class="smheader" align="right">International Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://asia.internet.com/">asia.internet.com</a> | 
+								<a class="sitemaplink" href="http://germany.internet.com/">germany.internet.com</a> | 
+								<a class="sitemaplink" href="http://japan.internet.com/">japan.internet.com</a> | 
+								<a class="sitemaplink" href="http://korea.internet.com/">korea.internet.com</a> | 
+								<a class="sitemaplink" href="http://turkey.internet.com/">turkey.internet.com</a>
+
+							</td>
+						</tr>
+						<tr>
+							<td class="smheader" align="right">InternetNews Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://eltoday.com/">Enterprise Linux Today</a> | 
+								<a class="sitemaplink" href="http://www.internetnews.com/">Internetnews.com</a> | 
+								<a class="sitemaplink" href="http://www.linuxtoday.com/">Linux Today</a> | 
+								<a class="sitemaplink" href="http://www.newslinx.com/">NewsLinx</a>													
+							</td>
+
+						</tr>
+						<tr>
+							<td class="smheader" align="right">Personal Technology Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://www.blackberrytoday.com/">BlackBerryToday</a> | 
+								<a class="sitemaplink" href="http://www.jumbo.com/">Jumbo</a> | 
+								<a class="sitemaplink" href="http://www.megapixel.net/">Megapixel.net</a> | 
+								<a class="sitemaplink" href="http://www.pocketpcwire.com/">PocketPCWire</a> | 
+								<a class="sitemaplink" href="http://www.palmblvd.com/">Palm Boulevard</a> | 
+								<a class="sitemaplink" href="http://www.pdastreet.com/">PDAStreet</a> | 
+								<a class="sitemaplink" href="http://sharkyextreme.com/">SharkyExtreme.com</a> | 
+								<a class="sitemaplink" href="http://www.smartphonetoday.com/">Smart Phone Today</a> | 
+								<a class="sitemaplink" href="http://www.windowsmobiletoday.com/">WindowsMobileToday</a>													
+							</td>
+
+						</tr>
+						<tr>
+							<td class="smheader" align="right">Small Business Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://www.ecommerce-guide.com/">ECommerce-Guide</a> | 
+								<a class="sitemaplink" href="http://www.internetnews.com/ec-news/">ECommerce News</a> | 
+								<a class="sitemaplink" href="http://www.refer-it.com/">Refer-It</a> |
+								<a class="sitemaplink" href="http://www.smallbusinesscomputing.com/">SmallBusinessComputing</a> | 
+								<a class="sitemaplink" href="http://www.webopedia.com/">Webopedia</a> | 
+								<a class="sitemaplink" href="http://www.winplanet.com/">WinPlanet</a>													
+							</td>
+
+						</tr>
+					</tbody></table>										
+				 </li>
+			 </ul>
+		 </div></div>
+		<!-- end icom links section -->			  
+
+		<!-- start eweb links section -->			  
+		<div id="div1" class="smsection" collapsible="true"><div class="floatingIcon"><a href="javascript://" title="Expand/Contract this item" onclick="toggleDiv(this.parentNode.parentNode);"><img src="Annotations_02_files/expand.gif" alt="Expand/Contract this item" title="Expand/Contract this item"></a></div><p style="cursor: pointer;" class="" onmouseover="changeFade(this, 1);" onmouseout="changeFade(this, 0);"><a onclick="toggleDiv(this.parentNode.parentNode);" title="Expand/Contract this item" href="javascript://" class="footinsetlink">EarthWeb Sitemap</a></p><div class="collapseWrap" style="display: none; margin-top: -10px; clear: left;">
+			
+			<ul style="list-style-type: none; list-style-image: none; list-style-position: outside;">
+
+				<li style="list-style-type: none; list-style-image: none; list-style-position: outside;">			
+					<table cellpadding="1" cellspacing="1" width="725">
+						<tbody><tr>
+							<td class="smheader" align="right">IT Management Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://www.bitaplanet.com/">bITa Planet</a> | 
+								<a class="sitemaplink" href="http://www.cioupdate.com/">CIO Update</a> | 
+								<a class="sitemaplink" href="http://www.datamation.com/">Datamation</a> | 
+								<a class="sitemaplink" href="http://products.datamation.com/">Datamation Product Watch</a> | 
+								<a class="sitemaplink" href="http://www.drmwatch.com/">DRM Watch</a> | 
+								<a class="sitemaplink" href="http://www.ecrmguide.com/">eCRM Guide</a> | 
+								<a class="sitemaplink" href="http://www.esecurityplanet.com/">eSecurityPlanet.com</a> | 
+								<a class="sitemaplink" href="http://www.gridcomputingplanet.com/">GridComputingPlanet</a> | 
+								<a class="sitemaplink" href="http://www.insideid.com/">Inside ID</a> | 
+								<a class="sitemaplink" href="http://www.intranetjournal.com/">Intranet Journal</a> | 
+								<a class="sitemaplink" href="http://www.itcareerplanet.com/">IT Career Planet</a> | 
+								<a class="sitemaplink" href="http://www.itsmwatch.com/">ITSMWatch.com</a>
+
+							</td>
+						</tr>
+						<tr>
+							<td class="smheader" align="right">Networking &amp; Communications Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://www.enterprisenetworkingplanet.com/">EnterpriseNetworkingPlanet</a> | 
+								<a class="sitemaplink" href="http://www.enterprisestorageforum.com/">EnterpriseStorageForum</a> | 
+								<a class="sitemaplink" href="http://www.instantmessagingplanet.com/">Instantmessagingplanet</a> | 
+								<a class="sitemaplink" href="http://www.opennetworkstoday.com/">OpenNetworksToday</a> | 
+								<a class="sitemaplink" href="http://www.opticallynetworked.com/">Optically Networked</a> | 
+								<a class="sitemaplink" href="http://www.practicallynetworked.com/">Practically Networked</a>
+
+							</td>
+						</tr>
+						<tr>
+							<td class="smheader" align="right">Web Development Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://www.htmlgoodies.com/">HTML Goodies</a> | 
+								<a class="sitemaplink" href="http://www.javascripts.com/">Javascripts.com</a>
+
+							</td>
+						</tr>
+						<tr>
+							<td class="smheader" align="right">Hardware &amp; Systems Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://www.earthwebhardware.com/">EarthWeb Hardware</a> | 
+								<a class="sitemaplink" href="http://www.sysopt.com/">SysOpt.com</a> | 
+								<a class="sitemaplink" href="http://www.virtualdr.com/">Virtual Dr.</a> | 
+								<a class="sitemaplink" href="http://www.workstationplanet.com/">WorkstationPlanet</a>													
+							</td>
+
+						</tr>
+						<tr>
+							<td class="smheader" align="right">Software Development Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://www.codeguru.com/">CodeGuru.com</a> | 
+								<a class="sitemaplink" href="http://www.developer.com/">Developer.com</a> | 
+								<a class="sitemaplink" href="http://www.jguru.com/">jGuru.com</a> | 
+								<a class="sitemaplink" href="http://www.jars.com/">JARS.com</a> | 
+								<a class="sitemaplink" href="http://www.developer.com/java/">Gamelan.com</a>												
+							</td>
+
+						</tr>
+						<tr>
+							<td class="smheader" align="right">IT News Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://www.earthweb.com/">EarthWeb.com</a> | 
+								<a class="sitemaplink" href="http://news.earthweb.com/">Earthweb News</a>													
+							</td>
+						</tr>
+
+					</tbody></table>											
+				</li>
+			</ul>
+		</div></div>
+		<!-- end eweb links section -->			  
+
+		<!-- start devx links section -->			  
+		<div id="div1" class="smsection" collapsible="true"><div class="floatingIcon"><a href="javascript://" title="Expand/Contract this item" onclick="toggleDiv(this.parentNode.parentNode);"><img src="Annotations_02_files/expand.gif" alt="Expand/Contract this item" title="Expand/Contract this item"></a></div><p style="cursor: pointer;" class="" onmouseover="changeFade(this, 1);" onmouseout="changeFade(this, 0);"><a onclick="toggleDiv(this.parentNode.parentNode);" title="Expand/Contract this item" href="javascript://" class="footinsetlink">DevX Sitemap</a></p><div class="collapseWrap" style="display: none; margin-top: -10px; clear: left;">
+			
+			<ul style="list-style-type: none; list-style-image: none; list-style-position: outside;">
+				<li style="list-style-type: none; list-style-image: none; list-style-position: outside;">	
+					<table cellpadding="1" cellspacing="1" width="725">
+
+						<tbody><tr>
+							<td class="smheader" align="right">DevX Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+							    <a class="sitemaplink" href="http://www.apifinder.com/">APIFinder</a> |
+							    <a class="sitemaplink" href="http://www.devx.com/architect/Door/7046">Architecture Zone</a> |
+								<a class="sitemaplink" href="http://www.devx.com/asp/">ASP.NET Zone</a> | 
+								<a class="sitemaplink" href="http://www.devx.com/cplus/">C++ Zone</a> | 
+								<a class="sitemaplink" href="http://www.devx.com/dbzone/">Database Zone</a> | 
+								<a class="sitemaplink" href="http://www.devx.com/">DevX.com</a> | 
+								<a class="sitemaplink" href="http://www.devxnews.com/">DevXNews</a> |
+								<a class="sitemaplink" href="http://www.devx.com/enterprise/Door/7043">Enterprise Zone</a> |
+								<a class="sitemaplink" href="http://www.freevbcode.com/">FreeVBCode</a> | 
+								<a class="sitemaplink" href="http://javaboutique.internet.com/">JavaBoutique</a> | 
+								<a class="sitemaplink" href="http://www.devx.com/Java/">Java Zone</a> |
+								<a class="sitemaplink" href="http://www.devx.com/wireless/">Mobile Zone</a> |
+								<a class="sitemaplink" href="http://www.devx.com/dotnet/">.NET Zone</a> | 
+								<a class="sitemaplink" href="http://www.devx.com/opensource/">Open Source Zone</a> |
+								<a class="sitemaplink" href="http://www.devx.com/semantic/Door/34578">Semantic Web</a> |
+								<a class="sitemaplink" href="http://www.devx.com/uml/">UML Zone</a> | 
+								<a class="sitemaplink" href="http://www.devx.com/vb/">Visual Basic Zone</a> | 
+								<a class="sitemaplink" href="http://www.devx.com/webdev/">Web Dev Zone</a> | 
+								<a class="sitemaplink" href="http://www.devx.com/xml/">XML Zone</a>
+
+							</td>
+						</tr>
+					</tbody></table>								
+				 </li>
+			 </ul>
+		 </div></div>
+		<!-- end devx links section -->
+        
+        <!-- start mediabistro links section -->			  
+		<div id="div1" class="smsection" collapsible="true"><div class="floatingIcon"><a href="javascript://" title="Expand/Contract this item" onclick="toggleDiv(this.parentNode.parentNode);"><img src="Annotations_02_files/expand.gif" alt="Expand/Contract this item" title="Expand/Contract this item"></a></div><p style="cursor: pointer;" class="" onmouseover="changeFade(this, 1);" onmouseout="changeFade(this, 0);"><a onclick="toggleDiv(this.parentNode.parentNode);" title="Expand/Contract this item" href="javascript://" class="footinsetlink">MediaBistro Sitemap</a></p><div class="collapseWrap" style="display: none; margin-top: -10px; clear: left;">
+			
+
+			<ul style="list-style-type: none; list-style-image: none; list-style-position: outside;">
+				<li style="list-style-type: none; list-style-image: none; list-style-position: outside;">				
+					<table cellpadding="1" cellspacing="1" width="725">
+						<tbody><tr>
+							<td class="smheader" align="right" height="35">Jobs Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://www.mediabistro.com/Ad-Agency-jobs.html" title="The best jobs in Advertising">Ad Agency Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/Book-Publishing-jobs.html" title="The best jobs in Book Publishing">Book Publishing Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/Communications-jobs.html" title="The best jobs in Corporate Communications">Corporate Communications Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/DesignArtPhoto-jobs.html" title="The best jobs in Design, Art Direction, and Photography">Design/Art/Photo Jobs </a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/Edit-jobs.html" title="The best Editing jobs">Editing Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/Journalism-jobs.html" title="The best jobs in Journalism">Journalism Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/Magazine-Publishing-jobs.html" title="The best jobs in Magazine Publishing">Magazine Publishing Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/Sales-jobs.html" title="The best jobs in Media Sales">Media Sales Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/Newspapers-jobs.html" title="The best jobs in Newspaper Publishing">Newspaper Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/OnlineNew-Media-jobs.html" title="The best jobs in Online and New Media">Online/New Media Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/PRMarketing-jobs.html" title="The best jobs in PR and Marketing">PR/Marketing Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/Radio-jobs.html" title="The best jobs in Radio">Radio Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/TeachingAcademia-jobs.html" title="The best media jobs in Academia">Teaching/Academia Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/Television-jobs.html" title="The best jobs in Television">Television Jobs</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/Write-jobs.html" title="The best Writing jobs">Writing Jobs</a>
+
+							</td>
+						</tr>
+                        <tr>
+                        	<td class="smheader" align="right" height="35">Education Channel</td>
+                        	<td class="sitemappad" bgcolor="#e0e0e0">
+                            	<a class="sitemaplink" href="http://www.mediabistro.com/courses/inhouse" title="In-House Training programs">Corporate Training</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/courses" title="Career-building courses to launch you to the top of your field">Courses</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/ondemand" title="Video crash courses, audio toolkits, and a look inside our panel discussions and speakers series">Mediabistro On Demand</a>
+
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td class="smheader" align="right" height="35">News Channel</td>
+                        	<td class="sitemappad" bgcolor="#e0e0e0">
+                            	<a class="sitemaplink" href="http://www.mediabistro.com/content/archives" title="">Features</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/fishbowldc" title="DC media, from the inside">FishbowlDC</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/fishbowlla" title="The LA media news you wish you knew">FishbowlLA</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/fishbowlny" title="NY media news, insight &amp; gossip">FishbowlNY</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/galleycat" title="The first word on the book publishing industry">GalleyCat</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/news" title="Media news">Media News Feed</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/tvnewser" title="The inside scoop on TV news">TVNewser</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/unbeige" title="Where designers read design">Unbeige</a>
+
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td class="smheader" align="right" height="35">Other Channel</td>
+                        	<td class="sitemappad" bgcolor="#e0e0e0">
+                            	<a class="sitemaplink" href="http://www.mediabistro.com/events" title="Cocktail parties and other events for media professionals">Events</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/bbs" title="">Forums</a> | 
+                                <a class="sitemaplink" href="http://www.mediabistro.com/fm" title="A forum for talented freelancers to showcase their work">Freelance Marketplace</a>
+
+                            </td>
+                        </tr>
+					</tbody></table>												
+				</li>
+			</ul>
+		</div></div>
+		<!-- end mediabistro links section -->		  
+
+		<!-- start graphics links section -->			  
+		<div id="div1" class="smsection" collapsible="true"><div class="floatingIcon"><a href="javascript://" title="Expand/Contract this item" onclick="toggleDiv(this.parentNode.parentNode);"><img src="Annotations_02_files/expand.gif" alt="Expand/Contract this item" title="Expand/Contract this item"></a></div><p style="cursor: pointer;" class="" onmouseover="changeFade(this, 1);" onmouseout="changeFade(this, 0);"><a onclick="toggleDiv(this.parentNode.parentNode);" title="Expand/Contract this item" href="javascript://" class="footinsetlink">Graphics Sitemap</a></p><div class="collapseWrap" style="display: none; margin-top: -10px; clear: left;">
+			
+
+			<ul style="list-style-type: none; list-style-image: none; list-style-position: outside;">
+				<li style="list-style-type: none; list-style-image: none; list-style-position: outside;">				
+					<table cellpadding="1" cellspacing="1" width="725">
+						<tbody><tr>
+							<td class="smheader" align="right" height="35">Graphics Channel</td>
+							<td class="sitemappad" bgcolor="#e0e0e0">
+								<a class="sitemaplink" href="http://www.adsoftheworld.com/">AdsOfTheWorld.com</a> | 
+								<a class="sitemaplink" href="http://www.creativebits.org/">CreativeBits.org</a> | 
+								<a class="sitemaplink" href="http://www.dynamicgraphics.com/">Dynamic Graphics</a> | 
+								<a class="sitemaplink" href="http://www.graphicdesignforum.com/">Graphic Design Forum</a> | 
+								<a class="sitemaplink" href="http://graphics.com/">Graphics.com</a> | 
+								<a class="sitemaplink" href="http://www.liquidtreat.com/">Liquid Treat</a> | 
+								<a class="sitemaplink" href="http://www.stepinsidedesign.com/">STEP inside design</a>
+
+							</td>
+						</tr>
+					</tbody></table>												
+				</li>
+			</ul>
+		</div></div>
+		<!-- end graphics links section -->
+
+
+		<!-- start solutions links section -->
+									<div id="div1" class="smsolutionsection" collapsible="true"><div class="floatingIcon"><a href="javascript://" title="Expand/Contract this item" onclick="toggleDiv(this.parentNode.parentNode);"><img src="Annotations_02_files/expand.gif" alt="Expand/Contract this item" title="Expand/Contract this item"></a></div><p style="cursor: pointer;" class="" onmouseover="changeFade(this, 1);" onmouseout="changeFade(this, 0);"><a onclick="toggleDiv(this.parentNode.parentNode);" title="Expand/Contract this item" href="javascript://" class="footinsetlink">Solutions</a></p><div class="collapseWrap" style="display: none; margin-top: -10px; clear: left;">
+						
+						<ul style="list-style-type: none; list-style-image: none; list-style-position: outside;">
+							<li style="list-style-type: none; list-style-image: none; list-style-position: outside;">
+
+								<table cellpadding="1" cellspacing="1" width="725">
+																		<tbody><tr>
+
+										<td class="smsolutionsheader" align="right">Whitepapers and eBooks</td>
+										<td class="sitemappad" bgcolor="#e1e2dc">
+																						<a class="sitemaplink" href="http://www.devx.com/Sybase/Link/34740" target="_blank">Sybase iAnywhere Whitepaper: Compliance in the Mobile Enterprise</a> | 																						<a class="sitemaplink" href="http://www.devx.com/SwsoftVS/Link/34477" target="_blank">Swsoft Whitepaper: Top Ten Server Virtualization Technology Considerations </a> | 																						<a class="sitemaplink" href="http://solutions.internet.com/index.php/3836_protection" target="_blank">Nalpeiron Whitepaper: Securing Your Software--How to Choose the Right Copy Protection Tool for Your Business </a> | 																						<a class="sitemaplink" href="http://www.devx.com/Innotas/Link/35003" target="_blank">Innotas Whitepaper: Implementing Project Portfolio Management in Digestible Bites </a> | 																						<a class="sitemaplink" href="http://www.devx.com/NovellSC/Link/33998" target="_blank">Novell Whitepaper: Real-World Performance of SUSE Linux Enterprise Real Time </a> | 																						<a class="sitemaplink" href="http://www.devx.com/Atempo/Door/35016" target="_blank">Atempo Whitepaper: Integrated Data Protection for the SME </a> | 																						<a class="sitemaplink" href="http://www.devx.com/Sybase/Link/34737" target="_blank">Sybase Whitepaper: Ten Steps to Mobile Security </a> | 																						<a class="sitemaplink" href="http://www.devx.com/SwsoftVS/Link/34474%20" target="_blank">SWsoft Whitepaper: An Introduction to OS Virtualization and Virtuozzo</a> | 																						<a class="sitemaplink" href="http://www.devx.com/Nalpeiron/Link/34922" target="_blank">Nalpeiron Whitepaper: The Truth About Dongles&#8212;How a New Generation of Physical Protection Could Save Your Software</a> | 																						<a class="sitemaplink" href="http://cp.jupiterweb.com/index.php/3816_performance" target="_blank">Novell eBook: Achieve Superior Real-Time Performance with SUSE Linux</a> | 																						<a class="sitemaplink" href="http://www.devx.com/ipswitchVS/Link/34975" target="_blank">Ipswitch Whitepaper: Secure File Transfer In the Era of Regulatory Compliance</a> | 																						<a class="sitemaplink" href="http://www.devx.com/QuestSoftware/Door/35062" target="_blank">Quest Whitepaper:  Realizing Continuous Performance Management Best Practices Documentation</a> | 																						<a class="sitemaplink" href="http://www.devx.com/avaya/Link/34813" target="_blank">Avaya Whitepaper: SIP--Creating Next-Generation Telecom Applications</a> | 																						<a class="sitemaplink" href="http://www.devx.com/symantec/Link/34673" target="_blank">Symantec Whitepaper: Advantages of Integrated Messaging Security</a> | 																						<a class="sitemaplink" href="http://www.devx.com/ipswitchVS/Link/34971" target="_blank">Ipswitch Whitepaper: Configuring WMI Performance Monitors </a>																					</td>
+									</tr>
+																		<tr>
+
+										<td class="smsolutionsheader" align="right">Webcasts</td>
+										<td class="sitemappad" bgcolor="#e1e2dc">
+																						<a class="sitemaplink" href="http://solutions.internet.com/index.php/3896_default" target="_blank">Tripwire: Optimizing Change Management</a> | 																						<a class="sitemaplink" href="http://solutions.internet.com/index.php/4051_default" target="_blank">Ipswitch: Best Practices in Network Monitoring</a> | 																						<a class="sitemaplink" href="http://www.devx.com/Innotas/Link/35001" target="_blank">Innotas: 3 Easy Steps to Project Portfolio Management Success</a> | 																						<a class="sitemaplink" href="http://solutions.internet.com/index.php/3901_default" target="_blank">Tripwire: Preparing for an IT Audit</a> | 																						<a class="sitemaplink" href="http://solutions.internet.com/index.php/3766_default" target="_blank">HP: What to Look for in an SMB iSCSI Storage System</a> | 																						<a class="sitemaplink" href="http://solutions.internet.com/index.php/3761_default" target="_blank">HP:  Blades and Virtualization--A Perfect Match?</a> | 																						<a class="sitemaplink" href="http://solutions.internet.com/index.php/3611_default" target="_blank">DNF Storage: Enterprise iSCSI Storage Options and Applications</a> | 																						<a class="sitemaplink" href="http://solutions.internet.com/index.php/3771_default" target="_blank">Finisar: Cure Fabric Blindness and Optimize SAN Performance for Application Availability</a> | 																						<a class="sitemaplink" href="http://www.devx.com/ibm/Link/35005" target="_blank"> Rational Asset Manager: Succeed with Asset-based Development</a>																					</td>
+									</tr>
+																		<tr>
+
+										<td class="smsolutionsheader" align="right">Downloads and eKits</td>
+										<td class="sitemappad" bgcolor="#e1e2dc">
+																						<a class="sitemaplink" href="http://www.devx.com/ibm/Link/34625" target="_blank">IBM Rational Systems Development Solution e-Kit</a> | 																						<a class="sitemaplink" href="http://www.devx.com/Sybase/Link/34735" target="_blank">Sybase iAnywhere Secure Wireless Email Trial</a> | 																						<a class="sitemaplink" href="http://www.devx.com/Elementool/Link/35020" target="_blank">Elementool Bug Tracking Tool</a> | 																						<a class="sitemaplink" href="http://www.devx.com/ibm/Link/29378%20" target="_blank">IBM  SOA Development Survival Guide eKit</a> | 																						<a class="sitemaplink" href="http://www.devx.com/ibm/Link/34424" target="_blank">Evaluate IBM Rational Build Forge Online </a> | 																						<a class="sitemaplink" href="http://www.devx.com/ibm/Link/33330" target="_blank">IBM Enterprise Architect eKit for SOA </a> | 																						<a class="sitemaplink" href="http://www.devx.com/ibm/Link/34424" target="_blank">Evaluate Rational Application Developer Online </a> | 																						<a class="sitemaplink" href="http://www.devx.com/IronSpeedVS/Door/17479" target="_blank">Iron Speed Designer Application Generator</a> | 																						<a class="sitemaplink" href="http://www.devx.com/symantec/Link/34286" target="_blank">Symantec IM Detection Utility </a>																					</td>
+									</tr>
+																		<tr>
+
+										<td class="smsolutionsheader" align="right">Tutorials and Demos</td>
+										<td class="sitemappad" bgcolor="#e1e2dc">
+																						<a class="sitemaplink" href="http://www.devx.com/ibm/Link/33034" target="_blank">Rational Functional Tester Tutorial: Create Robust, Reusable Automated Functional Tests </a> | 																						<a class="sitemaplink" href="http://www.devx.com/Sybase/Link/34738" target="_blank">Sybase iAnywhere Demo: Day in the Life of a Mobile Device</a> | 																						<a class="sitemaplink" href="http://www.devx.com/ibm/Link/31606" target="_blank">Rational Software Modeler Tutorial: UML 2.0 Modeling</a> | 																						<a class="sitemaplink" href="http://www.devx.com/ibm/Link/33060" target="_blank">DB2 9 Tutorial: Shrink Your Database Using  Row Compression </a> | 																						<a class="sitemaplink" href="http://www.devx.com/OnDemandDemos/Link/34885" target="_blank">Rational Asset Manager Demo: Maximizing Reuse of Your Software Assets</a> | 																						<a class="sitemaplink" href="http://www.devx.com/ipswitchVS/Link/34972" target="_blank">WhatsUp Gold v11 Demo:  Discovery, Mapping, Reporting, &amp; Monitoring </a>																					</td>
+									</tr>
+																	</tbody></table>
+
+							 </li>
+						 </ul>
+					 </div></div>
+					<!-- end solutions links section -->
+			  </div>		<!-- end foot links -->
+
+
+
+
+	</div>
+				
+		<!-- end foot links -->
+
+			
+		<div style="height: 20px;"></div>
+	
+<!-- footer stops here -->
+		
+
+
+
+
+
+<div style="width: 760px; margin-top: 10px;" align="center">
+<br clear="all"><center><table border="0" cellpadding="5" cellspacing="0">
+                <tbody><tr> 
+                  <form method="post" action="http://search.internet.com/www.jupiterweb.com" target="_top"></form>
+                    <td align="center">
+<table class="mgfoot" border="0">
+  <tbody><tr><td class="foot_alt" style="vertical-align: middle;" align="center">
+					 <img src="Annotations_02_files/onlinemedia_footer.png" alt="JupiterOnlineMedia" border="0" height="17" hspace="0" width="175"> 
+                      <p align="center"> 
+                      <a href="http://www.internet.com/" class="foot" target="_top"><img src="Annotations_02_files/icom_foot.png" alt="internet.com" style="" align="absmiddle" border="0" height="15" hspace="0" width="97"></a><img src="Annotations_02_files/ruledivide_foot.gif" alt="" align="absmiddle" border="0" height="25" hspace="10" width="1"><a href="http://www.earthweb.com/" target="_top"><img src="Annotations_02_files/earthweb_foot.png" alt="earthweb.com" style="" align="absmiddle" border="0" height="10" hspace="5" width="93"></a><img src="Annotations_02_files/ruledivide_foot.gif" alt="" align="absmiddle" border="0" height="25" hspace="10" width="1"><a href="http://www.devx.com/" target="_top"><img src="Annotations_02_files/devx_foot.png" alt="Devx.com" align="absmiddle" border="0" height="30" hspace="0" width="34"></a><img src="Annotations_02_files/ruledivide_foot.gif" alt="" align="absmiddle" border="0" height="25" hspace="10" width="1"><a href="http://www.mediabistro.com/" target="_top"><img src="Annotations_02_files/mediabistro_foot.png" alt="mediabistro.com" align="absmiddle" border="0" height="35" hspace="0" width="100"></a><img src="Annotations_02_files/ruledivide_foot.gif" alt="" align="absmiddle" border="0" height="25" hspace="10" width="1"><a href="http://www.graphics.com/" target="_top"><img src="Annotations_02_files/grcom_foot.png" alt="Graphics.com" style="" align="absmiddle" border="0" height="16" hspace="0" width="97"></a></p></td></tr></tbody></table>
+                      <p> 
+                      <font face="verdana, arial, helvetica" size="-2"><b>Search:</b> 
+                      <input name="IC_Summary" value="1" type="hidden">
+                      <input name="IC_StartNumber" value="0" type="hidden">
+                      <input name="IC_BatchSize" value="10" type="hidden">
+                      <input name="IC_RelevanceThreshold" value="50" type="hidden">
+                      <input name="IC_QueryDatabase" value="all" type="hidden">
+                      <input name="IC_QueryText" size="45" type="text">
+                      <input value="Find" name="SUBMIT" src="Annotations_02_files/but_find.gif" align="absmiddle" border="0" height="20" type="image" width="41">
+                      </font>
+                      </p><p>
+                      <font face="verdana, arial, helvetica" size="-2">
+                     <a href="http://www.jupitermedia.com/" class="foot"> Jupitermedia Corporation</a> has two divisions: <a href="http://www.jupiterimages.com/" class="foot">Jupiterimages</a> and <a href="http://www.jupitermedia.com/onlinemedia.html" class="foot">JupiterOnlineMedia</a></font></p><p><font face="verdana, arial, helvetica" size="-2"> <font face="verdana, arial, helvetica" size="-2"><a href="http://www.jupitermedia.com/corporate/" class="foot" target="_top">Jupitermedia Corporate Info</a>                      </font></font></p><p>
+<font face="verdana, arial, helvetica" size="-2"><font face="verdana, arial, helvetica" size="-2">                      </font></font></p><div class="foot"><!--Copyright 2005-2007-->
+
+<font face="verdana, arial, helvetica" size="-2"><font face="verdana, arial, helvetica" size="-2"><script type="text/javascript">
+document.write(' Copyright ');
+var now = new Date();
+document.write(  + now.getFullYear());
+document.write(' Jupitermedia Corporation All Rights Reserved.');
+</script> Copyright 2007 Jupitermedia Corporation All Rights Reserved.
+<noscript> Copyright 2007 Jupitermedia Corporation All Rights Reserved.</noscript>
+<br>
+                        <a href="http://www.jupitermedia.com/corporate/legal.html" class="foot" target="_top">Legal 
+                        Notices</a>, <a href="http://www.jupitermedia.com/corporate/reprints.html#Licensing1" class="foot" target="_top">Licensing</a>, 
+                        <a href="http://www.jupitermedia.com/corporate/reprints.html#Reprints1" class="foot" target="_top">Reprints</a>, 
+                        &amp; <a href="http://www.jupitermedia.com/corporate/reprints.html#Permissions" class="foot" target="_top">Permissions</a>, 
+                        <a href="http://www.jupitermedia.com/corporate/privacy/privacypolicy.html" class="foot" target="_top">Privacy 
+                        Policy</a>. </font>
+                      </font><p><font face="verdana, arial, helvetica" size="-2"> <font face="verdana, arial, helvetica" size="-2"><a href="http://www.webhost.thelist.com/" class="foot" target="_top">Web Hosting</a> | <a href="http://e-newsletters.internet.com/" class="foot">Newsletters</a> 
+                       | <a href="http://jobs.internet.com/" class="foot" target="_top">Tech 
+                        Jobs</a> | <a href="http://www.internetshopper.com/" class="foot" target="_top">Shopping</a> | <a href="http://e-newsletters.internet.com/announcement_list.html" class="foot" target="_top">E-mail 
+                        Offers</a></font></font></p></div>
+
+<font face="verdana, arial, helvetica" size="-2">                    </font></td>
+                  
+                </tr>
+              </tbody></table></center>
+
+
+
+</div>
+<script type="text/javascript" class="footinsetlink_sm">
+	// Must be contained in the footer for each page
+	applyDecorators();
+</script>
+
+   
+
+
+<div style="border: 1px solid black; overflow: hidden; position: absolute; visibility: hidden; left: -500px; top: -2000px; width: 158px; cursor: default; height: 137px;" id="HM_Menu1"><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 0px;" id="HM_Item1_1">EJB/Components</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 23px;" id="HM_Item1_2">Enterprise Java</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 46px;" id="HM_Item1_3">J2ME</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 69px;" id="HM_Item1_4">Data &amp; Java</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 92px;" id="HM_Item1_5">Web-based Java</div><div style="padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 115px;" id="HM_Item1_6">Other Java</div></div><div style="border: 1px solid black; overflow: hidden; position: absolute; visibility: hidden; left: -500px; top: -2000px; width: 158px; cursor: default; height: 160px;" id="HM_Menu2"><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 0px;" id="HM_Item2_1">CGI</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 23px;" id="HM_Item2_2">CSS</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 46px;" id="HM_Item2_3">DHTML</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 69px;" id="HM_Item2_4">JavaScript / Jscript</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 92px;" id="HM_Item2_5">Perl</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 115px;" id="HM_Item2_6">PHP</div><div style="padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 138px;" id="HM_Item2_7">Other</div></div><div style="border: 1px solid black; overflow: hidden; position: absolute; visibility: hidden; left: -500px; top: -2000px; width: 158px; cursor: default; height: 114px;" id="HM_Menu3"><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 0px;" id="HM_Item3_1">.NET</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 23px;" id="HM_Item3_2">ASP &amp; ASP.NET</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 46px;" id="HM_Item3_3">Visual Basic</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 69px;" id="HM_Item3_4">Visual C#</div><div style="padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 92px;" id="HM_Item3_5">Visual C++</div></div><div style="border: 1px solid black; overflow: hidden; position: absolute; visibility: hidden; left: -500px; top: -2000px; width: 158px; cursor: default; height: 137px;" id="HM_Menu4"><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 0px;" id="HM_Item4_1">BREW</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 23px;" id="HM_Item4_2">J2ME</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 46px;" id="HM_Item4_3">Palm</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 69px;" id="HM_Item4_4">Pocket PC/WinCE</div><div style="border-bottom: 1px solid black; padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 92px;" id="HM_Item4_5">Protocols/Standards</div><div style="padding: 3px; position: absolute; visibility: inherit; cursor: pointer; background-color: white; color: black; font-family: Arial,sans-serif; font-style: normal; font-variant: normal; font-weight: bold; font-size: 10pt; line-height: normal; font-size-adjust: none; font-stretch: normal; left: 0px; width: 152px; top: 115px;" id="HM_Item4_6">Other Wireless/Mobile</div></div></body></html>

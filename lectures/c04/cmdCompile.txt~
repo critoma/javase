@@ -1,0 +1,294 @@
+Linux UBUNTU 12/14:
+
+//use ghex for introspecting the files in hex
+
+//set env variables:
+
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_25
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export CLASSPATH=.:$JAVA_HOME/jre/lib
+export JSE=/home/stud/javase/lectures
+
+cd $JSE/c04/src
+
+A. Reflection
+
+cd $JSE/c04/src/S03_Annotation_Reflection
+
+javac eu/ase/reflection/*.java
+
+java eu/ase/reflection/ProgMainTString
+
+1. Getting method declaration
+java eu/ase/reflection/DumpMethods1 eu.ase.reflection.ProgMainTString
+java eu/ase/reflection/DumpMethods1 eu.ase.reflection.TString
+
+2. Simulating the instanceof Operator
+java eu/ase/reflection/Instance2
+
+3. Finding Out More About Methods of a Class
+java eu/ase/reflection/Methods3 eu.ase.reflection.TString
+
+4. Obtaining Information About Constructors
+java eu/ase/reflection/Constructors4 eu.ase.reflection.TString
+
+5. Finding Out About Class Fields
+java eu/ase/reflection/Fields5 eu.ase.reflection.TString
+
+6. Creating new Objects, Invoking Methods by Name. and Changing Values of Fields
+java eu/ase/reflection/RComplete6 eu.ase.reflection.TString
+
+
+B. Addnotations
+
+cd $JSE/c04/src/S03_Annotation_Reflection
+
+//@Override - exception for !!! equalss instead of equals
+javac eu/ase/annotations/TString.java
+
+//@Deprecated & @SupressWarnings({"deprecation"})
+javac eu/ase/annotations/TString.java
+javac eu/ase/annotations/ProgMainTString.java
+java eu/ase/annotations/ProgMainTString
+
+//test meta-addnotations such as: @Target, @Retention, @Documented
+javac eu/ase/annotations/TestTargetRetention.java
+java eu/ase/annotations/ProgMainAnn
+
+javadoc -private eu/ase/annotations/TestTargetRetention.java
+
+//Combine annotation with reflection
+javac eu/ase/annotations/Test.java
+javac eu/ase/annotations/MyTestClass.java
+
+javac eu/ase/annotations/RunTests.java
+
+
+
+
+java eu/ase/annotations/RunTests eu.ase.annotations.ClasaTest
+
+C. I/O + JNI
+
+cd $JSE/c04/src/S04_LibAndIO
+
+C1. Libraries
+
+cd $JSE/c04/src/S04_LibAndIO/BytesCharStreamsAndFormat1
+
+C1.1. Compile & archive library JAR
+javac eu/ase/IO/CopyBytesLib.java
+javac eu/ase/IO/CopyCharsLib.java
+jar cvf ./CopyLib.jar eu/ase/IO/*.class
+
+C1.2. Compile the main program specifying what library should have the called instances from classes and methods
+javac -classpath $CLASSPATH:./CopyLib.jar CopyBytes1.java
+javac -classpath $CLASSPATH:./CopyLib.jar ProgMainCopyBytes1.java
+
+C1.3. Run the main program and specifying the library
+java -classpath $CLASSPATH:./CopyLib.jar CopyBytes1 t1.txt t2.txt
+java -classpath $CLASSPATH:./CopyLib.jar ProgMainCopyBytes1 t1.txt t3.txt
+
+
+C2. I/O Data Streams
+
+cd $JSE/c04/src/S04_LibAndIO/DataStreams2
+
+javac ProgMain.java
+java ProgMain
+
+
+C3. Serialization
+
+cd $JSE/c04/src/S04_LibAndIO/ObjectStream_Serialization3
+
+C3.1a. Compilare si rulare serializare 1
+
+javac Serializare1.java
+java SalvareObiect
+-se sterg clasele rezultat, mai putin test1.txt
+
+C3.1b. Compilare si rulare deserializare 1
+
+javac Deserializare1.java
+java RefacereObiect
+-se sterg clasele rezultat, mai putin test1.txt
+
+C3.2. Adaugarea unui camp int n5 in mecanismul de deserializare => eroare la rulare UID-uri diferite
+
+C3.3. In serializare/deserializare 3, se adauga constanta serialVersionUID care se afla cu comanda
+
+javac Serializare3.java
+java SalvareObiect
+
+serialver ObiectSimplu
+
+-se retine numarul
+-se sterg clasele rezultat, mai putin test3.txt
+-se adauga in clasa ObiectSimplu din deserializare numarul (-7180073083063849357L)
+
+javac Deserializare3.java
+java RefacereObiect
+
+C3.4. Serializare Grafuri de Obiecte - metoda reset()
+
+javac SerializareObGraf4.java
+java SalvareObiect
+java RestaurareObiect
+
+C4. RandomAccessFile + File
+
+cd $JSE/c04/src/S04_LibAndIO/FileRandomAccessFile4
+
+javac TestRAF.java
+java TestRAF test1.txt
+
+javac ListFiles.java
+java ListFiles .
+
+javac ConcatenationFiles.java
+java ConcatenationFiles t_rez.txt t1.txt t2.txt
+
+C5. JNI
+
+cd $JSE/c04/src/S05_JNI
+
+C5.1. Compilare
+
+javac JNISample.java
+//javac eu/ase/jni/JNISample.java
+
+C5.2. Generare Header File
+
+javah -jni ReadFile
+//javah -classpath .:./eu/ase/jni -d eu/ase/jni eu.ase.jni.ReadFile
+//javah -jni eu.ase.jni.ReadFile
+
+C5.3. Implement native method in dad_nativelib.c
+
+gedit dad_nativelib.c
+//dad_nativelib.c
+//#include "./eu/ase/jni/eu_ase_jni_ReadFile.h"
+#include "./ReadFile.h"
+#include <malloc.h>
+#include <stdio.h>
+
+JNIEXPORT jbyteArray JNICALL Java_ReadFile_loadFileInMemory (JNIEnv* env, jobject jobj, jstring name)
+{
+	jbyteArray jb;
+	unsigned char *buf;
+	int len = 0;
+	jboolean iscopy;
+    	const char *mfile = (*env)->GetStringUTFChars(env, name, &iscopy);
+    	FILE* f = fopen(mfile, "r");
+
+	fseek(f, 0, 2); // SEEK_END = 2 
+	len = ftell(f); buf = (unsigned char*)malloc(len*sizeof(char));
+	fseek(f, 0, 0); // SEEK_SET = 0
+	
+	jb=(*env)->NewByteArray(env, len);
+	
+	fread(buf, sizeof(char), len, f);
+	
+	printf( "Contents of buffer = %s\n len=%d\n", buf, len );
+
+	(*env)->SetByteArrayRegion(env, jb, 0, len, (jbyte *)buf);	
+  
+	fclose(f);
+	free(buf);
+    	(*env)->ReleaseStringUTFChars(env, name, mfile);
+
+	return (jb);
+
+}
+
+C5.4. In same or another terminal, Compile the C program (dad_nativelib.c) into *.so shared object/library (from command prompt with gcc)
+
+cd $JSE/c04/src/S05_JNI
+//export LD_LIBRARY_PATH=".:./eu/ase/jni:/opt/software/java/jdks/jdk1.6.0_35/jre/lib"
+//XOR
+//export LD_LIBRARY_PATH=.:/home/stud/dad/lectures/c04/src/S05_JNI:/home/stud/dad/lectures/c04/src/S05_JNI/eu/ase/jni
+
+export LD_LIBRARY_PATH=.:/opt/software/java/jdks/jdk1.8.0_25/jre/lib
+
+gcc -Wall -fPIC -c -I$JAVA_HOME/include -I$JAVA_HOME/include/linux dad_nativelib.c
+gcc -shared -Wl,-soname,libdad_native.so.1 -o libdad_native.so.1.0 dad_nativelib.o
+ln -sf ./libdad_native.so.1.0 ./libdad_native.so.1
+ln -sf ./libdad_native.so.1 ./libdad_native.so
+
+
+5. Run the Java program using the *.so - shared object/library lib
+
+//java -Djava.library.path=$LD_LIBRARY_PATH eu/ase/jni/JNIProgMain tt1.txt
+
+//java -Djava.library.path=. JNIProgMain tt1.txt
+
+java JNIProgMain tt1.txt
+
+
+-------------------------------------------------------------------------------------------------------------
+JNI in MS Windows XP/7:
+
+-. setare variabile mediu
+
+set JAVA_HOME=C:\Software\Java\JDKs\jdk1.5.0_09
+set PATH=%JAVA_HOME%\bin
+set CLASSPATH=.;%JAVA_HOME%\jre\lib;
+
+d:
+cd D:\Temp\DAD\Lecture\c04\src\S05_JNI
+
+1. Compilare
+
+javac JNISample.java
+
+2. Generare Header File
+
+javah -jni ReadFile
+
+3. Implement native method in nativelib1.c
+
+#include "./ReadFile.h"
+#include <malloc.h>
+#include <stdio.h>
+
+JNIEXPORT jbyteArray JNICALL Java_ReadFile_loadFileInMemory (JNIEnv* env, jobject jobj, jstring name)
+{
+	jbyteArray jb;
+	unsigned char *buf;
+	int len = 0;
+	jboolean iscopy;
+    	const char *mfile = (*env)->GetStringUTFChars(env, name, &iscopy);
+    	FILE* f = fopen(mfile, "r");
+
+	fseek(f, 0, 2); // SEEK_END = 2 
+	len = ftell(f); buf = (unsigned char*)malloc(len*sizeof(char));
+	fseek(f, 0, 0); // SEEK_SET = 0
+	
+	jb=(*env)->NewByteArray(env, len);
+	
+	fread(buf, sizeof(char), len, f);
+	
+	printf( "Contents of buffer = %s\n len=%d\n", buf, len );
+
+	(*env)->SetByteArrayRegion(env, jb, 0, len, (jbyte *)buf);	
+  
+	fclose(f);
+	free(buf);
+    	(*env)->ReleaseStringUTFChars(env, name, mfile);
+
+	return (jb);
+
+}
+
+4. Compile the C program (nativelib1.c) into dll lib (from Visual Studio tools window)
+
+d:
+cd D:\Temp\DAD\Lecture\c04\src\S05_JNI
+
+cl.exe -IC:/Software/Java/JDKs/jdk1.5.0_09/include -IC:/Software/Java/JDKs/jdk1.5.0_09/include/win32 /LD nativelib1.c /Fenativelib1.dll
+
+5. Run the Java program using the dll lib
+
+java JNIProgMain tt1.txt
+

@@ -1,0 +1,30 @@
+Linux UBUNTU 14 | 12:
+# export JAVA_HOME=/opt/software/java/jdks/jdk1.6.0_35
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_25
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export CLASSPATH=.:$JAVA_HOME/jre/lib
+export JSE=/home/stud/javase/lectures
+
+cd $JSE/c03/src
+
+1. Generics
+
+javac eu/ase/generics/Generics1.java
+java eu/ase/generics/BoxDemo1
+java eu/ase/generics/BoxDemo2
+
+javac eu/ase/generics/Generics4.java
+
+2. JCF - Java Collection Framework
+
+javac eu/ase/jcf/*.java
+
+java eu/ase/jcf/ProgMainJCF0
+java eu/ase/jcf/ForLoopBenchmarkTest1
+java eu/ase/jcf/ProgMainC
+java eu/ase/jcf/MapExample
+java eu/ase/jcf/FindDups
+java eu/ase/jcf/Frecvente if it is to be it is up to me to delegate
+
+-----------------------------------------------------------------------------------
+
