@@ -8,7 +8,7 @@ https://blog.codefx.org/java/java-module-system-tutorial/
 https://examples.javacodegeeks.com/core-java/java-9-modules-tutorial/
 
 
-
+MacOS:
 Cristians-MacBook-Pro:testproj001 ctoma$ export PATH=/Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/bin:$PATH
 Cristians-MacBook-Pro:testproj001 ctoma$ javac -version
 javac 1.8.0_74
@@ -21,6 +21,16 @@ Java(TM) SE Runtime Environment (build 9.0.1+11)
 Java HotSpot(TM) 64-Bit Server VM (build 9.0.1+11, mixed mode)
 Cristians-MacBook-Pro:testproj001 ctoma$ echo $PATH
 /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Linux Ubuntu:
+stud@stud-VirtualBoxU16x64:~/javase$ export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
+stud@stud-VirtualBoxU16x64:~/javase$ export JAVA_HOME=/opt/software/java/jdks/jdk-9.0.4
+
+export PATH=$PATH:.:$JAVA_HOME/bin
+
+cd /home/stud/javase/lectures/c01/testprojmodulesj9
+
+MacOS:
 
 mkdir testproj001
 cd testproj001/

@@ -12,7 +12,7 @@ A. C/C++ reminder sample about Inheritance, Polymorphism and ClassCast Exception
 
 // ------------------------------------------------------------------------------
 
-B. Hello World
+B. Hello World - on Linux Ubuntu 16, MacOS & RaspberyPi
 javac eu/ase/hello/HelloWorld.java
 
 java eu/ase/hello/HelloWorld
@@ -25,3 +25,6 @@ java eu/ase/hello/ProgMain
 ps -aef | grep java
 
 // ##############################################################################
+
+C. HelloWorld Java 9 vs. Java 8:
+
