@@ -1,6 +1,6 @@
-Linux UBUNTU 14:
-# export JAVA_HOME=/opt/software/java/jdks/jdk1.6.0_35
-export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_25
+Linux UBUNTU:
+
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
 export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 export CLASSPATH=.:$JAVA_HOME/jre/lib
 export JSE=/home/stud/javase/lectures
@@ -8,23 +8,27 @@ export JSE=/home/stud/javase/lectures
 cd $JSE/c01/src
 // ##############################################################################
 
-A. C/C++ reminder sample about Inheritance, Polymorphism and ClassCast Exception
 
 // ------------------------------------------------------------------------------
 
-B. Hello World - on Linux Ubuntu 16, MacOS & RaspberyPi
+A. Hello World - on Linux Ubuntu 16, MacOS & RaspberyPi
 javac eu/ase/hello/HelloWorld.java
 
 java eu/ase/hello/HelloWorld
 
-javac eu/ase/hello/Certificate.java
-javac eu/ase/hello/ProgMain.java
-
-java eu/ase/hello/ProgMain
 
 ps -aef | grep java
 
 // ##############################################################################
 
-C. HelloWorld Java 9 vs. Java 8:
+B. Shallow copy vs. deep copy - labs explain with memory layout abstractization
 
+
+javac eu/ase/oop/Certificate.java
+javac eu/ase/oop/ProgMainCertificate.java
+
+java eu/ase/oop/ProgMainCertificate
+
+
+jar -cmvf ./META-INF/MANIFEST.MF ../oop.jar eu/ase/oop/*.class
+java -jar ../oop.jar eu/ase/oop/ProgMainCertificate

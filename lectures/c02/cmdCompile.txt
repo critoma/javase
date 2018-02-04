@@ -1,0 +1,201 @@
+Linux UBUNTU:
+
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export CLASSPATH=.:$JAVA_HOME/jre/lib
+export JSE=/home/stud/javase/lectures
+
+cd $JSE/c02/src
+// ##############################################################################
+
+
+// ------------------------------------------------------------------------------
+
+# A. Student Sample in Java (non-OOP):
+javac eu/ase/arrays/ProgMainArrays.java
+
+java eu/ase/arrays/ProgMainArrays
+
+
+
+// ##############################################################################
+
+# B.Student sample in Java with OOP - simple and jLibs - JARs in command line:
+
+# B.1 - Simple
+javac eu/ase/ooparrays/Student.java
+javac eu/ase/ooparrays/ProgMainOopArrays.java
+
+java eu/ase/ooparrays/ProgMainOopArrays
+
+# B.2 - full JAR deployment 
+jar -cmvf ./META-INF/MANIFEST.MF ../student.jar eu/ase/ooparrays/*.class
+rm eu/ase/ooparrays/*.class
+
+java -jar ../student.jar eu/ase/ooparrays/ProgMainOopArrays
+rm ../student.jar
+
+# B.3 - the Java lib - JAR:
+javac eu/ase/ooparrays/Student.java
+jar -cvf ../studentLib.jar eu/ase/ooparrays/Student.class
+
+
+javac eu/ase/ooparrays/ProgMainOopArrays.java
+rm eu/ase/ooparrays/Student.class
+java -classpath .:../studentLib.jar eu/ase/ooparrays/ProgMainOopArrays
+
+rm eu/ase/ooparrays/ProgMainOopArrays.class
+rm ../studentLib.jar
+
+// ##############################################################################
+
+# C. Apache ANT
+# https://ant.apache.org/manual/tutorial-HelloWorldWithAnt.html
+
+export ANT_HOME=/opt/software/apache-ant-1.10.1
+export PATH=$PATH:$ANT_HOME/bin
+
+ant -version
+
+
+
+# build.xml
+<project>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/student.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="eu.ase.ooparrays.ProgMainOopArrays"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <java jar="build/jar/student.jar" fork="true"/>
+    </target>
+
+</project>
+
+
+cd $JSE/c02/antproj
+
+ant compile
+ant jar
+ant run
+
+ant clean
+
+
+// ##############################################################################
+
+# D. Apache Maven - MVN
+
+# https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
+# https://maven.apache.org/guides/getting-started/index.html
+# https://www.tutorialspoint.com/maven/maven_build_test_project.htm
+
+export MVN_HOME=/opt/software/apache-maven-3.5.2
+export PATH=$PATH:$MVN_HOME/bin
+
+cd $JSE/c02/mavenproj
+mvn --version
+
+mvn archetype:generate -DgroupId=eu.ase.ooparrays -DartifactId=my-app-student -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+ls -latr /home/stud/.m2/repository
+du -k -h ls /home/stud/.m2/repository
+
+# output approx. 18MB
+
+cd my-app-student
+mvn clean 
+mvn compile
+mvn package
+
+ls -latr /home/stud/.m2/repository
+du -k -h ls /home/stud/.m2/repository
+
+# output approx. 27 MB
+
+java -classpath target/my-app-student-1.0-SNAPSHOT.jar eu.ase.ooparrays.App
+
+// ##############################################################################
+
+# E. Gradle
+# https://gradle.org/install/
+# https://gradle.org/install/
+# https://github.com/jabedhasan21/java-hello-world-with-gradle
+# https://www.tutorialspoint.com/gradle/index.htm
+# https://www.tutorialspoint.com/gradle/gradle_build_a_java_project.htm
+
+# https://github.com/jabedhasan21/java-hello-world-with-gradle/blob/master/README.md
+
+export GRADLE_HOME=/opt/software/gradle-4.5
+export PATH=$PATH:$GRADLE_HOME/bin
+
+cd $JSE/c02/gradleproj
+gradle -v
+
+gradle -tasks
+gradle -help
+
+mkdir -p my-app-student/src/main/java/eu/ase/ooparrays
+cd my-app-student
+gradle init
+
+# in build.gradle file:
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'eu.ase.ooparrays.ProgMainOopArrays'
+
+// tag::jar[]
+jar {
+    baseName = 'student-gradle'
+    version =  '0.1.0'
+}
+// end::jar[]
+
+// tag::dependencies[]
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+
+gradle build
+
+gradle run
+
+java -classpath build/libs/student-gradle-0.1.0.jar eu.ase.ooparrays.ProgMainOopArrays
+// ##############################################################################
+
+# F. Jenkins - DevOps
+
+export CATALINA_HOME=/opt/software/apache-tomcat-9.0.4
+export PATH=$PATH:$CATALINA_HOME/bin
+
+cd $CATALINA_HOME
+bin/startup.sh
+
+http://127.0.0.1:8080
+http://127.0.0.1:8080/jenkins/
+
+
+bin/shutdown.sh
+
+// ##############################################################################
+
+# G. Docker
+
+
