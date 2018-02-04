@@ -1,7 +1,0 @@
--semaphores count, and can have values greater than 1.
--mutexes are binary state, either locked or unlocked.
--a semaphore can be incremented and decremented by any process/thread.
--a mutex needs to be locked and unlocked by the same process/thread.
--mutexes alone can't be used to signal changes in the state of shared variables, a condition variable is also needed.
--a pair of semaphores can be used to signal state changes in a situation where a mutex and condition variable would be needed.
--mutexes are implemented in user space, sysV sems are in kernel space.(posix sems are not widely supported, and are in user space).

@@ -1,0 +1,137 @@
+.tagline 
+ { 
+ font: normal 9pt Tahoma;
+ font-weight:bold;
+ color:#FFFFFF;  
+ }
+
+a.menulink:link { 
+font: normal 7pt Tahoma;  
+ line-height: 12pt;
+ color:#000000;  
+ text-decoration:none;   
+ margin:0px; 
+ padding:4px 0px 0px 0px;
+ list-style-type:none;  
+ }
+
+a.menulink:visited	{ 
+font: normal 7pt Tahoma;  
+ line-height: 12pt;
+ color:#000000;  
+ text-decoration:none;   
+ margin:0px; 
+ padding:4px 0px 0px 0px;
+ list-style-type:none;  
+ }
+
+a.menulink:hover    {  
+font: normal 7pt Tahoma; 
+line-height: 12pt; 
+color:blue; 
+text-decoration:underline; 
+margin:0px; 
+padding:4px 0px 0px 0px; 
+list-style-type:none; 
+}
+
+
+#ewheader {
+    float:left;
+    width:100%;
+    background:#FFFFFF;
+    font-size:8px;
+    font-family:arial,verdana;
+    line-height:normal;
+    margin-bottom: 1px;
+    }
+    
+#ewheader ul {
+    margin:0;
+    padding:0;
+    list-style:none;
+    }
+  
+
+    
+    #ewheader a {
+     display:block;
+     background:url("/icom_includes/earthweb/headers/img/norm_left.gif")
+     no-repeat left top;
+     padding:5px 10px;
+     font-size:9px;
+     font-family:verdana,arial;
+     font-weight:bold;
+     text-decoration:none;
+     color:#FFFFFF;
+    }
+    
+    #ewheader a:hover {
+    display:block;
+    background:url("/icom_includes/earthweb/headers/img/norm_left.gif")
+    no-repeat left top;
+    padding:5px 10px;
+    font-family:verdana,arial;
+    font-size:9px;
+	font-weight:bold;
+    text-decoration:underline;
+    color:#FFFFFF;
+    }
+    
+    #ewheader li {
+    float:left;
+    background:url("/icom_includes/earthweb/headers/img/norm_right.gif")
+      no-repeat right top;
+    margin:0;
+    padding:0;
+    }
+
+#cgheader {
+    float:left;
+    width:100%;
+    background:#FFFFFF;
+    font-size:8px;
+    font-family:arial,verdana;
+    line-height:normal;
+    margin-bottom: 1px;
+    }
+    
+#cgheader ul {
+    margin:0;
+    padding:0;
+    list-style:none;
+    }
+  
+#cgheader a {
+     display:block;
+     background:url("/icom_includes/earthweb/headers/img/norm_left_cg.gif")
+     no-repeat left top;
+     padding:5px 10px;
+     font-size:9px;
+     font-family:verdana,arial;
+     font-weight:bold;
+     text-decoration:none;
+     color:#FFFFFF;
+    }
+    
+#cgheader a:hover {
+    display:block;
+    background:url("/icom_includes/earthweb/headers/img/norm_left_cg.gif")
+    no-repeat left top;
+    padding:5px 10px;
+    font-family:verdana,arial;
+    font-size:9px;
+	font-weight:bold;
+    text-decoration:underline;
+    color:#FFFFFF;
+    }
+    
+#cgheader li {
+    float:left;
+    background:url("/icom_includes/earthweb/headers/img/norm_right_cg.gif")
+      no-repeat right top;
+    margin:0;
+    padding:0;
+    }
+
+.au { margin:0px; padding:0;}

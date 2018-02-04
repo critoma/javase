@@ -1,0 +1,280 @@
+<html><head><title>Annotations</title>
+
+
+<meta name="collection" content="reference"></head><body bgcolor="#ffffff">
+
+<table summary="layout" border="0" width="100%">
+<tbody><tr>
+<!--TD WIDTH=60-->
+<td>
+   <img src="annotations2_files/javalogo52x88.gif" alt="Java" border="0" height="88" width="52">
+</td>
+
+<td>
+<center>
+<h1>Annotations</h1>
+</center>
+</td>
+
+<td align="right" valign="top">
+<font size="-1"><a href="http://java.sun.com/j2se/1.5.0/docs/guide/language/index.html">Language Contents</a></font>
+<p>
+</p></td></tr>
+</tbody></table>
+
+<!-- Body text begins here -->
+
+<hr noshade="noshade" size="3">
+
+Many APIs require a fair amount of boilerplate code.  For example, in order to
+write a JAX-RPC web service, you must provide a paired interface and
+implementation.  This boilerplate could be generated automatically by a tool
+if the program were &#8220;decorated&#8221; with annotations indicating which
+methods were remotely accessible.
+
+<p>Other APIs require &#8220;side files&#8221; to be maintained in parallel
+with programs.  For example JavaBeans requires a
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/beans/BeanInfo.html"><code>BeanInfo</code></a> class
+to be maintained in parallel with a bean, and Enterprise JavaBeans (EJB)
+requires a <i>deployment descriptor</i>.  It would be more convenient and less
+error-prone if the information in these side files were maintained as
+annotations in the program itself.
+
+</p><p>The Java platform has always had various ad hoc annotation mechanisms.  For
+example the
+<code>transient</code> modifier is an ad hoc annotation indicating that a
+field should be ignored by the serialization subsystem, and the
+<code>@deprecated</code> javadoc tag is an ad hoc annotation indicating that the
+method should no longer be used.  As of release 5.0, the platform has a
+general purpose annotation (also known as <i>metadata</i>) facility 
+that permits you to define and use your own annotation types.  The facility
+consists of a syntax for declaring annotation types, a syntax for annotating
+declarations, APIs for reading annotations, a class file representation for
+annotations, and an <a href="http://java.sun.com/j2se/1.5.0/docs/guide/apt/index.html">annotation processing tool</a>.
+
+</p><p>Annotations do not directly affect program semantics, but they do
+affect the way programs are treated by tools and libraries, which can in turn
+affect the semantics of the running program. Annotations can be read from
+source files, class files, or reflectively at run time.
+
+</p><p>Annotations complement javadoc tags.  In general, if the markup is intended 
+to affect or produce documentation, it should probably be a javadoc tag; 
+otherwise, it should be an annotation. 
+
+</p><p>Typical application programmers will never have to define an annotation
+type, but it is not hard to do so.
+Annotation type declarations are similar to normal interface
+declarations.  An at-sign (<code>@</code>) precedes the <code>interface</code>
+keyword. Each method declaration defines an <i>element</i> of the
+annotation type.  Method declarations must not have any parameters or
+a <code>throws</code> clause.  Return types are restricted to primitives, 
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html"><code>String</code></a>,
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html"><code>Class</code></a>,
+<a href="http://java.sun.com/j2se/1.5.0/docs/guide/language/enums.html">enums</a>, annotations, and arrays of the preceding
+types. Methods can have <i>default values</i>.  Here is an example annotation
+type declaration:
+</p><blockquote>
+<pre>/**
+ * Describes the Request-For-Enhancement(RFE) that led
+ * to the presence of the annotated API element.
+ */
+public @interface RequestForEnhancement {
+    int    id();
+    String synopsis();
+    String engineer() default "[unassigned]"; 
+    String date();    default "[unimplemented]"; 
+}
+</pre>
+</blockquote>
+<p>Once an annotation type is defined, you can use it
+to annotate declarations.  An annotation is a special kind of modifier, and
+can be used anywhere that other modifiers (such as 
+<code>public</code>, <code>static</code>, or <code>final</code>)
+can be used.  By convention, annotations precede other modifiers.  Annotations
+consist of an at-sign (<code>@</code>) followed by an annotation type and a
+parenthesized list of element-value pairs.  The values must be compile-time
+constants.  Here is a method declaration with an annotation corresponding to
+the annotation type declared above:
+</p><blockquote>
+<pre>@RequestForEnhancement(
+    id       = 2868724,
+    synopsis = "Enable time-travel",
+    engineer = "Mr. Peabody",
+    date     = "4/1/3007"
+)
+public static void travelThroughTime(Date destination) { ... }
+</pre>
+</blockquote>
+An annotation type with no elements is termed a <i>marker</i> annotation type,
+for example:
+<blockquote>
+<pre>/**
+ * Indicates that the specification of the annotated API element
+ * is preliminary and subject to change.
+ */
+public @interface Preliminary { }
+</pre>
+</blockquote>
+It is permissible to omit the parentheses in marker annotations, as shown
+below:
+<blockquote>
+<pre>@Preliminary public class TimeTravel { ... }
+</pre>
+</blockquote>
+In annotations with a single element, the element should be named
+<code>value</code>, as shown below:
+<blockquote>
+<pre>/**
+ * Associates a copyright notice with the annotated API element.
+ */
+public @interface Copyright {
+    String <font color="#009900">value</font>();
+}
+</pre>
+</blockquote>
+It is permissible to omit the element name and equals sign (<code>=</code>)
+in a single-element annotation whose element name is <code>value</code>, as
+shown below:
+<blockquote>
+<pre>@Copyright("2002 Yoyodyne Propulsion Systems")
+public class OscillationOverthruster { ... }
+</pre>
+</blockquote>
+To tie it all together, we'll build a simple annotation-based test framework.
+First we need a marker annotation type to indicate that a method is a test
+method, and should be run by the testing tool:
+<blockquote>
+<pre>import java.lang.annotation.*;
+
+/**
+ * Indicates that the annotated method is a test method.
+ * This annotation should be used only on parameterless static methods.
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public <font color="#009900">@interface Test</font> { }
+</pre>
+</blockquote>
+Note that the annotation type declaration is itself annotated.  Such
+annotations are called <i>meta-annotations</i>.  The first 
+(<code>@Retention(RetentionPolicy.RUNTIME)</code>) indicates that annotations
+with this type are to be retained by the VM so they can be read reflectively
+at run-time.  The second  (<code>@Target(ElementType.METHOD)</code>) indicates
+that this annotation type can be used to annotate only method declarations.
+<p>
+Here is a sample program, some of whose methods are annotated with the above
+interface:
+</p><blockquote>
+<pre>public class Foo {
+    <font color="#009900">@Test</font> public static void m1() { }
+    public static void m2() { }
+    <font color="#009900">@Test</font> public static void m3() {
+        throw new RuntimeException("Boom");
+    }
+    public static void m4() { }
+    <font color="#009900">@Test</font> public static void m5() { }
+    public static void m6() { }
+    <font color="#009900">@Test</font> public static void m7() {
+        throw new RuntimeException("Crash");
+    }
+    public static void m8() { }
+}
+</pre>
+</blockquote>
+Here is the testing tool:
+<blockquote>
+<pre>import java.lang.reflect.*;
+
+public class RunTests {
+   public static void main(String[] args) throws Exception {
+      int passed = 0, failed = 0;
+      for (Method m : Class.forName(args[0]).getMethods()) {
+         if (<font color="#009900">m.isAnnotationPresent(Test.class)</font>) {
+            try {
+               m.invoke(null);
+               passed++;
+            } catch (Throwable ex) {
+               System.out.printf("Test %s failed: %s %n", m, ex.getCause());
+               failed++;
+            }
+         }
+      }
+      System.out.printf("Passed: %d, Failed %d%n", passed, failed);
+   }
+}
+</pre>
+</blockquote>
+The tool takes a class name as a command line argument and iterates over all
+the methods of the named class attempting to invoke each method that is
+annotated with the <code>Test</code> annotation type (defined above).  The
+reflective query to find out if a method has a <code>Test</code> annotation
+is highlighted in green.  If a test method invocation throws an exception,
+the test is deemed to have failed, and a failure report is printed. Finally, a
+summary is printed showing the number of tests that passed and failed.
+Here is how it looks when you run the testing tool on the <code>Foo</code>
+program (above):
+<blockquote>
+<pre>$ java RunTests Foo
+Test public static void Foo.m3() failed: java.lang.RuntimeException: Boom 
+Test public static void Foo.m7() failed: java.lang.RuntimeException: Crash 
+Passed: 2, Failed 2
+</pre>
+</blockquote>
+While this testing tool is clearly a toy, it demonstrates the power of
+annotations and could easily be extended to overcome its limitations.
+<!-- Body text ends here -->
+
+<!-- ============================================================== -->
+
+<hr noshade="noshade" size="3">
+
+<table summary="layout" border="0" width="100%">
+<tbody><tr valign="top">
+
+<td>
+   <font size="-2">
+
+   <a href="http://java.sun.com/j2se/1.5.0/docs/relnotes/SMICopyright.html">Copyright ©</a> 2004
+   <a href="http://www.sun.com/">Sun Microsystems, Inc.</a>
+   All Rights Reserved.
+
+   </font>
+   <p>
+
+   <font size="-1">
+
+   Please <a href="http://java.sun.com/j2se/1.5.0/docs/relnotes/contacts.html">send us comments and suggestions</a><br>
+   </font>
+</p></td>
+
+<td align="right">
+   <img src="annotations2_files/sunlogo64x30.gif" alt="Sun" border="0" height="30" width="64">
+   <br><br>
+   <font size="+1">
+   <i>Java Software</i>
+   </font>
+</td>
+
+</tr>
+</tbody></table>
+
+
+<pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+
+<script language="JavaScript" src="annotations2_files/s_code_remote.js"></script><img src="annotations2_files/s83999996781036.gif" name="s_i_sunglobal" alt="" border="0" height="1" width="1"></body></html>

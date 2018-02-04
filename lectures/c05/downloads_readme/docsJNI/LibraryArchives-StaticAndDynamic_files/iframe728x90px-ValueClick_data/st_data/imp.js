@@ -1,0 +1,7 @@
+document.write('<object type=\"application/x-shockwave-flash\" data=\"http://content.yieldmanager.edgesuite.net/atoms/1c/5c/37/ef/1c5c37effd91f673480d9361ca572ecb.swf?clickTag=http%3A%2F%2Fad%2Eyieldmanager%2Ecom%2Fclk%3F3%2CeJytjkuPgjAUhX8NOyW0BaEhsyhWZkzEB2Gjm0ltC3bkYbAK%2EvspaExmPydter7T294LUHjkmDEQBC7DEvjMDwESQBxzgRGeOGFoGDouQDPgTmgd3cgnTrZk7vFHE5FBsZJb8lJBFoTsn34bjLckrafp7hnR42FH%2EkVz75EuX3459CUFDYijlf2VOdG7jC69DT2U%2D58zXGVFn1SJTrK4TBQ4bWhUrjLuHrK1WmeLLoE7d128X35MTlpfLEQsGJtVSaGYnbOr5qXiZ7uW2qSd2U8%2DyVZaKOZKWIgiD%2EjAsVBUjRgEAEM4oAFgzusYewDPhpQbPxQP3ahnTN60XIrv8WMT%2ER2k6zr70ZSqvvU2byqTMHGXrVZXVReGVN6ySvow6LFz6ad3Vt7ka0Rdlb8xSZCK%2C\" height=\"90\" width=\"728\" loop=\"false\" wmode=\"opaque\"><param name=\"wmode\" value=\"opaque\"><param name=\"movie\" value=\"http://content.yieldmanager.edgesuite.net/atoms/1c/5c/37/ef/1c5c37effd91f673480d9361ca572ecb.swf?clickTag=http%3A%2F%2Fad%2Eyieldmanager%2Ecom%2Fclk%3F3%2CeJytjkuPgjAUhX8NOyW0BaEhsyhWZkzEB2Gjm0ltC3bkYbAK%2EvspaExmPydter7T294LUHjkmDEQBC7DEvjMDwESQBxzgRGeOGFoGDouQDPgTmgd3cgnTrZk7vFHE5FBsZJb8lJBFoTsn34bjLckrafp7hnR42FH%2EkVz75EuX3459CUFDYijlf2VOdG7jC69DT2U%2D58zXGVFn1SJTrK4TBQ4bWhUrjLuHrK1WmeLLoE7d128X35MTlpfLEQsGJtVSaGYnbOr5qXiZ7uW2qSd2U8%2DyVZaKOZKWIgiD%2EjAsVBUjRgEAEM4oAFgzusYewDPhpQbPxQP3ahnTN60XIrv8WMT%2ER2k6zr70ZSqvvU2byqTMHGXrVZXVReGVN6ySvow6LFz6ad3Vt7ka0Rdlb8xSZCK%2C\" /></object>');
+var rm_data = new Object();
+rm_data.creative_id = 19559353;
+rm_data.offer_type = 10;
+rm_data.entity_id = 768624;
+
+if (window.rm_crex_data) {rm_crex_data.push(19559353);}

@@ -1,1 +1,0 @@
-twttr.receiveCount({"count":8,"url":"http:\/\/www.cprogramming.com\/tutorial\/shared-libraries-linux-gcc.html\/"});

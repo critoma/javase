@@ -1,0 +1,159 @@
+.headline  { font-size: 10pt;
+           font-weight: bold;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+
+.headline2  { font-size: 15pt;
+           font-weight: bold;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+		   
+.author  { font-size: 9pt;
+           font-weight: bold;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+		   
+.threadhead  { font-size: 9pt;
+           COLOR: #ffffff;
+           font-weight: bold;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+		   
+.threadby  { font-size: 9pt;
+           font-weight: bold;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+
+.threadtext  { font-size: 9pt;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+		   
+.date  { font-size: 9pt;
+           COLOR: #CC0000;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+		   
+.text  { font-size: 10pt;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+
+table { font-size: 10pt; 
+	   font-family : Verdana, Arial, Helvetica, sans-serif}
+		   
+.devnews  { font-size: 9pt;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+		   
+
+.code  { font-size: 9pt;
+           COLOR: #990099;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+
+
+.foot  { font-size: 9pt;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+
+
+.commerce  { font-size: 9pt;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+		   
+.topdev  { font-size: 9pt;
+           COLOR: #FF9;
+		   font-family : Verdana, Arial, Helvetica, sans-serif}
+
+.navlinks {
+	font-size: 9pt;
+	color: #FFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif}
+	
+A.btn_item {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 9pt;
+	COLOR: #FFF;
+	FONT-FAMILY: verdana, arial, sans-serif;
+	TEXT-DECORATION: none
+}
+A.btn_item:hover {
+	COLOR: #FF9;
+	TEXT-DECORATION: underline
+}
+A.btn_item:active {
+	COLOR: #FF9;
+	TEXT-DECORATION: underline
+}
+
+#leftnavi a {
+	display: block;
+	line-height: 11px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	font-family: verdana,arial,helvetica;
+	border-bottom: 1px solid #303030;
+	border-top: 1px solid #CCCCCC;
+    background-color: #999999;
+	font-size: 7pt;
+		
+}
+#leftnavi a:link, #leftnavi a:visited {
+	color: #eee;
+	text-decoration: none;
+	font-weight: bold;	
+}
+#leftnavi a:hover, #leftnavi a:active {
+	background-color: #333333;
+	color: #FFFF99;
+	text-decoration: none;
+		
+}
+
+
+#leftnavi_on a {
+	display: block;
+	font-family: verdana,arial,helvetica;
+	padding: 3px 3px 3px 3px;
+	border: 2px solid;
+	border-color: #666 #666 #666 #666;
+	font-size: 7pt;
+	background-color: #2953A4;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: bold;	
+}
+
+A.imnav {
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 9pt;
+    COLOR: #FFF;
+    FONT-FAMILY: verdana, arial, sans-serif;
+    TEXT-DECORATION: none
+}
+A.imnav:visited {
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 9pt;
+    COLOR: #FFF;
+    FONT-FAMILY: verdana, arial, sans-serif;
+    TEXT-DECORATION: none
+}
+
+A.imnav:hover {
+    COLOR: #FF9;
+    TEXT-DECORATION: underline
+}
+A.imnav:active {
+    COLOR: #FF9;
+    TEXT-DECORATION: underline
+}
+
+PRE
+{
+ PADDING: 7pt;
+ FONT: 9pt Courier New, Courier, mono;
+}
+
+tt
+{
+ FONT: 10pt Courier New, Courier, mono;
+ COLOR: #666666;
+ font-weight: bold;
+
+}
+
+code
+{
+ FONT: 10pt Courier New, Courier, mono;
+ COLOR: #666666;
+ font-weight: bold;
+}
+

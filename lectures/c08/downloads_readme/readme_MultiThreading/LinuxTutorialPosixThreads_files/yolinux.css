@@ -1,0 +1,38 @@
+body  {
+	font-family: helvetica, arial, sans-serif;
+        background-color: #cccccc;
+	color: #000000;
+}
+table.tmain { width: 100%; 
+             border-spacing: 0 0;
+             border-style: solid;
+             border-color: #000000;
+             border-collapse: separate;
+           }
+td.tmain {      padding: 4px;
+                margin: 0;
+                border-style: solid;
+                border-color: #000000;
+           }
+th    {
+	font-family: helvetica, arial, sans-serif;
+	font-weight: bold;
+	color: #000000;
+}
+td    {
+	font-family: helvetica, arial, sans-serif;
+	color: #000000;
+}
+a:link    {font-family: Helvetica, Arial, sans-serif; color: #0000FF; text-decoration: none; }
+a:visited {font-family: Helvetica, Arial, sans-serif; color: #0000CC; text-decoration: none; }
+a:active  {font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0000FF; text-decoration: none; }
+a:hover   {font-family: Helvetica, Arial, sans-serif; color: #0000AA; text-decoration: underline; }
+.text  {
+	font-family: helvetica, arial, sans-serif;
+	color: #000000;
+}
+.textbold  {
+        font-family: helvetica, arial, sans-serif;
+        font-weight: bold;
+        color: #000000;
+}

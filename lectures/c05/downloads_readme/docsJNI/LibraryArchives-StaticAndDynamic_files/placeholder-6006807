@@ -1,0 +1,13 @@
+function submitCJ10472684X36(formId, url) {
+   var s = "";
+   if (url != null) {
+      s = "<form id=\"" + formId + "\" method=\"post\" action=\"http:\/\/www.jdoqocy.com\/click-s\" target=\"_blank\" onmouseover=\"window.status=\'null\';return true;\" onmouseout=\"window.status=\' \';return true;\">\r\n<input type=\"hidden\" name=\"aid\" value=\"10472684\"\/>\r\n<input type=\"hidden\" name=\"pid\" value=\"5446021\"\/>\r\n<input type=\"hidden\" name=\"cm_mmc\" value=\"CJ-_-3460786-_-5446021-_-Trifecta_140x300_04_09_08_2\"\/><input type=\"hidden\" name=\"url\" value=\"" + url + "\"/></form>";
+   } else {
+      s = "<form id=\"" + formId + "\" method=\"post\" action=\"http:\/\/www.jdoqocy.com\/click-s\" target=\"_blank\" onmouseover=\"window.status=\'null\';return true;\" onmouseout=\"window.status=\' \';return true;\">\r\n<input type=\"hidden\" name=\"aid\" value=\"10472684\"\/>\r\n<input type=\"hidden\" name=\"pid\" value=\"5446021\"\/>\r\n<input type=\"hidden\" name=\"cm_mmc\" value=\"CJ-_-3460786-_-5446021-_-Trifecta_140x300_04_09_08_2\"\/></form>";
+   }
+   var x = document.createElement("div");
+   x.innerHTML = s;
+   document.getElementsByTagName("body")[0].appendChild(x);
+   document.getElementById(formId).submit();
+}
+document.write("<a href=\"javascript:submitCJ10472684X36(\'CJ10472684X36\',null);\"><img src=\"http:\/\/www.geeks.com\/affiliates\/statlinks\/homepage\/banners\/DealNews11apr07_2.gif\" width=\"140\" height=\"300\" alt=\"Top selling categories\" border=\"0\"\/><\/a>");

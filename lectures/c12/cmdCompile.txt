@@ -1,228 +1,69 @@
 Linux UBUNTU 12/14:
 
-### INSTALL MySQL
-
-
-////////////////////////////////////
-Linux MySQL (user: root / pass: stud / default listen on 127.0.0.1:3306):
-BETTER: https://help.ubuntu.com/14.04/serverguide/mysql.html
-
-sudo apt-get install mysql-server
-sudo netstat -tap | grep mysql
-sudo netstat -na -p tcp | grep 3306
-sudo service mysql restart
-
-# change config + IP address and port for listening
-sudo gedit /etc/mysql/my.cnf
-
-# reconfigure root pass:
-sudo dpkg-reconfigure mysql-server-5.5
-
-# Default DB Engine for MySQL 5.5 is InnoDB instead of MyISAM 
-
-# create DB for testing JSP:
-mysql -u root -pstud
-show databases;
-
-mysql test -u root -pstud 
->
-create database mycards;
-use mycards;
-CREATE USER mysqluser IDENTIFIED BY 'mysqluserpwd'; 
-grant usage on *.* to mysqluser@localhost identified by 'mysqluserpwd'; 
-grant all privileges on mycards.* to mysqluser@localhost;
-exit
-
-mysql mycards -u mysqluser -pmysqluserpwd
->
-use mycards;
-CREATE TABLE ClientsCards (id INT NOT NULL AUTO_INCREMENT, 
-    Name VARCHAR(100) NOT NULL,
-    FirstName VARCHAR(100), 
-    CardType VARCHAR(50) NOT NULL, 
-    InsertTime DATE NOT NULL,     
-    PRIMARY KEY (ID));
-
-INSERT INTO ClientsCards values (default, 'TestName', 'TestFirstName','Visa', '2013-04-10 10:33:11');
-select * from ClientsCards;
-exit
-
-# see everything with MySQL Workbench app
- 
--------------------------------------------------------------------------
-Alternativley, with configuration work:
-
-Download for Linux-Debian/Ubuntu 14: mysql 5.6 + workbench
-Double click on *.deb files
-
-start MySQL:
-sudo su
-
-cd /opt/mysql/server-5.6/
-apt-get install libaio1 libaio-dev
-ln -s /opt/mysql/share/mysql /usr/share/
-scripts/mysql_install_db --user=mysql
-
-start MySQL workbench
-
-////////////////////////////////////
-
-Windows MS Acccess:
-Control Panel -> Administrative Tools -> Odbc Connection -> FileDNS ...Add... S10 <-> bdClienti.mdb 
-
-////////////////////////////////////
-
-
-### Install SQLite Browser:
-http://sqlitebrowser.org/
-http://sqlitebrowser.sourceforge.net
-
-Stable release
-For Ubuntu and derivaties, @deepsidhu1313 provides a PPA with our latest release here:
-
-    https://launchpad.net/~linuxgndu/+archive/ubuntu/sqlitebrowser
-
-To add this ppa just type in these commands in terminal:
-
-   sudo add-apt-repository -y ppa:linuxgndu/sqlitebrowser
-
-Then update the cache using:
-
-   sudo apt-get update
-
-Install the package using:
-
-   sudo apt-get install sqlitebrowser
-
-Ubuntu 14.04.X, 15.04.X, 15.10.X and 16.04.X are supported for now (until Launchpad decides to discontinue build for any series
-
-
-
-
-####################################################
-### Lecture:
-
-//set env variables for root user:
 export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_25
 export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar
 export JSE=/home/stud/javase/lectures
 
-cd $JSE/c12/src/
+cd $JSE/c11/src
+
+# http://www.vogella.com/tutorials/JAXB/article.html
+# http://www.vogella.com/tutorials/JavaXML/article.html
+
+###########################################################
+
+A. StaX
+
+cd StaX
+
+javac eu/ase/stax_xml/*.java
+
+java eu/ase/stax_xml/TestRead config.xml
+
+cd ..
+
+###########################################################
+
+B. XPath
+
+cd XPath
+
+javac eu/ase/xpath/*.java
+
+java eu/ase/xpath/QueryXML
+
+cd ..
+
+###########################################################
+
+C. XSLT
 
 
 
-A. JDBC - MySQL
+###########################################################
 
-cd $JSE/c12/src/JDBC
+D. JAXB 2 (Java XML)
 
+cd JAXB
 
-### //http://www.tutorialspoint.com/sqlite/sqlite_java.htm
-### //http://www.studytonight.com/java/connecting-to-mysql.php
-### //http://www.tutorialspoint.com/jdbc/jdbc-create-database.htm
+javac eu/ase/jaxb/Book.java
+javac eu/ase/jaxb/BookStore.java
+javac eu/ase/jaxb/BookProgMain.java
 
-# 1. Create Database/Table:
-javac -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample1.java
-java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample1
+java eu/ase/jaxb/BookProgMain
 
-# 2. Connect to DB and create table
-javac -classpath $CLASSPATH eu_ase_jdbc/JDBCExample2.java
-java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample2
+cd ..
 
-# 3. Connect to DB and insert rows in table
-javac -classpath $CLASSPATH eu_ase_jdbc/JDBCExample3.java
-java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample3
+###########################################################
 
-# 4. Connect to DB and select rows in table
-javac -classpath $CLASSPATH eu_ase_jdbc/JDBCExample4.java
-java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample4
+E. JSON (Java-JSON Library org.json - for more complex operations try Jackson)
 
-# 5. Connect to DB and update rows in table - with or without prepare statement
-javac -classpath $CLASSPATH eu_ase_jdbc/JDBCExample5.java
-java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample5
+cd JSON
 
-# 6. Connect to DB and delete rows in table
-javac -classpath $CLASSPATH eu_ase_jdbc/JDBCExample6.java
-java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample6
+javac -classpath .:./lib/java-json.jar eu/ase/json/BuildJson1.java
+javac -classpath .:./lib/java-json.jar eu/ase/json/ParseJson1.java
 
+java -classpath .:./lib/java-json.jar eu/ase/json/BuildJson1
+java -classpath .:./lib/java-json.jar eu/ase/json/ParseJson1 ./myJsonObj.json
 
-B. NoSQL - MongoDB
-
-cd $JSE/c12/src/NoSQLMongoDB
-
-
-### //https://www.mongodb.com/download-center
-### //https://docs.mongodb.com/ecosystem/tools/administration-interfaces/
-### //https://www.tutorialspoint.com/mongodb/index.htm
-### //https://www.tutorialspoint.com/mongodb/mongodb_java.htm
-
-### Install MongoDB:
-
-## https://www.tutorialspoint.com/mongodb/mongodb_overview.htm
-
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
-
-echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/testing multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
-
-sudo apt-get update
-
-sudo apt-get install -y mongodb
-
-sudo service mongodb start
-
-sudo service mongodb stop
-
-telnet localhost 27017 
-
-sudo find / -name mongo
-
-mongo
-> db.stats()
-
-######### MongoDb Admin
-mongo
->
-
-### Create the database
-
-The use Command
-MongoDB use DATABASE_NAME is used to create database. The command will create a new database if it doesn't exist, otherwise it will return the existing database.
-
-Syntax
-Basic syntax of use DATABASE statement is as follows −
-
-use DATABASE_NAME
-Example
-If you want to create a database with name <mydb>, then use DATABASE statement would be as follows −
-
->use mydb
-switched to db mydb
-To check your currently selected database, use the command db
-
->db
-mydb
-If you want to check your databases list, use the command show dbs.
-
->show dbs
-local     0.78125GB
-test      0.23012GB
-Your created database (mydb) is not present in list. To display database, you need to insert at least one document into it.
-
->db.movie.insert({"name":"tutorials point"})
->show dbs
-local      0.78125GB
-mydb       0.23012GB
-test       0.23012GB
-In MongoDB default database is test. If you didn't create any database, then collections will be stored in test database.
-
-# *** For info please see the presentation's slides and the web links references
-
-######### MongoDB Java Programming
-# B.1. Java MongoDB Sample:
-
-cd $JSE/c12/src/NoSQLMongoDB
-
-javac -classpath $CLASSPATH:../../downloads_readme/mongo-java-driver-3.4.0-rc1.jar eu/ase/nosql/MongoDbClient.java
-java -classpath $CLASSPATH:../../downloads_readme/mongo-java-driver-3.4.0-rc1.jar eu.ase.nosql.MongoDbClient
-
-
+cd ..

@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0278)http://pinit-cdn.pinterest.com/pinit.html -->
+<!DOCTYPE html><HTML><HEAD>
+<META content="text/html; charset=windows-1252" http-equiv="Content-Type">
+<STYLE type="text/css">
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            #PinItButton {
+                position: absolute;
+                background: url(/images/pinit6.png);
+                font: 11px Arial, sans-serif;
+                text-indent: -9999em;
+                font-size: .01em;
+                color: #CD1F1F;
+                height: 20px;
+                width: 43px;
+                background-position: 0 -7px;
+            }
+            #PinItButton:hover {
+                background-position: 0 -28px;
+            }
+            #PinItButton:active {
+                background-position: 0 -49px;
+            }
+            #PinItButton.pinned {
+                background-position: 0 -70px !important;
+            }
+            #CountPointer {
+                position: absolute;
+                z-index: 1;
+                background: url(/images/pinit6.png);
+                text-indent: -9999em;
+                font-size: .01em;
+                color: #FFF;
+            }
+            #CountBubble {
+                position: absolute;
+                border: 1px solid #C9C5C5;
+                color: #777;
+                background-color: #FCF9F9;
+                border-radius: 1px;
+            }
+            body.horizontal #CountPointer {
+                left: 43px;
+                height: 18px;
+                width: 4px;
+                background-position: -43px -8px;
+            }
+            body.horizontal #CountBubble {
+                top: 1px;
+                left: 46px;
+                height: 10px;
+                line-height: 10px;
+                padding: 2px 5px 4px 5px;
+                font: 10px Arial, Helvetica, sans-serif;
+                display: inline-block;
+            }
+            body.vertical #PinItButton {
+                top: 38px;
+            }
+            body.vertical #CountPointer {
+                top: 31px;
+                height: 7px;
+                width: 41px;
+                background-position: 0 0;
+            }
+            body.vertical #CountBubble {
+                left: 1px;
+                height: 21px;
+                width: 39px;
+                font: 12px Arial, Helvetica, sans-serif;
+                line-height: 12px;
+                padding: 9px 0 0;
+                text-align: center;
+            }
+            body.none #PinItCount {
+                display: none;
+            }
+        </STYLE>
+
+<SCRIPT type="text/javascript">
+            var countLayout = 'horizontal';
+            var alwaysShowCount = false;
+
+            function pinIt(pinItButton, pinUrl) {
+                return function(e) {
+                    var t;
+                    if (e.target) t = e.target;
+                    else t = e.srcElement;
+                    if (t.id != pinItButton.id)
+                        return false;
+
+                    var modal = window.open(pinUrl, 'signin', 'width=665,height=300,scrollbars=1,resizable=1');
+                    var wait = function() {
+                        setTimeout(function() {
+                            if (modal == null) {
+                                failure();
+                                return;
+                            }
+                            if (modal.closed)
+                                pinItButton.setAttribute('class', 'pinned');
+                            else
+                                wait();
+                        }, 25);
+                    };
+
+                    wait();
+                    return false;
+                };
+            }
+
+            function receiveCount(data) {
+                if (data['error'])
+                    return;
+
+                var targetUrl = data['url'];
+                var pinItCount = document.getElementById('PinItCount');
+                var countBubble = document.getElementById('CountBubble');
+
+                if (!alwaysShowCount && data['count'] < 1 && countLayout === 'horizontal') 
+                    return;
+
+                pinItCount.style.display = 'block';
+                var count = data['count'];
+                if (count > 999 && count <= 999999)
+                    count = Math.floor(count / 1000) + "K+";
+                else if (count > 999999 && count <= 999999999)
+                    count = Math.floor(count / 1000000) + "M+";
+                else if (count > 999999999)
+                    count = "++";
+                countBubble.innerHTML = count;
+            }
+
+            window.onload = function() {
+                var pinItButton = document.getElementById('PinItButton');
+                var pinItCount = document.getElementById('PinItCount');
+
+                // Parse args
+                var vars = {}, url = window.location.href;
+                var pairs = url.slice(url.indexOf('?') + 1).split('&');
+                for (var i = 0; i < pairs.length; i++) {
+                    var parts = pairs[i].split('=');
+                    vars[parts[0]] = parts[1];
+                }
+
+                countLayout = vars['layout'] || countLayout;
+                alwaysShowCount = vars['count'] || alwaysShowCount;
+
+                // Apply count layout class
+                document.body.className = countLayout;
+
+                // Build pin URL
+                delete vars['layout'];
+                delete vars['count'];
+                // ref will be sent with count.json so we know what page the button is on
+                var sep = '?', pinUrl = 'http://pinterest.com/pin/create/button/', ref = '';
+                for (var i in vars) {
+                    if (i === 'ref') {
+                        ref = vars[i];
+                    }
+                    pinUrl += sep + i + '=' + vars[i];
+                    sep = '&';
+                }
+
+                // Button click handler
+                if (document.addEventListener)
+                    pinItButton.addEventListener('click', pinIt(pinItButton, pinUrl), false);
+                else if (document.attachEvent)
+                    pinItButton.attachEvent('onclick', pinIt(pinItButton, pinUrl));
+
+                // Request count from API
+                if (countLayout != 'none' || alwaysShowCount) {
+                    var targetUrl = vars['url'] || vars['media'];
+                    var snode = document.createElement('script');
+                    var hnode = document.getElementsByTagName('head')[0];
+                    snode.setAttribute('async', 'true');
+                    snode.setAttribute('src', '//api.pinterest.com/v1/urls/count.json?callback=receiveCount&url='+targetUrl+'&ref='+ref+'&source=6');
+                    hnode.appendChild(snode);
+                }
+            };
+        </SCRIPT>
+
+<META name="GENERATOR" content="MSHTML 9.00.8112.16450"></HEAD>
+<BODY><A id="PinItButton" title="Pin it on Pinterest" 
+href="javascript:void(0)">Pin it</A>
+<DIV style="display: none;" id="PinItCount">
+<DIV id="CountPointer">«</DIV>
+<DIV id="CountBubble">0</DIV></DIV></BODY></HTML>

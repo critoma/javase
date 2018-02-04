@@ -1,0 +1,26 @@
+package eu.ase.threads;
+
+class SampleThread extends Thread {
+  String message;
+  public SampleThread(String m) {this.message = m;}
+  public void run() {
+     while (true) {
+       System.out.println(this.message);
+       this.yield();
+     }
+  }
+}
+
+
+public class Priority {
+  public static void main(String[] args) {
+   SampleThread f1 = new SampleThread("f1");
+   SampleThread f2 = new SampleThread("f2");
+
+   f1.start();
+
+    Thread curent = Thread.currentThread();
+    f2.setPriority(curent.getPriority() + 1);    
+    f2.start();
+ } 
+}

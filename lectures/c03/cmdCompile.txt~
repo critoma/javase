@@ -1,30 +1,222 @@
-Linux UBUNTU 14 | 12:
+Linux UBUNTU 12:
 # export JAVA_HOME=/opt/software/java/jdks/jdk1.6.0_35
 export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_25
 export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 export CLASSPATH=.:$JAVA_HOME/jre/lib
 export JSE=/home/stud/javase/lectures
 
-cd $JSE/c03/src
+cd $JSE/c02/src
 
-1. Generics
+1. C/C++ reminder sample about Inheritance, Polymorphism and ClassCast Exception
 
-javac eu/ase/generics/Generics1.java
-java eu/ase/generics/BoxDemo1
-java eu/ase/generics/BoxDemo2
+2. Inheritance/Polymorphism/Interface as Type/Arrays of Objects
+javac eu/ase/polimorfism/IMiscare.java
+javac eu/ase/polimorfism/Vehicul.java
+javac eu/ase/polimorfism/IAuto.java
+javac eu/ase/polimorfism/Auto.java
+javac eu/ase/polimorfism/Avion.java
+javac eu/ase/polimorfism/ProgMain.java
 
-javac eu/ase/generics/Generics4.java
+java eu/ase/polimorfism/ProgMain
 
-2. JCF - Java Collection Framework
+*** Robocode:
 
-javac eu/ase/jcf/*.java
+http://sourceforge.net/projects/robocode/files/latest/download?source=files
 
-java eu/ase/jcf/ProgMainJCF0
-java eu/ase/jcf/ForLoopBenchmarkTest1
-java eu/ase/jcf/ProgMainC
-java eu/ase/jcf/MapExample3
-java eu/ase/jcf/FindDups
-java eu/ase/jcf/Frecvente if it is to be it is up to me to delegate
+# cd /home/stud/javase/lectures/robocode-1.9.0.0/
+# ./robocode.sh
+
+# cd /home/stud/javase/lectures/robocode-1.9.0.0/robots/euase/jrobots
+
+->Battle->New (move at least two robots from left to right in GUI)
+
+###############################################
+//Exercises 1.1:
+
+package euase.jrobots;
+
+
+import robocode.*;
+
+
+
+// API help : http://robocode.sourceforge.net/docs/robocode/robocode/Robot.html
+
+
+
+/**
+
+ * Using just the ahead and turnRight/turnLeft methods create a robot that travels in a 
+
+ * complete square once, beginning from its starting position. Make the robot travel 150 units for 
+
+ * each side of the square.
+
+ */
+
+
+
+/**
+
+ * MyClass - a class by (your name here)
+
+ */
+
+public class MyExercices_1_1 extends Robot 
+
+{
+
+public void run() {
+
+			//first side
+
+			ahead(150);
+
+			turnRight(90);
+
+			//second side
+
+			ahead(150);
+
+			turnRight(90);
+
+			//third side
+
+			ahead(150);
+
+			turnRight(90);
+
+			//fourth side
+
+			ahead(150);
+
+			turnRight(90);						
+
+	}
+
+
+
+}
+###############################################
+// MyFirstRobot2:
+
+package euase.jrobots;
+
+import robocode.*;
+
+//import java.awt.Color;
+
+
+
+// API help : http://robocode.sourceforge.net/docs/robocode/robocode/Robot.html
+
+
+
+/**
+
+ * MyFirstRobot2 - a robot by (your name here)
+
+ */
+
+public class MyFirstRobot2 extends Robot
+
+{
+
+	/**
+
+	 * run: MyFirstRobot2's default behavior
+
+	 */
+
+	public void run() {
+
+		// Initialization of the robot should be put here
+
+
+
+		// After trying out your robot, try uncommenting the import at the top,
+
+		// and the next line:
+
+
+
+		// setColors(Color.red,Color.blue,Color.green); // body,gun,radar
+
+
+
+		// Robot main loop
+
+		while(true) {
+
+			// Replace the next 4 lines with any behavior you would like
+
+			ahead(100);
+
+			turnGunRight(360);
+
+			back(100);
+
+			turnGunRight(360);
+
+		}
+
+	}
+
+
+
+	/**
+
+	 * onScannedRobot: What to do when you see another robot
+
+	 */
+
+	public void onScannedRobot(ScannedRobotEvent e) {
+
+		// Replace the next line with any behavior you would like
+
+		//fire(1);
+
+		fire(2);
+
+	}
+
+
+
+	/**
+
+	 * onHitByBullet: What to do when you're hit by a bullet
+
+	 */
+
+	public void onHitByBullet(HitByBulletEvent e) {
+
+		// Replace the next line with any behavior you would like
+
+		back(10);
+
+		//scan();
+
+	}
+
+	
+
+	/**
+
+	 * onHitWall: What to do when you hit a wall
+
+	 */
+
+	public void onHitWall(HitWallEvent e) {
+
+		// Replace the next line with any behavior you would like
+
+		back(20);
+
+		//scan();
+
+	}	
+
+}
 
 -----------------------------------------------------------------------------------
 

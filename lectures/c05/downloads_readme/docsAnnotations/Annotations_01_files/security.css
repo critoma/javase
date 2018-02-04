@@ -1,0 +1,5 @@
+a.ss { font-family: Tahoma;color: #000000; text-decoration: none; FONT-SIZE: 11px; } 
+a:link.ss	{ font-family: Tahoma;color: #000000; text-decoration: none; FONT-SIZE: 11px; } 
+a:visited.ss	{ font-family: Tahoma;color: #000000; text-decoration: none; FONT-SIZE: 11px; } 
+a:active.ss	{ font-family: Tahoma;color: #000000; FONT-SIZE: 11px; } 
+a:hover.ss	{ font-family: Tahoma;color: #993300; text-decoration: underline; FONT-SIZE: 11px; }
