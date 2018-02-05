@@ -182,8 +182,10 @@ java -classpath build/libs/student-gradle-0.1.0.jar eu.ase.ooparrays.ProgMainOop
 
 # F. Jenkins - DevOps
 
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
+export CLASSPATH=.:$JAVA_HOME/jre/lib
 export CATALINA_HOME=/opt/software/apache-tomcat-9.0.4
-export PATH=$PATH:$CATALINA_HOME/bin
+export PATH=.:$JAVA_HOME/bin:$CATALINA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
 cd $CATALINA_HOME
 bin/startup.sh
@@ -197,5 +199,405 @@ bin/shutdown.sh
 // ##############################################################################
 
 # G. Docker
+
+https://hub.docker.com 
+
+https://hub.docker.com/r/critoma/ubuntu-java-node-py-dev/ 
+
+
+
+docker search critoma
+
+docker pull critoma/ubuntu-java-node-py-dev
+
+docker run -it critoma/ubuntu-java-node-py-dev
+
+// ##############################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ##############################################################################
+
+# ***. Create YOUR own Docker container - NOT necessary and totally optional
+https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-from-a-package
+
+https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/
+
+sudo dpkg -i /path/to/package.deb
+
+sudo docker run hello-world
+
+
+############
+>terminal
+cd /home/stud/Downloads/docker
+
+sudo dpkg -i docker-ce_17.03.2~ce-0~ubuntu-xenial_amd64.deb
+
+sudo docker run hello-world
+
+docker --version
+
+
+########
+# Docker Hello World
+########
+# https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile
+$ cd /home/stud/docker/containerpy01
+
+$ ls
+app.py  Dockerfile  requirements.txt
+
+
+$ sudo docker build -t friendlyhello .
+
+
+$ sudo docker images
+stud@stud-VirtualBoxU16x64:~/docker/containerpy01$ sudo docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+friendlyhello       latest              21199cdff011        3 minutes ago       148 MB
+python              2.7-slim            4fd30fc83117        4 weeks ago         138 MB
+hello-world         latest              f2a91732366c        7 weeks ago         1.85 kB
+
+
+
+$ sudo docker run -p 4000:80 friendlyhello
+
+
+$ sudo docker run -d -p 4000:80 friendlyhello
+
+
+$ sudo docker container ls
+
+
+$ sudo docker container stop 490f468f38fc
+
+
+################################################
+
+#--- Create docker Ubuntu 16 with Java 9 and 8, nodejs 6, Python 2 & 3, plus the usage from Dockhub:
+# https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
+
+# 1. Search the most correct ubuntu image:
+sudo docker search ubuntu
+
+# 2. Pull the ubuntu docker image (aprox 111 MB):
+sudo docker pull ubuntu
+
+# 3. See the Docker downloaded images:
+sudo su
+docker images
+docker images -a
+
+# 4. Run the ubuntu image interactive:
+docker run -it ubuntu
+# find the Ubuntu 16.04 LTS version - cat /etc/lsb-release
+
+# 5. Install SDKs:
+apt-get install wget
+apt-get install xz-utils
+
+cd /home
+mkdir stud
+mkdir kits
+cd kits
+
+ 
+# 5.1 Install nodejs 8.9:
+wget https://nodejs.org/dist/v8.9.4/node-v8.9.4-linux-x64.tar.xz
+mkdir /opt/nodejs89
+tar -xvf node-v8.9.4-linux-x64.tar.xz
+mv node-v8.9.4-linux-x64 /opt
+/opt/node-v8.9.4-linux-x64/bin/node -v
+
+
+
+# 5.2 Install Java 8 & 9:
+# https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04
+# https://stackoverflow.com/questions/10268583/downloading-java-jdk-on-linux-via-wget-is-shown-license-page-insteadx
+
+# UPDATED FOR JDK 9 it looks like you can download it now directly from java.net without sending a header
+
+wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/9.0.4+11/c2514751926b4512b076cc82f959763f/jdk-9.0.4_linux-x64_bin.tar.gz
+
+# UPDATED FOR JDK 8u151 TAR GZ:
+# Downloading Java from the command line has always been troublesome. What I have been doing reciently is to use FireFox (other browsers might work) to get a download started on my laptop, pause it (within the Downloads windows), use the "Copy Download Link" menu item of the context menu displayed for the downloading file. This URL can then be used on the Linux box to download the same file. I expect the URL has a short time to live. Ugly, but generally successful.
+
+wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz
+
+
+
+
+cd /home/kits
+tar -xvf jdk-8u161-linux-x64.tar.gz
+mv jdk1.8.0_161 /opt/
+
+tar -xvf jdk-9.0.4_linux-x64_bin.tar.gz
+mv jdk-9.0.4 /opt/
+
+
+
+
+# 5.3 Download Python 2 & 3:
+#Python 2:
+apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y \
+    build-essential \
+    ca-certificates \
+    gcc \
+    git \
+    libpq-dev \
+    make \
+    python-pip \
+    python2.7 \
+    python2.7-dev \
+    ssh \
+    && apt-get autoremove \
+&& apt-get clean
+
+pip install -U "setuptools==3.4.1"
+pip install -U "pip==1.5.4"
+pip install -U "Mercurial==2.9.1"
+pip install -U "virtualenv==1.11.4"
+pip install --upgrade pip
+
+python --version
+/usr/bin/python --version
+
+
+# Python 3:
+apt-get update
+apt-get install -y python3-pip python3-dev
+# cd /usr/local/bin
+# ln -s /usr/bin/python3 python
+pip3 install --upgrade pip
+
+python3 --version
+/usr/bin/python3 --version
+
+
+# 6. Save the image of the Docker while the container is running in another terminal:
+
+sudo su
+docker ps -a
+
+26050a3c4ac0        critoma/ubuntu-java
+
+docker images -a
+
+docker commit -m "Ubuntu 16.04 with Java 8 and 9, JS - NodeJS 8.9, Python 2.7 and 3" -a "Cristian Toma" 26050a3c4ac0 critoma/ubuntu-java-node-py-dev
+
+docker commit -m "Ubuntu 16.04 with Java 8 and 9, JS - NodeJS 8.9, Python 2.7 and 3" -a "Cristian Toma" bd43ce572d1e ubuntu-java-node-py-dev
+
+# where bd43ce572d1e is the container ID from docker ps -a command
+
+
+
+
+
+# 7. Upload the image into Docker Hub (2.2 GB):
+
+# https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
+
+# https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes#purging-all-unused-or-dangling-images,-containers,-volumes,-and-networks
+
+
+
+# https://hub.docker.com/ 
+# critoma / do...ss
+# cri...v...@gmail.com
+
+
+docker login -u critoma
+
+docker tag 05214ce23aa6 critoma/ubuntu-java-node-py-dev:latest
+docker push critoma/ubuntu-java-node-py-dev:latest
+
+
+
+
+# ---- stop all containers, delete a specific container and delete older images:
+# https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes#purging-all-unused-or-dangling-images,-containers,-volumes,-and-networks
+
+# stop all containers:
+docker stop $(docker ps -a -q)
+
+# delete all containers
+# docker rm $(docker ps -a -q)
+
+# delete specific docker container:
+docker ps -a
+docker rm 26050a3c4ac0
+docker rm 7b2153ffbc22
+docker rm 4ab07e2b32a6
+
+# delete specific image:
+docker images -a
+docker rmi fadd609f434d
+docker rmi 2a4cca5ac898
+
+# delete all images:
+docker images -a
+docker rmi $(docker images -a -q)
+
+################################################
+
+
+
+
+# 8. DOCKER image pull and Run interactively the image:
+
+sudo docker pull critoma/ubuntu-java-node-py-dev
+sudo docker run -it critoma/ubuntu-java-node-py-dev
+
+
+# export the env variables:
+# root@87ad522d7ace:/# echo $PATH
+# /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+export NODEJS_HOME=/opt/node-v8.9.4-linux-x64
+export JDK8_HOME=/opt/jdk1.8.0_161
+export JDK9_HOME=/opt/jdk-9.0.4
+export JAVA_HOME=$JDK8_HOME
+
+export PATH=$PATH:.:$JAVA_HOME/bin:$NODEJS_HOME/bin
+
+javac -version
+
+java -version
+
+node -v
+
+### image stored on the machine Linux Ubuntu:
+# https://stackoverflow.com/questions/19234831/where-are-docker-images-stored-on-the-host-machine
+sudo du -h /var/lib/docker/aufs/diff | grep 1,9
+
+# where java in /opt is stored:
+sudo ls -latr /var/lib/docker/aufs/diff/4a7b93c1e6daffeca70a758b81b238a92ffa39d045db39aefb3094b259edf0aa/opt
+
+# where nodejs in /opt is stored:
+sudo ls -latr /var/lib/docker/aufs/diff/a74ef67573923ea5217a4befd0beb53f5e4fc6e22af0fb63da3d401ffa98a6fc/opt
+
+
+
+
+
+
+
+####
+### 1. Dockerfile:
+
+# Use an official Python runtime as a parent image
+FROM python:2.7-slim
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+ADD . /app
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+# Make port 80 available to the world outside this container
+EXPOSE 80
+
+# Define environment variable
+ENV NAME World
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+
+### 2. requirements.txt:
+Flask
+Redis
+
+### 3. app.py:
+from flask import Flask
+from redis import Redis, RedisError
+import os
+import socket
+
+# Connect to Redis
+redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    try:
+        visits = redis.incr("counter")
+    except RedisError:
+        visits = "<i>cannot connect to Redis, counter disabled</i>"
+
+    html = "<h3>Hello {name}!</h3>" \
+           "<b>Hostname:</b> {hostname}<br/>" \
+           "<b>Visits:</b> {visits}"
+    return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=80)
+
+####
+
+
+
+
+
+$ cd /home/stud/docker/containerjava
+
+$ sudo docker build -t dockerimagejava_fromcontainer .
+
+
+
+#######################################################################################
+Resources:
+
+https://www.tutorialspoint.com/docker/docker_architecture.htm 
+
+https://www.tutorialspoint.com/docker/docker_containers_and_shells.htm
+
+https://docs.docker.com/install/linux/docker-ce/ubuntu/ 
+
+https://docs.docker.com/engine/installation/linux/linux-postinstall/ 
+
+https://docs.docker.com/get-started/
+
+https://docs.docker.com/get-started/part2/ 
+
+https://docs.docker.com/get-started/part6/ 
+
+
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04 
+
+https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes#purging-all-unused-or-dangling-images,-containers,-volumes,-and-networks 
+
+https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04 
+
+http://fabiorehm.com/blog/2014/09/11/running-gui-apps-with-docker/ 
+
+﻿https://github.com/fgrehm/docker-eclipse 
+
+﻿http://fabiorehm.com/blog/2014/09/11/running-gui-apps-with-docker/  
+
+﻿https://stackoverflow.com/questions/19234831/where-are-docker-images-stored-on-the-host-machine 
+
 
 

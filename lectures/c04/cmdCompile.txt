@@ -1,11 +1,10 @@
-Linux UBUNTU 14 | 12:
-# export JAVA_HOME=/opt/software/java/jdks/jdk1.6.0_35
-export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_25
+Linux UBUNTU:
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
 export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 export CLASSPATH=.:$JAVA_HOME/jre/lib
 export JSE=/home/stud/javase/lectures
 
-cd $JSE/c03/src
+cd $JSE/c04/src
 
 1. Generics
 

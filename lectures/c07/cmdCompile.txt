@@ -1,18 +1,17 @@
-Linux UBUNTU 14:
-# export JAVA_HOME=/opt/software/java/jdks/jdk1.6.0_35
-export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_25
+Linux UBUNTU:
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
 export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 export CLASSPATH=.:$JAVA_HOME/jre/lib
 export JSE=/home/stud/javase/lectures
 
-cd $JSE/c06/src
+cd $JSE/c07/src
 // ##############################################################################
 
 A. JavaScript Nashorn for callbacks-closure sample
 
 1. Hello World JS from Java2JS & JS2Java
 
-cd $JSE/c06/src
+cd $JSE/c07/src
 
 //sample.js
 print('Hello World!'); 
