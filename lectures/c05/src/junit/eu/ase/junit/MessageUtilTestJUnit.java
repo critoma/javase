@@ -12,4 +12,10 @@ public class MessageUtilTestJUnit {
    public void testPrintMessage() {
       assertEquals(message, messageUtil.printMessage());
    }
+
+   @Test
+   public void testPrintMessageFail() {
+      message = "New Word";
+      assertEquals(message, messageUtil.printMessage());
+   }
 }
