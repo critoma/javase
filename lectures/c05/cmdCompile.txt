@@ -13,7 +13,7 @@ cd $JSE/c05/src
 
 A. Reflection
 
-cd $JSE/c04/src/S03_Annotation_Reflection
+cd $JSE/c05/src/S03_Annotation_Reflection
 
 javac eu/ase/reflection/*.java
 
@@ -41,7 +41,7 @@ java eu/ase/reflection/RComplete6 eu.ase.reflection.TString
 
 B. Addnotations
 
-cd $JSE/c04/src/S03_Annotation_Reflection
+cd $JSE/c05/src/S03_Annotation_Reflection
 
 //@Override - exception for !!! equalss instead of equals
 javac eu/ase/annotations/TString.java
@@ -68,13 +68,15 @@ javac eu/ase/annotations/RunTests.java
 
 java eu/ase/annotations/RunTests eu.ase.annotations.MyTestClass
 
+
+// ##################################################################################
 C. I/O + JNI
 
-cd $JSE/c04/src/S04_LibAndIO
+cd $JSE/c05/src/S04_LibAndIO
 
 C1. Libraries
 
-cd $JSE/c04/src/S04_LibAndIO/BytesCharStreamsAndFormat1
+cd $JSE/c05/src/S04_LibAndIO/BytesCharStreamsAndFormat1
 
 C1.1. Compile & archive library JAR
 javac eu/ase/IO/CopyBytesLib.java
@@ -92,7 +94,7 @@ java -classpath $CLASSPATH:./CopyLib.jar ProgMainCopyBytes1 t1.txt t3.txt
 
 C2. I/O Data Streams
 
-cd $JSE/c04/src/S04_LibAndIO/DataStreams2
+cd $JSE/c05/src/S04_LibAndIO/DataStreams2
 
 javac ProgMain.java
 java ProgMain
@@ -100,15 +102,15 @@ java ProgMain
 
 C3. Serialization
 
-cd $JSE/c04/src/S04_LibAndIO/ObjectStream_Serialization3
+cd $JSE/c05/src/S04_LibAndIO/ObjectStream_Serialization3
 
-C3.1a. Compilare si rulare serializare 1
+C3.1a. Compile and run serialization 1
 
 javac Serializare1.java
 java SalvareObiect
 -se sterg clasele rezultat, mai putin test1.txt
 
-C3.1b. Compilare si rulare deserializare 1
+C3.1b. Compile and run deserialization 1
 
 javac Deserializare1.java
 java RefacereObiect
@@ -138,7 +140,7 @@ java RestaurareObiect
 
 C4. RandomAccessFile + File
 
-cd $JSE/c04/src/S04_LibAndIO/FileRandomAccessFile4
+cd $JSE/c05/src/S04_LibAndIO/FileRandomAccessFile4
 
 javac TestRAF.java
 java TestRAF test1.txt
@@ -149,9 +151,10 @@ java ListFiles .
 javac ConcatenationFiles.java
 java ConcatenationFiles t_rez.txt t1.txt t2.txt
 
+
 C5. JNI
 
-cd $JSE/c04/src/S05_JNI
+cd $JSE/c05/src/S05_JNI
 
 C5.1. Compilare
 
@@ -236,7 +239,7 @@ set PATH=%JAVA_HOME%\bin
 set CLASSPATH=.;%JAVA_HOME%\jre\lib;
 
 d:
-cd D:\Temp\DAD\Lecture\c04\src\S05_JNI
+cd D:\Temp\DAD\Lecture\c05\src\S05_JNI
 
 1. Compilare
 
@@ -284,11 +287,33 @@ JNIEXPORT jbyteArray JNICALL Java_ReadFile_loadFileInMemory (JNIEnv* env, jobjec
 4. Compile the C program (nativelib1.c) into dll lib (from Visual Studio tools window)
 
 d:
-cd D:\Temp\DAD\Lecture\c04\src\S05_JNI
+cd D:\Temp\DAD\Lecture\c05\src\S05_JNI
 
 cl.exe -IC:/Software/Java/JDKs/jdk1.5.0_09/include -IC:/Software/Java/JDKs/jdk1.5.0_09/include/win32 /LD nativelib1.c /Fenativelib1.dll
 
 5. Run the Java program using the dll lib
 
 java JNIProgMain tt1.txt
+
+
+// ##################################################################################
+D. J-Unit 4 Minimal Annotation Intro / Full JUnit 4 and 5 @ SQE/QA Lectures (Sample for Java Libraries):
+// https://www.tutorialspoint.com/junit/index.htm
+
+cd $JSE/c05/src/junit
+
+javac -classpath .:./lib/junit-4.12.jar:./lib/hamcrest-core-1.3.jar eu/ase/junit/*.java
+
+java -classpath .:./lib/junit-4.12.jar:./lib/hamcrest-core-1.3.jar eu/ase/junit/MessageUtilTestJUnitRunner
+
+
+
+
+
+
+
+
+
+
+
 
