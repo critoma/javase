@@ -1,0 +1,26 @@
+Linux UBUNTU:
+
+//use ghex for introspecting the files in hex
+
+//set env variables:
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export CLASSPATH=.:$JAVA_HOME/jre/lib
+export JSE=/home/stud/javase/lectures
+
+cd $JSE/c11/src
+
+A. NIO 
+
+cd $JSE/c11/src
+
+A.0. 
+
+--------------------------------------------------------------------------------------------
+
+B. RegEx
+
+cd $JSE/c11/src
+
+B.1. 
+

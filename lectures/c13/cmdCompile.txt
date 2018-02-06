@@ -1,4 +1,4 @@
-Linux UBUNTU 12/14:
+Linux UBUNTU:
 
 ### INSTALL MySQL
 
@@ -103,18 +103,18 @@ Ubuntu 14.04.X, 15.04.X, 15.10.X and 16.04.X are supported for now (until Launch
 ### Lecture:
 
 //set env variables for root user:
-export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_25
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
 export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar
 export JSE=/home/stud/javase/lectures
 
-cd $JSE/c12/src/
+cd $JSE/c13/src/
 
 
 
 A. JDBC - MySQL
 
-cd $JSE/c12/src/JDBC
+cd $JSE/c13/src/JDBC
 
 
 ### //http://www.tutorialspoint.com/sqlite/sqlite_java.htm
@@ -148,7 +148,7 @@ java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mys
 
 B. NoSQL - MongoDB
 
-cd $JSE/c12/src/NoSQLMongoDB
+cd $JSE/c13/src/NoSQLMongoDB
 
 
 ### //https://www.mongodb.com/download-center
@@ -220,7 +220,7 @@ In MongoDB default database is test. If you didn't create any database, then col
 ######### MongoDB Java Programming
 # B.1. Java MongoDB Sample:
 
-cd $JSE/c12/src/NoSQLMongoDB
+cd $JSE/c13/src/NoSQLMongoDB
 
 javac -classpath $CLASSPATH:../../downloads_readme/mongo-java-driver-3.4.0-rc1.jar eu/ase/nosql/MongoDbClient.java
 java -classpath $CLASSPATH:../../downloads_readme/mongo-java-driver-3.4.0-rc1.jar eu.ase.nosql.MongoDbClient
