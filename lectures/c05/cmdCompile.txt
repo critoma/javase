@@ -302,15 +302,18 @@ D. J-Unit 4 Minimal Annotation Intro / Full JUnit 4 and 5 @ SQE/QA Lectures (Sam
 
 cd $JSE/c05/src/junit
 
-javac -classpath .:./lib/junit-4.12.jar:./lib/hamcrest-core-1.3.jar eu/ase/junit/*.java
+javac -classpath .:./lib/junit-4.12.jar eu/ase/junit/*.java
 
 java -classpath .:./lib/junit-4.12.jar:./lib/hamcrest-core-1.3.jar eu/ase/junit/MessageUtilTestJUnitRunner
 
+# // Run tests suites:
+javac -classpath .:./lib/junit-4.12.jar eu/ase/junit/MessageUtil.java
+javac -classpath .:./lib/junit-4.12.jar eu/ase/junit/JunitTestSuite.java
+javac -classpath .:./lib/junit-4.12.jar eu/ase/junit/TestJunit1.java
+javac -classpath .:./lib/junit-4.12.jar eu/ase/junit/TestJunit2.java
+javac -classpath .:./lib/junit-4.12.jar eu/ase/junit/TestRunner.java
 
-
-
-
-
+java -classpath .:./lib/junit-4.12.jar:./lib/hamcrest-core-1.3.jar eu/ase/junit/TestRunner
 
 
 

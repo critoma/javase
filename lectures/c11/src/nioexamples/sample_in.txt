@@ -1,0 +1,6 @@
+Hello,
+
+This is an example of the file
+that is copied (read and write) with NIO.
+
+Thanks!

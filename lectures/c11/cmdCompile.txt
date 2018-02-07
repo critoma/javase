@@ -14,7 +14,77 @@ A. NIO
 
 cd $JSE/c11/src
 
-A.0. 
+A.1.
+
+javac nioexamples/CreateBuffer.java
+
+java nioexamples/CreateBuffer
+
+
+javac nioexamples/CreateArrayBuffer.java
+
+java nioexamples/CreateArrayBuffer
+
+
+javac nioexamples/ByteBufferSimpleProgMain.java
+
+java nioexamples/ByteBufferSimpleProgMain
+
+
+javac nioexamples/TypesInByteBuffer.java
+
+java nioexamples/TypesInByteBuffer
+
+
+javac nioexamples/SliceBuffer.java
+
+java nioexamples/SliceBuffer
+
+
+javac nioexamples/CopyFile.java
+
+java nioexamples/CopyFile ./nioexamples/test.txt ./nioexamples/test_out.txt
+
+javac nioexamples/FastCopyFile.java
+
+java nioexamples/FastCopyFile ./nioexamples/test.txt ./nioexamples/test_fast_out.txt
+
+javac nioexamples/ReadAndShow.java
+
+java nioexamples/ReadAndShow
+
+javac nioexamples/WriteSomeBytes.java
+
+java nioexamples/WriteSomeBytes
+
+
+javac nioexamples/UseMappedFile.java
+
+java nioexamples/UseMappedFile ./nioexamples/test.txt
+# //se the output file with gHex / iHex
+javac nioexamples/UseCharsets.java
+
+java nioexamples/UseCharsets
+
+
+javac nioexamples/UseFileLocks.java
+
+java nioexamples/UseFileLocks
+
+
+A.2 CompletionHandlers and Async Channels
+javac eu/ase/nio/ProgMainNio.java
+
+java eu/ase/nio/ProgMainNioFileSync1
+
+java eu/ase/nio/ProgMainNioFileAsync2
+
+java eu/ase/nio/ProgMainNioFileAsyncCompletionHandler31
+
+java eu/ase/nio/ProgMainNio32
+
+# ////3.3 Async NIO - model with CompletionHandler, write + read data from a file
+java eu/ase/nio/ProgMainNio
 
 --------------------------------------------------------------------------------------------
 
@@ -22,5 +92,56 @@ B. RegEx
 
 cd $JSE/c11/src
 
-B.1. 
+javac eu/ase/regex/RegexMatches.java
+
+java eu/ase/regex/RegexMatches
+
+
+javac eu/ase/regex/RegexMatchesStartEnd.java
+
+java eu/ase/regex/RegexMatchesStartEnd
+
+
+javac eu/ase/regex/RegexMatchesLookingAt.java
+
+java eu/ase/regex/RegexMatchesLookingAt
+
+
+javac eu/ase/regex/RegexMatchesReplace.java
+
+java eu/ase/regex/RegexMatchesReplace
+
+
+javac eu/ase/regex/RegexMatchesTail.java
+
+java eu/ase/regex/RegexMatchesTail
+
+--------------------------------------------------------------------------------------------
+
+C. JDK 9 Modules and HTTP2
+
+cd $JSE/c11
+
+C.1. Modules:
+
+
+C.2. HTTP 2:
+
+
+
+--------------------------------------------------------------------------------------------
+
+Resources for NIO:
+The Workspace for Java SE 7/8 API Draft of JC NIO 3.1 in:
+/Users/ctoma/Workspaces/EclipseProjects/javase
+
+http://tutorials.jenkov.com/java-nio/nio-vs-io.html
+https://www.ibm.com/developerworks/java/tutorials/j-nio/j-nio.html
+
+https://examples.javacodegeeks.com/core-java/nio/channels/completionhandler/java-nio-channels-completionhandler-example/
+
+http://www.java2s.com/Tutorials/Java/Java_io/1050__Java_nio_Asynchronous.htm
+
+http://rox-xmlrpc.sourceforge.net/niotut/
+https://dzone.com/articles/java-nio-vs-io
 
