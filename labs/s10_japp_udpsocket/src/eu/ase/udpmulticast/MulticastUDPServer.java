@@ -19,7 +19,7 @@ public class MulticastUDPServer {
 	} catch(IOException ioe) {
 		ioe.printStackTrace();
 	}
-
+    System.out.println("Multicast udp server started and bind on port " + args[0]);
     while (running) {
     	try {
     		// construct the time now message

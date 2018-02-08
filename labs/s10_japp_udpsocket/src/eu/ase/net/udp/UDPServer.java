@@ -14,6 +14,7 @@ public class UDPServer {
 		//try {
 			//socket = new DatagramSocket(7778);
 		try (DatagramSocket socket = new DatagramSocket(7778)) {
+			System.out.println("UDP Server bind on 7778 port.");
 			while (true) {
 				bufRecv = new byte[256];
 				

@@ -11,7 +11,8 @@ public class ObjectsSave {
 		try {
 			System.out.println("Saving objects ...");
 			
-			ObjectOutputStream sout = new ObjectOutputStream(new FileOutputStream("test4.txt"));
+			ObjectOutputStream sout = new ObjectOutputStream(
+					new FileOutputStream("test4.txt"));
 			
 			URL o1 = new URL("http://www.google.com");
 			URL o2 = o1;

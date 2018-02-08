@@ -10,6 +10,7 @@ public class HTTPMultiServer {
 		boolean listening = true;
 		
 		try {
+			// http:/127.0.0.1:10001/indextest.html
 			int port = Integer.parseInt(args[0]);
 			serverSocket = new ServerSocket(port);
 			System.out.println("Server DICE listens in port: "

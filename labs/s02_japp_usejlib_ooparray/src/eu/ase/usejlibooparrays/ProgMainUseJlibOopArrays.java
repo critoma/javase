@@ -2,6 +2,9 @@ package eu.ase.usejlibooparrays;
 
 import eu.ase.ooparrays.Student;
 
+// Right click on the project in Eclipse and select: 
+// Properties -> Java Build Path section -> Libraries (Add JAR ... from lib)
+
 public class ProgMainUseJlibOopArrays {
 
 	public static void main(String[] args) {

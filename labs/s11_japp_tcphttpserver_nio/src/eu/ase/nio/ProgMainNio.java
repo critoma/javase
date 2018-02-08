@@ -109,7 +109,8 @@ public class ProgMainNio {
 } //end class
 */
 
-//3.1 Async NIO - model with CompletionHandler, write + read data from a file
+//3.1 Async NIO - model with CompletionHandler, write 
+// + read data from a file
 
 
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -129,8 +130,8 @@ public class ProgMainNio {
     public static void main(String[] args) {
     	ProgMainNio myNio = new ProgMainNio();
     	try {
-	    	myNio.writeFile("data/test-write3.txt", "Test data\r using Java SE NIO \r async with CompletionHandler.");
-	    	myNio.readFile("data/test-write3.txt");
+	    	myNio.writeFile("./data/test-write3.txt", "Test data\r using Java SE NIO \r async with CompletionHandler.");
+	    	myNio.readFile("./data/test-write3.txt");
     	} catch(IOException ioe) {
     		ioe.printStackTrace();
     	}

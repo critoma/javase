@@ -4,7 +4,7 @@ Linux UBUNTU:
 
 
 ////////////////////////////////////
-Linux MySQL (user: root / pass: stud / default listen on 127.0.0.1:3306):
+Linux MySQL 5.7 (user: root / pass: stud / default listen on 127.0.0.1:3306):
 BETTER: https://help.ubuntu.com/14.04/serverguide/mysql.html
 
 sudo apt-get install mysql-server
@@ -16,7 +16,7 @@ sudo service mysql restart
 sudo gedit /etc/mysql/my.cnf
 
 # reconfigure root pass:
-sudo dpkg-reconfigure mysql-server-5.5
+sudo dpkg-reconfigure mysql-server-5.7
 
 # Default DB Engine for MySQL 5.5 is InnoDB instead of MyISAM 
 
@@ -24,7 +24,7 @@ sudo dpkg-reconfigure mysql-server-5.5
 mysql -u root -pstud
 show databases;
 
-mysql test -u root -pstud 
+mysql mysql -u root -pstud 
 >
 create database mycards;
 use mycards;
@@ -159,18 +159,41 @@ cd $JSE/c13/src/NoSQLMongoDB
 ### Install MongoDB:
 
 ## https://www.tutorialspoint.com/mongodb/mongodb_overview.htm
+# https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
 
-echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/testing multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+# sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+
+
+# echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/testing multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+
 
 sudo apt-get update
 
-sudo apt-get install -y mongodb
 
-sudo service mongodb start
 
-sudo service mongodb stop
+# sudo apt-get install -y mongodb
+
+ldd --version
+### ldd (Ubuntu GLIBC 2.23-0ubuntu10) 2.23  >  2.23-0ubuntu5
+
+sudo apt-get install -y mongodb-org
+
+sudo apt-get install -y mongodb-org=3.6.2 mongodb-org-server=3.6.2 mongodb-org-shell=3.6.2 mongodb-org-mongos=3.6.2 mongodb-org-tools=3.6.2
+
+
+
+#sudo service mongodb start
+sudo service mongod start
+
+mongo --host 127.0.0.1:27017
+
+#sudo service mongodb stop
+sudo service mongod stop
 
 telnet localhost 27017 
 
@@ -224,5 +247,16 @@ cd $JSE/c13/src/NoSQLMongoDB
 
 javac -classpath $CLASSPATH:../../downloads_readme/mongo-java-driver-3.4.0-rc1.jar eu/ase/nosql/MongoDbClient.java
 java -classpath $CLASSPATH:../../downloads_readme/mongo-java-driver-3.4.0-rc1.jar eu.ase.nosql.MongoDbClient
+
+####
+mongo
+>
+show dbs
+use test
+db.stats()
+show collections
+db.mycol.find()
+db.mycol.find().pretty()
+quit()
 
 
