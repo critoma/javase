@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <dirs>
-<entry loc="/opt/software/java/jdks/jdk1.8.0_161" stamp="1513729441000"/>
+    <entry loc="/opt/software/java/jdks/jdk1.8.0_161" stamp="1513729441000"/>
+    <entry loc="/opt/software/java/jdks/jdk-9.0.4" stamp="1516963612000"/>
 </dirs>

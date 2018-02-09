@@ -19,4 +19,5 @@
 <entry path="/opt/software/java/jdks/jdk1.8.0_161/jre/lib/endorsed"/>
 </endorsedDirs>
 </libraryInfo>
+<libraryInfo home="/opt/software/java/jdks/jdk-9.0.4" version="9.0.4"/>
 </libraryInfos>
