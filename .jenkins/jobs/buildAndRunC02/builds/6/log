@@ -1,0 +1,25 @@
+Started by user [8mha:////4Jrvfo/TOdaQt8CMjB4lN3t/p37m6Y2WOEd0ZIpj614wAAAAlh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgYu/dLi1CL94pLSFABasVirvwAAAA==[0mStudent
+Building in workspace /home/stud/.jenkins/workspace/buildAndRunC02
+[buildAndRunC02] $ /bin/sh -xe /opt/software/apache-tomcat-9.0.4/temp/jenkins673395574101663450.sh
++ cd /home/stud/jenkinsworkspace
++ [ ! -d ./javase ]
++ cd ./javase
++ git pull
+Already up-to-date.
++ export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
++ export PATH=/opt/software/java/jdks/jdk1.8.0_161/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
++ export CLASSPATH=.:/opt/software/java/jdks/jdk1.8.0_161/jre/lib
++ export JSE=/home/stud/jenkinsworkspace/javase/lectures
++ cd /home/stud/jenkinsworkspace/javase/lectures/c02/src
++ javac eu/ase/ooparrays/Student.java
++ javac eu/ase/ooparrays/ProgMainOopArrays.java
++ jar -cmvf ./META-INF/MANIFEST.MF ../student.jar eu/ase/ooparrays/ProgMainOopArrays.class eu/ase/ooparrays/Student.class
+added manifest
+adding: eu/ase/ooparrays/ProgMainOopArrays.class(in = 1146) (out= 685)(deflated 40%)
+adding: eu/ase/ooparrays/Student.class(in = 1044) (out= 588)(deflated 43%)
++ rm eu/ase/ooparrays/ProgMainOopArrays.class eu/ase/ooparrays/Student.class
++ java -jar ../student.jar eu/ase/ooparrays/ProgMainOopArrays
+The average mark for the student 0 is = 6.3333335
+The average mark for the student 1 is = 9.333333
++ rm ../student.jar
+Finished: SUCCESS

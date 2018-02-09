@@ -154,7 +154,9 @@ gradle -help
 
 mkdir -p my-app-student/src/main/java/eu/ase/ooparrays
 cd my-app-student
-gradle init
+
+
+# gradle init
 
 # in build.gradle file:
 apply plugin: 'java'
@@ -181,6 +183,10 @@ gradle build
 gradle run
 
 java -classpath build/libs/student-gradle-0.1.0.jar eu.ase.ooparrays.ProgMainOopArrays
+
+
+## git reset --hard head
+#  git reset --hard master 
 // ##############################################################################
 
 # F. Jenkins - DevOps

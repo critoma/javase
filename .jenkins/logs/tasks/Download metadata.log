@@ -1,0 +1,26 @@
+Started at Wed Feb 07 19:08:51 EET 2018
+FATAL: updates.jenkins.io
+[8mha:////4I0G6TSbmxV6+3dI58EBdI+3i234w8zqQwef+MMnMB1sAAAAVx+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P08vOT+vOD8nVc8DzHWtSE4tKMnMz/PLL0mV3NWzufebKBsTA0NFEYMUmgZnCA1SyAABjCCFBQC2xNaiYAAAAA==[0mjava.net.UnknownHostException: updates.jenkins.io
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:184)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at sun.security.ssl.SSLSocketImpl.connect(SSLSocketImpl.java:673)
+	at sun.net.NetworkClient.doConnect(NetworkClient.java:175)
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:558)
+	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264)
+	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367)
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191)
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1156)
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1050)
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1564)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1492)
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:263)
+	at hudson.model.DownloadService.loadJSON(DownloadService.java:167)
+	at hudson.model.UpdateSite.updateDirectlyNow(UpdateSite.java:190)
+	at hudson.PluginManager.doCheckUpdatesServer(PluginManager.java:1633)
+	at jenkins.model.DownloadSettings$DailyCheck.execute(DownloadSettings.java:131)
+	at hudson.model.AsyncPeriodicWork$1.run(AsyncPeriodicWork.java:101)
+	at java.lang.Thread.run(Thread.java:748)
+Finished at Wed Feb 07 19:08:51 EET 2018. 535ms

@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: ljader
+Build-Jdk: 1.8.0_45
+Extension-Name: jsch
+Specification-Title: Jenkins plugin that brings the JSch library as a 
+ plugin dependency, and provides        an SSHAuthenticatorFactory for
+  using JSch with the ssh-credentials plugin.
+Implementation-Title: jsch
+Implementation-Version: 0.1.54.1
+Group-Id: org.jenkins-ci.plugins
+Short-Name: jsch
+Long-Name: Jenkins JSch dependency plugin
+Url: http://wiki.jenkins-ci.org/display/JENKINS/JSch+plugin
+Plugin-Version: 0.1.54.1
+Hudson-Version: 1.477
+Jenkins-Version: 1.477
+Plugin-Dependencies: credentials:1.21,ssh-credentials:1.12
+Plugin-Developers: Lukasz Jader:ljader:,Zoran Regvart:zregvart:,Brando
+ n Pedersen:bpedman:
+
