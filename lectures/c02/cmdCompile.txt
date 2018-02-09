@@ -125,6 +125,9 @@ mvn package
 ls -latr /home/stud/.m2/repository
 du -k -h ls /home/stud/.m2/repository
 
+ls -latr /root/.m2/repository
+du -k -h ls /root/.m2/repository
+
 # output approx. 27 MB
 
 java -classpath target/my-app-student-1.0-SNAPSHOT.jar eu.ase.ooparrays.App
