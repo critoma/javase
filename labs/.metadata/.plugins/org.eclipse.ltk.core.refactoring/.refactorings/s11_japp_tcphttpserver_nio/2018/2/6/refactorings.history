@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;s11_japp_tcphttpserver_nio&apos;&#x0A;- Original project: &apos;s11_japp_tcphttpserver_nio&apos;&#x0A;- Original element: &apos;eu.ase.nio.ProgMainNioBuffer.java&apos;" description="Delete element" element1="/src&lt;eu.ase.nio{ProgMainNioBuffer.java" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1518039097589" subPackages="false" version="1.0"/>
+</session>

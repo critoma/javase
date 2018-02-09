@@ -1,0 +1,10 @@
+/**
+ * 
+ */
+/**
+ * @author stud
+ *
+ */
+module com.hello.client {
+	exports com.hello.client;
+}
