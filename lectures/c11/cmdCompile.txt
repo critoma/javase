@@ -120,12 +120,67 @@ java eu/ase/regex/RegexMatchesTail
 
 C. JDK 9 Modules and HTTP2
 
+
+export JAVA_HOME=/opt/software/java/jdks/jdk-9.0.4
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export JSE=/home/stud/javase/lectures
+
+
+# C.1. Modules:
+
+# Example 1
+cd $JSE/c11/java9modulesExample1
+
+rm -rf mods
+mkdir -p mods/com.me.mymodule
+
+javac -d mods/com.me.mymodule \
+           src/com.me.mymodule/module-info.java \
+           src/com.me.mymodule/com/me/mymodule/Main.java
+
+java --module-path mods -m com.me.mymodule/com.me.mymodule.Main
+
+
+
+# Example 2
+
+cd $JSE/c11/java9modulesExample2
+rm -rf output
+mkdir -p output
+javac -d output com.hello/com/hello/HelloWorld.java com.hello/module-info.java 
+
+rm -rf mlib
+mkdir mlib
+jar -c -f mlib/com.hello.jar -C output .
+
+
+rm -rf output
+javac --module-path mlib -d output com.hello.client/com/hello/client/HelloWorldClient.java com.hello.client/module-info.java
+
+java --module-path mlib:output -m com.hello.client/com.hello.client.HelloWorldClient
+
+
+
+# C.2. HTTP 2:
+
 cd $JSE/c11
 
-C.1. Modules:
+javac --add-modules=jdk.incubator.httpclient java9webhttp2/Http2MyDemo.java
+
+java --add-modules=jdk.incubator.httpclient java9webhttp2/Http2MyDemo
+
+rm java9webhttp2/Http2MyDemo.class
 
 
-C.2. HTTP 2:
+cd $JSE/c11/java9webhttp2
+
+rm -rf mods
+mkdir -p mods/com.http2example
+
+javac -d mods/com.http2example --add-modules=jdk.incubator.httpclient src/com.http2example/module-info.java src/com.http2example/com/http2example/Http2Demo.java
+
+java --module-path mods --add-modules=jdk.incubator.httpclient -m com.http2example/com.http2example.Http2Demo
+
 
 
 
