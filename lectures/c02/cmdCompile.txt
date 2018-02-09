@@ -240,6 +240,19 @@ docker run -it critoma/ubuntu-java-node-py-dev
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ##############################################################################
 
 # ***. Create YOUR own Docker container - NOT necessary and totally optional
@@ -250,6 +263,7 @@ https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/
 sudo dpkg -i /path/to/package.deb
 
 sudo docker run hello-world
+
 
 
 ############
@@ -331,8 +345,8 @@ cd kits
 wget https://nodejs.org/dist/v8.9.4/node-v8.9.4-linux-x64.tar.xz
 mkdir /opt/nodejs89
 tar -xvf node-v8.9.4-linux-x64.tar.xz
-mv node-v8.9.4-linux-x64 /opt
-/opt/node-v8.9.4-linux-x64/bin/node -v
+mv node-v8.9.4-linux-x64 /opt/software/
+/opt/software/node-v8.9.4-linux-x64/bin/node -v
 
 
 
@@ -354,10 +368,10 @@ wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-secureback
 
 cd /home/kits
 tar -xvf jdk-8u161-linux-x64.tar.gz
-mv jdk1.8.0_161 /opt/
+mv jdk1.8.0_161 /opt/software/java/jdks/
 
 tar -xvf jdk-9.0.4_linux-x64_bin.tar.gz
-mv jdk-9.0.4 /opt/
+mv jdk-9.0.4 /opt/software/java/jdks/
 
 
 
@@ -400,6 +414,20 @@ pip3 install --upgrade pip
 python3 --version
 /usr/bin/python3 --version
 
+# 5.4 Install ANT 1.10.1, Maven 3.5.2, Gradle 4.5, Apache Tomcat 9.0.4, Jenkins Generic WAR 2.89.3
+cd /home/kits
+wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.10.1-bin.tar.xz
+wget http://mirrors.m247.ro/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+wget https://services.gradle.org/distributions/gradle-4.5-bin.zip
+wget http://apache.javapipe.com/tomcat/tomcat-9/v9.0.4/bin/apache-tomcat-9.0.4.tar.gz
+wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+
+tar -xvf apache-ant-1.10.1-bin.tar.xz
+tar -xvf apache-maven-3.5.2-bin.tar.gz
+unzip gradle-4.5-bin.zip
+tar -xvf apache-tomcat-9.0.4.tar.gz
+
+
 
 # 6. Save the image of the Docker while the container is running in another terminal:
 
@@ -414,13 +442,15 @@ docker commit -m "Ubuntu 16.04 with Java 8 and 9, JS - NodeJS 8.9, Python 2.7 an
 
 docker commit -m "Ubuntu 16.04 with Java 8 and 9, JS - NodeJS 8.9, Python 2.7 and 3" -a "Cristian Toma" bd43ce572d1e ubuntu-java-node-py-dev
 
+docker commit -m "Ubuntu 16.04 with Java 8 & 9, JS - NodeJS 8.9, Python 2.7 & 3, ANT 1.10.1, Maven 3.5.2, Gradle 4.5, Apache Tomcat 9.0.4, Jenkins Generic WAR 2.89.3, Git" -a "Cristian Toma" f2321a6bcf8b critoma/ubuntu-java-dev
+
 # where bd43ce572d1e is the container ID from docker ps -a command
 
 
 
 
 
-# 7. Upload the image into Docker Hub (2.2 GB):
+# 7. Upload the image into Docker Hub (4.2 GB):
 
 # https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
 
@@ -429,8 +459,8 @@ docker commit -m "Ubuntu 16.04 with Java 8 and 9, JS - NodeJS 8.9, Python 2.7 an
 
 
 # https://hub.docker.com/ 
-# critoma / do...ss
-# cri...v...@gmail.com
+# critoma / d...s
+# c...v...@gmail.com
 
 
 docker login -u critoma
@@ -472,6 +502,7 @@ docker rmi $(docker images -a -q)
 
 # 8. DOCKER image pull and Run interactively the image:
 
+sudo docker search critoma
 sudo docker pull critoma/ubuntu-java-node-py-dev
 sudo docker run -it critoma/ubuntu-java-node-py-dev
 
@@ -480,9 +511,9 @@ sudo docker run -it critoma/ubuntu-java-node-py-dev
 # root@87ad522d7ace:/# echo $PATH
 # /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-export NODEJS_HOME=/opt/node-v8.9.4-linux-x64
-export JDK8_HOME=/opt/jdk1.8.0_161
-export JDK9_HOME=/opt/jdk-9.0.4
+export NODEJS_HOME=/opt/software/node-v8.9.4-linux-x64
+export JDK8_HOME=/opt/software/java/jdks/jdk1.8.0_161
+export JDK9_HOME=/opt/software/java/jdks/jdk-9.0.4
 export JAVA_HOME=$JDK8_HOME
 
 export PATH=$PATH:.:$JAVA_HOME/bin:$NODEJS_HOME/bin
@@ -493,6 +524,8 @@ java -version
 
 node -v
 
+
+
 ### image stored on the machine Linux Ubuntu:
 # https://stackoverflow.com/questions/19234831/where-are-docker-images-stored-on-the-host-machine
 sudo du -h /var/lib/docker/aufs/diff | grep 1,9
@@ -502,6 +535,20 @@ sudo ls -latr /var/lib/docker/aufs/diff/4a7b93c1e6daffeca70a758b81b238a92ffa39d0
 
 # where nodejs in /opt is stored:
 sudo ls -latr /var/lib/docker/aufs/diff/a74ef67573923ea5217a4befd0beb53f5e4fc6e22af0fb63da3d401ffa98a6fc/opt
+
+
+
+
+
+
+
+
+###################################################################################################
+---------------------------------------------------------------------------------------------------
+
+
+
+
 
 
 
