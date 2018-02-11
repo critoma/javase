@@ -801,6 +801,12 @@ docker service ps getstartedlab_web
 
 
 
+# docker run -p 80:80 critoma/get-started:part2
+
+
+
+
+
 
 
 
