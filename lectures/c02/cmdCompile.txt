@@ -268,7 +268,7 @@ sudo docker run hello-world
 
 ############
 >terminal
-cd /home/stud/Downloads/docker
+cd /home/stud/kits/docker
 
 sudo dpkg -i docker-ce_17.03.2~ce-0~ubuntu-xenial_amd64.deb
 
@@ -281,7 +281,7 @@ docker --version
 # Docker Hello World
 ########
 # https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile
-$ cd /home/stud/docker/containerpy01
+$ cd /home/stud/kits/docker/containerpy01
 
 $ ls
 app.py  Dockerfile  requirements.txt
@@ -309,6 +309,9 @@ $ sudo docker container ls
 
 
 $ sudo docker container stop 490f468f38fc
+
+
+
 
 
 ################################################
@@ -500,6 +503,8 @@ docker rmi $(docker images -a -q)
 
 
 
+
+
 # 8. DOCKER image pull and Run interactively the image:
 
 sudo docker search critoma
@@ -543,21 +548,38 @@ sudo ls -latr /var/lib/docker/aufs/diff/a74ef67573923ea5217a4befd0beb53f5e4fc6e2
 
 
 
+
+
+
 ###################################################################################################
 ---------------------------------------------------------------------------------------------------
 
+# Start docker image and container from the configuration file:
+# https://docs.docker.com/get-started/#test-docker-version
 
+sudo su
 
+cd /home/stud/kits/docker/
+mkdir dockerpyimg
 
+docker --version
 
+docker info
 
+docker run hello-world
 
+docker image ls
 
+docker container ls --all
 
+touch Dockerfile
+
+nano Dockerfile
 
 
 ####
 ### 1. Dockerfile:
+
 
 # Use an official Python runtime as a parent image
 FROM python:2.7-slim
@@ -580,9 +602,19 @@ ENV NAME World
 # Run app.py when the container launches
 CMD ["python", "app.py"]
 
+
+
+touch requirements.txt
+nano requirements.txt
+
 ### 2. requirements.txt:
 Flask
 Redis
+
+
+
+touch app.py
+nano app.py
 
 ### 3. app.py:
 from flask import Flask
@@ -616,9 +648,162 @@ if __name__ == "__main__":
 
 
 
-$ cd /home/stud/docker/containerjava
+# Build the image and the app:
 
-$ sudo docker build -t dockerimagejava_fromcontainer .
+docker build -t friendlyhello .
+
+docker image ls
+
+
+
+# Run the image and the app:
+
+docker run -p 4000:80 friendlyhello
+
+docker run -p 4000:80 -it friendlyhello
+
+# Run in the detached mode:
+docker run -d -p 4000:80 friendlyhello
+
+# in another terminal:
+curl http://localhost:4000
+
+
+# List Docker containers = instances of the images:
+docker container ls
+
+root@stud-VirtualBoxU16x64:/home/stud/kits/docker/dockerpyimg# docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS                  NAMES
+f4f251a29643        friendlyhello       "python app.py"     About a minute ago   Up About a minute   0.0.0.0:4000->80/tcp   tender_pike
+root@stud-VirtualBoxU16x64:/home/stud/kits/docker/dockerpyimg# 
+
+
+# Stop Docker container:
+docker container stop f4f251a29643
+
+
+# Share your image:
+
+docker login
+
+docker images -a
+docker container ps -all
+# docker tag image username/repository:tag
+docker tag friendlyhello critoma/get-started:part2
+
+#docker push username/repository:tag
+docker push critoma/get-started:part2
+
+# https://cloud.docker.com/swarm/critoma/repository/list
+# https://hub.docker.com/r/critoma/
+
+
+# Pull and run the image from the remote repository
+# stop all containers:
+docker stop $(docker ps -a -q)
+
+# delete all containers
+# docker rm $(docker ps -a -q)
+
+# delete all images:
+docker images -a
+docker images -a -q
+docker rmi $(docker images -a -q)
+
+
+# Pull and run the image from the remote repository:
+# docker run -p 4000:80 username/repository:tag
+
+docker run -p 4000:80 critoma/get-started:part2
+
+
+
+###############
+# *** Download and install Docker Composer in Linux:
+# https://github.com/docker/compose/releases
+
+curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
+
+
+# First docker-compose.yml file
+touch docker-compose.yml
+
+nano docker-compose.yml
+
+##### docker-compose.yml file content:
+version: "3"
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: critoma/get-started:part2
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80:80"
+    networks:
+      - webnet
+networks:
+  webnet:
+
+
+# Run your new load-balanced app:
+
+docker swarm init
+
+root@stud-VirtualBoxU16x64:/home/stud/kits/docker/dockerpyimg# docker swarm init
+Swarm initialized: current node (t1aqjktzdsry2pf4tvr2kyy5q) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join \
+    --token SWMTKN-1-4x7130zyfsjduawyijmfq9x5lpi8arfvyr5z9udlrwyjajx08k-2laqmr5s32w5s8njawd0srflx \
+    10.0.2.15:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+
+
+### Scale the app
+docker stack deploy -c docker-compose.yml getstartedlab
+
+
+docker service ls
+docker service ps getstartedlab_web
+
+docker container ls -q
+
+
+# In another terminal:
+curl -4 http://127.0.0.1
+
+
+# Take down the app and the swarm:
+docker stack rm getstartedlab
+
+docker swarm leave --force
+
+### Scale the app - reinit the swarm, redeploy the stack
+docker swarm init
+docker service ls
+
+docker stack deploy -c docker-compose.yml getstartedlab
+docker service ls
+docker service ps getstartedlab_web
+
+
+
+
+
+
+
 
 
 
