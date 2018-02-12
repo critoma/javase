@@ -1,8 +1,0 @@
-Started by user [8mha:////4Jrvfo/TOdaQt8CMjB4lN3t/p37m6Y2WOEd0ZIpj614wAAAAlh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgYu/dLi1CL94pLSFABasVirvwAAAA==[0mStudent
-Building in workspace /home/stud/.jenkins/workspace/buildAndRunC02
-[buildAndRunC02] $ /bin/sh -xe /opt/software/apache-tomcat-9.0.4/temp/jenkins7386611673077530078.sh
-+ cd /home/stud/jenkinsworkspace
-+ git clone https://github.com/critoma/javase.git
-fatal: destination path 'javase' already exists and is not an empty directory.
-Build step 'Execute shell' marked build as failure
-Finished: FAILURE
