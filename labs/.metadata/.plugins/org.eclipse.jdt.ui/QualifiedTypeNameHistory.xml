@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.hello.HelloWorld"/>
+<fullyQualifiedTypeName name="com.hello.HelloWorld"/>
+<fullyQualifiedTypeName name="eu.ase.poly.Plane"/>
+<fullyQualifiedTypeName name="java.lang.ClassCastException"/>
+<fullyQualifiedTypeName name="java.lang.AutoCloseable"/>
+<fullyQualifiedTypeName name="eu.ase.ooparrays.Student"/>
 </qualifiedTypeNameHistroy>

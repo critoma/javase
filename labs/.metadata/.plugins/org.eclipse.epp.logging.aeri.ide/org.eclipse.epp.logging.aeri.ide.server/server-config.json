@@ -1,7 +1,7 @@
 {
   "version": "v1",
   "title": "Eclipse",
-  "timestamp": 1518032706209,
+  "timestamp": 1520423227542,
   "ttl": 10080,
   "helpUrl": "https://dev.eclipse.org/recommenders/community/aeri/v2/help/",
   "feedbackUrl": "https://www.codetrails.com/error-analytics/",
@@ -10,7 +10,6 @@
   "maxReportSize": 262144,
   "problemsUrl": "https://www.eclipse.org/downloads/download.php?r\u003d1\u0026file\u003d/technology/epp/logging/problems.zip",
   "problemsTtl": 20160,
-  "interestUrl": "https://dev.eclipse.org/recommenders/community/confess/v2/interest",
   "connectTimeout": 10,
   "socketTimeout": 10,
   "acceptedProducts": [
@@ -68,5 +67,5 @@
     "org.eclipse.pde.core::The current target platform contains errors*",
     "org.eclipse.ui::Conflicting handlers for*"
   ],
-  "problemsZipLastDownloadTimestamp": 0
+  "problemsZipLastDownloadTimestamp": 1520945542219
 }

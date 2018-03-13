@@ -1,0 +1,15 @@
+package eu.ase.poly;
+
+public class ProgMainPoly {
+	public static void main(String... args) {
+		Vehicle v = null;
+		Auto a = new Auto(1200, 3);
+		Plane p = new Plane(11000, 40, 2);
+		
+		v = a;
+		System.out.println(v.display());
+		
+		v = p;
+		System.out.println(v.display());
+	}
+}

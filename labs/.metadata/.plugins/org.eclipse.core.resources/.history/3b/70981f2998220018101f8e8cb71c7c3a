@@ -1,0 +1,12 @@
+package eu.ase.poly;
+
+public class Vehicle /*extends Object*/ implements Movement {
+	private int weight;
+	public Vehicle() {
+		
+	}
+	
+	public Vehicle(int weight) {
+		this.weight = weight;
+	}
+}

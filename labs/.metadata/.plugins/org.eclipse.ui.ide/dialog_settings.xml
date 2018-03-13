@@ -12,9 +12,10 @@
 		</list>
 	</section>
 	<section name="NewWizardAction">
-		<item value="org.eclipse.jdt.ui.wizards.JavaProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<item value="org.jetbrains.kotlin.projectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 			<item value="org.eclipse.jdt.ui.java"/>
+			<item value="org.jetbrains.kotlin.wizards"/>
 		</list>
 	</section>
 </section>

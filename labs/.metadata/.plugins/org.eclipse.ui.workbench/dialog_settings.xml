@@ -5,8 +5,8 @@
 		<item value="32" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
-		<item value="244" key="dialogHeight"/>
-		<item value="344" key="dialogWidth"/>
+		<item value="675" key="dialogHeight"/>
+		<item value="1200" key="dialogWidth"/>
 		<list key="textEntries">
 		</list>
 		<list key="orderedElements">
@@ -17,10 +17,9 @@
 		</list>
 	</section>
 	<section name="NewWizardAction">
-		<item value="org.eclipse.jdt.ui.wizards.NewSourceFolderCreationWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<item value="org.jetbrains.kotlin.classWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
-			<item value="org.eclipse.jdt.ui.java"/>
-			<item value="org.eclipse.wst.jsdt.ui.java"/>
+			<item value="org.jetbrains.kotlin.wizards"/>
 		</list>
 	</section>
 	<section name="ImportExportAction">

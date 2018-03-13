@@ -1,0 +1,22 @@
+package eu.ase.poly;
+
+public class Plane extends Vehicle {
+	private float capacity;
+	private int enginesNo;
+	
+	public Plane() {
+	}
+	
+	public float getCapacity() {
+		return this.capacity;
+	}
+	
+	public int getEnginesNo() {
+		return this.enginesNo;
+	}
+	
+	@Override
+	public String display() {
+		return new String("");
+	}
+}
