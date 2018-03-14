@@ -1,3 +1,4 @@
+
 Linux UBUNTU:
 export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
 export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
