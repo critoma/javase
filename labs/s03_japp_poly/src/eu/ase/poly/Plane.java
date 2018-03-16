@@ -5,7 +5,6 @@ public class Plane extends Vehicle {
 	private int enginesNo;
 	
 	public Plane() {
-		
 	}
 	
 	public Plane(int weight, float capacity, int engineN) {
@@ -36,6 +35,5 @@ public class Plane extends Vehicle {
 	public void setEnginesNo(int enginesNo) {
 		this.enginesNo = enginesNo;
 	}
-	
 	
 }

@@ -1,6 +1,6 @@
 package eu.ase.poly;
 
-public class Vehicle implements Movement {
+public class Vehicle implements Movement, Cloneable {
 
 	private int weight;
 	
@@ -28,6 +28,16 @@ public class Vehicle implements Movement {
 	@Override
 	public void stopEngine() {
 		System.out.println("Vehicle::stopEngine()");
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		Vehicle r = null;
+		
+		r = (Vehicle)super.clone();
+		r.weight = this.weight;
+		
+		return r;
 	}
 
 }

@@ -29,14 +29,7 @@ public class ProgMainOopArrays {
 			System.out.println("The average mark for the student "+ i +" is = "+
 					classStudents[i].getAverageMark());
 		}
-		
-		try (Student s = new Student("test1", null)) {
-			System.out.println("no s = " + Student.getNoStud());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("no s = " + Student.getNoStud());
-		
+
 	}
 
 }

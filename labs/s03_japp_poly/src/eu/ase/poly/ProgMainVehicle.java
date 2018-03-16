@@ -16,6 +16,7 @@ public class ProgMainVehicle {
 		Vehicle v0 = null;
         v0 = a; //Auto -> Vehicul - up-cast (is implicit)
         //after 270 code lines
+        // try-catch mechanism
         try {
             p = (Plane)v0;
         } catch(ClassCastException cce) {
@@ -25,6 +26,17 @@ public class ProgMainVehicle {
         Movement im0 = new Auto(2900, 4);
         //im0.afis();//eroare la compilare
         im0.startEngine();
+        
+        System.out.println("No Cars = " + Auto.getNoCars());
+        // try-with-resources mechanism
+        try(Auto aa = new Auto(3000, 5)) {
+        		aa.display();
+        		System.out.println("No Cars = " + Auto.getNoCars());
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
+        System.out.println("No Cars = " + Auto.getNoCars());
+        
 	}
 
 }

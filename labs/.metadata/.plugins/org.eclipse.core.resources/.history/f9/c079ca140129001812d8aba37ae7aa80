@@ -1,0 +1,59 @@
+package eu.ase.jcf;
+
+public class Plane implements Comparable<Plane>, Cloneable {
+	private int idPlane;
+	private String type;
+	private float capacity;
+	
+	public Plane(int idPlane, String type, float capacity) {
+		this.idPlane = idPlane;
+		this.type = type;
+		this.capacity = capacity;
+	}
+	
+	public void print() {
+		System.out.println("Plane - id = " + this.idPlane +
+				", capacity = "+this.capacity);
+	}
+	
+	@Override
+	public int compareTo(Plane p) {
+		if (this.idPlane == p.idPlane)
+			return 0;
+		else if(this.idPlane > p.idPlane)
+			return 1;
+		else
+			return -1;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+        if (!(o instanceof Plane))
+            return false;
+        Plane p = (Plane) o;
+        return p.idPlane.firstName.equals(firstName) &&
+               n.lastName.equals(lastName);
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+	//super.clone(); //ar fi fost eroare la executie daca clasa mea nu declara "implements Clonable"
+	Name newOb = (Name)super.clone(); //nu se recomanda alocare cu "new", conform specificatiilor
+	//nu este cazul, se face doar pentru obiecte "mutable"
+	//if (this.firstName != null) newOb.firstName = (String)this.firstName.clone();
+	//if (this.lastName != null) newOb.lastName = (String)this.lastName.clone();
+
+	if (this.firstName != null) newOb.firstName = this.firstName;
+	if (this.lastName != null) newOb.lastName = this.lastName;
+
+	return newOb;
+    }
+
+    public int hashCode() {
+        return 31*firstName.hashCode() + lastName.hashCode();
+    }
+
+    public String toString() {
+	return firstName + " " + lastName + " @ "+this.hashCode();
+    }
+
+}

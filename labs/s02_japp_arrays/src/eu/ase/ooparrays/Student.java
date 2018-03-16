@@ -1,6 +1,6 @@
 package eu.ase.ooparrays;
 
-public class Student implements AutoCloseable {
+public class Student {
 	private static int noStud;
 	private String sName;
 	private short[] marks;
@@ -9,7 +9,6 @@ public class Student implements AutoCloseable {
 	public Student(String studentName, short[] studentMarks) {
 		this.sName = studentName;
 		this.marks = studentMarks;
-		Student.noStud++;
 	}
 	
 	public static int getNoStud() {
@@ -41,11 +40,6 @@ public class Student implements AutoCloseable {
 		}
 		result = result / marks.length;
 		return result;
-	}
-
-	@Override
-	public void close() throws Exception {
-		Student.noStud--;
 	}
 	
 	

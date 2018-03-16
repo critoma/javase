@@ -1,0 +1,25 @@
+package eu.ase.jcf;
+
+public class Plane implements Comparable<Plane> {
+	private int idPlane;
+	private float capacity;
+	
+	public Plane(int idPlane, float capacity) {
+		this.idPlane = idPlane;
+		this.capacity = capacity;
+	}
+	
+	public void print() {
+		System.out.println("Plane - id = " + this.idPlane);
+	}
+	
+	@Override
+	public int compareTo(Plane p) {
+		if (this.idPlane == p.idPlane)
+			return 0;
+		else if(this.idPlane > p.idPlane)
+			return 1;
+		else
+			return -1;
+	}
+}

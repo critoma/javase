@@ -5,4 +5,9 @@
 <fullyQualifiedTypeName name="java.lang.ClassCastException"/>
 <fullyQualifiedTypeName name="java.lang.AutoCloseable"/>
 <fullyQualifiedTypeName name="eu.ase.ooparrays.Student"/>
+<fullyQualifiedTypeName name="java.lang.Cloneable"/>
+<fullyQualifiedTypeName name="java.lang.CloneNotSupportedException"/>
+<fullyQualifiedTypeName name="eu.ase.jcf.Country"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="java.util.Hashtable"/>
 </qualifiedTypeNameHistroy>
