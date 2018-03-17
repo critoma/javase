@@ -25,7 +25,7 @@ public class ProgMainOopArrays {
 			}
 		}
 		
-		for (int i = 0; i < Student.getNoStud(); i++) {
+		for (int i = 0; i < 2; i++) {
 			System.out.println("The average mark for the student "+ i +" is = "+
 					classStudents[i].getAverageMark());
 		}
