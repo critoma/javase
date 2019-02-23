@@ -13,17 +13,17 @@ public class ProgMainOopArrays {
 		
 		//Student[] classStudents = new Student[Student.getNoStud()];
 		Student[] classStudents = new Student[2];
-//		classStudents[0] = new Student("S0", new short[] {5, 5, 9});
-//		classStudents[1] = new Student("S1", new short[] {9, 10, 9});
+		classStudents[0] = new Student("S0", new short[] {5, 5, 9});
+		classStudents[1] = new Student("S1", new short[] {9, 10, 9});
 		
 		//for (int i = 0; i < Student.getNoStud(); i++) {
-		for (int i = 0; i < 2; i++) {
-			if ( i == 0 ) {
-				classStudents[i] = new Student("S0", new short[] {5, 5, 9});
-			} else {
-				classStudents[i] = new Student("S1", new short[] {9, 10, 9});
-			}
-		}
+//		for (int i = 0; i < 2; i++) {
+//			if ( i == 0 ) {
+//				classStudents[i] = new Student("S0", new short[] {5, 5, 9});
+//			} else {
+//				classStudents[i] = new Student("S1", new short[] {9, 10, 9});
+//			}
+//		}
 		
 		for (int i = 0; i < 2; i++) {
 			System.out.println("The average mark for the student "+ i +" is = "+
