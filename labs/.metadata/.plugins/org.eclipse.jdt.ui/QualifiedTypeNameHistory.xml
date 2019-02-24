@@ -10,4 +10,6 @@
     <fullyQualifiedTypeName name="eu.ase.jcf.Country"/>
     <fullyQualifiedTypeName name="java.util.Set"/>
     <fullyQualifiedTypeName name="java.util.Hashtable"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.CompletableFuture"/>
 </qualifiedTypeNameHistroy>

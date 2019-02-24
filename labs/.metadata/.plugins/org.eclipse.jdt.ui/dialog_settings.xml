@@ -2,7 +2,7 @@
 <section name="Workbench">
 	<item value="JavaSE-9" key="org.eclipse.jdt.ui.last.selected.execution.enviroment"/>
 	<item value="1" key="org.eclipse.jdt.ui.last.selected.jre.kind2"/>
-	<item value="Java SE 8 [1.8.0_74]" key="org.eclipse.jdt.ui.last.selected.project.jre"/>
+	<item value="Java SE 9.0.1 [9.0.1]" key="org.eclipse.jdt.ui.last.selected.project.jre"/>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
 		<item value="false" key="updateSimilarElements"/>
 		<item value="1" key="updateSimilarElementsMatchStrategy"/>
@@ -103,6 +103,7 @@
 		<item value="false" key="JarManifestWizardPage.SAVE_MANIFEST"/>
 		<item value="false" key="JarPackageWizardPage.EXPORT_OUTPUT_FOLDER"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="s02_jmoduse_arraystudent/libmod/student.jar"/>
 			<item value="s02_japp_usejlib_ooparray/lib/student.jar"/>
 		</list>
 	</section>
