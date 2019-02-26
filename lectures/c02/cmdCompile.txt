@@ -47,6 +47,21 @@ java -classpath .:../studentLib.jar eu/ase/ooparrays/ProgMainOopArrays
 rm eu/ase/ooparrays/ProgMainOopArrays.class
 rm ../studentLib.jar
 
+# B.4 - the Java modules from JAR:
+export JAVA_HOME=/opt/software/java/jdks/jdk-11
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+
+cd /home/stud/javase/lectures/c02/modules/s02_jmod_student/src
+javac eu/ase/oopmodules/Student.java module-info.java
+jar -cvf ../../s02_jmoduse_arraystudent/libmod/student.jar eu/ase/oopmodules/Student.class module-info.class
+rm eu/ase/oopmodules/Student.class
+rm module-info.class
+
+cd /home/stud/javase/lectures/c02/modules/s02_jmoduse_arraystudent/src
+javac --module-path .:../libmod/student.jar eu/ase/usejmodooparrays/ProgMainUseJModsOppArrays.java module-info.java
+java --module-path .:../libmod/student.jar -m s02_jmoduse_arraystudent/eu.ase.usejmodooparrays.ProgMainUseJModsOppArrays
+
+
 // ##############################################################################
 
 # C. Apache ANT
