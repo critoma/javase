@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Delete resource &apos;s003_japp_poly&apos;" deleteContents="true" description="Delete resource &apos;s003_japp_poly&apos;" element1="/s003_japp_poly" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1521022719168"/>
-</session>
