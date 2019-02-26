@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>s11_japp_tcphttpserver_nio</name>
+	<name>s11_japp_tcphttpserver_nio_http2asyncclient</name>
 	<comment></comment>
 	<projects>
 	</projects>
