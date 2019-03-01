@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;eu.ase.ktest&apos; to &apos;s14_kotlin_examples/src&apos;&#x0A;- Original project: &apos;s14_kotlin&apos;&#x0A;- Destination element: &apos;s14_kotlin_examples/src&apos;&#x0A;- Original element: &apos;s14_kotlin/src/eu.ase.ktest&apos;" description="Copy package" destination="=s14_kotlin_examples/src" element1="/src&lt;eu.ase.ktest" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1551120506433" version="1.0"/>
+</session>
