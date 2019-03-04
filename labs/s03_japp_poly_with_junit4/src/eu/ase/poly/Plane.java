@@ -1,5 +1,11 @@
 package eu.ase.poly;
 
+//Create the Plane class which is inheriting Vehicle and it is adding the following private fields:
+//- capacity: float
+//- enginesNo: int
+//- Create default constructor and constructor with parameters - using super
+//- create get/set methods with eventual throw Exception statement
+//- overwrite display method from Vehicle class
 public class Plane extends Vehicle {
 	private float capacity;
 	private int enginesNo;
@@ -24,7 +30,8 @@ public class Plane extends Vehicle {
 		return capacity;
 	}
 
-	public void setCapacity(float capacity) {
+	public void setCapacity(float capacity) throws Exception {
+		if (capacity < 0) throw new Exception("The doorsNo must not be less than 0.");
 		this.capacity = capacity;
 	}
 

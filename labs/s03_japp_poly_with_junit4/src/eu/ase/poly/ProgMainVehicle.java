@@ -1,5 +1,7 @@
 package eu.ase.poly;
 
+
+// test the polymorphism, class-cast exception, interface as type and try-catch mechnism with AutoCloseable interface call
 public class ProgMainVehicle {
 
 	public static void main(String[] args) {

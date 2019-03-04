@@ -1,5 +1,10 @@
 package eu.ase.poly;
 
+
+// Create the Vehicle class which implements Movement and Cloneable interface 
+// and is has a private int non-static field weight with default constructor and constructor with 
+// one parameter, plus get and set methods
+// implement public String display() method for returning a string which contain the Vehicle weight
 public class Vehicle implements Movement, Cloneable {
 
 	private int weight;

@@ -1,5 +1,11 @@
 package eu.ase.poly;
 
+// Create the Auto class which is inheriting Vehicle and it is adding the following private fields:
+// - doorsNo: int
+// - noCars: int static
+// - Create default constructor and constructor with parameters
+// - create get/set methods with eventual throw Exception statement
+// - overwrite display method from Vehicle class and close (AutoCloseable interface) and clone (Cloneable interface) methods
 public class Auto extends Vehicle implements AutoCloseable, Cloneable {
 	private int doorsNo;
 	private static int noCars;
@@ -18,7 +24,9 @@ public class Auto extends Vehicle implements AutoCloseable, Cloneable {
 		return this.doorsNo;
 	}
 	
-	public void setDoorsNo(int doorsN) {
+	public void setDoorsNo(int doorsN) throws Exception {
+		//if(this.doorsNo < 0) throw new Exception("The doorsNo must not be less than 0.");//WRONG
+		if (doorsN < 0) throw new Exception("The doorsNo must not be less than 0.");
 		this.doorsNo = doorsN;
 	}
 	
