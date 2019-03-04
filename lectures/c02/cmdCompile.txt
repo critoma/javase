@@ -47,6 +47,8 @@ java -classpath .:../studentLib.jar eu/ase/ooparrays/ProgMainOopArrays
 rm eu/ase/ooparrays/ProgMainOopArrays.class
 rm ../studentLib.jar
 
+
+
 # B.4 - the Java modules from JAR:
 export JAVA_HOME=/opt/software/java/jdks/jdk-11
 export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
@@ -62,11 +64,33 @@ javac --module-path .:../libmod/student.jar eu/ase/usejmodooparrays/ProgMainUseJ
 java --module-path .:../libmod/student.jar -m s02_jmoduse_arraystudent/eu.ase.usejmodooparrays.ProgMainUseJModsOppArrays
 
 
-// ##############################################################################
+# B.5 GraalVM (https://www.graalvm.org/docs/getting-started/):
+sudo apt-get install libz-dev
+export GRAALVM_HOME=/opt/software/graalvm-ce-1.0.0-rc12
+export PATH=$GRAALVM_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export CLASSPATH=.:$JAVA_HOME/jre/lib
+export JSE=/home/stud/javase/lectures
+
+cd $JSE/c02/graalvm
+
+javac eu/ase/arrays/ProgMainArrays.java
+java eu.ase.arrays.ProgMainArrays
+
+native-image eu.ase.arrays.ProgMainArrays
+./eu.ase.arrays.progmainarrays
+
+rm eu/ase/arrays/*.class
+rm eu.ase.arrays.progmainarrays
+
+#// ##############################################################################
+
+cd $JSE/c02
 
 # C. Apache ANT
 # https://ant.apache.org/manual/tutorial-HelloWorldWithAnt.html
 
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 export ANT_HOME=/opt/software/apache-ant-1.10.1
 export PATH=$PATH:$ANT_HOME/bin
 
