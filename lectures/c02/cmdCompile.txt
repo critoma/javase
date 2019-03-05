@@ -70,8 +70,8 @@ rm module-info.class
 cp student.jar ../../s02_jmoduse_arraystudent/libmod/student.jar
 
 
-rm student.jar
 jmod create --class-path ./student.jar s02_jmod_student.jmod
+rm student.jar
 
 jmod describe s02_jmod_student.jmod
 jmod list s02_jmod_student.jmod
@@ -87,10 +87,13 @@ java --module-path .:../libmod --module s02_jmoduse_arraystudent/eu.ase.usejmodo
 
 rm ../libmod/student.jar
 /home/stud/javase/lectures/c02/modules/s02_jmod_student/mods/out-standalone-jvm11/bin/java --module-path . --module s02_jmoduse_arraystudent/eu.ase.usejmodooparrays.ProgMainUseJModsOppArrays
-rm -rf /home/stud/javase/lectures/c02/modules/s02_jmod_student/mods/out-standalone-jvm11
 
+jimage list /home/stud/javase/lectures/c02/modules/s02_jmod_student/mods/out-standalone-jvm11/lib/modules
 jmod describe $JAVA_HOME/jmods/java.base.jmod
 jmod list $JAVA_HOME/jmods/java.base.jmod
+
+rm -rf /home/stud/javase/lectures/c02/modules/s02_jmod_student/mods/out-standalone-jvm11
+rm -rf /home/stud/javase/lectures/c02/modules/s02_jmod_student/mods/s02_jmod_student.jmod
 
 # B.5 GraalVM (https://www.graalvm.org/docs/getting-started/):
 #sudo apt-get install libz-dev
