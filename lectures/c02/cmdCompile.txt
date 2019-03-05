@@ -89,6 +89,9 @@ rm ../libmod/student.jar
 /home/stud/javase/lectures/c02/modules/s02_jmod_student/mods/out-standalone-jvm11/bin/java --module-path . --module s02_jmoduse_arraystudent/eu.ase.usejmodooparrays.ProgMainUseJModsOppArrays
 rm -rf /home/stud/javase/lectures/c02/modules/s02_jmod_student/mods/out-standalone-jvm11
 
+jmod describe $JAVA_HOME/jmods/java.base.jmod
+jmod list $JAVA_HOME/jmods/java.base.jmod
+
 # B.5 GraalVM (https://www.graalvm.org/docs/getting-started/):
 #sudo apt-get install libz-dev
 export GRAALVM_HOME=/opt/software/graalvm-ce-1.0.0-rc12
