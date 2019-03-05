@@ -50,22 +50,47 @@ rm ../studentLib.jar
 
 
 # B.4 - the Java modules from JAR:
+# https://dzone.com/articles/java-9-modular-development-part-2
+# http://tutorials.jenkov.com/java/modules.html
+
 export JAVA_HOME=/opt/software/java/jdks/jdk-11
 export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
 cd /home/stud/javase/lectures/c02/modules/s02_jmod_student/src
-javac eu/ase/oopmodules/Student.java module-info.java
-jar -cvf ../../s02_jmoduse_arraystudent/libmod/student.jar eu/ase/oopmodules/Student.class module-info.class
-rm eu/ase/oopmodules/Student.class
+javac -d ../mods eu/ase/oopmodules/Student.java ./module-info.java
+
+cd ../mods 
+javap module-info.class
+
+#jar -cvf ../../s02_jmoduse_arraystudent/libmod/student.jar eu/ase/oopmodules/Student.class module-info.class
+jar -cvf ./student.jar eu/ase/oopmodules/Student.class module-info.class
+
+rm -rf eu
 rm module-info.class
+cp student.jar ../../s02_jmoduse_arraystudent/libmod/student.jar
+
+
+rm student.jar
+jmod create --class-path ./student.jar s02_jmod_student.jmod
+
+jmod describe s02_jmod_student.jmod
+jmod list s02_jmod_student.jmod
+jmod extract s02_jmod_student.jmod
+rm -rf classes
+
+jlink --module-path .:$JAVA_HOME/jmods --add-modules s02_jmod_student --output ./out-standalone-jvm11
+
 
 cd /home/stud/javase/lectures/c02/modules/s02_jmoduse_arraystudent/src
-javac --module-path .:../libmod/student.jar eu/ase/usejmodooparrays/ProgMainUseJModsOppArrays.java module-info.java
-java --module-path .:../libmod/student.jar -m s02_jmoduse_arraystudent/eu.ase.usejmodooparrays.ProgMainUseJModsOppArrays
+javac --module-path .:../libmod eu/ase/usejmodooparrays/ProgMainUseJModsOppArrays.java module-info.java
+java --module-path .:../libmod --module s02_jmoduse_arraystudent/eu.ase.usejmodooparrays.ProgMainUseJModsOppArrays
 
+rm ../libmod/student.jar
+/home/stud/javase/lectures/c02/modules/s02_jmod_student/mods/out-standalone-jvm11/bin/java --module-path . --module s02_jmoduse_arraystudent/eu.ase.usejmodooparrays.ProgMainUseJModsOppArrays
+rm -rf /home/stud/javase/lectures/c02/modules/s02_jmod_student/mods/out-standalone-jvm11
 
 # B.5 GraalVM (https://www.graalvm.org/docs/getting-started/):
-sudo apt-get install libz-dev
+#sudo apt-get install libz-dev
 export GRAALVM_HOME=/opt/software/graalvm-ce-1.0.0-rc12
 export PATH=$GRAALVM_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 export CLASSPATH=.:$JAVA_HOME/jre/lib
