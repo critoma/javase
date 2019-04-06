@@ -67,3 +67,21 @@ java -classpath .:./lib/java-json.jar eu/ase/json/BuildJson1
 java -classpath .:./lib/java-json.jar eu/ase/json/ParseJson1 ./myJsonObj.json
 
 cd ..
+
+###########################################################
+
+F. Reactive Streams - JDK 11+
+
+export JAVA_HOME=/opt/software/java/jdks/jdk-11
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar
+export JSE=/home/stud/javase/lectures
+
+cd $JSE/c12/src
+cd ReactiveStreams
+
+javac -cp . eu/ase/reactstreams/ProgMainReactiveStreams.java
+java -cp . eu.ase.reactstreams.ProgMainReactiveStreams
+
+cd ..
+
