@@ -7,7 +7,7 @@ package eu.ase.poly;
 // implement public String display() method for returning a string which contain the Vehicle weight
 public class Vehicle implements Movement, Cloneable {
 
-	private int weight;
+	public int weight;
 	
 	public Vehicle() {
 		

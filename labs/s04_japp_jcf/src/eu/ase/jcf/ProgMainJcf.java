@@ -3,16 +3,18 @@ package eu.ase.jcf;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-//import java.util.Vector;
+import java.util.Vector;
 
 public class ProgMainJcf {
 	public static void main(String[] args) {
 		//List<Plane> listPlanes = new Vector<Plane>(10);
-		List<Plane> listPlanes = new ArrayList<Plane>();
+		//List<Plane> listPlanes = new ArrayList<Plane>();
+		List<Plane> listPlanes = new LinkedList<Plane>();
 		
 		System.out.println("size / capacity = " + listPlanes.size());
 	
@@ -27,8 +29,8 @@ public class ProgMainJcf {
 			temp.print();
 		}
 		
-		//Map<Plane, Country> treeMap = new TreeMap<Plane, Country>();
-		Map<Plane, Country> treeMap = new Hashtable<Plane, Country>();
+		Map<Plane, Country> treeMap = new TreeMap<Plane, Country>();
+		//Map<Plane, Country> treeMap = new Hashtable<Plane, Country>();
 		for(int i = 0; i < 7; i++) {
 			Plane pk = new Plane(201 + i, "Airbus " + (i*10), 351.0f + i);
 			Country cv = new Country(701 + i, "Country " + i);

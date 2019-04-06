@@ -24,7 +24,7 @@ import java.io.IOException;
 // B.5 - clone method for deep copy
 
 public class Invoice implements Cloneable {
-	
+
 	private double[] prices;
 	private int[] units;
 	private String[] descs;

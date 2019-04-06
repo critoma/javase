@@ -8,8 +8,8 @@ public class ProgMainOopIo {
 		String[] descs = new String[] {"T-Shirt", "Mug", "Pen"};
 		
 		Invoice invoice = new Invoice(units, prices, descs);
-		invoice.saveInvoice2File("test2.txt");
-		invoice	.readInvoiceFromFileAndCalcTotal("test2.txt");
+		invoice.saveInvoice2File("test5.txt");
+		invoice.readInvoiceFromFileAndCalcTotal("test5.txt");
 	}
 
 }
