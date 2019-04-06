@@ -42,6 +42,9 @@ jar -cvf ../studentLib.jar eu/ase/ooparrays/Student.class
 
 javac eu/ase/ooparrays/ProgMainOopArrays.java
 rm eu/ase/ooparrays/Student.class
+
+javac -cp ../studentLib.jar eu/ase/ooparrays/ProgMainOopArrays.java
+
 java -classpath .:../studentLib.jar eu/ase/ooparrays/ProgMainOopArrays
 
 rm eu/ase/ooparrays/ProgMainOopArrays.class
@@ -67,6 +70,7 @@ jar -cvf ./student.jar eu/ase/oopmodules/Student.class module-info.class
 
 rm -rf eu
 rm module-info.class
+mkdir -p ../../s02_jmoduse_arraystudent/libmod
 cp student.jar ../../s02_jmoduse_arraystudent/libmod/student.jar
 
 

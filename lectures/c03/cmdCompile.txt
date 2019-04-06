@@ -29,6 +29,8 @@ http://sourceforge.net/projects/robocode/files/latest/download?source=files
 
 # cd /home/stud/javase/lectures/robocode-1.9.0.0/robots/euase/jrobots
 
+# cd /home/stud/javase/lectures/robocode-1.9.0.0/robots
+# javac -cp .:../libs/robocode.jar euase/jrobots/*.java
 ->Battle->New (move at least two robots from left to right in GUI)
 
 ###############################################

@@ -207,12 +207,12 @@ JNIEXPORT jbyteArray JNICALL Java_ReadFile_loadFileInMemory (JNIEnv* env, jobjec
 
 C5.4. In same or another terminal, Compile the C program (dad_nativelib.c) into *.so shared object/library (from command prompt with gcc)
 
-cd $JSE/c04/src/S05_JNI
+cd $JSE/c05/src/S05_JNI
 //export LD_LIBRARY_PATH=".:./eu/ase/jni:/opt/software/java/jdks/jdk1.6.0_35/jre/lib"
 //XOR
 //export LD_LIBRARY_PATH=.:/home/stud/dad/lectures/c04/src/S05_JNI:/home/stud/dad/lectures/c04/src/S05_JNI/eu/ase/jni
 
-export LD_LIBRARY_PATH=.:/opt/software/java/jdks/jdk1.8.0_25/jre/lib
+export LD_LIBRARY_PATH=.:/opt/software/java/jdks/jdk1.8.0_161/jre/lib
 
 gcc -Wall -fPIC -c -I$JAVA_HOME/include -I$JAVA_HOME/include/linux dad_nativelib.c
 gcc -shared -Wl,-soname,libdad_native.so.1 -o libdad_native.so.1.0 dad_nativelib.o
@@ -230,7 +230,7 @@ java JNIProgMain tt1.txt
 
 
 -------------------------------------------------------------------------------------------------------------
-JNI in MS Windows XP/7:
+JNI in MS Windows XP/7/10:
 
 -. setare variabile mediu
 
