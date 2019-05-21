@@ -1,5 +1,3 @@
-//dad_nativelib.c
-//#include "./eu/ase/jni/eu_ase_jni_ReadFile.h"
 #include "./ReadFile.h"
 #include <malloc.h>
 #include <stdio.h>
@@ -14,7 +12,8 @@ JNIEXPORT jbyteArray JNICALL Java_ReadFile_loadFileInMemory (JNIEnv* env, jobjec
     	FILE* f = fopen(mfile, "r");
 
 	fseek(f, 0, 2); // SEEK_END = 2 
-	len = ftell(f); buf = (unsigned char*)malloc(len*sizeof(char));
+	len = ftell(f); 
+	buf = (unsigned char*)malloc(len*sizeof(char));
 	fseek(f, 0, 0); // SEEK_SET = 0
 	
 	jb=(*env)->NewByteArray(env, len);

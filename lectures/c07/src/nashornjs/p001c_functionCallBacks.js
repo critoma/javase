@@ -10,8 +10,18 @@ function some_function(arg1, arg2, callback) {
 }
 
 // call the function (callback usage) by closure implementation
+// jjs ./nashornjs/p001c_functionCallBacks.js
 some_function(5, 15, function(num) {
 	// this anonymous function will run when the
 	// callback is called
-	print("callback called! " + num);
+	//print("callback called! " + num);
+	console.log("callback called! " + num);
 });
+
+
+// it is working in ECMAScript 6+ / node.js 8+
+// /opt/software/node-v8.9.4-linux-x64/bin/node ./nashornjs/p001c_functionCallBacks.js
+some_function(23, 7, (n) => {
+	console.log("lambda callback = " + n);
+});
+
