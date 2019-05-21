@@ -22,13 +22,16 @@ public class Java8TestFILambda {
 		
 		MathOperation addition = (int a, int b) -> a + b;
 		MathOperation substraction = (a, b) -> a - b;
-		MathOperation multiplication = (int a, int b) -> {return a * b;};
+		MathOperation multiplication = (int a, int b) -> {
+			return a * b;
+		};
 		MathOperation division = (int a, int b) -> a/b;
 		
 		System.out.println("10 + 5 = " + tester.operate(10, 5, addition));
 		System.out.println("10 - 5 = " + tester.operate(10, 5, substraction));
 		System.out.println("10 * 5 = " + tester.operate(10, 5, multiplication));
-		System.out.println("10 / 5 = " + tester.operate(10, 5, division));
+		System.out.println("10 / 5 = " 
+				+ tester.operate(10, 5, ( (x1, x2) -> x1/x2) ));
 	
 		GreetingService greetingService1 = message ->
 		System.out.println("Hello " + message);
