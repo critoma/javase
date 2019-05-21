@@ -11,7 +11,7 @@ public class MulticastUDPClient {
 
     	// udp port 4446 (e.g. serverPort + 1)
         MulticastSocket socket = new MulticastSocket(Integer.parseInt(args[0]));
-        //MulticastSocket socket = new MulticastSocket(4446);
+        //MulticastSocket socket = new MulticastSocket(4447);
         
         InetAddress address = InetAddress.getByName("230.0.0.1");
         socket.joinGroup(address);
