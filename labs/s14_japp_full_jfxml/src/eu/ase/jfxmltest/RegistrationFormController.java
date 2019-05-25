@@ -1,9 +1,12 @@
-package com.jfxmltest;
+package eu.ase.jfxmltest;
 
 import java.util.concurrent.Flow;
 import java.util.concurrent.SubmissionPublisher;
 import java.util.concurrent.Flow.Subscription;
 
+import eu.ase.iojson.User;
+import eu.ase.sqldao.SqlDAO;
+import eu.ase.sqldao.UsersSubscriberReactStream;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -36,11 +39,20 @@ public class RegistrationFormController {
     
     
     private static int objectRegisteredUsersCount = 0;
-    private SqlDAO sqlObj;
+//    public static int getObjectRegisteredUsersCount() {
+//    	return objectRegisteredUsersCount;
+//    }
+//    public static void setObjectRegisteredUsersCount(int objectRegisteredUsersCount) {
+//    	RegistrationFormController.objectRegisteredUsersCount = objectRegisteredUsersCount;
+//    }
+    private static SqlDAO sqlObj;
+//    public static SqlDAO getSqlObj() {
+//    	return sqlObj;
+//    }
     
     public RegistrationFormController() {
     	super();
-    	sqlObj = new SqlDAO();
+    	sqlObj = SqlDAO.getInstance();
     }
     
     
@@ -109,9 +121,10 @@ public class RegistrationFormController {
     	
     	try (SubmissionPublisher<User> usersPublisher = new SubmissionPublisher<User>()) {
     		User u = new User(objectRegisteredUsersCount, nameField.getText(), emailField.getText(), passwordField.getText());
-    		UsersSubscriber usersSubscriber = new UsersSubscriber(sqlObj);
+    		UsersSubscriberReactStream usersSubscriber = new UsersSubscriberReactStream();
     		usersPublisher.subscribe(usersSubscriber);
     		usersPublisher.submit(u);
+    		usersSubscriber.cancelSubscription();
     	} catch(Exception reacte) {
     		reacte.printStackTrace();
     	}
@@ -128,87 +141,3 @@ public class RegistrationFormController {
     
 }
 
-class User {
-	private int id;
-	private String name;
-	private String email;
-	private String password;
-	public User(int id, String name, String email, String password) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	@Override
-	public String toString() {
-		return "user [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + "]";
-	}
-}
-
-class UsersSubscriber implements Flow.Subscriber<User> {
-	 
-	private SqlDAO sqlOb;
-    private Subscription subscription;
-    
-    public UsersSubscriber() {
-    	super();
-    }
-    
-    public UsersSubscriber(SqlDAO sqlObject) {
-    	super();
-    	this.sqlOb = sqlObject;
-    }
- 
-    @Override
-    public void onSubscribe(Subscription subscription) {
-      System.out.printf("onSubscribe(...) - new subscription %s\n", subscription);
-      this.subscription = subscription;
-      subscription.request(1);
-    }
- 
-    @Override
-    public void onNext(User item) {
-      System.out.printf("onNext(...) - user received: %s \n", item.toString());
-      
-      sqlOb.insertIntoDB(item.getId(), item.getName(), item.getEmail(), item.getPassword());
-      //subscription.request(1);
-      subscription.cancel();
-    }
- 
-    @Override
-    public void onError(Throwable throwable) {
-      System.err.printf("error occurred fetching user: %s\n", throwable.getMessage());
-      throwable.printStackTrace(System.err);
- 
-    }
- 
-    @Override
-    public void onComplete() {
-      System.out.println("fetching user completed");
-    }
-  }

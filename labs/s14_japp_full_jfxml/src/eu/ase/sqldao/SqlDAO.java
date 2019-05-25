@@ -1,5 +1,6 @@
-package com.jfxmltest;
+package eu.ase.sqldao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,20 +10,33 @@ import java.sql.Statement;
 
 public class SqlDAO {
 	private Connection sqliteConn;
+	private static SqlDAO currentInstance;
 	
-	public SqlDAO() {
+	private SqlDAO() {
 		try {
+			boolean cdb = false;
+			File f = new File("./users.db");
+			if (! f.exists())
+				cdb = true;
 			Class.forName("org.sqlite.JDBC");
 			sqliteConn = DriverManager.getConnection("jdbc:sqlite:users.db");
 			sqliteConn.setAutoCommit(false);
 			
-			createDBTable();
+			if (cdb)
+				createDBTable();
 			
 		} catch(ClassNotFoundException cnfe) {
 			cnfe.printStackTrace();
 		} catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
+	}
+	
+	public static synchronized SqlDAO getInstance() {
+		if (currentInstance == null) {
+			currentInstance = new SqlDAO();
+		}
+		return currentInstance;
 	}
 	
 	public void closeDB() {
@@ -38,16 +52,16 @@ public class SqlDAO {
 			throws SQLException {
 		Statement stmt = sqliteConn.createStatement();
 		
-		String sqlDropTable = "drop table USERS";
+		//String sqlDropTable = "drop table USERS";
 		String sqlCreateTable = "create table USERS " +
 				"(ID INT PRIMARY KEY NOT NULL," +
 				"NAME TEXT NOT NULL, EMAIL CHAR(50), PASSWORD TEXT NOT NULL)";
 		
-		try {
-			stmt.executeUpdate(sqlDropTable);
-		} catch(SQLException sqle) {
-			System.out.printf("%s", "\n The table users did not exist!");
-		}
+//		try {
+//			stmt.executeUpdate(sqlDropTable);
+//		} catch(SQLException sqle) {
+//			System.out.printf("%s", "\n The table users did not exist!");
+//		}
 		stmt.executeUpdate(sqlCreateTable);
 		
 		stmt.close();
@@ -56,7 +70,7 @@ public class SqlDAO {
 	
 	public void insertIntoDB(int id, String name, String email, String pass) {
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -94,6 +108,7 @@ public class SqlDAO {
     }
 	
 	public void displayDB() {
+		System.out.println("\n Display the database: \n");
     	Statement stmt;
 		try {
 			stmt = sqliteConn.createStatement();

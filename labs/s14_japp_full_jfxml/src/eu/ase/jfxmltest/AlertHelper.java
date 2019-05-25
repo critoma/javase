@@ -1,4 +1,4 @@
-package com.jfxmltest;
+package eu.ase.jfxmltest;
 
 import javafx.scene.control.Alert;
 import javafx.stage.Window;

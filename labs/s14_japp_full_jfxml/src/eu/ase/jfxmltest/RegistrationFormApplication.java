@@ -1,4 +1,4 @@
-package com.jfxmltest;
+package eu.ase.jfxmltest;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
