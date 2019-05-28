@@ -1,0 +1,21 @@
+####################################################
+### Lecture - Linux:
+
+# //set env variables for root user:
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar
+export JSE=/home/stud/javase/lectures
+
+cd $JSE/c14/src/
+
+
+
+# JFXML
+
+javac -classpath $CLASSPATH com/jfxmltest/*.java
+java -classpath $CLASSPATH com.jfxmltest.RegistrationFormApplication
+
+rm com/jfxmltest/*.class
+
+
