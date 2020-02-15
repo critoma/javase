@@ -1,8 +1,7 @@
 Linux UBUNTU:
 
-export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161
+export JAVA_HOME=/opt/software/java/jdks/jdk-11
 export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-export CLASSPATH=.:$JAVA_HOME/jre/lib
 export JSE=/home/stud/javase/lectures
 
 cd $JSE/c01/src
