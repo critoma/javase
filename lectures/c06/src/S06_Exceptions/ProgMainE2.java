@@ -13,7 +13,7 @@ class ListOfNumbers {
         }
     }
 
-public void writeList() {
+   public void writeList() {
     PrintWriter out = null;
 
     try {

@@ -48,7 +48,7 @@ public class ProgMainJCF0 {
             atemp.print();
         }
         
-        Map<PersDetinator, Avion> arb = new TreeMap<PersDetinator, Avion>();
+        Map<PersDetinator, Avion> arb = new TreeMap<PersDetinator, Avion>(); //Hashtable
         for(int i = 0; i < 7; i++) {
             PersDetinator pd = new PersDetinator(i+200);
             Avion va = new Avion(i+50);

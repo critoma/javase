@@ -8,11 +8,11 @@ class ObiectSimplu implements Serializable {
  private transient int n2;
  public transient int n3;
  public int n4;
- public int n5 = 0; //camp adaugat in noua versiune
+ //public int n5 = 0; //camp adaugat in noua versiune
 
- public ObiectSimplu(String nume, int n1, int n2, int n3, int n4) {
+ public ObiectSimplu(String nume, int n1p, int n2, int n3, int n4) {
   this.nume = nume;
-  this.n1 = n1;
+  n1 = n1p;
   this.n2 = n2;
   this.n3 = n3;
   this.n4 = n4;

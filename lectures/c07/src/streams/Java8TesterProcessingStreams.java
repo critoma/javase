@@ -14,7 +14,7 @@ public class Java8TesterProcessingStreams {
       System.out.println("======= Using Java 7: ");
 		
       // Count empty strings
-      List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd","", "jkl");
+      List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd", "", "jkl");
       System.out.println("List: " +strings);
       long count = getCountEmptyStringUsingJava7(strings);
 		
@@ -57,7 +57,7 @@ public class Java8TesterProcessingStreams {
       System.out.println("======= Using Java 8: ");
       System.out.println("List: " +strings);
 		
-      count = strings.stream().filter(string->string.isEmpty()).count();
+      count = strings.stream().filter((String s)->{return s.isEmpty();}).count();
       System.out.println("Empty Strings: " + count);
 		
       count = strings.stream().filter(string -> string.length() == 3).count();

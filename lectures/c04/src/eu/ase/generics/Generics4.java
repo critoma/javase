@@ -1,14 +1,14 @@
 package eu.ase.generics;
 
-class Box<T> {
+class Box<Ty> {
 
-        private T object;
+        private Ty object;
 
-        public void add(T object) {
+        public void add(Ty object) {
             this.object = object;
         }
 
-        public T get() {
+        public Ty get() {
             return object;
         }
 }

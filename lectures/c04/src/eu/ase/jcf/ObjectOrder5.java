@@ -1,7 +1,11 @@
+package eu.ase.jcf;
+
 import java.util.*;
+import java.lang.Object;
+
 
 //orice clasa se recomanda sa fie "immutable" 
-class Name implements Comparable<Name>, Cloneable {
+class Name /*extends Object*/ implements Comparable<Name>, Cloneable {
     //private final String firstName, lastName;//daca erau final nu se putea utiliza metode de tip "set"
     private String firstName;
     private String lastName;
@@ -39,6 +43,7 @@ class Name implements Comparable<Name>, Cloneable {
 	return newOb;
     }
 
+    @Override
     public int hashCode() {
         return 31*firstName.hashCode() + lastName.hashCode();
     }
@@ -114,6 +119,8 @@ class MyComparator implements Comparator<Angajat> {
 
 class NameSort2 {
     public static void main(String[] args) {
+	//if (n1 == n2)
+	//if(n1.equals(n2))
 	MyComparator mya = new MyComparator();
         Angajat aArray[] = {
             new Angajat("John", "Lennon", new Date(435263625)),

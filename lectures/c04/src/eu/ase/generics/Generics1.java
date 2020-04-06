@@ -1,5 +1,9 @@
 package eu.ase.generics;
 
+import java.lang.Object;
+import java.lang.Integer;
+import java.lang.String;
+
 class Box {
 
         private Object object;

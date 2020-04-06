@@ -5,9 +5,7 @@ export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sb
 export CLASSPATH=.:$JAVA_HOME/jre/lib
 export JSE=/home/stud/javase/lectures
 
-
 cd $JSE/c03/src
-
 javac eu/ase/polimorfism/IMiscare.java
 javac eu/ase/polimorfism/Vehicul.java
 javac eu/ase/polimorfism/IAuto.java

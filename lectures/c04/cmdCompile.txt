@@ -9,8 +9,8 @@ cd $JSE/c04/src
 1. Generics
 
 javac eu/ase/generics/Generics1.java
-java eu/ase/generics/BoxDemo1
-java eu/ase/generics/BoxDemo2
+java eu.ase.generics.BoxDemo1
+java eu.ase.generics.BoxDemo2
 
 javac eu/ase/generics/Generics4.java
 

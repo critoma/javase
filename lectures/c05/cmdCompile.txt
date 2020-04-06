@@ -20,17 +20,17 @@ javac eu/ase/reflection/*.java
 java eu/ase/reflection/ProgMainTString
 
 1. Getting method declaration
-java eu/ase/reflection/DumpMethods1 eu.ase.reflection.ProgMainTString
-java eu/ase/reflection/DumpMethods1 eu.ase.reflection.TString
+java eu.ase.reflection.DumpMethods1 eu.ase.reflection.ProgMainTString
+java eu.ase.reflection.DumpMethods1 eu.ase.reflection.TString
 
 2. Simulating the instanceof Operator
-java eu/ase/reflection/Instance2
+java eu.ase.reflection.Instance2
 
 3. Finding Out More About Methods of a Class
 java eu/ase/reflection/Methods3 eu.ase.reflection.TString
 
 4. Obtaining Information About Constructors
-java eu/ase/reflection/Constructors4 eu.ase.reflection.TString
+java eu.ase.reflection.Constructors4 eu.ase.reflection.TString
 
 5. Finding Out About Class Fields
 java eu/ase/reflection/Fields5 eu.ase.reflection.TString
@@ -82,6 +82,7 @@ C1.1. Compile & archive library JAR
 javac eu/ase/IO/CopyBytesLib.java
 javac eu/ase/IO/CopyCharsLib.java
 jar cvf ./CopyLib.jar eu/ase/IO/*.class
+rm eu/ase/IO/*.class
 
 C1.2. Compile the main program specifying what library should have the called instances from classes and methods
 javac -classpath $CLASSPATH:./CopyLib.jar CopyBytes1.java
@@ -91,6 +92,10 @@ C1.3. Run the main program and specifying the library
 java -classpath $CLASSPATH:./CopyLib.jar CopyBytes1 t1.txt t2.txt
 java -classpath $CLASSPATH:./CopyLib.jar ProgMainCopyBytes1 t1.txt t3.txt
 
+hexdump -C t1.txt
+hexdump -C tnano1.txt
+hexdump -C t2.txt
+hexdump -C t3.txt
 
 C2. I/O Data Streams
 
