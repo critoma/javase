@@ -10,7 +10,7 @@ class NonSyncThreadA1 extends Thread {
 		System.out.println(this.getName() + " a=" +a+" b="+b);
 		a++;
 			try {
-				this.sleep((int)(Math.random()*1000));//blocked thread
+				sleep((int)(Math.random()*1000));//blocked thread
 			} catch(InterruptedException e) {e.printStackTrace();}
 		b++; //este atomic?
 	}

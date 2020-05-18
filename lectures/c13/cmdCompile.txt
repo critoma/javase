@@ -122,28 +122,28 @@ cd $JSE/c13/src/JDBC
 ### //http://www.tutorialspoint.com/jdbc/jdbc-create-database.htm
 
 # 1. Create Database/Table:
-javac -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample1.java
-java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample1
+javac -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample1.java
+java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample1
 
 # 2. Connect to DB and create table
 javac -classpath $CLASSPATH eu_ase_jdbc/JDBCExample2.java
-java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample2
+java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample2
 
 # 3. Connect to DB and insert rows in table
 javac -classpath $CLASSPATH eu_ase_jdbc/JDBCExample3.java
-java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample3
+java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample3
 
 # 4. Connect to DB and select rows in table
 javac -classpath $CLASSPATH eu_ase_jdbc/JDBCExample4.java
-java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample4
+java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample4
 
 # 5. Connect to DB and update rows in table - with or without prepare statement
 javac -classpath $CLASSPATH eu_ase_jdbc/JDBCExample5.java
-java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample5
+java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample5
 
 # 6. Connect to DB and delete rows in table
 javac -classpath $CLASSPATH eu_ase_jdbc/JDBCExample6.java
-java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample6
+java -classpath $CLASSPATH:../../downloads_readme/mysql-connector-java-5.0.8-bin.jar eu_ase_jdbc/JDBCExample6
 
 
 B. NoSQL - MongoDB
