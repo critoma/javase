@@ -7,7 +7,7 @@ export JSE=/home/stud/javase/lectures
 cd $JSE/c07/src
 // ##############################################################################
 
-A. JavaScript Nashorn for callbacks-closure sample
+A. JavaScript Nashorn for callbacks-closure sample in Java 8+ but with modification with Java 17+ (nashorn doesn't exist from 15)
 
 1. Hello World JS from Java2JS & JS2Java
 
@@ -40,6 +40,16 @@ java nashornjs.Caller
 javac nashornjs/Callbacks2.java
 
 java nashornjs.WebSiteTimeUpdater
+
+
+cd java17-js_graalvm22_engine_eproj
+cd src
+javac -cp .:../lib/* -d ../bin graalvmjs/*.java
+cd ../bin
+java -cp .:../lib/* -Dpolyglot.log.file=./log.txt graalvmjs.JSTester
+java -cp .:../lib/* -Dpolyglot.log.file=./log.txt graalvmjs.HelloWorldJSFile
+
+
 
 // ##############################################################################
 
