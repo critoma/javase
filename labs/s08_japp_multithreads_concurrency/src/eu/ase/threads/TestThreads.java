@@ -1,4 +1,4 @@
-package eu.dice.mthreading;
+package eu.dice.threads;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
