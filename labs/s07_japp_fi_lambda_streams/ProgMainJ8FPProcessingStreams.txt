@@ -1,0 +1,64 @@
+package eu.dice.fpp;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+public class ProgMainJ8FPProcessingStreams {
+
+	public static void main(String[] args) {
+		List<String> strings = Arrays.asList("ab", "", "abc", "de", "", "fgh", "klm", "p");
+		System.out.println(strings);
+		
+		int count = 0;
+		//for (var i = 0; i < strings.size(); i++) {
+		for (String s : strings) {
+			//if (strings.get(i).length() == 0)
+			//if (s.length() == 0)
+			if (s.isEmpty())
+				count++;
+		}
+		System.out.println(count);
+		
+		
+//		Predicate<String> validateEmpties = (String s) -> {
+//			boolean r = false;
+//			if (s.isEmpty())
+//				r = true;
+//			return r;
+//		};
+//		long countEmpty = strings.stream().filter(validateEmpties).count();
+		long countEmpty = strings.stream().filter(s -> s.isEmpty()).count();
+		System.out.println(countEmpty);
+		
+		long countNonEmpty = strings.stream().filter(s -> !(s.isEmpty())).count();
+		System.out.println(countNonEmpty);
+		
+		List<String> filtredS = strings.stream().filter(s -> !(s.isEmpty())).collect(Collectors.toList());
+		System.out.println(filtredS);
+		
+		List<Integer> noL = Arrays.asList(3, 5, 24, 7, 23, 5);
+		
+//		List<Integer> noL2 = new ArrayList<Integer>();
+//		for(var i = 0; i < noL.size(); i++) {
+//			Integer ct = noL.get(i) * noL.get(i);
+//			if (!noL2.contains(ct)) {
+//				noL2.add(ct);
+//			}
+//		}
+//		System.out.println(noL2);
+//		
+//		Function<Integer, Integer> funcMapping = (i) -> {
+//			Integer r = i * i;
+//			return r;
+//		};
+//		List<Integer> noLMapped = noL.stream().map(funcMapping).distinct().collect(Collectors.toList());
+		
+		List<Integer> noLMapped = noL.stream().map(i -> i*i).distinct().collect(Collectors.toList());
+		System.out.println(noLMapped);
+	}
+
+}

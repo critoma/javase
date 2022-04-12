@@ -1,0 +1,62 @@
+package eu.dice.fpp;
+
+
+@FunctionalInterface
+interface GreetingService {
+	void say(String message);
+}
+
+@FunctionalInterface
+interface MathOp<T> {
+	//Double doMathOp(Double x, Double y);
+	T doMathOp(T x, T y);
+}
+class MathClass<E> {
+	public MathClass() {
+	}
+	public E doCalc(E a, E b, MathOp<E> mathOp) {
+		E r = (E) mathOp.doMathOp(a, b);
+		return r;
+	}
+}
+
+public class ProgMainJ8FPLambda {
+
+	public static void main(String[] args) {
+		
+		MathClass<Double> j8TesterFPLambdaObj = new MathClass<Double>();
+		
+		MathOp<Double> add = (Double x, Double y) -> {
+			Double res = (Double)(x + y);
+			return res;
+		};
+		//MathOp sub = (op1, op2) -> op1 - op2;
+		MathOp<Double> multiply = (op1, op2) -> op1 * op2;
+		MathOp<Double> division = (op1, op2) -> op1/op2;
+		MathOp<Float> power = (MathOp<Float>) (op1, op2) -> {return (float)Math.pow(op1.doubleValue(), op2.doubleValue());}; 
+		//double radd = j8TesterFPLambdaObj.doCalc(23.7, 1.2, add);
+		//System.out.println("23.7 + 1.2 = " + radd);
+		
+		MathClass<Float> j8TesterFPLambdaObjF = new MathClass<Float>();
+		System.out.println("23.7 + 1.2 = " + j8TesterFPLambdaObj.doCalc(23.7, 1.2, add));
+		//System.out.println("23.7 - 1.2 = " + j8TesterFPLambdaObj.doCalc(23.7, 1.2, sub));
+		System.out.println("23.7 - 1.2 = " + j8TesterFPLambdaObj.doCalc(23.7, 1.2, (MathOp<Double>)((op1, op2) -> op1 - op2) ));
+		System.out.println("23.7 * 1.2 = " + j8TesterFPLambdaObj.doCalc(23.7, 1.2, multiply));
+		System.out.println("23.7 / 1.2 = " + j8TesterFPLambdaObj.doCalc(23.7, 1.2, division));
+		System.out.println("23.7 ^ 1.2 = " + j8TesterFPLambdaObjF.doCalc(Float.parseFloat("" + 23.7), Float.parseFloat("" + 1.2), power));
+		
+
+		GreetingService gs1 = (String message) -> {
+			var h = "Hello";
+			var end = "!";
+			System.out.println(h + " " + message + end);
+		};
+		
+		GreetingService gs2 = m -> System.out.println("Bonjour " + m + "!");
+		
+		gs1.say("Mihai");
+		gs2.say("Jean-Yves");
+
+	}
+
+}
