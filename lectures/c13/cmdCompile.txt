@@ -21,10 +21,10 @@ sudo dpkg-reconfigure mysql-server-5.7
 # Default DB Engine for MySQL 5.5 is InnoDB instead of MyISAM 
 
 # create DB for testing JSP:
-mysql -u root -pstud
+sudo mysql -u root -pstud
 show databases;
 
-mysql mysql -u root -pstud 
+sudo mysql -u root -pstud 
 >
 create database mycards;
 use mycards;
