@@ -297,13 +297,16 @@ docker pull critoma/linux-ubuntu-dev-security-ism
 docker run -it critoma/linux-ubuntu-dev-security-ism
 
 $ docker container ls -a
-
+$ docker start <container_id>
 $ docker exec -it <container_id> /bin/bash
 $ docker exec -u stud -t -i 0aa85c74361c /bin/bash
 
 # deprecated:
 # docker pull critoma/ubuntu-java-node-py-dev
 # docker run -it critoma/ubuntu-java-node-py-dev
+
+# alternatively
+docker pull ubuntu
 
 // ##############################################################################
 
