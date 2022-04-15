@@ -390,6 +390,7 @@ $ sudo docker container stop 490f468f38fc
 $ docker container ls -a
 
 $ docker exec -it <container_id> /bin/bash
+$ docker exec -u stud -t -i 0aa85c74361c /bin/bash
 
 
 ################################################
