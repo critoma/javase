@@ -387,7 +387,9 @@ $ sudo docker container ls
 $ sudo docker container stop 490f468f38fc
 
 
+$ docker container ls
 
+$ docker exec -it <container_id> bash
 
 
 ################################################
