@@ -467,9 +467,21 @@ tar -xvf jdk-9.0.4_linux-x64_bin.tar.gz
 mv jdk-9.0.4 /opt/software/java/jdks/
 
 
+# 5.3 Install ANT 1.10.1, Maven 3.5.2, Gradle 4.5, Apache Tomcat 9.0.4, Jenkins Generic WAR 2.89.3
+cd /home/kits
+wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.10.1-bin.tar.xz
+wget http://mirrors.m247.ro/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+wget https://services.gradle.org/distributions/gradle-4.5-bin.zip
+wget http://apache.javapipe.com/tomcat/tomcat-9/v9.0.4/bin/apache-tomcat-9.0.4.tar.gz
+wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+
+tar -xvf apache-ant-1.10.1-bin.tar.xz
+tar -xvf apache-maven-3.5.2-bin.tar.gz
+unzip gradle-4.5-bin.zip
+tar -xvf apache-tomcat-9.0.4.tar.gz
 
 
-# 5.3 Download Python 2 & 3:
+# 5.4 Download Python 2 & 3:
 #Python 2:
 apt-get update \
     && apt-get upgrade -y \
@@ -506,19 +518,6 @@ pip3 install --upgrade pip
 
 python3 --version
 /usr/bin/python3 --version
-
-# 5.4 Install ANT 1.10.1, Maven 3.5.2, Gradle 4.5, Apache Tomcat 9.0.4, Jenkins Generic WAR 2.89.3
-cd /home/kits
-wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.10.1-bin.tar.xz
-wget http://mirrors.m247.ro/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
-wget https://services.gradle.org/distributions/gradle-4.5-bin.zip
-wget http://apache.javapipe.com/tomcat/tomcat-9/v9.0.4/bin/apache-tomcat-9.0.4.tar.gz
-wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
-
-tar -xvf apache-ant-1.10.1-bin.tar.xz
-tar -xvf apache-maven-3.5.2-bin.tar.gz
-unzip gradle-4.5-bin.zip
-tar -xvf apache-tomcat-9.0.4.tar.gz
 
 
 
@@ -588,6 +587,43 @@ docker rmi 2a4cca5ac898
 docker images -a
 docker rmi $(docker images -a -q)
 
+# * Install MongoDB and mySQL:
+
+sudo apt-get install gnupg
+wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+lsb_release -dc
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+cat /etc/apt/sources.list.d/mongodb-org-5.0.list
+sudo apt-get update
+
+sudo apt-get install -y mongodb-org
+
+sudo apt-get install systemctl
+sudo systemctl start mongod
+sudo systemctl daemon-reload
+# vs.
+sudo /etc/init.d/docker start
+cat /var/log/mongodb/mongod.log
+
+sudo service mongo start
+
+sudo netstat -na -p tcp | grep 27
+sudo netstat -na -p tcp | grep 27017
+
+
+sudo apt-get install mysql-server
+sudo systemctl status mysql.service
+sudo systemctl start mysql.service
+# vs.
+sudo service mysql restart
+
+sudo netstat -na -p tcp | grep 3306
+
+sudo dpkg-reconfigure mysql-server-8.0
+sudo dpkg-reconfigure mysql-server-8.0.28-0ubuntu0.20.04.3
+sudo nano /etc/mysql/my.cnf
+mysql --version
+mysql -u root -pstud
 ################################################
 
 
