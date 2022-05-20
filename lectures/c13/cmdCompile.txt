@@ -35,7 +35,11 @@ ip a
 # tcpdump -i <interface> 'port <val>' -s 65535 -w <file> 
 sudo tcpdump -i lo 'port 3306' -s 65535 -w ~/wmysql.pcap
 
-# Terminal 4 - compile and run java
+# Terminal 4 - get the connector, compile and run Java
+wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.29.tar.gz
+tar -xf mysql-connector-java-8.0.29.tar.gz
+javac -cp .:./libs/mysql-connector-java-8.0.29/mysql-connector-java-8.0.29.jar eu_ase_jdbc/JDBCExample1.java
+java -cp .:./libs/mysql-connector-java-8.0.29/mysql-connector-java-8.0.29.jar eu_ase_jdbc.JDBCExample1
 
 
 ############################################
