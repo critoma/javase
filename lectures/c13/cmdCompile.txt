@@ -12,6 +12,34 @@ sudo netstat -tap | grep mysql
 sudo netstat -na -p tcp | grep 3306
 sudo service mysql restart
 
+############################################
+# *** As paranthesis - In Ubuntu from Google Shell Cloud there some restriction but the one is still be able to install and run for playing:
+sudo apt-get install mysql-server # set pass stud in the installation process
+sudo su
+# Terminal 1:
+/usr/sbin/mysqld --user=root &
+# Terminal 2:
+mysql -u root -p
+
+show databases;
+use mysql;
+show tables;
+select * from user;
+select user from user;
+
+# Terminal 3 - OS commands:
+ps -ax | grep mysql
+netstat -na | grep 3306
+ip a
+# sudo apt-get install tcpdump
+# tcpdump -i <interface> 'port <val>' -s 65535 -w <file> 
+sudo tcpdump -i lo 'port 3306' -s 65535 -w ~/wmysql.pcap
+
+# Terminal 4 - compile and run java
+
+
+############################################
+
 # change config + IP address and port for listening
 sudo gedit /etc/mysql/my.cnf
 
