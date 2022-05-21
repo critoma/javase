@@ -13,7 +13,7 @@ sudo netstat -na -p tcp | grep 3306
 sudo service mysql restart
 
 ############################################
-# *** As paranthesis - In Ubuntu from Google Shell Cloud there some restriction but the one is still be able to install and run for playing:
+# *** As paranthesis - In Ubuntu from Google Shell Cloud (Linux Ubuntu 20.04 LTS) there some restriction but the one is still be able to install and run for playing:
 sudo apt-get install mysql-server # set pass stud in the installation process
 sudo su
 # Terminal 1:
@@ -41,6 +41,34 @@ tar -xf mysql-connector-java-8.0.29.tar.gz
 javac -cp .:./libs/mysql-connector-java-8.0.29/mysql-connector-java-8.0.29.jar eu_ase_jdbc/JDBCExample1.java
 java -cp .:./libs/mysql-connector-java-8.0.29/mysql-connector-java-8.0.29.jar eu_ase_jdbc.JDBCExample1
 
+#---------------------------------------------------------------------
+#Install MongoDB in Linux Ubuntu 20 LTS from Google Cloud Shell
+#https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
+
+
+sudo apt-get install gnupg
+wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+
+ps --no-headers -o comm 1
+
+# Terminal 1 - start manually mongod
+sudo su
+mkdir -p /data/db
+mongod --port 27017 --logpath /var/log/mongodb/mongod.log
+# or: mongod --fork --port 27017 --logpath /var/log/mongodb/mongod.log --dbpath /data/db
+
+# Terminal 2 - MongoDB client operations
+ps -ax | grep mongod
+netstat -na | grep 27017
+sudo kill -l
+sudo kill -2 <PID>
+
+# Terminal 3 - OS Admin commands: check TCP port and mongod process
+
+# Terminal 4 - Java program compile and run
 
 ############################################
 
