@@ -60,15 +60,31 @@ mkdir -p /data/db
 mongod --port 27017 --logpath /var/log/mongodb/mongod.log
 # or: mongod --fork --port 27017 --logpath /var/log/mongodb/mongod.log --dbpath /data/db
 
-# Terminal 2 - MongoDB client operations
+
+# Terminal 2 - OS Admin commands: check TCP port and mongod process
 ps -ax | grep mongod
 netstat -na | grep 27017
 sudo kill -l
 sudo kill -2 <PID>
 
-# Terminal 3 - OS Admin commands: check TCP port and mongod process
+# Terminal 3 - Java program compile and run
+wget https://github.com/critoma/javase/raw/master/lectures/c13/downloads_readme/mongo-java-driver-3.4.0-rc1.jar # in libs
 
-# Terminal 4 - Java program compile and run
+javac -cp .:./libs/mongo-java-driver-3.4.0-rc1.jar eu_ase_nosql/MongoDbClient.java
+
+java -cp .:./libs/mongo-java-driver-3.4.0-rc1.jar eu_ase_nosql.MongoDbClient
+
+# Terminal 4 - MongoDB client operations
+mongo
+>
+
+show dbs
+use test
+db.stats()
+show collections
+db.mycol.find()
+db.mycol.find().pretty()
+quit()
 
 ############################################
 
