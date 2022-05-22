@@ -9,7 +9,14 @@ export JSE=/home/stud/javase/lectures
 
 cd $JSE/c14/src/
 
-
+# https://download2.gluonhq.com/scenebuilder/17.0.0/install/mac/SceneBuilder-17.0.0.dmg
+# https://gluonhq.com/products/javafx/
+# https://download2.gluonhq.com/openjfx/17.0.1/openjfx-17.0.1_osx-x64_bin-sdk.zip
+# https://download2.gluonhq.com/openjfx/17.0.1/openjfx-17.0.1_osx-x64_bin-jmods.zip
+# https://download2.gluonhq.com/openjfx/17.0.1/openjfx-17.0.1_windows-x64_bin-sdk.zip
+# https://download2.gluonhq.com/openjfx/17.0.1/openjfx-17.0.1_windows-x64_bin-jmods.zip
+# https://download2.gluonhq.com/openjfx/17.0.1/openjfx-17.0.1_linux-x64_bin-sdk.zip
+# https://download2.gluonhq.com/openjfx/17.0.1/openjfx-17.0.1_linux-x64_bin-jmods.zip
 
 # JFXML
 
