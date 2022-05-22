@@ -70,9 +70,18 @@ sudo kill -2 <PID>
 # Terminal 3 - Java program compile and run
 wget https://github.com/critoma/javase/raw/master/lectures/c13/downloads_readme/mongo-java-driver-3.4.0-rc1.jar # in libs
 
+wget https://repo1.maven.org/maven2/org/mongodb/mongodb-driver/3.12.9/mongodb-driver-3.12.9.jar
+wget https://repo1.maven.org/maven2/org/mongodb/bson/3.3.0/bson-3.3.0.jar
+#wget https://repo1.maven.org/maven2/org/mongodb/mongodb-driver-reactivestreams/1.12.0/mongodb-driver-reactivestreams-1.12.0.jar
+
 javac -cp .:./libs/mongo-java-driver-3.4.0-rc1.jar eu_ase_nosql/MongoDbClient.java
 
 java -cp .:./libs/mongo-java-driver-3.4.0-rc1.jar eu_ase_nosql.MongoDbClient
+
+javac -cp .:./bson-3.3.0.jar:./libs/mongodb-driver-3.12.9.jar eu_ase_nosql/MongoDbClient.java
+
+java -cp .:./bson-3.3.0.jar:./libs/mongodb-driver-3.12.9.jar eu_ase_nosql.MongoDbClient
+
 
 # Terminal 4 - MongoDB client operations
 mongo
