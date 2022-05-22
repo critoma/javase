@@ -59,6 +59,7 @@ sudo su
 mkdir -p /data/db
 mongod --port 27017 --logpath /var/log/mongodb/mongod.log
 # or: mongod --fork --port 27017 --logpath /var/log/mongodb/mongod.log --dbpath /data/db
+# https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
 
 
 # Terminal 2 - OS Admin commands: check TCP port and mongod process
@@ -81,6 +82,15 @@ java -cp .:./libs/mongo-java-driver-3.4.0-rc1.jar eu_ase_nosql.MongoDbClient
 #javac -cp .:./libs/bson-3.3.0.jar:./libs/mongodb-driver-3.12.9.jar eu_ase_nosql/MongoDbClient.java
 #java -cp .:./bson-3.3.0.jar:./libs/mongodb-driver-3.12.9.jar eu_ase_nosql.MongoDbClient
 
+# https://mongodb.github.io/mongo-java-driver-reactivestreams/
+# https://repo1.maven.org/maven2/org/mongodb/mongo-java-driver/
+# https://repo1.maven.org/maven2/org/mongodb/mongodb-driver-reactivestreams/
+# https://github.com/mongodb/mongo-java-driver/tree/master/driver-reactive-streams/src/examples/reactivestreams/tour
+# https://mongodb.github.io/mongo-java-driver-reactivestreams/1.10/getting-started/quick-tour/
+# https://mongodb.github.io/mongo-java-driver-reactivestreams/
+# https://mongodb.github.io/mongo-java-driver/4.1/driver-reactive/getting-started/quick-start/
+# https://www.mongodb.com/docs/drivers/reactive-streams/
+# https://mongodb.github.io/mongo-java-driver/4.2/driver/getting-started/installation/#mongodb-driver-sync
 
 # Terminal 4 - MongoDB client operations
 mongo
