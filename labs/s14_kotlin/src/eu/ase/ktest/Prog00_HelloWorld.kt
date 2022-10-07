@@ -1,7 +1,7 @@
 package eu.ase.ktest
 /*
-Online IDE: https://try.kotlinlang.org
-Offline IDE: Android Studio 3.x / IntelliJ IDEA or Eclipse
+Online IDE: https://play.kotlinlang.org/ <- https://try.kotlinlang.org
+Offline IDE: Android Studio 3.x + / IntelliJ IDEA or Eclipse
 
 Reference: https://kotlinlang.org/docs/reference/basic-syntax.html
 Tutorial starting point:
