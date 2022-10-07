@@ -2,6 +2,8 @@ package eu.ase.ktest
 /*
 Online IDE: https://play.kotlinlang.org/ <- https://try.kotlinlang.org
 Offline IDE: Android Studio 3.x + / IntelliJ IDEA or Eclipse
+Kotlin GitHub: https://github.com/JetBrains/kotlin | https://github.com/JetBrains/kotlin/releases/tag/v1.7.20
+Kotlin Docs: https://kotlinlang.org/docs/command-line.html | https://play.kotlinlang.org/byExample/
 
 Reference: https://kotlinlang.org/docs/reference/basic-syntax.html
 Tutorial starting point:
