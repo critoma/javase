@@ -62,3 +62,68 @@ public class ProgMainJ8FPProcessingStreams {
 	}
 
 }
+
+/*
+package eu.dice.streams_lamda;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+public class J8ProgMainTestProcesingStreams {
+
+	public static void main(String[] args) {
+		List<String> sl = Arrays.asList("Bogdan", "Andrei", "", "Ana", "", "Marius",
+				"Andrei", "", "Ana", "", "Marius", "Andrei", "", "Ana", "", "Marius");
+
+		long start = 0, stop = 0;
+		start = System.currentTimeMillis();
+		int contor = 0;
+		for (var i = 0; i < sl.size(); i++)
+			if ( sl.get(i).equals("") )
+				contor++;
+		stop = System.currentTimeMillis();
+
+		System.out.println("# empty1 = " + contor + ", ms = " + (stop - start));
+		
+		start = System.currentTimeMillis();
+		int emptyItems = 0;
+		for (String s : sl) {
+			if ( s.equals("") )
+				emptyItems++;
+		}
+		stop = System.currentTimeMillis();
+		System.out.println("# empty2 = " + emptyItems + ", ms = " + (stop - start));
+
+		start = System.currentTimeMillis();
+		Predicate<String> predEmptyStr = (String s) -> {
+			boolean res = s.isEmpty();
+			return res;
+		};
+		long countEmptyStr = sl.stream().filter(predEmptyStr).count();
+		stop = System.currentTimeMillis();
+		System.out.println("# empty3 = " + countEmptyStr + ", ms = " + (stop - start));
+		
+		
+		start = System.currentTimeMillis();
+		long c6ltr = sl.stream().filter(s -> s.length() == 6).count();
+		stop = System.currentTimeMillis();
+		System.out.println("# strins with 6 letters = " + c6ltr + ", ms = " + (stop - start));
+		
+		System.out.println(sl);
+		
+		List<String> notEmptyNames = sl.stream().filter(s -> !s.isEmpty()).collect(Collectors.toList());
+		System.out.println(notEmptyNames);
+		
+		List<String> notEmptyUnqNames = sl.stream().filter(s -> !s.isEmpty()).distinct().collect(Collectors.toList());
+		System.out.println(notEmptyUnqNames);
+		
+		List<Integer> numbers = Arrays.asList(3, 5, 12, 11, 7);
+		List<Integer> sqNumbers = numbers.stream().map(i -> i*i).toList();
+		System.out.println(sqNumbers);
+	}
+
+}
+
+*/
