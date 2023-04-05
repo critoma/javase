@@ -1,10 +1,12 @@
 package eu.ase.threads;
 
+import java.time.Duration;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 class HelloThread extends Thread {
@@ -30,6 +32,58 @@ class HelloRunnable extends /* OtherClass */ Object implements Runnable {
 
 	}
 
+}
+
+class VirtualThreadsPlayground {
+	// https://blog.rockthejvm.com/ultimate-guide-to-java-virtual-threads/
+	// MacOS - get CPU cores: sysctl hw.physicalcpu hw.logicalcpu
+	// Linux - get CPU: lscpu
+	// put in Run cofig: --enable-preview and Java 19
+	
+	static int numberOfCores() {
+		return Runtime.getRuntime().availableProcessors();
+	}
+	
+	static void concurrentMorningRoutineUsingExecutorsWithName() {
+		@SuppressWarnings("preview")
+		final ThreadFactory factory = Thread.ofVirtual().name("routine-", 0).factory();
+		//final ThreadFactory factory = Thread.ofVirtual().factory();
+		
+		try (@SuppressWarnings("preview")
+		var executor = Executors.newThreadPerTaskExecutor(factory)) {
+			
+			var bathTime = executor.submit(() -> {
+				// breakpoint here:
+				System.out.printf("\n %s - I'm going to take a bath", Thread.currentThread().getName());
+				try {
+					Thread.sleep(Duration.ofMillis(500L));
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.printf("\n %s - I'm done with the bath", Thread.currentThread().getName());
+			});
+			
+			var boilingWater = executor.submit(() -> {
+				// breakpoint here:
+				System.out.printf("\n %s - I'm going to boil some water", Thread.currentThread().getName());
+				try {
+					Thread.sleep(Duration.ofSeconds(1L));
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.printf("\n %s - I'm done with the water", Thread.currentThread().getName());
+			});
+			
+			try {
+				// breakpoints here:
+				bathTime.get();
+				boilingWater.get();
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+			
+		} 
+	}
 }
 
 public class TestThreads {
@@ -72,21 +126,11 @@ public class TestThreads {
 		Thread twj8 = new Thread(taskJ8, "Th04 Java 8 ...17");
 		twj8.start();
 		
-		// Java 19+ MUST be set and --enable-preview in VM arguments:
-		Runnable taskJ19 = () -> {
-			String name = Thread.currentThread().getName();
-			System.out.println("Hello J19 " + name);
-		};
-		@SuppressWarnings("preview")
-		Thread twj19 = Thread.ofVirtual().unstarted(taskJ19);
-		twj19.start();
-		
 
 		ExecutorService executorThreadsPool = Executors.newFixedThreadPool(2); // .newSingleThreadExecutor(); //
 																				// .newFixedThreadPool(4);
 		executorThreadsPool.submit(taskJ8);
 		executorThreadsPool.submit(taskJ8);
-		executorThreadsPool.submit(taskJ19);
 //		executorThreadsPool.submit(() -> {
 //			String name = Thread.currentThread().getName();
 //			System.out.println("Hello J8 ExecServ " + name);
@@ -147,9 +191,21 @@ public class TestThreads {
 			System.out.println("shutdown finished");
 		}
 		
+		// Java Fabrics (Virtual Threads - run this with Java 19+):
+		// Java 19+ MUST be set and --enable-preview in VM arguments:
+		Runnable taskJ19 = () -> {
+			String name = Thread.currentThread().getName();
+			System.out.println("Hello J19 " + name);
+		};
+		@SuppressWarnings("preview")
+		Thread twj19 = Thread.ofVirtual()
+						.name("virtualThread-aka-fabric").unstarted(taskJ19);
+		twj19.start();
 		
+		System.out.printf("# of CPU cores: %s", VirtualThreadsPlayground.numberOfCores());
+		VirtualThreadsPlayground.concurrentMorningRoutineUsingExecutorsWithName();
 
-		System.out.println("Main Program finished!");
+		System.out.println("\n Main Program finished!");
 
 	}
 
