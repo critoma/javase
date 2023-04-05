@@ -3,7 +3,11 @@ package eu.ase.threads;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.io.Serializable;
+import java.time.Duration;
 
 class ASingleton {
 
@@ -66,16 +70,16 @@ class ASingletonSafe {
 /*
  * How to create class which produces immutable objects (thread safe) + Java
  * Fabrics (virtual Threads - run this with Java 19+):
- * https://www.geeksforgeeks.org/create-immutable-class-java/ 
+ * https://www.geeksforgeeks.org/create-immutable-class-java/
  * 
- * In Java, all the wrapper classes (like Integer, Boolean, Byte, Short) and String class is
- * immutable. 1. Declare the class as final so it can’t be extended. 2. Make all
- * of the fields private so that direct access is not allowed. 3. Don’t provide
- * setter methods for variables. 4. Make all mutable fields final so that a
- * field’s value can be assigned only once. 5. Initialize all fields using a
- * constructor method performing deep copy. 6. Perform cloning of objects in the
- * getter methods to return a copy rather than returning the actual object
- * reference.
+ * In Java, all the wrapper classes (like Integer, Boolean, Byte, Short) and
+ * String class is immutable. 1. Declare the class as final so it can’t be
+ * extended. 2. Make all of the fields private so that direct access is not
+ * allowed. 3. Don’t provide setter methods for variables. 4. Make all mutable
+ * fields final so that a field’s value can be assigned only once. 5. Initialize
+ * all fields using a constructor method performing deep copy. 6. Perform
+ * cloning of objects in the getter methods to return a copy rather than
+ * returning the actual object reference.
  *
  * regarding Comparable, please see lecture 4 and JCF - Java Collection
  * Framework:
@@ -89,19 +93,18 @@ final class Student implements Serializable, Cloneable, Comparable<Student> {
 
 	// Member attributes of final class
 	private final int regNo;
-	
+
 	private final String firstName;
 	private final String lastName;
-	
+
 	private final Map<String, String> metadata;
 
-	// Constructor of immutable class
-	// Parameterized constructor
+	// Constructor of immutable class - Parameterized constructor
 	public Student(int regNo, String firstName, String lastName, Map<String, String> metadata) {
 		this.regNo = regNo;
 		this.firstName = new String("" + firstName);
 		this.lastName = new String("" + lastName);
-		
+
 		// Creating Map object with reference to HashMap
 		// Declaring object of string type
 		Map<String, String> tempMap = new HashMap<>();
@@ -109,7 +112,7 @@ final class Student implements Serializable, Cloneable, Comparable<Student> {
 		// Iterating using for-each loop
 		for (Map.Entry<String, String> entry : metadata.entrySet()) {
 			// instead of new if other class than String, then 'clone()' will be used
-			tempMap.put(new String(""+entry.getKey()), new String(""+entry.getValue()));
+			tempMap.put(new String("" + entry.getKey()), new String("" + entry.getValue()));
 		}
 
 		this.metadata = tempMap;
@@ -141,13 +144,12 @@ final class Student implements Serializable, Cloneable, Comparable<Student> {
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		//return super.clone();
-		//Student objCopy =  (Student) super.clone();
+		// return super.clone();
+		// Student objCopy = (Student) super.clone();
 		Student objCopy = new Student(this.regNo, this.firstName, this.lastName, this.getMetadata());
 		return objCopy;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		// return Objects.hash(firstName, lastName, metadata, regNo);
@@ -157,11 +159,11 @@ final class Student implements Serializable, Cloneable, Comparable<Student> {
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((metadata == null) ? 0 : metadata.hashCode());
 		result = prime * result + regNo;
-		
+
 		int r = Objects.hash(firstName, lastName, metadata, regNo);
-		String str = (r != result)? "\n whoops! \n" : "\n good! \n";
+		String str = (r != result) ? "\n whoops! \n" : "\n good! \n";
 		System.out.printf(str);
-		
+
 		return result;
 	}
 
@@ -176,7 +178,7 @@ final class Student implements Serializable, Cloneable, Comparable<Student> {
 //		Student other = (Student) obj;
 //		return Objects.equals(firstName, other.firstName) && Objects.equals(lastName, other.lastName)
 //				&& Objects.equals(metadata, other.metadata) && regNo == other.regNo;
-		
+
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -206,7 +208,7 @@ final class Student implements Serializable, Cloneable, Comparable<Student> {
 
 	@Override
 	public int compareTo(Student o) {
-		if(this.regNo > o.regNo)
+		if (this.regNo > o.regNo)
 			return 1;
 		else if (this.regNo == o.regNo)
 			return 0;
@@ -216,10 +218,62 @@ final class Student implements Serializable, Cloneable, Comparable<Student> {
 
 	@Override
 	public String toString() {
-		return "eu.ase.threads.Student [regNo=" + regNo + ", firstName=" + firstName + ", lastName=" + lastName + ", metadata="
-				+ metadata + "]" + " @ " + Integer.toHexString(this.hashCode());
+		return "eu.ase.threads.Student [regNo=" + regNo + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", metadata=" + metadata + "]" + " @ " + Integer.toHexString(this.hashCode());
 	}
 
+}
+
+class VirtualThreadsPlayground {
+	// https://blog.rockthejvm.com/ultimate-guide-to-java-virtual-threads/
+	// MacOS - get CPU cores: sysctl hw.physicalcpu hw.logicalcpu
+	// Linux - get CPU: lscpu
+	// put in Run cofig: --enable-preview
+	
+	static int numberOfCores() {
+		return Runtime.getRuntime().availableProcessors();
+	}
+	
+	static void concurrentMorningRoutineUsingExecutorsWithName() {
+		@SuppressWarnings("preview")
+		final ThreadFactory factory = Thread.ofVirtual().name("routine-", 0).factory();
+		//final ThreadFactory factory = Thread.ofVirtual().factory();
+		
+		try (@SuppressWarnings("preview")
+		var executor = Executors.newThreadPerTaskExecutor(factory)) {
+			
+			var bathTime = executor.submit(() -> {
+				// breakpoint here:
+				System.out.printf("\n %s - I'm going to take a bath", Thread.currentThread().getName());
+				try {
+					Thread.sleep(Duration.ofMillis(500L));
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.printf("\n %s - I'm done with the bath", Thread.currentThread().getName());
+			});
+			
+			var boilingWater = executor.submit(() -> {
+				// breakpoint here:
+				System.out.printf("\n %s - I'm going to boil some water", Thread.currentThread().getName());
+				try {
+					Thread.sleep(Duration.ofSeconds(1L));
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.printf("\n %s - I'm done with the water", Thread.currentThread().getName());
+			});
+			
+			try {
+				// breakpoints here:
+				bathTime.get();
+				boilingWater.get();
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+			
+		} 
+	}
 }
 
 public class ThreadSafeSourceCodeDesignPatterns {
@@ -240,7 +294,7 @@ public class ThreadSafeSourceCodeDesignPatterns {
 		Thread th1 = new Thread(t1);
 		th0.start();
 		th1.start();
-		
+
 		Runnable t2 = () -> {
 			ASingletonSafe ss1 = ASingletonSafe.getInstance();
 			ss1.setMyField(91);
@@ -255,7 +309,6 @@ public class ThreadSafeSourceCodeDesignPatterns {
 		Thread th3 = new Thread(t3);
 		th2.start();
 		th3.start();
-		
 
 		// Creating Map object with reference to HashMap
 		Map<String, String> map1 = new HashMap<>();
@@ -267,7 +320,7 @@ public class ThreadSafeSourceCodeDesignPatterns {
 		Student s1 = new Student(101, "Alexandra", "Popescu", map1);
 
 		System.out.println(s1.getRegNo() + " " + s1.getFirstName() + " " + s1.getLastName());
-		
+
 		System.out.println("\n" + Thread.currentThread().getName() + " : " + s1.getMetadata());
 
 		Runnable t4 = () -> {
@@ -295,5 +348,8 @@ public class ThreadSafeSourceCodeDesignPatterns {
 			e.printStackTrace();
 		}
 		System.out.println(s1);
+		
+		System.out.printf("# of CPU cores: %s", VirtualThreadsPlayground.numberOfCores());
+		VirtualThreadsPlayground.concurrentMorningRoutineUsingExecutorsWithName();
 	}
 }
