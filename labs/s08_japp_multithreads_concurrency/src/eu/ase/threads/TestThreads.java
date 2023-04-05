@@ -1,4 +1,4 @@
-package eu.dice.threads;
+package eu.ase.threads;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -21,16 +21,8 @@ class HelloThread extends Thread {
 	}
 }
 
-//daca nu derivez Thread voi implementa Runnable
 class HelloRunnable extends /* OtherClass */ Object implements Runnable {
 
-	// Runnable are o singura metoda => .run
-
-	// private String threadName;
-	//
-	// public HelloRunnable(String nameOfThread) {
-	// this.threadName = nameOfThread;
-	// }
 	@Override
 	public void run() {
 		String name = Thread.currentThread().getName();
@@ -47,8 +39,6 @@ public class TestThreads {
 		HelloThread tJ5 = new HelloThread("Th01 Java 1.1 ...17");
 		// tJ5.run();
 
-		// start va lansa un fir de executie
-		// start va lansa in executie metoda run din clasa Thread
 		tJ5.start();
 //		try {
 //			tJ5.join();
@@ -58,7 +48,6 @@ public class TestThreads {
 //		
 
 		// HelloRunnable tJ5Plus = new HelloRunnable("Th02 Java 1.1 Plus... 17");
-
 		HelloRunnable tJ5Plus = new HelloRunnable();
 		Thread tw_tJ5Plus = new Thread(tJ5Plus, "Th02 Java 1.1 Plus... 17");
 		tw_tJ5Plus.start();
@@ -82,15 +71,27 @@ public class TestThreads {
 
 		Thread twj8 = new Thread(taskJ8, "Th04 Java 8 ...17");
 		twj8.start();
+		
+		// Java 19+ MUST be set and --enable-preview in VM arguments:
+		Runnable taskJ19 = () -> {
+			String name = Thread.currentThread().getName();
+			System.out.println("Hello J19 " + name);
+		};
+		@SuppressWarnings("preview")
+		Thread twj19 = Thread.ofVirtual().unstarted(taskJ19);
+		twj19.start();
+		
 
-		ExecutorService executorThreadsPool = Executors.newFixedThreadPool(2); //.newSingleThreadExecutor(); // .newFixedThreadPool(4);
+		ExecutorService executorThreadsPool = Executors.newFixedThreadPool(2); // .newSingleThreadExecutor(); //
+																				// .newFixedThreadPool(4);
 		executorThreadsPool.submit(taskJ8);
 		executorThreadsPool.submit(taskJ8);
+		executorThreadsPool.submit(taskJ19);
 //		executorThreadsPool.submit(() -> {
 //			String name = Thread.currentThread().getName();
 //			System.out.println("Hello J8 ExecServ " + name);
 //		});
-		
+
 		try {
 			System.out.println("attempt to shutdown executor");
 			executorThreadsPool.shutdown();
@@ -104,15 +105,14 @@ public class TestThreads {
 			executorThreadsPool.shutdownNow();
 			System.out.println("shutdown finished");
 		}
-		
-		
-		
-		ExecutorService executorThreadsPool4FC = Executors.newFixedThreadPool(1); //.newSingleThreadExecutor(); // .newFixedThreadPool(4);
+
+		ExecutorService executorThreadsPool4FC = Executors.newFixedThreadPool(1); // .newSingleThreadExecutor(); //
+																					// .newFixedThreadPool(4);
 		Callable<Integer> taskCallable = () -> {
 			try {
 				TimeUnit.SECONDS.sleep(2);
 				return 105;
-			} catch(InterruptedException ie) {
+			} catch (InterruptedException ie) {
 				throw new IllegalStateException("task callable interrupted!", ie);
 			}
 		};
@@ -132,7 +132,7 @@ public class TestThreads {
 				e.printStackTrace();
 			}
 		}
-		
+
 		try {
 			System.out.println("attempt to shutdown executor");
 			executorThreadsPool4FC.shutdown();
@@ -146,6 +146,8 @@ public class TestThreads {
 			executorThreadsPool4FC.shutdownNow();
 			System.out.println("shutdown finished");
 		}
+		
+		
 
 		System.out.println("Main Program finished!");
 
