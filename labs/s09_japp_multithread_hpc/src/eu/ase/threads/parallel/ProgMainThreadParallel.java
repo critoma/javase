@@ -160,17 +160,20 @@ public class ProgMainThreadParallel {
 		
 		// 6. Java 19+ Virtual Threads aka Fabrics
 		// set --enable-preview in command line or in VM Arguments of the Run Configuration of Eclipse/IntelliJ
+		// please also see: https://github.com/critoma/dad/blob/master/lectures/c01/src/S08_HPC_Threads/eu/ase/threads/ProgMainMultiThreadParallelJava19Fibers.java
 		sum = Long.valueOf(0);
 		startTime = System.currentTimeMillis();
 		
-		Thread[] vectVirtThreads = new Thread[NTHREADS];
+		// Thread[] vectVirtThreads = new Thread[NTHREADS];
 		MyMultiThreadArray[] vectVirtRThreads = new MyMultiThreadArray[NTHREADS];
 		
-		@SuppressWarnings("preview")
-		ThreadFactory factory = Thread.ofVirtual().factory();
-		
+//		//@SuppressWarnings("preview")
+//		//ThreadFactory factory = Thread.ofVirtual().factory();
+//		
 		try (@SuppressWarnings("preview")
-				var executorServ = Executors.newThreadPerTaskExecutor(factory)) {
+			var executorServ = Executors.newVirtualThreadPerTaskExecutor()
+			// var executorServ = Executors.newThreadPerTaskExecutor(factory)
+		) {
 			
 			for (int it = 0; it < NTHREADS; it++) {
 				startIdx = it * (dimVect/NTHREADS);
@@ -199,6 +202,22 @@ public class ProgMainThreadParallel {
 //				vectVirtThreads[it].join();
 //			} catch(InterruptedException ie) {
 //				ie.printStackTrace();
+//			}
+//		}
+		
+//		for (int it = 0; it < NTHREADS; it++) {
+//			startIdx = it * (dimVect/NTHREADS);
+//			stopIdx = (it + 1) * (dimVect/NTHREADS) - 1;
+//			vectSum[it] = Long.valueOf(0);
+//			vectVirtRThreads[it] = new MyMultiThreadArray(v, startIdx, stopIdx);
+//			vectVirtThreads[it] = Thread.startVirtualThread(vectVirtRThreads[it]);
+//		}
+//		
+//		for(int it = 0; it < NTHREADS; it++) {
+//			try {
+//				vectVirtThreads[it].join();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
 //			}
 //		}
 		
