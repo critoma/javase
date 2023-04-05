@@ -7,16 +7,17 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 public class ProgMainThreadParallel {
-	private static final int NTHREADS = 4; //2
+	private static final int NTHREADS = 4; //8 or 4 or 2
 	
 	public static void main(String[] args) {
 		int dimVect = 40_000_000;
 		
 		int [] v = new int[dimVect];
-		Long sum = new Long(0);
+		Long sum = Long.valueOf(0);
 		
 		for (int i = 0; i < dimVect; i++)
 			v[i] = 1 + i;
@@ -27,7 +28,7 @@ public class ProgMainThreadParallel {
 		
 		// -----------
 		// 1. Sequential
-		sum = new Long(0);
+		sum = Long.valueOf(0);
 		startTime = System.currentTimeMillis();
 		for (int i = 0; i < dimVect; i++) {
 			sum += v[i];
@@ -37,7 +38,7 @@ public class ProgMainThreadParallel {
 				+ " , sum = " + sum);
 		
 		// 2. Multi-threading standard
-		sum = new Long(0);
+		sum = Long.valueOf(0);
 		startTime = System.currentTimeMillis();
 		
 		Thread[] vectThreads = new Thread[NTHREADS];
@@ -46,7 +47,7 @@ public class ProgMainThreadParallel {
 		for (int it = 0; it < NTHREADS; it++) {
 			startIdx = it * (dimVect/NTHREADS);
 			stopIdx = (it + 1) * (dimVect/NTHREADS) - 1;
-			vectSum[it] = new Long(0);
+			vectSum[it] = Long.valueOf(0);
 			vectRThreads[it] = new MyMultiThreadArray(v, 
 					startIdx, stopIdx);
 			vectThreads[it] = new Thread(vectRThreads[it]);
@@ -74,7 +75,7 @@ public class ProgMainThreadParallel {
 		
 		
 		// 3. Multi-threading executor-service
-		sum = new Long(0);
+		sum = Long.valueOf(0);
 		startTime = System.currentTimeMillis();
 		ExecutorService execThreadPool = Executors.newFixedThreadPool(NTHREADS);	
 		MyMultiThreadArray[] workerTask = new MyMultiThreadArray[NTHREADS];
@@ -82,7 +83,7 @@ public class ProgMainThreadParallel {
 		for (int it = 0; it < NTHREADS; it++) {
 			startIdx = it * (dimVect/NTHREADS);
 			stopIdx = (it + 1) * (dimVect/NTHREADS) - 1;
-			vectSum[it] = new Long(0);
+			vectSum[it] = Long.valueOf(0);
 			workerTask[it] = new MyMultiThreadArray(v, 
 							startIdx, stopIdx);
 			execThreadPool.execute(workerTask[it]);
@@ -108,7 +109,7 @@ public class ProgMainThreadParallel {
 		ExecutorService executor = Executors.newFixedThreadPool(NTHREADS);
 		List<Future<Long>> list = new ArrayList<Future<Long>>();
 				
-		sum = new Long(0);
+		sum = Long.valueOf(0);
 		int slot = 0;
 
 		startTime = System.currentTimeMillis();
@@ -149,18 +150,64 @@ public class ProgMainThreadParallel {
 		System.out.println("4. Array Multithreading - thread pool (ExecutorService) + Callable & Future - stopTime - startTime = "
 								+ (stopTime - startTime) + " , sum = " + sum);
 		// 5.1 - Fork-Join
-		sum = new Long(0);
+		sum = Long.valueOf(0);
 		startTime = System.currentTimeMillis();
 		sum = SumForkJoin.sumArrays(v);
 		stopTime = System.currentTimeMillis();
 		System.out.println("5. Fork-Join Parallel Array time = "
-						+ (stopTime - startTime) + " , sum = " + sum);				
+						+ (stopTime - startTime) + " , sum = " + sum);	
+		
+		
+		// 6. Java 19+ Virtual Threads aka Fabrics
+		// set --enable-preview in command line or in VM Arguments of the Run Configuration of Eclipse/IntelliJ
+		sum = Long.valueOf(0);
+		startTime = System.currentTimeMillis();
+		
+		Thread[] vectVirtThreads = new Thread[NTHREADS];
+		MyMultiThreadArray[] vectVirtRThreads = new MyMultiThreadArray[NTHREADS];
+		
+		@SuppressWarnings("preview")
+		ThreadFactory factory = Thread.ofVirtual().factory();
+		
+		try (@SuppressWarnings("preview")
+				var executorServ = Executors.newThreadPerTaskExecutor(factory)) {
+			
+			for (int it = 0; it < NTHREADS; it++) {
+				startIdx = it * (dimVect/NTHREADS);
+				stopIdx = (it + 1) * (dimVect/NTHREADS) - 1;
+				vectSum[it] = Long.valueOf(0);
+				vectVirtRThreads[it] = new MyMultiThreadArray(v, startIdx, stopIdx);
+				executorServ.execute(vectVirtRThreads[it]);
+			}
+		}
+		
+//		for (int it = 0; it < NTHREADS; it++) {
+//			startIdx = it * (dimVect/NTHREADS);
+//			stopIdx = (it + 1) * (dimVect/NTHREADS) - 1;
+//			vectSum[it] = Long.valueOf(0);
+//			vectVirtRThreads[it] = new MyMultiThreadArray(v, 
+//					startIdx, stopIdx);
+//			vectVirtThreads[it] = Thread.ofVirtual().unstarted(vectVirtRThreads[it]);
+//		}
+//		
+//		for (int it = 0; it < NTHREADS; it++) {
+//			vectVirtThreads[it].start();
+//		}
+//		
+//		for (int it = 0; it < NTHREADS; it++) {
+//			try {
+//				vectVirtThreads[it].join();
+//			} catch(InterruptedException ie) {
+//				ie.printStackTrace();
+//			}
+//		}
+		
+		for (int it = 0; it < NTHREADS; it++) {
+			sum += vectVirtRThreads[it].getSum(); //vectSum[it]; //vectRThreads[it].getSum();
+		}
+		stopTime = System.currentTimeMillis();
+		System.out.println("6. Virtual Threads aka Fabrics time = "
+						+ (stopTime - startTime) + " , sum = " + sum);	
 	} // end main
 } // end class
-
-
-
-
-
-
 
