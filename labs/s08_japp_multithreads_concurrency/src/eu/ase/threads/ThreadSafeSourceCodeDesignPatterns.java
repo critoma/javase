@@ -61,7 +61,8 @@ class ASingletonSafe {
 5. Initialize all fields using a constructor method performing deep copy.
 6. Perform cloning of objects in the getter methods to return a copy rather than returning the actual object reference.
 *
-* regarding Comparable, please see lecture 3: https://github.com/critoma/javase/blob/master/lectures/c04/src/eu/ase/jcf/ObjectOrder5.java
+* regarding Comparable, please see lecture 4 and JCF - Java Collection Framework: 
+https://github.com/critoma/javase/blob/master/lectures/c04/src/eu/ase/jcf/ObjectOrder5.java
 *
 */
 // Java Program to Create An Immutable Class
