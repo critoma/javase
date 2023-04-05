@@ -3,11 +3,7 @@ package eu.ase.threads;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 import java.io.Serializable;
-import java.time.Duration;
 
 class ASingleton {
 
@@ -68,20 +64,20 @@ class ASingletonSafe {
 }
 
 /*
- * How to create class which produces immutable objects (thread safe) + Java
- * Fabrics (virtual Threads - run this with Java 19+):
+ * How to create class which produces immutable objects (thread safe):
  * https://www.geeksforgeeks.org/create-immutable-class-java/
  * 
  * In Java, all the wrapper classes (like Integer, Boolean, Byte, Short) and
- * String class is immutable. 1. Declare the class as final so it can’t be
- * extended. 2. Make all of the fields private so that direct access is not
- * allowed. 3. Don’t provide setter methods for variables. 4. Make all mutable
- * fields final so that a field’s value can be assigned only once. 5. Initialize
- * all fields using a constructor method performing deep copy. 6. Perform
- * cloning of objects in the getter methods to return a copy rather than
+ * String class is immutable. 
+ * 1. Declare the class as final so it can’t be extended. 
+ * 2. Make all of the fields private so that direct access is not allowed. 
+ * 3. Don’t provide setter methods for variables. 
+ * 4. Make all mutable fields final so that a field’s value can be assigned only once. 
+ * 5. Initialize all fields using a constructor method performing deep copy. 
+ * 6. Perform cloning of objects in the getter methods to return a copy rather than
  * returning the actual object reference.
  *
- * regarding Comparable, please see lecture 4 and JCF - Java Collection
+ * Regarding Comparable, please see lecture 4 and JCF - Java Collection
  * Framework:
  * https://github.com/critoma/javase/blob/master/lectures/c04/src/eu/ase/jcf/
  * ObjectOrder5.java
@@ -224,58 +220,6 @@ final class Student implements Serializable, Cloneable, Comparable<Student> {
 
 }
 
-class VirtualThreadsPlayground {
-	// https://blog.rockthejvm.com/ultimate-guide-to-java-virtual-threads/
-	// MacOS - get CPU cores: sysctl hw.physicalcpu hw.logicalcpu
-	// Linux - get CPU: lscpu
-	// put in Run cofig: --enable-preview
-	
-	static int numberOfCores() {
-		return Runtime.getRuntime().availableProcessors();
-	}
-	
-	static void concurrentMorningRoutineUsingExecutorsWithName() {
-		@SuppressWarnings("preview")
-		final ThreadFactory factory = Thread.ofVirtual().name("routine-", 0).factory();
-		//final ThreadFactory factory = Thread.ofVirtual().factory();
-		
-		try (@SuppressWarnings("preview")
-		var executor = Executors.newThreadPerTaskExecutor(factory)) {
-			
-			var bathTime = executor.submit(() -> {
-				// breakpoint here:
-				System.out.printf("\n %s - I'm going to take a bath", Thread.currentThread().getName());
-				try {
-					Thread.sleep(Duration.ofMillis(500L));
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				System.out.printf("\n %s - I'm done with the bath", Thread.currentThread().getName());
-			});
-			
-			var boilingWater = executor.submit(() -> {
-				// breakpoint here:
-				System.out.printf("\n %s - I'm going to boil some water", Thread.currentThread().getName());
-				try {
-					Thread.sleep(Duration.ofSeconds(1L));
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				System.out.printf("\n %s - I'm done with the water", Thread.currentThread().getName());
-			});
-			
-			try {
-				// breakpoints here:
-				bathTime.get();
-				boilingWater.get();
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
-			}
-			
-		} 
-	}
-}
-
 public class ThreadSafeSourceCodeDesignPatterns {
 	public static void main(String[] args) {
 		Runnable t0 = () -> {
@@ -348,8 +292,5 @@ public class ThreadSafeSourceCodeDesignPatterns {
 			e.printStackTrace();
 		}
 		System.out.println(s1);
-		
-		System.out.printf("# of CPU cores: %s", VirtualThreadsPlayground.numberOfCores());
-		VirtualThreadsPlayground.concurrentMorningRoutineUsingExecutorsWithName();
 	}
 }
