@@ -10,6 +10,15 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
+// ssh -i "clusterAwsEc2_01.pem" ubuntu@ec2-3-135-212-48.us-east-2.compute.amazonaws.com
+// In terminal in Linux, the one can set Java thread affinity on CPU core:
+// java -cp . eu.ase.threads.parallel.ProgMainThreadParallel &
+// jstack <PID_JAVA_PROCESS> # jstack 1461
+// taskset -p -c 0 1482
+// taskset -p -c 1 1483
+// taskset -p -c 2 1484
+// taskset -p -c 3 1485    
+
 public class ProgMainThreadParallel {
 	private static final int NTHREADS = 4; //8 or 4 or 2
 	
