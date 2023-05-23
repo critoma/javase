@@ -18,10 +18,10 @@ import java.io.FileInputStream;
  * Add *.jar files from lib folder of the JavaFX SDK: https://github.com/critoma/javase/tree/master/tools/JavaFX
  * 
  * in run configuration dialog add the following:
- * --module-path "\path to javafx\lib" --add-modules javafx.controls,javafx.fxml
+ * --module-path "\path to javafx\lib" --add-modules javafx.controls,javafx.fxml  -Djava.library.path=<path to DLLs>
  * 
  * e.g. for Windows (FXML files and *.dll files from JavaFX bin folder in the root of project):
- * --module-path ".\lib" --add-modules javafx.controls,javafx.fxml
+ * --module-path ".\lib" --add-modules javafx.controls,javafx.fxml -Djava.library.path=.\lib
  * 
  * * e.g. for MacOS/Linux (FXML files in the root of project, but *.dylib/*.so from JavaFX bin directory in lib folder):
  * --module-path ".\lib" --add-modules javafx.controls,javafx.fxml
