@@ -18,6 +18,10 @@ java eu/ase/hello/HelloWorld
 
 ps -aef | grep java
 
+kill -8 <PID>
+
+javap -c -p eu/ase/hello/HelloWorld.class
+
 // ##############################################################################
 
 B. Shallow copy vs. deep copy - labs explain with memory layout abstractization
