@@ -1,6 +1,6 @@
 Linux UBUNTU:
 
-export JAVA_HOME=/opt/software/java/jdks/jdk-11
+export JAVA_HOME=/opt/software/java/jdks/jdk-21
 export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 export JSE=/home/stud/javase/lectures
 
@@ -10,7 +10,7 @@ cd $JSE/c01/src
 
 // ------------------------------------------------------------------------------
 
-A. Hello World - on Linux Ubuntu 16, MacOS & RaspberyPi
+A. Hello World - on Linux Ubuntu 16/18/20/22/24, MacOS & RaspberyPi
 javac eu/ase/hello/HelloWorld.java
 
 java eu/ase/hello/HelloWorld
@@ -23,11 +23,11 @@ ps -aef | grep java
 B. Shallow copy vs. deep copy - labs explain with memory layout abstractization
 
 
-javac eu/ase/oop/Certificate.java
-javac eu/ase/oop/ProgMainCertificate.java
+javac eu/ase/oop/Car.java
+javac eu/ase/oop/ProgMainCar.java
 
-java eu/ase/oop/ProgMainCertificate
+java eu/ase/oop/ProgMainCar
 
 
 jar -cmvf ./META-INF/MANIFEST.MF ../oop.jar eu/ase/oop/*.class
-java -jar ../oop.jar eu/ase/oop/ProgMainCertificate
+java -jar ../oop.jar eu/ase/oop/ProgMainCar
