@@ -1,67 +1,113 @@
 package eu.ase.jcf;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
-class Avion {
-    private int nrPasageri;
-    public Avion(int nrP) {
-        this.nrPasageri = nrP;
+class Patient implements Cloneable {
+    private int id;
+    private String name;
+    
+    public Patient(int idPatient, String name) {
+        id = idPatient;
+        this.name = name;
     }
     void print() {
-        System.out.println("Avion @ "+this.nrPasageri);
+        System.out.println("Patient - id:" + this.id + " has name: " + this.name + " and this obj: " + this);
     }
+    @Override
+	protected Object clone() throws CloneNotSupportedException {
+		Patient c = (Patient)super.clone();
+		c.id = this.id;
+		c.name = this.name;
+		return c;
+	}
+    
 }
 
-class PersDetinator implements Comparable<PersDetinator> {
-    private int cnp;
-    public PersDetinator(int cnp) {
-        this.cnp = cnp;
+class Hospital implements Comparable<Hospital> {
+    private int id;
+    private int capacityNoBeds;
+    private int noDoctors;
+    private String location;
+    
+    public Hospital(int id, int noBeds, int noDoctors, String location) {
+        this.id = id; 
+        this.capacityNoBeds = noBeds;
+        this.noDoctors = noDoctors;
+        this.location = location;
     }
-    public int compareTo(PersDetinator p) {
-        if(this.cnp < p.cnp)
+    public int compareTo(Hospital h) {
+        if(this.id < h.id)
             return 1;
-        else if(this.cnp > p.cnp)
+        else if(this.id > h.id)
             return -1;
         
         return 0;
     }
     void print() {
-        System.out.println("PersDetinator @ "+this.cnp);
+        System.out.println("Hospital @ "+this.id + ", noBeds = " + this.capacityNoBeds 
+        		+ ", noDoctors = " + this.noDoctors + ", location = " + location);
     }
 }
 
 public class ProgMainJCF0 {
-    public static void main(String[] args) {
-        //List<Avion> listaavioane = new Vector<Avion>();
-        List<Avion> listaavioane = new LinkedList<Avion>();
+
+	public static void main(String[] args) {
+		List<Patient> listP = new LinkedList<Patient>();
         for(int i = 0; i < 5; i++) 
-            listaavioane.add(new Avion(100+i));
-        /*
-        for(int i = 0; i < 5; i++) {
-            Avion atemp = null;
-            atemp = listaavioane.get(i);
-            atemp.print();
-        }*/
+        	listP.add(new Patient(200+i, "Location "+i));
         
-        for(Iterator<Avion> it = listaavioane.iterator(); it.hasNext();) {
-            Avion atemp = it.next();
-            atemp.print();
+        System.out.println("Normal iteration:");
+        for(int i = 0; i < listP.size(); i++) {
+            Patient pTemp = null;
+            pTemp = listP.get(i);
+            pTemp.print();
         }
+        System.out.println("for-each iteration:");
+        for(var pTemp : listP) {
+        	pTemp.print();
+        }
+        System.out.println("Iteration with iterator object:");
+        for(Iterator<Patient> it = listP.iterator(); it.hasNext();) {
+            Patient pTemp = it.next();
+            pTemp.print();
+        }   
         
-        Map<PersDetinator, Avion> arb = new TreeMap<PersDetinator, Avion>(); //Hashtable
+        Map<Hospital, List<Patient>> arb = new TreeMap<Hospital, List<Patient>>(); 
+        // Map<Hospital, List<Patient>> arb = new HashMap<Hospital, List<Patient>>(); 
         for(int i = 0; i < 7; i++) {
-            PersDetinator pd = new PersDetinator(i+200);
-            Avion va = new Avion(i+50);
-            arb.put(pd, va);
+        	Hospital hk = new Hospital(200+i, 100, 30, "Location: " + i);
+        	//List<Patient> plv = listP.subList(0, listP.size());
+        	
+        	@SuppressWarnings("unchecked")
+			List<Patient> plv = ((List<Patient>) ((LinkedList<Patient>) (listP) ).clone());
+        	for(var idx = 0; idx < plv.size(); idx++) {
+                Patient pTemp = null;
+				try {
+					pTemp = (Patient)listP.get(idx).clone();
+				} catch (CloneNotSupportedException e) {
+					e.printStackTrace();
+				}
+                plv.set(idx, pTemp);
+            }
+            arb.put(hk, plv);
         }
-            
-        //System.out.println(arb);
-        Set<PersDetinator> s = arb.keySet();
-        Iterator<PersDetinator> itp = s.iterator();
-        for(;itp.hasNext();) {
-            PersDetinator ppk = itp.next();
-            Avion aavalue = arb.get(ppk);
-            ppk.print(); aavalue.print();
+        
+        System.out.println("\n\nPrint associative data structure:");    
+        System.out.println(arb);
+        Set<Hospital> s = arb.keySet();
+        Iterator<Hospital> ith = s.iterator();
+        for(;ith.hasNext();) {
+            Hospital hk = ith.next();
+            List<Patient> plvalue = arb.get(hk);
+            hk.print(); 
+            for(var objP : plvalue) 
+            	objP.print();
         }
-    }
-}
+	} // end main method
+
+} // end main class
