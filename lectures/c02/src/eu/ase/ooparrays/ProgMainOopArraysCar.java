@@ -4,7 +4,7 @@ public class ProgMainOopArraysCar {
 
 	public static void main(String[] args) {
 		Car.setNoCars(2);
-		Car[] carsArray = new Car[Car.getNoStud()];
+		Car[] carsArray = new Car[Car.getNoCars()];
 
 		carsArray[0] = new Car("C0", new short[] {51, 50, 92});
 		carsArray[1] = new Car("C1", new short[] {94, 10, 19});
