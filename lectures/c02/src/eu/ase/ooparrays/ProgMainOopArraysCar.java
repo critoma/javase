@@ -7,7 +7,7 @@ public class ProgMainOopArraysCar {
 		Car[] carsArray = new Car[Car.getNoStud()];
 
 		carsArray[0] = new Car("C0", new short[] {51, 50, 92});
-		carsArray[1] = new Car("S1", new short[] {94, 10, 19});
+		carsArray[1] = new Car("C1", new short[] {94, 10, 19});
 		
 		for (int i = 0; i < Car.getNoCars(); i++) {
 			System.out.println("The average km for the car "+ i +" is = "+
