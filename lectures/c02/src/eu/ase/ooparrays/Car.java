@@ -1,44 +1,44 @@
 package eu.ase.ooparrays;
 
-public class Student {
-	private static int noStud;
-	private String sName;
-	private short[] marks;
-	private float averageMark;
+public class Car {
+	private static int noCars;
+	private String rName;
+	private short[] km;
+	private float averageKm;
 	
-	public Student(String studentName, short[] studentMarks) {
-		this.sName = studentName;
-		this.marks = studentMarks;
+	public Car(String registrationPlateNumber, short[] kmPerDayByCar) {
+		this.rName = registrationPlateNumber;
+		this.km = kmPerDayByCar;
 	}
 	
-	public static int getNoStud() {
-		return noStud;
+	public static int getNoCars() {
+		return noCars;
 	}
-	public static void setNoStud(int noStud) {
-		Student.noStud = noStud;
+	public static void setNoCars(int noCars) {
+		Car.noCars = noCars;
 	}
-	public String getsName() {
-		return sName;
+	public String getRName() {
+		return rName;
 	}
-	public void setsName(String sName) {
-		this.sName = sName;
+	public void setRName(String registrationPlateNumber) {
+		this.rName = registrationPlateNumber;
 	}
-	public short[] getMarks() {
-		return marks;
+	public short[] getKm() {
+		return km;
 	}
-	public void setMarks(short[] marks) {
-		this.marks = marks;
+	public void setKm(short[] kmDailyByEachCar) {
+		this.km = kmDailyByEachCar;
 	}
-	public float getAverageMark() {
-		this.averageMark = this.calcAvgMark();
-		return averageMark;
+	public float getAverageKm() {
+		this.averageKm = this.calcAvgKm();
+		return averageKm;
 	}
-	private float calcAvgMark() {
+	private float calcAvgKm() {
 		float result = 0.0f;
-		for (int j = 0; j < marks.length; j++) {
-			result = result + this.marks[j];
+		for (int j = 0; j < km.length; j++) {
+			result = result + this.km[j];
 		}
-		result = result / marks.length;
+		result = result / km.length;
 		return result;
 	}
 	
