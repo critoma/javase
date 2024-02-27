@@ -11,19 +11,21 @@ public class ProgMainArraysCar {
 				new short[][] {{51, 50, 92}, {94, 10, 19}};
 		float[] carsAvgKm = new float[carsNo];
 				
-		for (int i = 0; i < carsNo; i++) {
+		int i = 0; 
+		while(i < carsNo) {
 			carsAvgKm[i] = 0;
-			for (int j = 0; j < daysNo; j++) {
+			int j = 0;
+			while (j < daysNo) {
 				carsAvgKm[i] += carsKmDaily[i][j];
-			}
+				j++; // j = j + 1;
+			} // end inner while
 			carsAvgKm[i] /= carsNo;
-		}
+			i = i + 1;
+		} // end outter while
 		
-		for (int i = 0; i < carsNo; i++) {
-			System.out.println("The average km for the car "+ i +" is = "+
-					carsAvgKm[i]);
-		}
+		for (int i = 0; i < carsNo; i++)
+			System.out.println("The average km for the car " + i + " is = " + carsAvgKm[i]);
 
-	}
+	} // end main method
 
-}
+} // end class
