@@ -19,11 +19,11 @@ public class ProgMainArraysCar {
 				carsAvgKm[i] += carsKmDaily[i][j];
 				j++; // j = j + 1;
 			} // end inner while
-			carsAvgKm[i] /= carsNo;
+			carsAvgKm[i] /= daysNo;
 			i = i + 1;
 		} // end outter while
 		
-		for (int i = 0; i < carsNo; i++)
+		for (i = 0; i < carsNo; i++)
 			System.out.println("The average km for the car " + i + " is = " + carsAvgKm[i]);
 
 	} // end main method
