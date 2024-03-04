@@ -54,7 +54,7 @@ class Tiger extends Feline {
     }
 }
 
-public class PolymorphismExample {
+public class ProgMainPoly {
     public static void main(String[] args) {
         // Using "pure" polymorphism/runtime polymorphism
         Animal cat = new Cat();
