@@ -15,6 +15,7 @@ class Feline implements Animal {
     @Override
     public double maxSpeed() {
         System.out.println("Animal has max speed");
+        return 0.0;
     }
     
     public void display() {
@@ -31,6 +32,7 @@ class Cat extends Feline {
     @Override
     public double maxSpeed() {
         System.out.println("Cat has max speed 50km/h");
+        return 50.0;
     }
     @Override
     public void display() {
@@ -47,6 +49,7 @@ class Tiger extends Feline {
     @Override
     public double maxSpeed() {
         System.out.println("Tiger has max speed 65km/h");
+        return 65.0;
     }
     @Override
     public void display() {
