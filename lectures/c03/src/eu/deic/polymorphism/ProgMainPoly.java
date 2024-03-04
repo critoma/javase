@@ -16,7 +16,7 @@ class Feline implements Animal {
     public double maxSpeed() {
         System.out.println("Animal has max speed");
     }
-    @Override
+    
     public void display() {
       System.out.println("Feline::display() "+this);
     }
