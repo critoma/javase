@@ -10,7 +10,10 @@ cd $JSE/c03/src
 
 1. C/C++ reminder sample about Inheritance, Polymorphism and ClassCast Exception
 
-2. Inheritance/Polymorphism/Interface as Type/Arrays of Objects
+2. Inheritance/Polymorphism/Interface as Type/Arrays of Objects + ask ChatGPT AI to generate code for an example of Java polymorphism with 3 classes and 1 interface:
+javac eu/deic/polymorphism/ProgMainPoly.java
+java ProgMainPoly
+
 javac eu/ase/polimorfism/IMiscare.java
 javac eu/ase/polimorfism/Vehicul.java
 javac eu/ase/polimorfism/IAuto.java
