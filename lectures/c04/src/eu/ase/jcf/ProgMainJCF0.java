@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.Vector;
+import java.util.ArrayList;
 
 class Human {
 	private int ssn; // cnp; <=> social security number
@@ -113,7 +113,7 @@ public class ProgMainJCF0 {
 		
 		
 		// JCF - Java Collection Framework:
-		List<Patient> listP = new LinkedList<Patient>();
+		List<Patient> listP = new LinkedList<Patient>(); // ArrayList<>();
         	for(int i = 0; i < 5; i++) 
         		listP.add(new Patient(100+i, 200+i, "Location "+i));
         
