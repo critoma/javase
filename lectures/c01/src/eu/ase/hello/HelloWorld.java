@@ -28,8 +28,8 @@ public class HelloWorld
         // }
 	 
         System.out.println("Hello World form Java!!! r = " + r);
- }
-}
+ } // end main
+} // end class
 
 
 
