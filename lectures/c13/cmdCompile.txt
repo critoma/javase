@@ -21,6 +21,7 @@ sudo su
 # Terminal 2:
 mysql -u root --skip-password
 ALTER USER 'root'@'localhost' IDENTIFIED BY ’stud’;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'stud' WITH GRANT OPTION;
 mysql -u root -p
 
 show databases;
