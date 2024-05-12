@@ -19,6 +19,8 @@ sudo su
 # Terminal 1:
 /usr/sbin/mysqld --user=root &
 # Terminal 2:
+mysql -u root --skip-password
+ALTER USER 'root'@'localhost' IDENTIFIED BY ’stud’;
 mysql -u root -p
 
 show databases;
