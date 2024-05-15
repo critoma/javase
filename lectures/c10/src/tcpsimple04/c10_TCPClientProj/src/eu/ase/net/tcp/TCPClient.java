@@ -1,6 +1,5 @@
 package eu.ase.net.tcp;
 
-
 import java.io.*;
 import java.net.*;
 
@@ -12,7 +11,7 @@ public class TCPClient {
 		BufferedReader in = null;
 
 		if (args.length < 2) {
-			System.out.println("Clientul trebuie sa aiba 2 parametrii: IPMasina port");
+			System.out.println("The client must have 2 params: IP and Port");
 			System.exit(1);
 		}
 
@@ -39,20 +38,20 @@ public class TCPClient {
 			lin = in.readLine(); // RECV
 			System.out.println("Sever: " + lin);
 
-			out.println("What date is it?"); // SEND
-			lin = in.readLine(); // RECV
-			System.out.println("Sever: " + lin);
+			// out.println("What date is it?"); // SEND
+			// lin = in.readLine(); // RECV
+			// System.out.println("Sever: " + lin);
 
-			out.println("What time is it?");
+			out.println("What date & time is it?");
 			lin = in.readLine();
 			System.out.println("Sever: " + lin);
 
 			// Thread t = Thread.currentThread();
 			Thread.sleep(20000);
 
-			// out.println("La revedere!");
-			// lin = in.readLine();
-			// System.out.println("Sever: " + lin);
+			out.println("Good bye!");
+			lin = in.readLine();
+			System.out.println("Sever: " + lin);
 
 			out.close(); // CLOSEOUT
 			in.close(); // CLOSEIN
