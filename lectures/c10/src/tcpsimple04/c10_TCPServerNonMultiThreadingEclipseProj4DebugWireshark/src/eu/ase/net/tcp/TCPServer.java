@@ -1,64 +1,81 @@
 package eu.ase.net.tcp;
 
 import java.net.*;
+import java.util.Date;
 import java.io.*;
 
 public class TCPServer {
-    public static void main(String[] args) {
-        
-	ServerSocket serverSocket = null;
-	Socket clientSocket = null;
+	public static void main(String[] args) {
 
-    boolean listening = true;
+		ServerSocket serverSocket = null;
+		Socket clientSocket = null;
 
-	OutputStream os = null; PrintWriter out = null;
-	InputStream is = null; BufferedReader in = null;
-	String inputLine = null, outputLine = null;
+		boolean listening = true;
 
-        try {
-			//SEVERSOCKET = SOCKET+BIND+LISTEN
-            serverSocket = new ServerSocket(4801);			
-			System.out.println("Serverul asculta in port 4801");
-        } catch (IOException e) {
-            System.err.println("Could not listen on port: 4801.");
-            System.exit(-1);
-        }
+		OutputStream os = null;
+		PrintWriter out = null;
+		InputStream is = null;
+		BufferedReader in = null;
+		String inputLine = null, outputLine = null;
 
-        while (listening) {
+		try {
+			// SEVERSOCKET = SOCKET+BIND+LISTEN
+			serverSocket = new ServerSocket(4801);
+			System.out.println("Server is listening in port 4801!");
+		} catch (IOException e) {
+			System.err.println("Could not listen on port: 4801.");
+			System.exit(-1);
+		}
+
+		while (listening) {
 			try {
-				clientSocket = serverSocket.accept();		//ACCEPT
-				System.out.println("A venit clientul (remote addr.)="+clientSocket.getInetAddress().toString()+" : (remote port)="+clientSocket.getPort()+" in server port 4801");
-					
+				clientSocket = serverSocket.accept(); // ACCEPT
+				System.out.println("Clientul (remote addr.)=" + clientSocket.getInetAddress().toString()
+						+ " : (remote port)=" + clientSocket.getPort() + " in server port 4801");
+
 				is = clientSocket.getInputStream();
-		    	in = new BufferedReader(new InputStreamReader(is));
-				
+				in = new BufferedReader(new InputStreamReader(is));
+
 				os = clientSocket.getOutputStream();
-			 	out = new PrintWriter(os, true);
-			
+				out = new PrintWriter(os, true);
+
 				while ((inputLine = in.readLine()) != null) {
 					System.out.println(inputLine);
-					outputLine = new String("OK");
+					if (inputLine.compareTo("What date & time is it?") == 0) {
+						outputLine = new Date().toString();
+					} else {
+						if (inputLine.compareTo("Good bye!") == 0) {
+							outputLine = new String("Good bye to you too!");
+						} else
+							outputLine = new String("OK! I don't know your request!");
+					}
 					out.println(outputLine);
 					out.flush();
-				
-					if (inputLine.compareTo("La revedere!") == 0) {break;}
-		    	}
+
+					if (inputLine.compareTo("Good bye!") == 0) {
+						break;
+					}
+				}
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
 			} finally {
 				try {
-					if (out != null) out.close();
-		    			if (in != null) in.close();
-			    		if (clientSocket != null) clientSocket.close();
+					if (out != null)
+						out.close();
+					if (in != null)
+						in.close();
+					if (clientSocket != null)
+						clientSocket.close();
 				} catch (IOException ioec) {
 					ioec.printStackTrace();
 				}
 			}
-		} //end while
-        try {
+		} // end while
+		try {
 			serverSocket.close();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
-    }
+	}
 }
+
