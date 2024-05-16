@@ -51,6 +51,7 @@ java -cp .:./libs/mysql-connector-java-8.0.29/mysql-connector-java-8.0.29.jar eu
 
 
 sudo apt-get install gnupg
+
 wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
 sudo apt-get update
@@ -58,10 +59,29 @@ sudo apt-get install -y mongodb-org
 
 ps --no-headers -o comm 1
 
+# Alternatively install MongoDB 7 Community Edition server and mongosh client into Linux Ubuntu 22.04 LTS:
+# https://www.mongodb.com/try/download/community-edition/releases
+
+wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-7.0.9.tgz
+tar -zxf mongodb-linux-x86_64-ubuntu2204-7.0.9.tgz
+rm mongodb-linux-x86_64-ubuntu2204-7.0.9.tgz
+sudo mkdir -p /opt/software
+sudo chown -R $USER /opt/software
+sudo mv mongodb-linux-x86_64-ubuntu2204-7.0.9 /opt/software/
+
+wget https://downloads.mongodb.com/compass/mongosh-2.2.5-linux-x64.tgz
+tar -zxf mongosh-2.2.5-linux-x64.tgz
+rm mongosh-2.2.5-linux-x64.tgz
+mv mongosh-2.2.5-linux-x64 /opt/software
+
+
 # Terminal 1 - start manually mongod
 sudo su
 mkdir -p /data/db
-mongod --port 27017 --logpath /var/log/mongodb/mongod.log
+mkdir /var/log/mongodb
+cd /opt/software/mongodb-linux-x86_64-ubuntu2204-7.0.9
+./bin/mongod --port 27017 --logpath /var/log/mongodb/mongod.log
+# mongod --port 27017 --logpath /var/log/mongodb/mongod.log
 # or: mongod --fork --port 27017 --logpath /var/log/mongodb/mongod.log --dbpath /data/db
 # https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
 
@@ -97,7 +117,17 @@ java -cp .:./libs/mongo-java-driver-3.4.0-rc1.jar eu_ase_nosql.MongoDbClient
 # https://mongodb.github.io/mongo-java-driver/4.2/driver/getting-started/installation/#mongodb-driver-sync
 
 # Terminal 4 - MongoDB client operations
-mongo
+# mongo
+# https://www.mongodb.com/docs/v7.0/tutorial/install-mongodb-on-ubuntu/
+# sudo apt-get install gnupg curl
+# curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \
+#    sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg \
+#    --dearmor
+
+# echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+# sudo apt-get install -y mongodb-org-shell
+
+/opt/software/mongosh-2.2.5-linux-x64/mongosh
 >
 
 show dbs
@@ -110,6 +140,11 @@ quit()
 
 ############################################
 
+# delete MongoDB 7:
+sudo rm -r /var/log/mongodb
+sudo rm -r /var/lib/mongodb
+
+#######################################################
 # change config + IP address and port for listening
 sudo gedit /etc/mysql/my.cnf
 
