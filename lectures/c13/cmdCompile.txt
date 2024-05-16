@@ -139,6 +139,17 @@ db.mycol.find().pretty()
 quit()
 
 ############################################
+# build/compile and run Java:
+# ism_ase_ro@cloudshell:~/jse/c13/lib
+cd ~/jse/c13/lib
+wget https://github.com/critoma/javase/raw/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo6/mongo-java-driver-3.12.9.jar
+wget https://github.com/critoma/javase/raw/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo6/slf4j-simple-1.7.30.jar
+wget https://github.com/critoma/javase/raw/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo6/bson-3.12.9.jar
+cd ../src
+javac -cp .:../lib/* eu_deic_nosql/*.java
+java -cp .:../lib/* eu_deic_nosql/MongoDbClient
+
+############################################
 
 # delete MongoDB 7:
 sudo rm -r /var/log/mongodb
