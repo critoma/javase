@@ -21,7 +21,7 @@ public class Java8TestFILambda {
 
 		GreetingService greetingService1 = (String msg) -> {
 			System.out.println("Bonjour " + msg);
-		}
+		};
 		GreetingService greetingService2 = m -> System.out.println("Hello " + m);
 		
 		MathOpClass tester = new MathOpClass();
