@@ -24,7 +24,10 @@ javac eu/ase/polimorfism/ProgMain.java
 java eu/ase/polimorfism/ProgMain
 
 *** Robocode:
+New:
+https://github.com/robo-code/robocode/releases
 
+Old:
 http://sourceforge.net/projects/robocode/files/latest/download?source=files
 
 # cd /home/stud/javase/lectures/robocode-1.9.0.0/
