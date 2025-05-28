@@ -1,5 +1,19 @@
 package eu.deic.nosql;
 
+// https://www.mongodb.com/try/download/community
+// https://www.mongodb.com/docs/manual/tutorial/install-mongodb-community-with-docker/
+// https://www.mongodb.com/docs/drivers/java-drivers/
+// https://www.mongodb.com/docs/drivers/java/sync/current/get-started/
+// https://www.mongodb.com/docs/languages/java/
+// Source code: 
+// https://github.com/mongodb/mongo-java-driver/releases
+// https://github.com/mongodb/mongo-java-driver
+// Bytecode:
+// https://central.sonatype.com/artifact/org.mongodb/mongodb-driver-sync/5.5.0/dependencies
+// https://repo1.maven.org/maven2/org/mongodb/mongodb-driver-core/5.5.0/
+// https://repo1.maven.org/maven2/org/mongodb/mongodb-driver-sync/5.5.0/
+// https://repo1.maven.org/maven2/org/mongodb/bson/5.5.0/
+
 import org.bson.Document;
 
 import com.mongodb.client.FindIterable;
