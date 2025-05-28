@@ -33,10 +33,8 @@ public class MongoDbClient {
 
 			System.out.println("Collection accessed successfully");
 
-			Document doc = new Document("title", "MongoDB").append("description", "database").
-        append("likes", 100).
-        append("url", "http://www.tutorialspoint.com/mongodb/").
-        append("by", "www.ism.ase.ro");
+			Document doc = new Document("title", "MongoDB").append("description", "database").append("likes", 100)
+					.append("url", "http://www.tutorialspoint.com/mongodb/").append("by", "www.ism.ase.ro");
 
 			// coll.insert(doc);
 			collection.insertOne(doc);
