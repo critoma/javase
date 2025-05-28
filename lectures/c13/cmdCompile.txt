@@ -403,4 +403,9 @@ db.mycol.find()
 db.mycol.find().pretty()
 quit()
 
-
+######
+# B.2 Alternatively, the one may install MongoDB as Docker / Podman container:
+docker pull mongodb/mongodb-community-server:latest
+# docker run --name mongodb -p 27017:27017 -d mongodb/mongodb-community-server:latest
+docker run --name mongodb -p 27017:27017 -d mongo:8.0
+docker exec -it mongodb /bin/bash
