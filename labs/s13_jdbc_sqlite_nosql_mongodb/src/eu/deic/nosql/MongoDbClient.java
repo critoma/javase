@@ -1,18 +1,18 @@
 package eu.deic.nosql;
 
-// https://www.mongodb.com/try/download/community
-// https://www.mongodb.com/docs/manual/tutorial/install-mongodb-community-with-docker/
-// https://www.mongodb.com/docs/drivers/java-drivers/
-// https://www.mongodb.com/docs/drivers/java/sync/current/get-started/
-// https://www.mongodb.com/docs/languages/java/
-// Source code: 
-// https://github.com/mongodb/mongo-java-driver/releases
-// https://github.com/mongodb/mongo-java-driver
-// Bytecode:
-// https://central.sonatype.com/artifact/org.mongodb/mongodb-driver-sync/5.5.0/dependencies
-// https://repo1.maven.org/maven2/org/mongodb/mongodb-driver-core/5.5.0/
-// https://repo1.maven.org/maven2/org/mongodb/mongodb-driver-sync/5.5.0/
-// https://repo1.maven.org/maven2/org/mongodb/bson/5.5.0/
+//https://www.mongodb.com/try/download/community
+//https://www.mongodb.com/docs/manual/tutorial/install-mongodb-community-with-docker/
+//https://www.mongodb.com/docs/drivers/java-drivers/
+//https://www.mongodb.com/docs/drivers/java/sync/current/get-started/
+//https://www.mongodb.com/docs/languages/java/
+//Source code: 
+//https://github.com/mongodb/mongo-java-driver/releases
+//https://github.com/mongodb/mongo-java-driver
+//Bytecode:
+//https://central.sonatype.com/artifact/org.mongodb/mongodb-driver-sync/5.5.0/dependencies
+//https://repo1.maven.org/maven2/org/mongodb/mongodb-driver-core/5.5.0/
+//https://repo1.maven.org/maven2/org/mongodb/mongodb-driver-sync/5.5.0/
+//https://repo1.maven.org/maven2/org/mongodb/bson/5.5.0/
 
 import org.bson.Document;
 
@@ -47,10 +47,14 @@ public class MongoDbClient {
 
 			System.out.println("Collection accessed successfully");
 
-			Document doc = new Document("title", "MongoDB").append("description", "database").append("likes", 100)
+			Document doc = null;
+			doc = new Document("title", "Java for MongoDB").append("description", "database bla bla bla...").append("likes", 1200)
 					.append("url", "http://www.tutorialspoint.com/mongodb/").append("by", "www.ism.ase.ro");
-
-			// coll.insert(doc);
+			collection.insertOne(doc);
+			System.out.println("Document inserted successfully");
+			
+			doc = new Document("title", "Java Driver for MongoDB").append("description", "database JS bla bla bla...").append("likes", 2100)
+					.append("url", "https://github.com/mongodb/mongo-java-driver").append("by", "www.ism.ase.ro");
 			collection.insertOne(doc);
 			System.out.println("Document inserted successfully");
 
