@@ -27,7 +27,7 @@ public class JDBCExample1 {
       System.out.println("Creating database...");
       stmt = conn.createStatement();
       
-      String sql = "CREATE DATABASE STUDENTS";
+      String sql = "CREATE DATABASE IF NOT EXISTS STUDENTS";
       stmt.executeUpdate(sql);
       System.out.println("Database created successfully...");
    }catch(SQLException se){
