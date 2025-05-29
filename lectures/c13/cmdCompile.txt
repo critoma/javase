@@ -21,10 +21,13 @@ sudo apt install mysql-server # set pass stud in the installation process
 sudo su
 /usr/sbin/mysqld --user=root &
 # Terminal 2:
+sudo su
 mysql -u root --skip-password
-ALTER USER 'root'@'localhost' IDENTIFIED BY ’stud’;
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'stud';
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'stud';
 FLUSH PRIVILEGES;
+exit
+
 mysql -u root -p
 
 show databases;
@@ -37,7 +40,7 @@ select user from user;
 ps -ax | grep mysql
 netstat -na | grep 3306
 ip a
-# sudo apt-get install tcpdump
+# sudo apt install tcpdump
 # tcpdump -i <interface> 'port <val>' -s 65535 -w <file> 
 sudo tcpdump -i lo 'port 3306' -s 65535 -w ~/wmysql.pcap
 
