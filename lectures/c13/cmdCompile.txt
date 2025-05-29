@@ -14,9 +14,11 @@ sudo service mysql restart
 
 ############################################
 # *** As paranthesis - In Ubuntu from Google Shell Cloud (Linux Ubuntu 20.04/24.04 LTS - MySQL 8) there some restriction but the one is still be able to install and run for playing:
+
+# Terminal 1:
+sudo apt update
 sudo apt install mysql-server # set pass stud in the installation process
 sudo su
-# Terminal 1:
 /usr/sbin/mysqld --user=root &
 # Terminal 2:
 mysql -u root --skip-password
