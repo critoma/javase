@@ -28,7 +28,7 @@ public class JDBCExample2 {
       System.out.println("Creating table in given database...");
       stmt = conn.createStatement();
       
-      String sql = "CREATE TABLE REGISTRATION " +
+      String sql = "CREATE TABLE IF NOT EXISTS REGISTRATION " +
                    "(id INTEGER not NULL, " +
                    " first VARCHAR(255), " + 
                    " last VARCHAR(255), " + 
