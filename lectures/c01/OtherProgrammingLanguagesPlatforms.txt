@@ -1,0 +1,179 @@
+// Other programming languages with same "clone" and objects problem
+// https://shell.cloud.google.com/?show=ide%2Cterminal
+
+//////////////////////////////////////////////////
+// Java (Ion.java):
+package eu_deic;
+
+class Certificate {
+    private String studentName;
+    private String courseName;
+    private String issueDate;
+
+    public Certificate(String studentName, String courseName, String issueDate) {
+        this.studentName = studentName;
+        this.courseName = courseName;
+        this.issueDate = issueDate;
+    }
+
+    // Getters
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public String getIssueDate() {
+        return issueDate;
+    }
+
+    // Setters
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public void setIssueDate(String issueDate) {
+        this.issueDate = issueDate;
+    }
+
+    // Optional: Display method
+    public void printCertificate() {
+        System.out.println("---- Certificate of Completion ----");
+        System.out.println("Student: " + studentName);
+        System.out.println("Course: " + courseName);
+        System.out.println("Issued on: " + issueDate);
+        System.out.println("-----------------------------------");
+    }
+} // end class Certificate
+
+class ProgMainOopCert {
+    public static void main(String[] args) {
+        // Create certificate object
+        Certificate cert1 = new Certificate(
+                "Alice Johnson",
+                "Java Programming",
+                "2026-02-17"
+        );
+        Certificate cert2 = cert1;
+
+        cert1.printCertificate();
+        cert2.printCertificate();
+
+        cert2.setStudentName("X");
+
+        cert1.printCertificate();
+        cert2.printCertificate();
+    } //end main
+} // end class ProgMain
+
+
+//////////////////////////////////////////////////
+// C++ (Vasile.cpp):
+#include <iostream>
+#include <string>
+using namespace std;
+
+namespace eu_deic_oop {
+    class Certificate {
+    public:
+        string studentName;
+        string courseName;
+        string issueDate;
+
+        Certificate(string studentName, string courseName, string issueDate)
+            : studentName(studentName), courseName(courseName), issueDate(issueDate) {}
+
+        void printCertificate() {
+            cout << "---- Certificate of Completion ----" << endl;
+            cout << "Student: " << studentName << endl;
+            cout << "Course: " << courseName << endl;
+            cout << "Issued on: " << issueDate << endl;
+            cout << "-----------------------------------" << endl;
+        }
+    };
+} // namespace eu_deic_oop
+
+int main() {
+        using namespace eu_deic_oop;
+
+        Certificate* cert1 = new Certificate("Alice Johnson", "C++ Programming", "2026-02-17");
+        Certificate* cert2 = cert1; // same pointer → same object
+
+        cert1->printCertificate();
+        cert2->printCertificate();
+        
+        cert1->studentName = "X";
+
+        cert1->printCertificate();
+        cert2->printCertificate();
+
+        delete cert1;
+        return 0;
+}
+
+//////////////////////////////////////////////////
+// JavaScript/ECMAScript - in node.js (Decebal.js):
+
+class Certificate {
+    constructor(studentName, courseName, issueDate) {
+        this.studentName = studentName;
+        this.courseName = courseName;
+        this.issueDate = issueDate;
+    }
+
+    printCertificate() {
+        console.log("---- Certificate of Completion ----");
+        console.log("Student:", this.studentName);
+        console.log("Course:", this.courseName);
+        console.log("Issued on:", this.issueDate);
+        console.log("-----------------------------------");
+    }
+}
+
+// Usage
+let cert1 = new Certificate("Alice Johnson", "JavaScript Programming", "2026-02-17");
+let cert2 = cert1; // same object reference
+
+cert1.printCertificate();
+cert2.printCertificate();
+
+cert1.studentName = "X";
+
+cert1.printCertificate();
+cert2.printCertificate();
+
+//////////////////////////////////////////////////
+# Python 3 (Maricika.py):
+class Certificate:
+    def __init__(self, studentName, courseName, issueDate):
+        self.studentName = studentName
+        self.courseName = courseName
+        self.issueDate = issueDate
+
+    def printCertificate(self):
+        print("---- Certificate of Completion ----")
+        print(f"Student: {self.studentName}")
+        print(f"Course: {self.courseName}")
+        print(f"Issued on: {self.issueDate}")
+        print("-----------------------------------")
+
+
+# Usage
+cert1 = Certificate("Alice Johnson", "Python Programming", "2026-02-17")
+cert2 = cert1  # same object reference
+
+cert1.printCertificate()
+cert2.printCertificate()
+
+cert1.studentName = "X"
+
+cert1.printCertificate()
+cert2.printCertificate()
+
+
