@@ -22,4 +22,4 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     - name: Build with Ant
-      run: cd lectures/c02/antproj && ant -buildfile build.xml run
+      run: cd lectures/c02/antproj && ant compile && ant jar && ant run
