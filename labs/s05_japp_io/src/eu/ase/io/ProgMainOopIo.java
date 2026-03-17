@@ -9,7 +9,7 @@ public class ProgMainOopIo {
 		
 		Invoice invoice = new Invoice(units, prices, descs);
 		invoice.saveInvoice2File("test2.txt");
-		invoice	.readInvoiceFromFileAndCalcTotal("test2.txt");
+		invoice.readInvoiceFromFileAndCalcTotal("test2.txt");
 	}
 
 }
