@@ -1,0 +1,196 @@
+####
+C.  Kafka-Style Streaming Demo in Pure Java
+Producer --> Broker(Server) --> Subscribers
+                    Topics:
+                  - sports
+                  - weather
+                  - finance
+
+// 1.  Broker Server (Multi-threaded)
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.*;
+
+public class StreamingBrokerServer {
+    private static final int PORT = 7000;
+
+    // topic -> subscribers
+    private static final Map<String, List<PrintWriter>> topicSubscribers = new ConcurrentHashMap<>();
+
+    private static final ExecutorService pool = Executors.newCachedThreadPool();
+
+    public static void main(String[] args) {
+
+        System.out.println("Streaming Broker started on port " + PORT);
+        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
+
+            while (true) {
+                Socket socket = serverSocket.accept();
+                pool.execute(new ClientHandler(socket));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static class ClientHandler implements Runnable {
+        private final Socket socket;
+        public ClientHandler(Socket socket) {
+            this.socket = socket;
+        }
+
+        @Override
+        public void run() {
+            try (
+                BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                PrintWriter writer = new PrintWriter(socket.getOutputStream(), true)
+            ) {
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    // SUBSCRIBE:sports
+                    if (line.startsWith("SUBSCRIBE:")) {
+                        String topic = line.split(":")[1];
+                        topicSubscribers.putIfAbsent(
+                                topic,
+                                new CopyOnWriteArrayList<>());
+
+                        topicSubscribers.get(topic).add(writer);
+                        writer.println("Subscribed to topic: " + topic);
+                    }
+                    // PUBLISH:sports:Team won championship
+                    else if (line.startsWith("PUBLISH:")) {
+                        String[] parts = line.split(":", 3);
+                        String topic = parts[1];
+                        String message = parts[2];
+                        broadcast(topic, message);
+                    }
+                }
+
+            } catch (IOException e) {
+                System.out.println("Client disconnected.");
+            }
+        }
+
+        private void broadcast(String topic, String message) {
+            List<PrintWriter> subscribers = topicSubscribers.get(topic);
+
+            if (subscribers != null) {
+                for (PrintWriter subscriber : subscribers) {
+                    subscriber.println("[" + topic.toUpperCase() + "] " + message);
+                }
+            }
+        }
+    }
+}
+
+// 2.  Reactive Producer Client - Publisher
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.concurrent.Flow;
+import java.util.concurrent.SubmissionPublisher;
+import java.util.concurrent.TimeUnit;
+
+public class NewsProducer {
+
+    public static void main(String[] args) {
+
+        try (
+            Socket socket = new Socket("localhost", 7000);
+
+            PrintWriter writer =
+                    new PrintWriter(socket.getOutputStream(), true)
+        ) {
+
+            SubmissionPublisher<String> publisher =
+                    new SubmissionPublisher<>();
+
+            publisher.subscribe(new Flow.Subscriber<>() {
+
+                @Override
+                public void onSubscribe(Flow.Subscription subscription) {
+                    subscription.request(Long.MAX_VALUE);
+                }
+
+                @Override
+                public void onNext(String item) {
+
+                    writer.println(item);
+
+                    System.out.println("Published: " + item);
+                }
+
+                @Override
+                public void onError(Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+
+                @Override
+                public void onComplete() {
+                    System.out.println("Publishing completed.");
+                }
+            });
+
+            // Publish messages
+            publisher.submit(
+                    "PUBLISH:sports:Local club wins championship");
+
+            TimeUnit.SECONDS.sleep(1);
+
+            publisher.submit(
+                    "PUBLISH:weather:Storm warning issued");
+
+            TimeUnit.SECONDS.sleep(1);
+
+            publisher.submit(
+                    "PUBLISH:finance:Stock market rises 4%");
+
+            publisher.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+// 3. Subscriber client:
+import java.io.*;
+import java.net.Socket;
+
+public class TopicSubscriber {
+
+    public static void main(String[] args) {
+
+        String topic = "sports";
+
+        try (
+            Socket socket = new Socket("localhost", 7000);
+
+            PrintWriter writer =
+                    new PrintWriter(socket.getOutputStream(), true);
+
+            BufferedReader reader =
+                    new BufferedReader(
+                            new InputStreamReader(
+                                    socket.getInputStream()))
+        ) {
+
+            // Subscribe to topic
+            writer.println("SUBSCRIBE:" + topic);
+
+            System.out.println("Subscribed to topic: " + topic);
+
+            String message;
+
+            while ((message = reader.readLine()) != null) {
+
+                System.out.println("Received -> " + message);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
