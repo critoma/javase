@@ -134,7 +134,7 @@ java -cp .:./libs/mongo-java-driver-3.4.0-rc1.jar eu_ase_nosql.MongoDbClient
 # echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
 # sudo apt-get install -y mongodb-org-shell
 
-/opt/software/mongosh-2.5.0-linux-x64/mongosh
+/opt/software/mongosh-2.5.0-linux-x64/bin/mongosh
 >
 
 show dbs
