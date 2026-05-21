@@ -149,10 +149,10 @@ quit()
 # build/compile and run Java:
 # ism_ase_ro@cloudshell:~/jse/c13/lib
 cd ~/jse/c13/lib
-wget https://github.com/critoma/javase/blob/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo8/mongodb-driver-core-5.5.0.jar
-wget https://github.com/critoma/javase/blob/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo8/mongodb-driver-sync-5.5.0.jar
-wget https://github.com/critoma/javase/blob/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo8/slf4j-simple-1.7.30.jar
-wget https://github.com/critoma/javase/raw/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo8/bson-5.5.0.jar
+wget https://github.com/critoma/javase/raw/refs/heads/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo8/bson-5.5.0.jar
+wget https://github.com/critoma/javase/raw/refs/heads/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo8/mongodb-driver-core-5.5.0.jar
+wget https://github.com/critoma/javase/raw/refs/heads/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo8/mongodb-driver-sync-5.5.0.jar
+wget https://github.com/critoma/javase/raw/refs/heads/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo8/slf4j-simple-1.7.30.jar
 cd ../src
 mkdir eu_deic_nosql
 wget https://raw.githubusercontent.com/critoma/javase/refs/heads/master/labs/s13_jdbc_sqlite_nosql_mongodb/src/eu/deic/nosql/MongoDbClient.java
