@@ -154,7 +154,9 @@ wget https://github.com/critoma/javase/blob/master/labs/s13_jdbc_sqlite_nosql_mo
 wget https://github.com/critoma/javase/blob/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo8/slf4j-simple-1.7.30.jar
 wget https://github.com/critoma/javase/raw/master/labs/s13_jdbc_sqlite_nosql_mongodb/lib4Mongo8/bson-5.5.0.jar
 cd ../src
+mkdir eu_deic_nosql
 wget https://raw.githubusercontent.com/critoma/javase/refs/heads/master/labs/s13_jdbc_sqlite_nosql_mongodb/src/eu/deic/nosql/MongoDbClient.java
+mv MongoDbClient.java eu_deic_nosql/
 javac -cp .:../lib/* eu_deic_nosql/*.java
 java -cp .:../lib/* eu_deic_nosql/MongoDbClient
 
