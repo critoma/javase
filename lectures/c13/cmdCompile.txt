@@ -51,7 +51,7 @@ javac -cp .:./libs/mysql-connector-java-8.0.29/mysql-connector-java-8.0.29.jar e
 java -cp .:./libs/mysql-connector-java-8.0.29/mysql-connector-java-8.0.29.jar eu_ase_jdbc.JDBCExample1
 
 #---------------------------------------------------------------------
-#Install MongoDB in Linux Ubuntu 20 LTS from Google Cloud Shell
+#Install MongoDB in Linux Ubuntu 20/24 LTS from Google Cloud Shell
 #https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
 
 sudo apt-get install gnupg
@@ -66,24 +66,27 @@ ps --no-headers -o comm 1
 # Alternatively install MongoDB 7 Community Edition server and mongosh client into Linux Ubuntu 22.04 LTS:
 # https://www.mongodb.com/try/download/community-edition/releases
 
-wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-7.0.9.tgz
-tar -zxf mongodb-linux-x86_64-ubuntu2204-7.0.9.tgz
-rm mongodb-linux-x86_64-ubuntu2204-7.0.9.tgz
+# wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-7.0.9.tgz
+# tar -zxf mongodb-linux-x86_64-ubuntu2204-7.0.9.tgz
+# rm mongodb-linux-x86_64-ubuntu2204-7.0.9.tgz
+wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2404-8.3.0.tgz
+tar -zxf mongodb-linux-x86_64-ubuntu2404-8.3.0.tgz
+rm mongodb-linux-x86_64-ubuntu2404-8.3.0.tgz
 sudo mkdir -p /opt/software
 sudo chown -R $USER /opt/software
-sudo mv mongodb-linux-x86_64-ubuntu2204-7.0.9 /opt/software/
+sudo mv mongodb-linux-x86_64-ubuntu2404-8.3.0 /opt/software/
 
-wget https://downloads.mongodb.com/compass/mongosh-2.2.5-linux-x64.tgz
-tar -zxf mongosh-2.2.5-linux-x64.tgz
-rm mongosh-2.2.5-linux-x64.tgz
-mv mongosh-2.2.5-linux-x64 /opt/software
+wget https://downloads.mongodb.com/compass/mongosh-2.5.0-linux-x64.tgz
+tar -zxf mongosh-2.5.0-linux-x64.tgz
+rm mongosh-2.5.0-linux-x64.tgz
+mv mongosh-2.5.0-linux-x64 /opt/software
 
 
 # Terminal 1 - start manually mongod
 sudo su
 mkdir -p /data/db
 mkdir /var/log/mongodb
-cd /opt/software/mongodb-linux-x86_64-ubuntu2204-7.0.9
+cd /opt/software/mongodb-linux-x86_64-ubuntu2404-8.3.0
 ./bin/mongod --port 27017 --logpath /var/log/mongodb/mongod.log
 # mongod --port 27017 --logpath /var/log/mongodb/mongod.log
 # or: mongod --fork --port 27017 --logpath /var/log/mongodb/mongod.log --dbpath /data/db
@@ -131,7 +134,7 @@ java -cp .:./libs/mongo-java-driver-3.4.0-rc1.jar eu_ase_nosql.MongoDbClient
 # echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
 # sudo apt-get install -y mongodb-org-shell
 
-/opt/software/mongosh-2.2.5-linux-x64/mongosh
+/opt/software/mongosh-2.5.0-linux-x64/mongosh
 >
 
 show dbs
